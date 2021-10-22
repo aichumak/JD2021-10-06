@@ -7,6 +7,7 @@ import static java.lang.Math.*;
 public class TaskC {
     public static void main(String[] args) {
         step1();
+        step2();
     }
 
     private static void step1() {
@@ -48,11 +49,111 @@ public class TaskC {
         System.out.printf("Среднее геометрическое значение = %f\n", averageGeometricValue);
     }
 
+    private static void step2() {
+        int[] arrayA = new int[31];
+        int[] arrayB;
+        int a = 103;
+        int b = 450;
+        int arrayLengthOrIndex = 0;
+        boolean indexToCols = false;
+
+        for (int i = 0; i < arrayA.length; i++) {
+            arrayA[i] = a + (int) (random() * (b - a));
+            if ((arrayA[i] * 0.1) > i) {
+                arrayLengthOrIndex = arrayLengthOrIndex + 1;
+            }
+        }
+
+        arrayB = new int[arrayLengthOrIndex];
+        arrayLengthOrIndex = 0;
+        for (int i = 0; i < arrayA.length; i++) {
+            if ((arrayA[i] * 0.1) > i) {
+                arrayB[arrayLengthOrIndex] = arrayA[i];
+                arrayLengthOrIndex = arrayLengthOrIndex + 1;
+            }
+        }
+        Arrays.sort(arrayB);
+        printTable(arrayA, "Array A (index to rows)", indexToCols);
+        // indexToCols = true;
+        // printTable(arrayB, "Array B (index to cols)", indexToCols);
+    }
+
     public static void printArray(double[] arrayDoubleNumbers, String name, int columnCount) {
         for (int i = 0; i < arrayDoubleNumbers.length; i++) {
             System.out.printf("%s[%- 3d]= %-10.5f", name, i, arrayDoubleNumbers[i]);
             if ((i + 1) % columnCount == 0 || i == arrayDoubleNumbers.length - 1) {
                 System.out.println();
+            }
+        }
+    }
+
+    private static void printTable(int[] array, String s, boolean indexToCols) {
+        int countColumns = array.length < 5 ? array.length : 5;
+        int countRows = array.length % 5 == 0 ? array.length / 5 : array.length / 5 + 1;
+        //StringBuffer finalLine = new StringBuffer("║");
+        //String bufferLine = "";
+
+        System.out.println(s);
+        printTopLine(countColumns);
+
+        if (indexToCols) {
+
+        } else {
+            for (int i = 0; i < array.length; i++) {
+                //bufferLine += String.format("║ A[%d]=%d ", i, array[i]);
+                if ((i + 1) % countColumns == 0 && i != array.length - 1) {
+                    System.out.print(String.format("║ A[%3d]=%d ║\n", i, array[i]));
+                    printMiddleLine(countColumns);
+                } else {
+                    System.out.print(String.format("║ A[%3d]=%d ", i, array[i]));
+                }
+                if (i == array.length - 1) {
+                    printEmptyLines(countColumns * countRows - array.length);
+                    printBottomLine(countColumns);
+                }
+            }
+        }
+        //  printMiddleLine(countColumns);
+        //  printBottomLine(countColumns);
+
+    }
+
+    private static void printTopLine(int countColumns) {
+        StringBuffer finalLine = new StringBuffer("╔════════════╗");
+        String bufferLine = "";
+        for (int i = 1; i < countColumns; i++) {
+            bufferLine += "════════════╦";
+        }
+        finalLine.insert(1, bufferLine);
+        System.out.println(finalLine);
+    }
+
+    private static void printMiddleLine(int countColumns) {
+        StringBuffer finalLine = new StringBuffer("╠════════════╣");
+        String bufferLine = "";
+        for (int i = 1; i < countColumns; i++) {
+            bufferLine += "════════════╬";
+        }
+        finalLine.insert(1, bufferLine);
+        System.out.println(finalLine);
+    }
+
+    private static void printBottomLine(int countColumns) {
+        StringBuffer finalLine = new StringBuffer("╚════════════╝");
+        String bufferLine = "";
+        for (int i = 1; i < countColumns; i++) {
+            bufferLine += "════════════╩";
+        }
+        finalLine.insert(1, bufferLine);
+        System.out.println(finalLine);
+    }
+
+    private static void printEmptyLines(int countColumns) {
+        for (int i = 1; i <= countColumns; i++) {
+            if (i == countColumns) {
+                System.out.print("║            ║\n");
+            } else {
+                System.out.print("║            ");
             }
         }
     }
