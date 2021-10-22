@@ -74,8 +74,8 @@ public class TaskC {
         }
         Arrays.sort(arrayB);
         printTable(arrayA, "Array A (index to rows)", indexToCols);
-        // indexToCols = true;
-        // printTable(arrayB, "Array B (index to cols)", indexToCols);
+        indexToCols = true;
+        printTable(arrayB, "Array B (index to cols)", indexToCols);
     }
 
     public static void printArray(double[] arrayDoubleNumbers, String name, int columnCount) {
@@ -87,20 +87,39 @@ public class TaskC {
         }
     }
 
-    private static void printTable(int[] array, String s, boolean indexToCols) {
+    private static void printTable(int[] array, String tableHeader, boolean indexToCols) {
         int countColumns = array.length < 5 ? array.length : 5;
-        int countRows = array.length % 5 == 0 ? array.length / 5 : array.length / 5 + 1;
-        //StringBuffer finalLine = new StringBuffer("║");
-        //String bufferLine = "";
+        int countRows = (int) ceil((double) array.length / countColumns);
+        boolean repeat = indexToCols;
+        int tempCountColumns;
 
-        System.out.println(s);
+        System.out.println(tableHeader);
         printTopLine(countColumns);
 
         if (indexToCols) {
+            for (int j = 0; j <= countRows - 1; j++) {
+                tempCountColumns = 1;
+                for (int i = j; i < array.length; i += countRows) {
+                    System.out.print(String.format("║ A[%3d]=%d ", i, array[i]));
+                    if (i + countRows > array.length - 1 && tempCountColumns != countColumns) {
+                        System.out.print(String.format("║            ", i, array[i]));
+                    }
+                    if (tempCountColumns == countColumns) {
+                        break;
+                    } else {
+                        tempCountColumns++;
+                    }
+                }
+                System.out.print("║\n");
 
+                if (j == countRows - 1) {
+                    printBottomLine(countColumns);
+                } else {
+                    printMiddleLine(countColumns);
+                }
+            }
         } else {
             for (int i = 0; i < array.length; i++) {
-                //bufferLine += String.format("║ A[%d]=%d ", i, array[i]);
                 if ((i + 1) % countColumns == 0 && i != array.length - 1) {
                     System.out.print(String.format("║ A[%3d]=%d ║\n", i, array[i]));
                     printMiddleLine(countColumns);
@@ -113,9 +132,6 @@ public class TaskC {
                 }
             }
         }
-        //  printMiddleLine(countColumns);
-        //  printBottomLine(countColumns);
-
     }
 
     private static void printTopLine(int countColumns) {
