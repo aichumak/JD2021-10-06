@@ -9,10 +9,10 @@ public class TaskB {
     }
 
     private static void step1() {
-        final double deltaX = 0.2;
+        final double DELTA_X = 0.2;
         double y;
 
-        for (double a = 0; a <= 2; a += deltaX) {
+        for (double a = 0; a <= 2; a += DELTA_X) {
             y = 0;
             for (double x = 1; x <= 6; x++) {
                 y = y + (pow(7, a) - cos(x));
@@ -22,10 +22,10 @@ public class TaskB {
     }
 
     private static void step2() {
-        final double deltaX = 0.5;
+        final double DELTA_X = 0.5;
         double a, betta;
 
-        for (double x = -6; x < 2; x += deltaX) {
+        for (double x = -6; x < 2; x += DELTA_X) {
             if (-6 < x && x < 2) {
                 betta = 0;
                 a = 0;
