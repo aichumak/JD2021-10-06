@@ -2,7 +2,7 @@ package by.it.vrublevskii.jd01_02;
 
 import java.util.Scanner;
 
-public class TaskB {
+class TaskB {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
