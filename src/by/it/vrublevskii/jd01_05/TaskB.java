@@ -3,7 +3,7 @@ package by.it.vrublevskii.jd01_05;
 import static java.lang.Math.*;
 
 class TaskB {
-    public static void main(String[] args) {
+    static void main(String[] args) {
         step4();
     }
 
