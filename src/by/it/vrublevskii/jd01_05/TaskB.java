@@ -17,6 +17,5 @@ class TaskB {
             }
             System.out.printf("При а = %.2f Сумма у = %f\n", a, sum);
         }
-        System.out.printf("При а = %.2f Сумма у = %f\n", a, y);
     }
 }
