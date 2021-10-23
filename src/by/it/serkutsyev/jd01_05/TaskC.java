@@ -19,7 +19,7 @@ public class TaskC {
         for (double x = 5.33; x <= 9 && index < countOfElements; x += delta) {
             double z = pow((pow(x,2) + 4.5), 1.0 / 3);
             originalArray[index] = z;
-            System.out.printf("%2$s[%1$ -3d]=%3$-7.2f", index, name, originalArray[index]);
+            System.out.printf("%2$s[%1$ -3d]=%3$f", index, name, originalArray[index]);
             index++;
             if (index % columnCount == 0){
                 System.out.println();
@@ -41,7 +41,7 @@ public class TaskC {
             if (originalArray[i]>3.5){
                 newArray[indexNewArray]= originalArray[i];
                // indexNewArray++;
-                System.out.printf("%2$s[%1$ -3d]=%3$-7.2f", indexNewArray, nameNew, newArray[indexNewArray]);
+                System.out.printf("%2$s[%1$ -3d]=%3$f", indexNewArray, nameNew, newArray[indexNewArray]);
                 indexNewArray++;
                 if (indexNewArray % columnCount == 0) {
                     System.out.println();

@@ -29,19 +29,20 @@ public class TaskB {
             if (x / 2 > -2 && x / 2 <= -1) {
                 b = sin(pow(x, 2));
                 a = log10(abs(b + 2.74));
-                System.out.printf("x/2=%3.2f b=%5.4f a=%5.4f\n", x / 2, b, a);
+                System.out.printf("При x/2=%3.2f a = %11.10f\n", x / 2, a);
             } else if (x / 2 > -1 && x / 2 < 0.2) {
                 b = cos(pow(x, 2));
                 a = log10(abs(b + 2.74));
-                System.out.printf("x/2=%3.2f b=%5.4f a=%5.4f\n", x / 2, b, a);
+                System.out.printf("При x/2=%3.2f a = %11.10f\n", x / 2, a);
             } else if (x / 2 == 0.2) {
-                b = 1 / tan(pow(x, 2));
-               // b = pow(1/tan(x),2);
+                b = 1 / (tan(pow(x, 2)));
+                // b = pow(1/tan(x),2);
                 a = log10(abs(b + 2.74));
-                System.out.printf("x/2=%3.2f b=%5.4f a=%5.4f\n", x / 2, b, a);
+                System.out.printf("При x/2=%3.2f a = %11.10f\n", x / 2, a);
             } else {
-                System.out.printf("x/2=%3.2f Вычисления при данных значениях х/2 невозможны\n", x / 2);
+                System.out.printf("При x/2=%3.2f вычисления не определены\n", x / 2);
             }
+
         }
     }
 }
