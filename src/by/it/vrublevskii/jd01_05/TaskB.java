@@ -7,6 +7,7 @@ class TaskB {
         step4();
     }
 
+
     static void step4() {
         double sum = 0;
         double a;
