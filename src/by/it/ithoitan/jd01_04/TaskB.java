@@ -4,28 +4,52 @@ import java.util.Scanner;
 
 public class TaskB {
     public static void main(String[] args) {
+        double total = 0;
         Scanner scanner = new Scanner(System.in);
-        String personamber = scanner.nextLine();
-        String person1 = scanner.next();
-        String person2 = scanner.next();
-        String person3 = scanner.next();
-        String sal1 = scanner.nextLine();
-        int[] arr1;
-        arr1 = stringLineToIntArray(sal1);
+        int personNamber = scanner.nextInt();
+        String[] personArray = new String[personNamber];
+        for (int i = 0; i < personArray.length; i++) {
+            personArray[i] = scanner.next();
+        }
+        int[][] salary = new int[personNamber][4];
+        for (int i = 0; i < salary.length; i++) {
+            System.out.printf("Введите зарплату для %s\n", personArray[i]);
+            for (int j = 0; j < salary[i].length; j++) {
+                salary[i][j] = scanner.nextInt();
+                total+=salary[i][j];
 
+            }
+            System.out.println(total);
 
-
-    }
-
-    public static int[] stringLineToIntArray(String line) {
-        String[] elemString = line.split("");
-        int[] mas = new int[elemString.length];
-        for (int i = 0; i < elemString.length; i++) {
-            mas[i] = Integer.parseInt(elemString[i]);
 
         }
-        return mas;
+        double midleSal = total / (personNamber * 4);
+        System.out.println("--------------------------------------------");
+        System.out.printf("%-8s%-10s%-10s%-10s%-10s%-8s\n", "Фамилия","Квартал1", "Квартал2", "квартал3", "Квартал4", "Итого");
+        System.out.println("--------------------------------------------");
+        for (int i = 0; i < salary.length; i++) {
+            System.out.print(personArray[i]+":");
+            for (int j = 0; j < salary[i].length; j++) {
+                System.out.printf("%10d",salary[i][j]);
+            }
+            System.out.println();
+
+        }
+        System.out.println("--------------------------------------------");
+        System.out.printf("\n Итого %f", total);
+        System.out.printf("\n Средняя %4.4f", midleSal );
+        System.out.println();
+
+
+
+
+
     }
+
+
+
+
+
 
 
 }
