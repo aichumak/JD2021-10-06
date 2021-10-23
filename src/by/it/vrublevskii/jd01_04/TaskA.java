@@ -3,7 +3,7 @@ package by.it.vrublevskii.jd01_04;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class TaskA {
+class TaskA {
 
     public static void main(String[] args) {
 

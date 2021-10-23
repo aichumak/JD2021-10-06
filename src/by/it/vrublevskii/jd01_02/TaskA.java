@@ -2,7 +2,7 @@ package by.it.vrublevskii.jd01_02;
 
 import java.util.Scanner;
 
-public class TaskA {
+class TaskA {
     public static void main(String[] args) {
         int[] arr = new int[10];
         Scanner sc = new Scanner(System.in);
