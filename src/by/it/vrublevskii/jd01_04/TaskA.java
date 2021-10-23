@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 class TaskA {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
 
         printMulTable();
 

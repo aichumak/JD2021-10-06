@@ -3,7 +3,7 @@ package by.it.vrublevskii.jd01_05;
 import static java.lang.Math.*;
 
 class TaskA {
-    static final double a = 756.13;
+    private static final double a = 756.13;
     static final double x = 0.3;
     static final double a1 = 1.21;
     static final double b1 = 0.371;
