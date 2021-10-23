@@ -1,4 +1,4 @@
-package by.it.khmelov.jd01_06;
+package by.it.konon.jd01_06;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
