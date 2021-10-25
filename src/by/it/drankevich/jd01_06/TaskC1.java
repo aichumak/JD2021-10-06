@@ -23,7 +23,6 @@ public class TaskC1 {
 
         Pattern pat = Pattern.compile("[\\s]+");
         for (int i = 0; i < str.length; i++) {
-            // String s="Привет как дела";
             StringBuilder sb = new StringBuilder(str[i]);
 
             Matcher matcher = pat.matcher(sb);
