@@ -27,8 +27,6 @@ public class TaskB {
 
         for (double x = -6; x < 2; x += DELTA_X) {
             if (-6 < x && x < 2) {
-                betta = 0;
-                a = 0;
                 if (-2 < x / 2 && x / 2 <= -1) {
                     betta = sin(pow(x, 2));
                     a = log10(abs(betta + 2.74));

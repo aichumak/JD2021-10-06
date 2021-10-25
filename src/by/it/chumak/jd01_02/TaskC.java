@@ -46,7 +46,7 @@ public class TaskC {
         for (int i = 0; i < array.length; i++) {
             for (int i1 = 0; i1 < array[i].length; i1++) {
                 if (array[i][i1] == max) {
-                    nclmn = nclmn + Integer.toString(i1);
+                    nclmn = nclmn + i1;
                 }
             }
         }
@@ -69,7 +69,7 @@ public class TaskC {
                     n2 = n2 + 1;
                 }
             }
-            if (stringfound == true) {
+            if (stringfound) {
                 arrstr[n1] = i;
                 n1 = n1 + 1;
             }
@@ -88,7 +88,7 @@ public class TaskC {
                     break;
                 }
             }
-            if (nextstr == true) {
+            if (nextstr) {
                 continue;
             }
             n2 = 0;
@@ -100,7 +100,7 @@ public class TaskC {
                         break;
                     }
                 }
-                if (nextcolumn == true) {
+                if (nextcolumn) {
                     continue;
                 }
                 arrnew[n1][n2] = array[i][i1];
@@ -132,11 +132,11 @@ public class TaskC {
                         start = true;
                         continue;
                     }
-                    if (start == true) {
+                    if (start) {
                         break;
                     }
                 }
-                if (start == true) {
+                if (start) {
                     sum = sum + element;
                 }
             }
@@ -167,7 +167,7 @@ public class TaskC {
                     }
                 }
             }
-            nfound = minfound == true && maxfound == true;
+            nfound = minfound && maxfound;
         }
 
         for (int i = 0; i < n; i++) {

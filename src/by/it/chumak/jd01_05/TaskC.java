@@ -55,7 +55,7 @@ public class TaskC {
         int a = 103;
         int b = 450;
         int arrayLengthOrIndex = 0;
-        boolean indexToCols = false;
+        boolean indexToCols;
 
         for (int i = 0; i < arrayA.length; i++) {
             arrayA[i] = a + (int) (random() * (b - a));
@@ -73,6 +73,7 @@ public class TaskC {
             }
         }
         Arrays.sort(arrayB);
+        indexToCols = false;
         printTable(arrayA, "Array A (index to rows)", indexToCols);
         indexToCols = true;
         printTable(arrayB, "Array B (index to cols)", indexToCols);
@@ -88,9 +89,8 @@ public class TaskC {
     }
 
     private static void printTable(int[] array, String tableHeader, boolean indexToCols) {
-        int countColumns = array.length < 5 ? array.length : 5;
+        int countColumns = Math.min(array.length, 5);
         int countRows = (int) ceil((double) array.length / countColumns);
-        boolean repeat = indexToCols;
         int tempCountColumns;
 
         System.out.println(tableHeader);
@@ -100,9 +100,9 @@ public class TaskC {
             for (int j = 0; j <= countRows - 1; j++) {
                 tempCountColumns = 1;
                 for (int i = j; i < array.length; i += countRows) {
-                    System.out.print(String.format("║ A[%3d]=%d ", i, array[i]));
+                    System.out.printf("║ A[%3d]=%d ", i, array[i]);
                     if (i + countRows > array.length - 1 && tempCountColumns != countColumns) {
-                        System.out.print(String.format("║            ", i, array[i]));
+                        System.out.print("║            ");
                     }
                     if (tempCountColumns == countColumns) {
                         break;
@@ -121,10 +121,10 @@ public class TaskC {
         } else {
             for (int i = 0; i < array.length; i++) {
                 if ((i + 1) % countColumns == 0 && i != array.length - 1) {
-                    System.out.print(String.format("║ A[%3d]=%d ║\n", i, array[i]));
+                    System.out.printf("║ A[%3d]=%d ║\n", i, array[i]);
                     printMiddleLine(countColumns);
                 } else {
-                    System.out.print(String.format("║ A[%3d]=%d ", i, array[i]));
+                    System.out.printf("║ A[%3d]=%d ", i, array[i]);
                 }
                 if (i == array.length - 1) {
                     printEmptyLines(countColumns * countRows - array.length);

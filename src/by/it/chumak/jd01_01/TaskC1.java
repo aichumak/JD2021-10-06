@@ -18,6 +18,6 @@ class TaskC1 {
         int a = sc.nextInt();
         int b = sc.nextInt();
 
-        System.out.println("Sum = " + Integer.toString(a+b));
+        System.out.println("Sum = " + (a + b));
     }
 }
