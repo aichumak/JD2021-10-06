@@ -9,7 +9,7 @@ public class TaskA1 {
 
         textTaskA1 = getTextA1();
         System.out.print(textTaskA1);
-        System.out.println();
+        //System.out.println();
     }
 
     private static String getTextA1() {
