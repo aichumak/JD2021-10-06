@@ -10,7 +10,7 @@ class TaskA {
     static final double x2 = 12.1;
 
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         double partOne = cos(pow((pow(x, 2) + PI / 6), 5));
         double partTwo = sqrt(x * pow(a, 3));
         double partThree = log(abs((a - 1.12 * x) / 4));
@@ -26,9 +26,7 @@ class TaskA {
 
         for (double a2 = -5; a2 <= 12; a2 += 3.75) {
             double f = pow(E, a2 * x2) - 3.45 * a2;
-            System.out.printf("При a = %.2f, f = %f\n", a2, f);
+            System.out.printf("При a = %.2f, f = %e\n", a2, f);
         }
     }
-
-
 }
