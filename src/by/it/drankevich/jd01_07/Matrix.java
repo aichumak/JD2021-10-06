@@ -19,7 +19,7 @@ class Matrix extends Var {
         String str=strMatrix.replace('{',' ');
         String str1=str.replace('}',' ');
         String str2=str1.trim();
-        String[]arraystr=str2.split(", ");
+        String[]arraystr=str2.split("[,\\s]+");
 
         double[][]array1=new double[2][2];
         int k=0;
