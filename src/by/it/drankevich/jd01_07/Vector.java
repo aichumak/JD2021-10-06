@@ -1,9 +1,7 @@
 package by.it.drankevich.jd01_07;
 
-import java.util.Arrays;
-
 class Vector extends Var {
-    private double[] value;
+    private final double[] value;
 
     Vector(double[] value) {
         this.value = value;
