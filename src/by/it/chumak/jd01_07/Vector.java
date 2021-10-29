@@ -18,7 +18,7 @@ public class Vector extends Var {
 
     public Vector(String strVector) {
         StringBuilder inText = new StringBuilder(strVector);
-        Pattern pattern = Pattern.compile("[^,]+");
+        Pattern pattern = Pattern.compile("[^,{}]+");
         Matcher matcher = pattern.matcher(inText);
         double[] arrayDouble = new double[0];
 
@@ -26,9 +26,7 @@ public class Vector extends Var {
             arrayDouble = Arrays.copyOf(arrayDouble, arrayDouble.length + 1);
             arrayDouble[arrayDouble.length - 1] = Double.parseDouble(matcher.group());
         }
-
         this.values = arrayDouble;
-
     }
 
     @Override
