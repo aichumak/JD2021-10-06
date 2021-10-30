@@ -1,6 +1,6 @@
 package by.it._classwork_.jd01_07;
 
-public class Scalar extends Var {
+class Scalar extends Var {
 
     private final double value;
 
