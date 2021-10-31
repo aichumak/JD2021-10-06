@@ -15,9 +15,7 @@ public class Vector extends Var {
     }
 
     public Vector(String stringVector) {
-        if (stringVector.contains("{")) {
-            stringVector = stringVector.substring(1, stringVector.length() - 1);
-        }
+        stringVector = stringVector.replaceAll("[{|}]", " ");
         String[] stringArray = stringVector.split(",");
         double[] vectorBuffer = new double[stringArray.length];
         for (int i = 0; i < stringArray.length; i++) {
@@ -29,10 +27,8 @@ public class Vector extends Var {
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(", ", "{", "}");
-        String buffer;
         for (double vectorElement : vector) {
-            buffer = Double.toString(vectorElement);
-            joiner.add(buffer);
+            joiner.add(Double.toString(vectorElement));
         }
         return joiner.toString();
     }
