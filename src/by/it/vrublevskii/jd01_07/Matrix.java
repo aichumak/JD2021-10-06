@@ -20,18 +20,17 @@ public class Matrix extends Var {
     public Matrix(String stringMatrix) {
         String[] matrixElements;
         String[] matrixRows = stringMatrix.split("},\\{");
-        double[][] newDoubleMatrix = getArraysSize(matrixRows);
+        this.matrix = initialiseMatrix(matrixRows);
         for (int i = 0; i < matrixRows.length; i++) {
             matrixRows[i] = matrixRows[i].replaceAll("[{|}]", " ");
             matrixElements = matrixRows[i].split(",");
             for (int j = 0; j < matrixElements.length; j++) {
-                newDoubleMatrix[i][j] = Double.parseDouble(matrixElements[j]);
+                this.matrix[i][j] = Double.parseDouble(matrixElements[j]);
             }
         }
-        this.matrix = newDoubleMatrix;
     }
 
-    private double[][] getArraysSize(String[] matrixRows) {
+    private double[][] initialiseMatrix(String[] matrixRows) {
         String[] matrixElements;
         matrixRows[0] = matrixRows[0].replaceAll("[{|}]", " ");
         matrixElements = matrixRows[0].split(",");
