@@ -1,6 +1,6 @@
-package by.it._classwork_.jd01_07;
+package by.it.chumak.jd01_07;
 
-class Scalar extends Var {
+public class Scalar extends Var {
 
     private final double value;
 
@@ -12,8 +12,8 @@ class Scalar extends Var {
         this.value = otherScalar.value;
     }
 
-    public Scalar(String stringValue) {
-        value = Double.parseDouble(stringValue);
+    public Scalar(String strScalar) {
+        this.value = Double.parseDouble(strScalar);
     }
 
     @Override
