@@ -3,18 +3,18 @@ package by.it.vrublevskii.jd01_07;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-public class Vector extends Var {
+class Vector extends Var {
     private final double[] vector;
 
-    public Vector(double[] vector) {
+    Vector(double[] vector) {
         this.vector = Arrays.copyOf(vector, vector.length);
     }
 
-    public Vector(Vector otherVector) {
+    Vector(Vector otherVector) {
         this.vector = otherVector.vector;
     }
 
-    public Vector(String stringVector) {
+    Vector(String stringVector) {
         stringVector = stringVector.replaceAll("[{|}]", " ");
         String[] stringArray = stringVector.split(",");
         double[] vectorBuffer = new double[stringArray.length];

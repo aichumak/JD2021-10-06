@@ -6,18 +6,18 @@ public class Matrix extends Var {
     private final double[][] matrix;
 
 
-    public Matrix(double[][] value) {
+    Matrix(double[][] value) {
         this.matrix = new double[value.length][value[0].length];
         for (int i = 0; i < matrix.length; i++) {
             this.matrix[i] = Arrays.copyOf(value[i], value.length);
         }
     }
 
-    public Matrix(Matrix otherMatrix) {
+    Matrix(Matrix otherMatrix) {
         this.matrix = otherMatrix.matrix;
     }
 
-    public Matrix(String stringMatrix) {
+    Matrix(String stringMatrix) {
         String[] matrixElements;
         String[] matrixRows = stringMatrix.split("},\\{");
         this.matrix = initialiseMatrix(matrixRows);
