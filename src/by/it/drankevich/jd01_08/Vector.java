@@ -44,14 +44,19 @@ class Vector extends Var {
         if ((other instanceof Vector)) {
             double[] res = Arrays.copyOf(value, value.length);
             if (value.length!=((Vector) other).value.length) {
-                System.out.printf("Incorrect operation %s / %s%n", this, other);
+                System.out.printf("Incorrect operation %s + %s%n", this, other);
             }
-            for (int i = 0; i < res.length; i++) {
-                res[i] = res[i] + ((Vector) other).value[i];
+            else {
+                for (int i = 0; i < res.length; i++) {
+                    res[i] = res[i] + ((Vector) other).value[i];
 
+                }
+
+                return new Vector(res);
             }
-            return new Vector(res);
+
         }
+
         return super.add(other);
     }
 
@@ -69,18 +74,20 @@ class Vector extends Var {
         }
         if ((other instanceof Vector)) {
             double[] res = Arrays.copyOf(value, value.length);
-            if (value.length!=((Vector) other).value.length) {
+            if (value.length != ((Vector) other).value.length) {
                 System.out.printf("Incorrect operation %s / %s%n", this, other);
-            }
+            } else {
                 for (int i = 0; i < ((Vector) other).value.length; i++) {
                     res[i] = res[i] - ((Vector) other).value[i];
 
                 }
                 return new Vector(res);
             }
+        }
 
         return super.sub(other);
     }
+
     @Override
     public Var mul(Var other) {
         if ((other instanceof Scalar)){
@@ -98,16 +105,18 @@ class Vector extends Var {
             if (value.length!=((Vector) other).value.length) {
                 System.out.printf("Incorrect operation %s / %s%n", this, other);
             }
-            for (int i = 0; i < res.length; i++) {
-                res[i] = res[i] * ((Vector) other).value[i];
+            else {
+                for (int i = 0; i < res.length; i++) {
+                    res[i] = res[i] * ((Vector) other).value[i];
 
-            }
-            double res1=0;
-            for (int i = 0; i < res.length; i++) {
-                res1=res1+res[i];
+                }
+                double res1 = 0;
+                for (int i = 0; i < res.length; i++) {
+                    res1 = res1 + res[i];
 
+                }
+                return new Scalar(res1);
             }
-            return new Scalar(res1);
 
         }
         return super.mul(other);
