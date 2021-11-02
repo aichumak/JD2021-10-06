@@ -108,12 +108,49 @@ class Matrix extends Var {
             }
             return new Matrix(result);
         }
-
+        if (other instanceof Matrix otherMatrix) {
+            if (this.matrix[0].length == otherMatrix.matrix.length) {
+                double[][] result = new double[this.matrix.length][otherMatrix.matrix[0].length];
+                for (int i1 = 0; i1 < otherMatrix.matrix[0].length; i1++) {
+                    for (int i = 0; i < this.matrix.length; i++) {
+                        for (int j = 0; j < this.matrix[i].length; j++) {
+                            result[i][i1] += this.matrix[i][j] * otherMatrix.matrix[j][i1];
+                        }
+                    }
+                }
+                return new Matrix(result);
+            }
+            System.out.printf("Matrices are not equal %s - %s\n", this, other);
+        }
+        if (other instanceof Vector otherVector) {
+            if (this.matrix[0].length == otherVector.getVector().length) {
+                double[] result = new double[this.matrix.length];
+                    for (int i = 0; i < this.matrix.length; i++) {
+                        for (int j = 0; j < this.matrix[i].length; j++) {
+                            result[i] += this.matrix[i][j] * otherVector.getVector()[j];
+                        }
+                    }
+                return new Vector(result);
+            }
+            System.out.printf("Matrices are not equal %s - %s\n", this, other);
+        }
         return super.mul(other);
     }
 
     @Override
     public Var div(Var other) {
+        if (other instanceof Scalar otherScalar) {
+            if (otherScalar.getValue() == 0) {
+                System.out.printf("Division by zero %s / %s\n", this, other);
+            }
+            double[][] result = getCopyMatrix();
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] /= otherScalar.getValue();
+                }
+            }
+            return new Matrix(result);
+        }
         return super.div(other);
     }
 

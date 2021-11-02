@@ -100,6 +100,16 @@ class Vector extends Var {
 
     @Override
     public Var div(Var other) {
+        if (other instanceof Scalar otherScalar){
+            if (otherScalar.getValue() == 0) {
+                System.out.printf("Division by zero %s / %s\n", this, other);
+            }
+            double[] result = Arrays.copyOf(this.vector, this.vector.length);
+            for (int i = 0; i < result.length; i++) {
+                result[i] /= otherScalar.getValue();
+            }
+            return new Vector(result);
+        }
         return super.div(other);
     }
 

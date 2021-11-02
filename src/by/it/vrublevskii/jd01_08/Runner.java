@@ -10,8 +10,7 @@ public class Runner {
     public static void main(String[] args) {
         Var s = new Scalar(3.0);
         Var v = new Vector(new double[]{1, 2, 3}); // закомментируйте вектор и/или
-        Var m = new Matrix("{{1, 2}, {3, 4}}");// матрицу, если вы их не реализовали
-        Var m1 = new Matrix("{{4, 5}, {7, 8}}");
+        Var m = new Matrix("{{1,2,3},{4,5,6},{7,8,9}}");// матрицу, если вы их не реализовали
         /* Уровень сложности A (калькулятор) */
         print(s.add(s)); //выведет в консоль 6.0
         print(s.sub(s)); //выведет в консоль 0.0
