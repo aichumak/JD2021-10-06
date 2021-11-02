@@ -93,6 +93,7 @@ class Vector extends Var {
             }
             return new Vector(result);
         }
+
         if (other instanceof Vector otherVector) {
             double[] result = new double[1];
             //TODO Throws exception Incorrect operation
@@ -102,6 +103,25 @@ class Vector extends Var {
             for (int i = 0; i < this.values.length; i++) {
                 result[0] = result[0] + (this.values[i] * otherVector.values[i]);
             }
+            return new Vector(result);
+        }
+
+        if (other instanceof Matrix otherMatrix) {
+            double[] result = new double[this.values.length];
+            double[][] arrayOtherMatrix = otherMatrix.getValues();
+            int verticalVectorSize = arrayOtherMatrix[0].length;
+            int horizontalVectorSize = this.values.length;
+
+            //TODO Throws exception Incorrect operation
+            if (verticalVectorSize != horizontalVectorSize) {
+                System.out.printf("Incorrect operation %s + %s", this, otherMatrix);
+                return null;
+            }
+                for (int j = 0; j < horizontalVectorSize; j++) {
+                    for (int k = 0; k < result.length; k++) {
+                        result[j] = result[j] + (arrayOtherMatrix[j][k]) * (this.values[k]);
+                    }
+                }
             return new Vector(result);
         }
         return super.sub(other);

@@ -111,53 +111,51 @@ class Matrix extends Var {
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar otherScalar) {
-            double[][] result = Arrays.copyOf(this.values, this.values.length);
+            double[][] result = new double[this.values.length][this.values[0].length];
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
-                    result[i][j] = result[i][j] * otherScalar.getValue();
+                    result[i][j] = this.values[i][j] * otherScalar.getValue();
                 }
             }
             return new Matrix(result);
         }
         if (other instanceof Matrix otherMatrix) {
-            double[][] thisMatrix = Arrays.copyOf(this.values, this.values.length);
-            double[][] otherMatrixCopy = Arrays.copyOf(otherMatrix.getValues(), otherMatrix.getValues().length);
-            double[][] result = new double[0][0];
+            double[][] result = new double[this.values.length][this.values[0].length];
+            double[][] arrayOtherMatrix = otherMatrix.getValues();
+            int verticalMatrixSize = this.values[0].length;
+            int horizontalMatrixSize = this.values.length;
 
             //TODO Throws exception Incorrect operation
-            if (result.length != otherMatrix.values.length) {
+            if (result.length != otherMatrix.values[0].length) {
                 System.out.printf("Incorrect operation %s + %s", this, otherMatrix);
                 return null;
             }
 
-            //if (thisMatrix.length >= otherMatrixCopy.length) {
-            //    result = Arrays.copyOf(thisMatrix, thisMatrix.length);
-            //} else {
-            //    result = Arrays.copyOf(otherMatrixCopy, otherMatrixCopy.length);
-            //}
+            for (int i = 0; i < verticalMatrixSize; i++) {
+                for (int j = 0; j < horizontalMatrixSize; j++) {
+                    for (int k = 0; k < result.length; k++) {
+                        result[i][j] = result[i][j] + (this.values[i][k]) * (arrayOtherMatrix[k][j]);
+                    }
+                }
+            }
 
-            for (int i = 0; i < result.length; i++) {
-                for (int j = 0; j < result.length; j++) {
-                    result[i][j] = (result[i][j] * otherMatrix.values[i][j]) + (result[i][j + 1] * otherMatrix.values[i + 1][j]);
-                }
-            }
             return new Matrix(result);
         }
-        if (other instanceof Vector otherVector) {
-            double[][] result = Arrays.copyOf(this.values, this.values.length);
-            double[] arrayVector = otherVector.getValues();
-            //TODO Throws exception Incorrect operation
-            if (result.length != arrayVector.length) {
-                System.out.printf("Incorrect operation %s + %s", this, otherVector);
-            }
-            for (int i = 0; i < result.length; i++) {
-                for (int j = 0; j < result.length; j++) {
-                    result[i][j] *= arrayVector[j];
-                }
-            }
-            return new Matrix(result);
-        }
-        return super.mul(other);
+//        if (other instanceof Vector otherVector) {
+//            double[][] result = new double[this.values.length][this.values[0].length];
+//            double[] arrayOtherVector = otherVector.getValues();
+//            //TODO Throws exception Incorrect operation
+//            if (result.length != arrayOtherVector.length) {
+//                System.out.printf("Incorrect operation %s + %s", this, otherVector);
+//            }
+//            for (int i = 0; i < result.length; i++) {
+//                for (int j = 0; j < result.length; j++) {
+//                    result[i][j] *= arrayOtherVector[j];
+//                }
+//            }
+//            return new Matrix(result);
+//        }
+        return other.mul(this);
     }
 
     @Override
