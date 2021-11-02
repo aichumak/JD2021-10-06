@@ -37,7 +37,7 @@ class Vector extends Var {
     public Var add(Var other) {
         if (other instanceof Scalar otherScalar) {
             double[] result = new double[this.values.length];
-            //double[] result = Arrays.copyOf(this.values, this.values.length);
+
             for (int i = 0; i < result.length; i++) {
                 result[i] = this.values[i] + otherScalar.getValue();
             }
@@ -45,7 +45,7 @@ class Vector extends Var {
         }
         if (other instanceof Vector otherVector) {
             double[] result = new double[this.values.length];
-            //double[] result = Arrays.copyOf(this.values, this.values.length);
+
             //TODO Throws exception Incorrect operation
             if (result.length != otherVector.values.length) {
                 System.out.printf("Incorrect operation %s + %s", this, otherVector);
@@ -55,6 +55,7 @@ class Vector extends Var {
             }
             return new Vector(result);
         }
+
         return super.add(other);
     }
 
@@ -62,7 +63,7 @@ class Vector extends Var {
     public Var sub(Var other) {
         if (other instanceof Scalar otherScalar) {
             double[] result = new double[this.values.length];
-            //double[] result = Arrays.copyOf(this.values, this.values.length);
+
             for (int i = 0; i < result.length; i++) {
                 result[i] = this.values[i] - otherScalar.getValue();
             }
@@ -70,7 +71,7 @@ class Vector extends Var {
         }
         if (other instanceof Vector otherVector) {
             double[] result = new double[this.values.length];
-            //double[] result = Arrays.copyOf(this.values, this.values.length);
+
             //TODO Throws exception Incorrect operation
             if (result.length != otherVector.values.length) {
                 System.out.printf("Incorrect operation %s + %s", this, otherVector);
@@ -80,6 +81,7 @@ class Vector extends Var {
             }
             return new Vector(result);
         }
+
         return super.sub(other);
     }
 
@@ -87,13 +89,12 @@ class Vector extends Var {
     public Var mul(Var other) {
         if (other instanceof Scalar otherScalar) {
             double[] result = new double[this.values.length];
-            //double[] result = Arrays.copyOf(this.values, this.values.length);
+
             for (int i = 0; i < result.length; i++) {
                 result[i] = this.values[i] * otherScalar.getValue();
             }
             return new Vector(result);
         }
-
         if (other instanceof Vector otherVector) {
             double[] result = new double[1];
             //TODO Throws exception Incorrect operation
@@ -105,7 +106,6 @@ class Vector extends Var {
             }
             return new Vector(result);
         }
-
         if (other instanceof Matrix otherMatrix) {
             double[] result = new double[this.values.length];
             double[][] arrayOtherMatrix = otherMatrix.getValues();
@@ -115,7 +115,7 @@ class Vector extends Var {
             //TODO Throws exception Incorrect operation
             if (verticalVectorSize != horizontalVectorSize) {
                 System.out.printf("Incorrect operation %s + %s", this, otherMatrix);
-                return null;
+                //return null;
             }
                 for (int j = 0; j < horizontalVectorSize; j++) {
                     for (int k = 0; k < result.length; k++) {
@@ -124,6 +124,7 @@ class Vector extends Var {
                 }
             return new Vector(result);
         }
+
         return super.sub(other);
     }
 
@@ -131,21 +132,24 @@ class Vector extends Var {
     public Var div(Var other) {
         if (other instanceof Scalar otherScalar) {
             double[] result = new double[this.values.length];
-            //double[] result = Arrays.copyOf(this.values, this.values.length);
+
             for (int i = 0; i < result.length; i++) {
                 result[i] = this.values[i] / otherScalar.getValue();
             }
             return new Vector(result);
         }
+
         return super.div(other);
     }
 
     @Override
     public String toString() {
         StringBuilder outString = new StringBuilder();
+
         if (this.values.length > 1) {
             String delimiter = "";
             outString.append("{");
+
             for (double value : values) {
                 outString.append(delimiter).append(value);
                 delimiter = ", ";

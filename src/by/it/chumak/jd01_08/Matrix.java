@@ -19,7 +19,7 @@ class Matrix extends Var {
 
     public Matrix(String strMatrix) {
         double[][] resultArray;
-        ArrayList<String[]> allStringArrays = new ArrayList<String[]>();
+        ArrayList<String[]> allStringArrays = new ArrayList<>();
         int countRows = 0;
         int maxCountSubstrings = 0;
         strMatrix = strMatrix.replaceAll(" ", "");
@@ -37,6 +37,7 @@ class Matrix extends Var {
         }
 
         resultArray = new double[countRows][maxCountSubstrings];
+
         for (int i = 0; i < resultArray.length; i++) {
             String[] tempArray = allStringArrays.get(i);
             for (int j = 0; j < tempArray.length; j++) {
@@ -54,7 +55,7 @@ class Matrix extends Var {
     public Var add(Var other) {
         if (other instanceof Scalar otherScalar) {
             double[][] result = new double[this.values.length][this.values[0].length];
-            //double[][] result = Arrays.copyOf(this.values, this.values.length);
+
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
                     result[i][j] = this.values[i][j] + otherScalar.getValue();
@@ -76,6 +77,7 @@ class Matrix extends Var {
             }
             return new Matrix(result);
         }
+
         return super.add(other);
     }
 
@@ -83,7 +85,7 @@ class Matrix extends Var {
     public Var sub(Var other) {
         if (other instanceof Scalar otherScalar) {
             double[][] result = new double[this.values.length][this.values[0].length];
-            //double[][] result = Arrays.copyOf(this.values, this.values.length);
+
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
                     result[i][j] = this.values[i][j] - otherScalar.getValue();
@@ -93,7 +95,7 @@ class Matrix extends Var {
         }
         if (other instanceof Matrix otherMatrix) {
             double[][] result = new double[this.values.length][this.values[0].length];
-            //double[][] result = Arrays.copyOf(this.values, this.values.length);
+
             //TODO Throws exception Incorrect operation
             if (result.length != otherMatrix.values.length) {
                 System.out.printf("Incorrect operation %s + %s", this, otherMatrix);
@@ -105,6 +107,7 @@ class Matrix extends Var {
             }
             return new Matrix(result);
         }
+
         return super.sub(other);
     }
 
@@ -112,6 +115,7 @@ class Matrix extends Var {
     public Var mul(Var other) {
         if (other instanceof Scalar otherScalar) {
             double[][] result = new double[this.values.length][this.values[0].length];
+
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
                     result[i][j] = this.values[i][j] * otherScalar.getValue();
@@ -123,12 +127,12 @@ class Matrix extends Var {
             double[][] result = new double[this.values.length][this.values[0].length];
             double[][] arrayOtherMatrix = otherMatrix.getValues();
             int verticalMatrixSize = this.values[0].length;
-            int horizontalMatrixSize = this.values.length;
+            int horizontalMatrixSize = arrayOtherMatrix.length;
 
             //TODO Throws exception Incorrect operation
-            if (result.length != otherMatrix.values[0].length) {
+            if (verticalMatrixSize != horizontalMatrixSize) {
                 System.out.printf("Incorrect operation %s + %s", this, otherMatrix);
-                return null;
+                //return null;
             }
 
             for (int i = 0; i < verticalMatrixSize; i++) {
@@ -138,23 +142,9 @@ class Matrix extends Var {
                     }
                 }
             }
-
             return new Matrix(result);
         }
-//        if (other instanceof Vector otherVector) {
-//            double[][] result = new double[this.values.length][this.values[0].length];
-//            double[] arrayOtherVector = otherVector.getValues();
-//            //TODO Throws exception Incorrect operation
-//            if (result.length != arrayOtherVector.length) {
-//                System.out.printf("Incorrect operation %s + %s", this, otherVector);
-//            }
-//            for (int i = 0; i < result.length; i++) {
-//                for (int j = 0; j < result.length; j++) {
-//                    result[i][j] *= arrayOtherVector[j];
-//                }
-//            }
-//            return new Matrix(result);
-//        }
+
         return other.mul(this);
     }
 
@@ -169,6 +159,7 @@ class Matrix extends Var {
             }
             return new Matrix(result);
         }
+
         return super.div(other);
     }
 
@@ -177,9 +168,11 @@ class Matrix extends Var {
         StringBuilder stringLine = new StringBuilder();
         stringLine.append("{");
         String delimiter;
+
         for (int i = 0; i < values.length; i++) {
             stringLine.append("{");
             delimiter = "";
+
             for (int j = 0; j < values[i].length; j++) {
                 if (j == values[i].length - 1) {
                     stringLine.append(delimiter);
@@ -196,6 +189,7 @@ class Matrix extends Var {
                 stringLine.append("}");
             }
         }
+
         stringLine.append("}");
         return stringLine.toString();
     }
