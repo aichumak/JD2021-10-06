@@ -36,20 +36,22 @@ class Vector extends Var {
     @Override
     public Var add(Var other) {
         if (other instanceof Scalar otherScalar) {
-            double[] result = Arrays.copyOf(this.values, this.values.length);
+            double[] result = new double[this.values.length];
+            //double[] result = Arrays.copyOf(this.values, this.values.length);
             for (int i = 0; i < result.length; i++) {
-                result[i] = result[i] + otherScalar.getValue();
+                result[i] = this.values[i] + otherScalar.getValue();
             }
             return new Vector(result);
         }
         if (other instanceof Vector otherVector) {
-            double[] result = Arrays.copyOf(this.values, this.values.length);
+            double[] result = new double[this.values.length];
+            //double[] result = Arrays.copyOf(this.values, this.values.length);
             //TODO Throws exception Incorrect operation
             if (result.length != otherVector.values.length) {
                 System.out.printf("Incorrect operation %s + %s", this, otherVector);
             }
             for (int i = 0; i < result.length; i++) {
-                result[i] = result[i] + otherVector.values[i];
+                result[i] = this.values[i] + otherVector.values[i];
             }
             return new Vector(result);
         }
@@ -59,20 +61,22 @@ class Vector extends Var {
     @Override
     public Var sub(Var other) {
         if (other instanceof Scalar otherScalar) {
-            double[] result = Arrays.copyOf(this.values, this.values.length);
+            double[] result = new double[this.values.length];
+            //double[] result = Arrays.copyOf(this.values, this.values.length);
             for (int i = 0; i < result.length; i++) {
-                result[i] = result[i] - otherScalar.getValue();
+                result[i] = this.values[i] - otherScalar.getValue();
             }
             return new Vector(result);
         }
         if (other instanceof Vector otherVector) {
-            double[] result = Arrays.copyOf(this.values, this.values.length);
+            double[] result = new double[this.values.length];
+            //double[] result = Arrays.copyOf(this.values, this.values.length);
             //TODO Throws exception Incorrect operation
             if (result.length != otherVector.values.length) {
                 System.out.printf("Incorrect operation %s + %s", this, otherVector);
             }
             for (int i = 0; i < result.length; i++) {
-                result[i] = result[i] - otherVector.values[i];
+                result[i] = this.values[i] - otherVector.values[i];
             }
             return new Vector(result);
         }
@@ -82,9 +86,10 @@ class Vector extends Var {
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar otherScalar) {
-            double[] result = Arrays.copyOf(this.values, this.values.length);
+            double[] result = new double[this.values.length];
+            //double[] result = Arrays.copyOf(this.values, this.values.length);
             for (int i = 0; i < result.length; i++) {
-                result[i] = result[i] * otherScalar.getValue();
+                result[i] = this.values[i] * otherScalar.getValue();
             }
             return new Vector(result);
         }
@@ -105,9 +110,10 @@ class Vector extends Var {
     @Override
     public Var div(Var other) {
         if (other instanceof Scalar otherScalar) {
-            double[] result = Arrays.copyOf(this.values, this.values.length);
+            double[] result = new double[this.values.length];
+            //double[] result = Arrays.copyOf(this.values, this.values.length);
             for (int i = 0; i < result.length; i++) {
-                result[i] = result[i] / otherScalar.getValue();
+                result[i] = this.values[i] / otherScalar.getValue();
             }
             return new Vector(result);
         }

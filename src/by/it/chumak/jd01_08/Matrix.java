@@ -22,7 +22,7 @@ class Matrix extends Var {
         ArrayList<String[]> allStringArrays = new ArrayList<String[]>();
         int countRows = 0;
         int maxCountSubstrings = 0;
-        strMatrix.replaceAll(" ", "");
+        strMatrix = strMatrix.replaceAll(" ", "");
         StringBuilder str = new StringBuilder(strMatrix);
         Pattern pattern = Pattern.compile("[0-9,]+[^\\{|^\\}]");
         Matcher matcher = pattern.matcher(str);
@@ -53,23 +53,25 @@ class Matrix extends Var {
     @Override
     public Var add(Var other) {
         if (other instanceof Scalar otherScalar) {
-            double[][] result = Arrays.copyOf(this.values, this.values.length);
+            double[][] result = new double[this.values.length][this.values[0].length];
+            //double[][] result = Arrays.copyOf(this.values, this.values.length);
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
-                    result[i][j] += otherScalar.getValue();
+                    result[i][j] = this.values[i][j] + otherScalar.getValue();
                 }
             }
             return new Matrix(result);
         }
         if (other instanceof Matrix otherMatrix) {
-            double[][] result = Arrays.copyOf(this.values, this.values.length);
+            double[][] result = new double[this.values.length][this.values[0].length];
+            double[][] otherMatrixCopy = otherMatrix.getValues();
             //TODO Throws exception Incorrect operation
-            if (result.length != otherMatrix.values.length) {
+            if (result.length != otherMatrixCopy.length) {
                 System.out.printf("Incorrect operation %s + %s", this, otherMatrix);
             }
             for (int i = 0; i < result.length; i++) {
-                for (int j = 0; j < result.length; j++) {
-                    result[i][j] += otherMatrix.values[i][j];
+                for (int j = 0; j < result[i].length; j++) {
+                    result[i][j] = this.values[i][j] + otherMatrixCopy[i][j];
                 }
             }
             return new Matrix(result);
@@ -80,23 +82,25 @@ class Matrix extends Var {
     @Override
     public Var sub(Var other) {
         if (other instanceof Scalar otherScalar) {
-            double[][] result = Arrays.copyOf(this.values, this.values.length);
+            double[][] result = new double[this.values.length][this.values[0].length];
+            //double[][] result = Arrays.copyOf(this.values, this.values.length);
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
-                    result[i][j] -= otherScalar.getValue();
+                    result[i][j] = this.values[i][j] - otherScalar.getValue();
                 }
             }
             return new Matrix(result);
         }
         if (other instanceof Matrix otherMatrix) {
-            double[][] result = Arrays.copyOf(this.values, this.values.length);
+            double[][] result = new double[this.values.length][this.values[0].length];
+            //double[][] result = Arrays.copyOf(this.values, this.values.length);
             //TODO Throws exception Incorrect operation
             if (result.length != otherMatrix.values.length) {
                 System.out.printf("Incorrect operation %s + %s", this, otherMatrix);
             }
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result.length; j++) {
-                    result[i][j] -= otherMatrix.values[i][j];
+                    result[i][j] = this.values[i][j] - otherMatrix.values[i][j];
                 }
             }
             return new Matrix(result);
@@ -110,7 +114,7 @@ class Matrix extends Var {
             double[][] result = Arrays.copyOf(this.values, this.values.length);
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
-                    result[i][j] *= otherScalar.getValue();
+                    result[i][j] = result[i][j] * otherScalar.getValue();
                 }
             }
             return new Matrix(result);
@@ -162,7 +166,7 @@ class Matrix extends Var {
             double[][] result = Arrays.copyOf(this.values, this.values.length);
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result[i].length; j++) {
-                    result[i][j] /= otherScalar.getValue();
+                    result[i][j] = result[i][j] / otherScalar.getValue();
                 }
             }
             return new Matrix(result);
