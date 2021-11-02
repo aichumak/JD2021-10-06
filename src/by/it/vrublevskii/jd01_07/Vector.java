@@ -17,11 +17,10 @@ class Vector extends Var {
     Vector(String stringVector) {
         stringVector = stringVector.replaceAll("[{|}]", " ");
         String[] stringArray = stringVector.split(",");
-        double[] vectorBuffer = new double[stringArray.length];
+        this.vector = new double[stringArray.length];
         for (int i = 0; i < stringArray.length; i++) {
-            vectorBuffer[i] = Double.parseDouble(stringArray[i]);
+            this.vector[i] = Double.parseDouble(stringArray[i]);
         }
-        this.vector = Arrays.copyOf(vectorBuffer, vectorBuffer.length);
     }
 
     @Override

@@ -2,7 +2,7 @@ package by.it.vrublevskii.jd01_07;
 
 import java.util.Arrays;
 
-public class Matrix extends Var {
+class Matrix extends Var {
     private final double[][] matrix;
 
 

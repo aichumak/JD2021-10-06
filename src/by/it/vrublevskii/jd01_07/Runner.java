@@ -1,6 +1,6 @@
 package by.it.vrublevskii.jd01_07;
 
-public class Runner {
+class Runner {
     public static void main(String[] args) {
         Var var = new Scalar(156.254);
         Var var2 = new Scalar((Scalar) var);
