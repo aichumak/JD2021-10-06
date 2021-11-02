@@ -1,9 +1,13 @@
-package by.it.ithoitan.jd01_07;
+package by.it.ithoitan.jd01_08;
 
 import java.util.Arrays;
 
 class Vector extends Var {
     private final double[] values;
+
+    public double[] getValues() {
+        return Arrays.copyOf(values, values.length);
+    }
 
     public Vector(double[] values) {
         this.values = Arrays.copyOf(values, values.length);
@@ -24,6 +28,28 @@ class Vector extends Var {
         values = numStringArr;
 
 
+    }
+
+    @Override
+    public Var add(Var other) {
+        if(other instanceof Scalar oterScalar){
+           double[] result = Arrays.copyOf(values,values.length);
+            for (int i = 0; i < result.length; i++) {
+                result[i]=result[i]+oterScalar.getValue();
+            }
+            return new Vector(result);
+        }
+        if(other instanceof Vector oterVector){
+            double[] result = Arrays.copyOf(values,values.length);
+            if (this.values.length!=oterVector.values.length){
+                System.out.printf("Incorrect operation %s + %s&n", this,other);
+            }
+            for (int i = 0; i < result.length; i++) {
+                result[i]=result[i]+oterVector.values[i];
+            }
+            return new Vector(result);
+        }
+        return super.add(other);
     }
 
     @Override

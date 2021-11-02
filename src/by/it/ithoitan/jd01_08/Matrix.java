@@ -1,10 +1,10 @@
-package by.it.ithoitan.jd01_07;
+package by.it.ithoitan.jd01_08;
 
 import java.util.Arrays;
 
 
 class Matrix extends Var {
-    private final double[][] values;
+   private final double[][] values;
 
     public Matrix(double[][] values) {
         this.values = Arrays.copyOf(values, values.length);
@@ -13,6 +13,8 @@ class Matrix extends Var {
     public Matrix(Matrix otherMatrix) {
         values=otherMatrix.values;
     }
+
+
 
     @Override
     public String toString() {
