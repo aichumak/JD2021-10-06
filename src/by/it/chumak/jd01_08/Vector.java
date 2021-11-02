@@ -89,14 +89,13 @@ class Vector extends Var {
             return new Vector(result);
         }
         if (other instanceof Vector otherVector) {
-            //double
-            double[] result = Arrays.copyOf(this.values, this.values.length);
+            double[] result = new double[1];
             //TODO Throws exception Incorrect operation
             if (this.values.length != otherVector.values.length) {
                 System.out.printf("Incorrect operation %s - %s", this, otherVector);
             }
             for (int i = 0; i < this.values.length; i++) {
-                result[i] = result[i] * otherVector.values[i];
+                result[0] = result[0] + (this.values[i] * otherVector.values[i]);
             }
             return new Vector(result);
         }
@@ -118,13 +117,17 @@ class Vector extends Var {
     @Override
     public String toString() {
         StringBuilder outString = new StringBuilder();
-        String delimiter = "";
-        outString.append("{");
-        for (double value : values) {
-            outString.append(delimiter).append(value);
-            delimiter = ", ";
+        if (this.values.length > 1) {
+            String delimiter = "";
+            outString.append("{");
+            for (double value : values) {
+                outString.append(delimiter).append(value);
+                delimiter = ", ";
+            }
+            outString.append("}");
+        } else {
+            return Double.toString(this.values[0]);
         }
-        outString.append("}");
 
         return outString.toString();
     }
