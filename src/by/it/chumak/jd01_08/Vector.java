@@ -117,9 +117,9 @@ class Vector extends Var {
                 System.out.printf("Incorrect operation %s + %s", this, otherMatrix);
                 //return null;
             }
-                for (int j = 0; j < horizontalVectorSize; j++) {
-                    for (int k = 0; k < result.length; k++) {
-                        result[j] = result[j] + (arrayOtherMatrix[j][k]) * (this.values[k]);
+                for (int i = 0; i < horizontalVectorSize; i++) {
+                    for (int j = 0; j < result.length; j++) {
+                        result[i] = result[i] + (arrayOtherMatrix[i][j]) * (this.values[j]);
                     }
                 }
             return new Vector(result);
