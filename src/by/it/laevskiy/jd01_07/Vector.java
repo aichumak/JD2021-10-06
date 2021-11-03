@@ -1,12 +1,10 @@
 package by.it.laevskiy.jd01_07;
 
-import java.util.Arrays;
-
 class Vector extends Var {
     private double[] values;
 
-    Vector(double[] value) {
-        this.values = Arrays.copyOf(values,values.length);
+    Vector(double[] values) {
+        this.values = values;
     }
 
     Vector(Vector vector) {
@@ -19,11 +17,11 @@ class Vector extends Var {
 
     @Override
     public String toString() {
-        StringBuilder sb=new StringBuilder("{");
-        String delimiter="";
-        for (double element:values) {
+        StringBuilder sb = new StringBuilder("{");
+        String delimiter = "";
+        for (double element : values) {
             sb.append(delimiter).append(element);
-            delimiter=", ";
+            delimiter = ", ";
         }
         sb.append("}");
         return sb.toString();

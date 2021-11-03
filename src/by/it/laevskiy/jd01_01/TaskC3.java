@@ -34,20 +34,22 @@ import java.util.Scanner;
 
 */
 class TaskC3 {
-//    public static void main(String[] args) {
-//        Scanner sc = new Scanner(System.in);
-//        double me = sc.nextDouble();
-//        double mm = getWeight(me);
-//        System.out.println(mm);
-//        getWeight(me);
-}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double me = sc.nextDouble();
+        double mm = getWeight(me);
+        getWeight(me);
+        System.out.println(mm);
+    }
 
-//    private static double getWeight(double me) {
-//        double e = 9.81;
-//        double m = 3.86;
-//        double me;
-//        double mm = me / e * m;
-//        int mm100 = (int) mm * 100;
-//        double delta = mm * 100 - mm100;
-//        if (delta >= 0.5) return (mm100 + 1) / 100.0;
-//        return mm100 / 100.0;
+    private static double getWeight(double me) {
+        double e = 9.81;
+        double m = 3.86;
+        double mm = me / e * m;
+        int mm100 = (int) mm * 100;
+        double delta = mm * 100 - mm100;
+        if (delta >= 0.5) return (mm100+1) / 100.0;
+        return mm100 / 100.0;
+
+    }
+}
