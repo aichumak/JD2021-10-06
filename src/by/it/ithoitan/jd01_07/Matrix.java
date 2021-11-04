@@ -3,6 +3,8 @@ package by.it.ithoitan.jd01_07;
 import java.util.Arrays;
 
 
+
+
 class Matrix extends Var {
     private final double[][] values;
 
@@ -11,8 +13,29 @@ class Matrix extends Var {
     }
 
     public Matrix(Matrix otherMatrix) {
-        values=otherMatrix.values;
+        values = otherMatrix.values;
     }
+
+    public Matrix(String stringValues) {
+        String s = stringValues.replace("{{", "").replace("}}", "").replace("{","").replace(","," ");
+        String trim = s.trim();
+        String[] arr1 = trim.split("}");
+        int columns = arr1[0].split(" ").length;
+        String s2 = stringValues.replaceAll("[\\p{Punct}]+"," ").trim();
+        String[] arr3 = s2.split(" ");
+        String[][] arr2 = new String[arr1.length][columns];
+        double[][] mat = new double[arr1.length][columns];
+        int k = 0;
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                mat[i][j] =Double.parseDouble(arr3[k]);
+                k++;
+            }
+        }
+        values = mat;
+
+    }
+
 
     @Override
     public String toString() {
