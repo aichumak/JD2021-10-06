@@ -1,4 +1,4 @@
-package by.it._classwork_.jd01_08;
+package by.it.konon.jd01_08;
 
 
 import by.it.HomeWork;
