@@ -13,7 +13,6 @@ public class VarCreator {
         } catch (Exception error) {
             System.out.println(error.getMessage());
         }
-        System.err.println("Incorrect variable " + stringVarValue);
         return null;
     }
 }

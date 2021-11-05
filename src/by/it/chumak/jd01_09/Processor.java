@@ -2,24 +2,26 @@ package by.it.chumak.jd01_09;
 
 public class Processor {
 
-    public final Var varLeftPartExpression, varRightPartExpression;
+    public Var varLeftPartExpression, varRightPartExpression;
 
-    public Processor(Var leftPartExpression, Var rightPartExpression) {
-        this.varLeftPartExpression = leftPartExpression;
-        this.varRightPartExpression = rightPartExpression;
+    public Processor() {
+    }
+
+    public void setVarLeftPartExpression(Var varLeftPartExpression) {
+        this.varLeftPartExpression = varLeftPartExpression;
+    }
+
+    public void setVarRightPartExpression(Var varRightPartExpression) {
+        this.varRightPartExpression = varRightPartExpression;
     }
 
     public Var calc(String operation) {
-        switch (operation) {
-            case "+":
-                return varLeftPartExpression.add(varRightPartExpression);
-            case "-":
-                return varLeftPartExpression.sub(varRightPartExpression);
-            case "*":
-                return varLeftPartExpression.mul(varRightPartExpression);
-            case "/":
-                return varLeftPartExpression.div(varRightPartExpression);
-        }
-        return null;
+        return switch (operation) {
+            case "+" -> varLeftPartExpression.add(varRightPartExpression);
+            case "-" -> varLeftPartExpression.sub(varRightPartExpression);
+            case "*" -> varLeftPartExpression.mul(varRightPartExpression);
+            case "/" -> varLeftPartExpression.div(varRightPartExpression);
+            default -> null;
+        };
     }
 }
