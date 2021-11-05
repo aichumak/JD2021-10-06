@@ -6,34 +6,25 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public Var evaluate(String expression) {
-        //2+2 {1,3}*5
-        expression = expression
-                .replace(" ", "")
-                .trim();
-        String[] parts = expression.split(Patterns.OPERATION, 2);
-        String stingLeftVar = parts[0];
         VarCreator varCreator = new VarCreator();
-        Var left = varCreator.create(stingLeftVar);
-        if (parts.length == 1) {
-            return left;
+        expression = expression.replace(" ", "").trim();
+        String[] arrayExpressionParts = expression.split(Patterns.OPERATION, 2);
+        String stringLeftPartExpression = arrayExpressionParts[0];
+        Var varLeftPartExpression = varCreator.create(stringLeftPartExpression);
+
+        if (arrayExpressionParts.length == 1) {
+            return varLeftPartExpression;
         }
-        String stingRightVar = parts[1];
-        Var right = varCreator.create(stingRightVar);
-        if (left != null && right != null) {
+
+        String stringRightPartExpression = arrayExpressionParts[1];
+        Var varRightPartExpression = varCreator.create(stringRightPartExpression);
+
+        if (varLeftPartExpression != null && varRightPartExpression != null) {
             Pattern pattern = Pattern.compile(Patterns.OPERATION);
             Matcher matcher = pattern.matcher(expression);
             if (matcher.find()) {
-                String operation = matcher.group();
-                switch (operation) {
-                    case "+":
-                        return left.add(right);
-                    case "-":
-                        return left.sub(right);
-                    case "*":
-                        return left.mul(right);
-                    case "/":
-                        return left.div(right);
-                }
+                Processor processor = new Processor(varLeftPartExpression, varRightPartExpression);
+                return processor.calc(matcher.group());
             }
         }
         System.err.println("Something stupid");

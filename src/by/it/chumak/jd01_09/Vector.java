@@ -8,6 +8,10 @@ class Vector extends Var {
 
     private final double[] values;
 
+    public Vector() {
+        this.values = new double[0];
+    }
+
     public Vector(double[] array) {
         this.values = Arrays.copyOf(array, array.length);
     }
@@ -117,11 +121,11 @@ class Vector extends Var {
                 System.out.printf("Incorrect operation %s + %s", this, otherMatrix);
                 //return null;
             }
-                for (int i = 0; i < horizontalVectorSize; i++) {
-                    for (int j = 0; j < result.length; j++) {
-                        result[i] = result[i] + (arrayOtherMatrix[i][j]) * (this.values[j]);
-                    }
+            for (int i = 0; i < horizontalVectorSize; i++) {
+                for (int j = 0; j < result.length; j++) {
+                    result[i] = result[i] + (arrayOtherMatrix[i][j]) * (this.values[j]);
                 }
+            }
             return new Vector(result);
         }
 

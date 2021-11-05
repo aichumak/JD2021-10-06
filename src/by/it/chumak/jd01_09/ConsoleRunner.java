@@ -7,7 +7,6 @@ public class ConsoleRunner {
     public static final String STOP_APP_COMMAND = "end";
 
     public static void main(String[] args) {
-        //2+2
         Scanner scanner = new Scanner(System.in);
         Printer printer = new Printer();
         Parser parser = new Parser();
@@ -21,6 +20,5 @@ public class ConsoleRunner {
             }
         }
         System.out.println("Calculator closed");
-
     }
 }

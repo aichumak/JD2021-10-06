@@ -8,6 +8,10 @@ class Scalar extends Var {
         this.value = value;
     }
 
+    public Scalar() {
+        this.value = 0;
+    }
+
     public Scalar(Scalar otherScalar) {
         this.value = otherScalar.value;
     }

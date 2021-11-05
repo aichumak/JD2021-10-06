@@ -9,6 +9,10 @@ class Matrix extends Var {
 
     private final double[][] values;
 
+    public Matrix() {
+        this.values = new double[0][0];
+    }
+
     public Matrix(double[][] value) {
         this.values = Arrays.copyOf(value, value.length);
     }
