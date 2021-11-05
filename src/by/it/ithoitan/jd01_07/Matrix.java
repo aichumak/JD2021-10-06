@@ -19,7 +19,7 @@ class Matrix extends Var {
         String trim = s.trim();
         String[] arr1 = trim.split("}");
         int columns = arr1[0].split(" ").length;
-        String s2 = stringValues.replaceAll("[\\p{Punct}]+", " ").trim();
+        String s2 = stringValues.replaceAll("[\\W]+", " ").trim();
         String[] arr3 = s2.split(" ");
         double[][] matrix = new double[arr1.length][columns];
         int k = 0;

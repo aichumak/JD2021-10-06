@@ -11,7 +11,7 @@ public class Runner {
         Var var7 = new Matrix(mas);
         Var var5 = new Vector(array);
         Var var6 = new Vector("{1,2,3,4}");
-        Var var8 = new Matrix("{{1,2,3},{3,4,7}}");
+        Var var8 = new Matrix("{{1,2,3}, {3,4,7}}");
         System.out.println(var8);
     }
 }
