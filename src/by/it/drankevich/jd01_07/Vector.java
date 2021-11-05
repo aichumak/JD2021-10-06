@@ -1,10 +1,12 @@
 package by.it.drankevich.jd01_07;
 
+import java.util.Arrays;
+
 class Vector extends Var {
     private final double[] value;
 
     Vector(double[] value) {
-        this.value = value;
+        this.value = Arrays.copyOf(value,value.length);
     }
 
     Vector(Vector othervector) {
