@@ -1,12 +1,12 @@
 package by.it.serkutsyev.jd01_02;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TaskC {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        //  int arr[][] = new int[n][n];
         int array[][] = step1(n);
         int index = 0;
         for (int i = 0; i < n; i++) {
@@ -29,27 +29,24 @@ public class TaskC {
         int[][] arr1 = new int[n][n];
         boolean positiveN = false;
         boolean negativeN = false;
-        if (negativeN == false || positiveN == false) {
-            if (negativeN == false || positiveN == false) {
-                for (int i = 0; i < n; i++) {
-//                if (i==n){
-//                    i=0;
-//                }
-                    for (int j = 0; j < n; j++) {
-                        arr1[i][j] = ((int) (Math.random() * ((2 * n) + 1) - n));
-                        if (arr1[i][j] == n) {
-                            positiveN = true;
-                        } else if (arr1[i][j] == -n) {
-                            negativeN = true;
-                        }
+        boolean bothPositiveAndNegative = false;
+        while (bothPositiveAndNegative == false) {
+            positiveN = false;
+            negativeN = false;
+            bothPositiveAndNegative = false;
+            Random random = new Random();
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    arr1[i][j] = random.nextInt((n * 2) + 1) - n;
+                    if (arr1[i][j] == n) {
+                        positiveN = true;
+                    }
+                    if (arr1[i][j] == -n) {
+                        negativeN = true;
                     }
                 }
-
-                //  return arr1;
             }
-            else {
-                return arr1;
-            }
+            bothPositiveAndNegative = negativeN && positiveN;
         }
         return arr1;
     }
