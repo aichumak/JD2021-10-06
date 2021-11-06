@@ -7,7 +7,7 @@ import static java.lang.Math.pow;
 
 class TaskC {
     public static void main(String[] args) {
-//        step1();
+        step1();
         step2();
     }
 
@@ -34,9 +34,7 @@ class TaskC {
         System.out.printf("Массив B[] из элементов массива A > 3.5\n");
         i = 0;
         for (int j = 0; j < array.length; j++) {
-//            if (j % 5 == 0 & j != 0) {
-//                System.out.println();
-//            }
+
             if (array[j] > 3.5) {
                 if (i % 5 == 0 & i != 0) {
                     System.out.println();
