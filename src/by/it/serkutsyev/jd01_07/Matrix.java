@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 class Matrix extends Var{
 
-    double [][] value;
+     double [][] value;
 
     public Matrix(double [][] value) {
         this.value = Arrays.copyOf(value,value.length);
@@ -14,7 +14,7 @@ class Matrix extends Var{
         this.value = matrix.value;
     }
 
-    Matrix(String strMatrix) {
+     Matrix(String strMatrix) {
         strMatrix = strMatrix.replace("{","");
         strMatrix = strMatrix.replace("}","");
         strMatrix = strMatrix.replace(".0","");
@@ -41,7 +41,7 @@ class Matrix extends Var{
         //String oneString = Arrays.toString(valueString);
         StringBuilder out = new StringBuilder();
         out.append("{").append("{");
-        // String delimeter = "";
+       // String delimeter = "";
         for (int i = 0; i < 2; i++) {
             String delimeter = "";
             for (int j = 0; j < 2; j++) {
