@@ -9,6 +9,8 @@ class Runner {
     public static void main(String[] args) {
         Var s = new Scalar(3.0);
         Var s2 = new Scalar(4);
+        Var v2 = new Vector(new double[]{1, 3});
+        Var v3 = new Vector(new double[]{1, 2, 3});
         Var v = new Vector(new double[]{1, 2, 3}); // закомментируйте вектор и/или
         Var m = new Matrix("{{1,2,3}, {4,5,6}, {7,8,9}}");// матрицу, если вы их не реализовали
         Var n1 = new Matrix("{{1,2}, {3,4}}");
@@ -20,6 +22,7 @@ class Runner {
         print(s.div(s)); //выведет в консоль 1.0
         /* Уровень сложности B (векторные операции) закомментируйте, если не реализовали */
         print(v.add(v));//выведет в консоль {2.0, 4.0, 6.0}
+        print(v2.add(v3));
         print(v.mul(s));
         print(v.sub(v)); //выведет в консоль {0.0, 0.0, 0.0}
         print(v.mul(v)); //выведет в консоль 14.0
