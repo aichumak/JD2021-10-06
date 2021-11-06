@@ -10,9 +10,9 @@ public class PrintString {
         Method[] arrayMethods = stringClass.getDeclaredMethods();
 
         for (Method method : arrayMethods) {
-            if(!Modifier.isStatic(method.getModifiers())){
-               stringBuilder.append(method.getName());
-               stringBuilder.append("\n");
+            if (!Modifier.isStatic(method.getModifiers())) {
+                stringBuilder.append(method.getName());
+                stringBuilder.append("\n");
             }
         }
         System.out.println(stringBuilder);
