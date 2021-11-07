@@ -1,6 +1,6 @@
 package by.it.chumak.jd01_10;
 
-public class Bean {
+class Bean {
 
     @Param(a = 5, b = 10)
     static double sum(int a, int b) {

@@ -9,6 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @interface Param {
     int a();
-
     int b();
 }
