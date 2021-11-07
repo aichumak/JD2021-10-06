@@ -2,9 +2,9 @@ package by.it.serkutsyev.jd01_07;
 
 import java.util.Arrays;
 
-public class Matrix extends Var{
+class Matrix extends Var{
 
-    public double [][] value;
+     double [][] value;
 
     public Matrix(double [][] value) {
         this.value = Arrays.copyOf(value,value.length);
@@ -14,7 +14,7 @@ public class Matrix extends Var{
         this.value = matrix.value;
     }
 
-    public Matrix(String strMatrix) {
+     Matrix(String strMatrix) {
         strMatrix = strMatrix.replace("{","");
         strMatrix = strMatrix.replace("}","");
         strMatrix = strMatrix.replace(".0","");
