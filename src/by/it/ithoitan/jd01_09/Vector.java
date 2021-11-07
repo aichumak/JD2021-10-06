@@ -32,24 +32,89 @@ class Vector extends Var {
 
     @Override
     public Var add(Var other) {
-        if(other instanceof Scalar oterScalar){
+        if(other instanceof Scalar otherScalar){
            double[] result = Arrays.copyOf(values,values.length);
             for (int i = 0; i < result.length; i++) {
-                result[i]=result[i]+oterScalar.getValue();
+                result[i]=result[i]+otherScalar.getValue();
             }
             return new Vector(result);
         }
-        if(other instanceof Vector oterVector){
+        if(other instanceof Vector otherVector){
             double[] result = Arrays.copyOf(values,values.length);
-            if (this.values.length!=oterVector.values.length){
+            if (this.values.length!=otherVector.values.length){
                 System.out.printf("Incorrect operation %s + %s&n", this,other);
             }
             for (int i = 0; i < result.length; i++) {
-                result[i]=result[i]+oterVector.values[i];
+                result[i]=result[i]+otherVector.values[i];
             }
             return new Vector(result);
         }
         return super.add(other);
+    }
+
+    @Override
+    public Var sub(Var other) {
+        if(other instanceof Scalar otherScalar ){
+            double[] result  = Arrays.copyOf(values, values.length);
+            for (int i = 0; i < result.length; i++) {
+                result[i]=result[i]-otherScalar.getValue();
+            }
+            return new Vector(result);
+        }
+        if(other instanceof Vector otherVector){
+            double[] result  = Arrays.copyOf(values, values.length);
+            if (this.values.length!=otherVector.values.length){
+                System.out.printf("Incorrect operation %s - %s&n", this,other);
+            }
+            for (int i = 0; i < result.length; i++) {
+                result[i]=result[i]-otherVector.values[i];
+            }
+            return new Vector(result);
+        }
+        return super.sub(other);
+    }
+
+    @Override
+    public Var mul(Var other) {
+        if(other instanceof Scalar otherScalar){
+            double[] result = Arrays.copyOf(values,values.length);
+            for (int i = 0; i < result.length; i++) {
+                result[i]=result[i]*otherScalar.getValue();
+            }
+            return new Vector(result);
+        }
+        if(other instanceof Vector otherVector){
+            double[] result = Arrays.copyOf(values,values.length);
+            double scalarResult = 0;
+            if (this.values.length!=otherVector.values.length){
+                System.out.printf("Incorrect operation %s * %s&n", this,other);
+            }
+            for (int i = 0; i < result.length; i++) {
+                result[i]=result[i]*otherVector.values[i];
+                scalarResult = scalarResult+result[i];
+
+
+            }
+
+            return new Scalar(scalarResult);
+        }
+        return super.mul(other);
+    }
+
+    @Override
+    public Var div(Var other) {
+        if(other instanceof Scalar otherScalar){
+            if (otherScalar.getValue() == 0){
+                System.out.printf("Division by zero %s / %s&n", this,otherScalar);
+            }
+            double[] result = Arrays.copyOf(values,values.length);
+            for (int i = 0; i < result.length; i++) {
+                result[i]=result[i]/otherScalar.getValue();
+            }
+            return new Vector(result);
+        }
+
+        return super.div(other);
     }
 
     @Override

@@ -11,11 +11,14 @@ public class ConsoleRunner {
         Parcer parcer = new Parcer();
         for(;;){
             String expression = scanner.nextLine();
-            if(expression.equals(STOP_APP_COMMAND)){
+            if(!expression.equals(STOP_APP_COMMAND)){
                 Var result = parcer.evaluate(expression);
+                printer.print(result);
+            } else {
                 break;
             }
         }
+        System.out.println("Calculator closed");
     }
 
 }
