@@ -2,14 +2,55 @@ package by.it.ithoitan.jd01_10;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.StringJoiner;
 
 public class PrintMath {
     public static void main(String[] args) {
-        Class<Math> structMath = Math.class;
-        Method[] methods = structMath.getDeclaredMethods();
+        StringBuilder output = new StringBuilder();
+        Class<Math> mathClass = Math.class;
+        Method[] methods = mathClass.getDeclaredMethods();
         for (Method method : methods) {
-            if((method.getModifiers() & Modifier.PUBLIC) ==Modifier.STATIC);
-            System.out.println(method);
+            boolean isPublic = appendModifiers(output, method);
+            if (isPublic) {
+                appendReturnType(output, method);
+                appendSignature(output, method);
+                output.append("\n");
+            }
         }
+        System.out.println(output);
+    }
+
+    private static void appendSignature(StringBuilder output, Method method) {
+        output.append(method.getName());
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        StringJoiner joiner = new StringJoiner(",", "(", ")");
+        for (Class<?> parameterType : parameterTypes) {
+            joiner.add(parameterType.getSimpleName());
+        }
+        output.append(joiner);
+    }
+
+    private static void appendReturnType(StringBuilder output, Method method) {
+        Class<?> returnType = method.getReturnType();
+        output.append(returnType.getSimpleName()).append(" ");
+    }
+
+    private static boolean appendModifiers(StringBuilder output, Method method) {
+        int modifiers = method.getModifiers();
+        if (Modifier.isPublic(modifiers)) {
+            output.append("public ");
+        } else {
+            return false;
+        }
+        if (Modifier.isPrivate(modifiers)) {
+            output.append("private ");
+        }
+        if (Modifier.isProtected(modifiers)) {
+            output.append("protect ");
+        }
+        if (Modifier.isFinal(modifiers)) {
+            output.append("final ");
+        }
+        return true;
     }
 }
