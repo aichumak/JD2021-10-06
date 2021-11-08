@@ -1,6 +1,5 @@
 package by.it.chumak.simplecalc;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -22,7 +21,7 @@ public class CalcProcessor {
     public Var calc(String operation) {
         return switch (operation) {
             //case "+" -> varLeftPartExpression.add(varRightPartExpression);
-            case "+" -> add (varLeftPartExpression, varRightPartExpression);
+            case "+" -> add(varLeftPartExpression, varRightPartExpression);
             //case "-" -> varLeftPartExpression.sub(varRightPartExpression);
             //case "*" -> varLeftPartExpression.mul(varRightPartExpression);
             //case "/" -> varLeftPartExpression.div(varRightPartExpression);
@@ -31,22 +30,16 @@ public class CalcProcessor {
     }
 
     private Var add(Var varLeftPartExpression, Var varRightPartExpression) {
-        String className = varLeftPartExpression.getClass().getSimpleName()+"Methods";
+        String fullClassName = varRightPartExpression.getClass().getPackageName() + "."
+                + varRightPartExpression.getClass().getSimpleName() + "Methods";
         try {
-            Class<?> desiredСlass = Class.forName("by.it.chumak.simplecalc."+className);
-            Object instanceClass = desiredСlass.newInstance();
-            Class[] arrayparam = new Class[2];
-            arrayparam[0] = Var.class;
-            Method method = desiredСlass.getDeclaredMethod("add", arrayparam[0], arrayparam[0]);
-            Object abc = method.invoke(instanceClass,  varLeftPartExpression, varRightPartExpression);
-            return new Scalar((Double) abc);
-        } catch (ClassNotFoundException | NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+            Class<?> desiredClass = Class.forName(fullClassName);
+            Object instanceClass = desiredClass.newInstance();
+            Class[] arrayParameters = new Class[]{Var.class};
+            Method method = desiredClass.getDeclaredMethod("add", arrayParameters[0], arrayParameters[0]);
+            Object abc = method.invoke(instanceClass, varLeftPartExpression, varRightPartExpression);
+            return (Var) abc;
+        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;

@@ -11,19 +11,19 @@ class ScalarMethods implements Operation {
         try {
             field1 = varLeftPartExpression.getClass().getDeclaredField("value");
             field2 = varRightPartExpression.getClass().getDeclaredField("value");
+            field1.setAccessible(true);
+            field2.setAccessible(true);
+            try {
+                double a = (double) field1.get(varLeftPartExpression);
+                double b = (double) field2.get(varRightPartExpression);
+                return new Scalar(a + b);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
-        field1.setAccessible(true);
-        field2.setAccessible(true);
-        try {
-            double a = (double) field1.get(varLeftPartExpression);
-            double b = (double) field2.get(varLeftPartExpression);
-            return new Scalar(a + b);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return new Scalar(1);
+        return null;
     }
 
     @Override
