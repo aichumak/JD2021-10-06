@@ -1,9 +1,25 @@
 package by.it.konon.jd01_08;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class Vector extends Var {
     private final double[] values;
+
+
+    public Vector(String strVector) {
+        StringBuilder inText = new StringBuilder(strVector);
+        Pattern pattern = Pattern.compile("[^,{}]+");
+        Matcher matcher = pattern.matcher(inText);
+        double[] arrayDouble = new double[0];
+
+        while (matcher.find()) {
+            arrayDouble = Arrays.copyOf(arrayDouble, arrayDouble.length + 1);
+            arrayDouble[arrayDouble.length - 1] = Double.parseDouble(matcher.group());
+        }
+        this.values = arrayDouble;
+    }
 
 
     Vector(double[] values) {
