@@ -30,8 +30,7 @@ public class CalcProcessor {
     }
 
     private Var add(Var varLeftPartExpression, Var varRightPartExpression) {
-        String fullClassName = varRightPartExpression.getClass().getPackageName() + "."
-                + varRightPartExpression.getClass().getSimpleName() + "Methods";
+        String fullClassName = varLeftPartExpression.getClass().getPackageName() + "." + "MathExpressions";
         try {
             Class<?> desiredClass = Class.forName(fullClassName);
             Object instanceClass = desiredClass.newInstance();
