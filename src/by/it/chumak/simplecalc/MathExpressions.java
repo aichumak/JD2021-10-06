@@ -7,9 +7,9 @@ public class MathExpressions implements Operation {
 
     @Override
     public Var add(Var varLeftPartExpression, Var varRightPartExpression) {
-        ArrayList values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
+        ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
-        if (varLeftPartExpression.getClass().getSimpleName() == varRightPartExpression.getClass().getSimpleName()) {
+        if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
             if (varLeftPartExpression instanceof Scalar) {
                 return new Scalar((double) values.get(0) + (double) values.get(1));
             } else if (varLeftPartExpression instanceof Vector) {
@@ -33,9 +33,9 @@ public class MathExpressions implements Operation {
 
     @Override
     public Var sub(Var varLeftPartExpression, Var varRightPartExpression) {
-        ArrayList values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
+        ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
-        if (varLeftPartExpression.getClass().getSimpleName() == varRightPartExpression.getClass().getSimpleName()) {
+        if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
             if (varLeftPartExpression instanceof Scalar) {
                 return new Scalar((double) values.get(0) - (double) values.get(1));
             } else if (varLeftPartExpression instanceof Vector) {
@@ -60,9 +60,9 @@ public class MathExpressions implements Operation {
 
     @Override
     public Var mul(Var varLeftPartExpression, Var varRightPartExpression) {
-        ArrayList values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
+        ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
-        if (varLeftPartExpression.getClass().getSimpleName() == varRightPartExpression.getClass().getSimpleName()) {
+        if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
             if (varLeftPartExpression instanceof Scalar) {
                 return new Scalar((double) values.get(0) * (double) values.get(1));
             } else if (varLeftPartExpression instanceof Vector) {
@@ -91,9 +91,9 @@ public class MathExpressions implements Operation {
 
     @Override
     public Var div(Var varLeftPartExpression, Var varRightPartExpression) {
-        ArrayList values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
+        ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
-        if (varLeftPartExpression.getClass().getSimpleName() == varRightPartExpression.getClass().getSimpleName()) {
+        if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
             if (varLeftPartExpression instanceof Scalar) {
                 return new Scalar((double) values.get(0) / (double) values.get(1));
             }
@@ -137,7 +137,7 @@ public class MathExpressions implements Operation {
 
         //TODO Throws exception Incorrect operation
         if (result.length != b.length) {
-            System.out.printf("Incorrect operation");
+            //System.out.printf("Incorrect operation");
         }
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result.length; j++) {
@@ -152,7 +152,7 @@ public class MathExpressions implements Operation {
 
         //TODO Throws exception Incorrect operation
         if (result.length != b.length) {
-            System.out.printf("Incorrect operation");
+            //System.out.printf("Incorrect operation");
         }
         for (int i = 0; i < result.length; i++) {
             result[i] = a[i] - b[i];
@@ -162,18 +162,18 @@ public class MathExpressions implements Operation {
 
     private Var getVectorMulMatrix(double[] a, double[][] b) {
         double[] result = new double[a.length];
-        double[][] arrayOtherMatrix = b;
-        int verticalVectorSize = arrayOtherMatrix[0].length;
+        //double[][] arrayOtherMatrix = b;
+        int verticalVectorSize = b[0].length;
         int horizontalVectorSize = a.length;
 
         //TODO Throws exception Incorrect operation
         if (verticalVectorSize != horizontalVectorSize) {
-            System.out.printf("Incorrect operation");
+            //System.out.printf("Incorrect operation");
             //return null;
         }
         for (int i = 0; i < horizontalVectorSize; i++) {
             for (int j = 0; j < result.length; j++) {
-                result[i] = result[i] + (arrayOtherMatrix[i][j]) * (a[j]);
+                result[i] = result[i] + (b[i][j]) * (a[j]);
             }
         }
         return new Vector(result);
@@ -202,19 +202,19 @@ public class MathExpressions implements Operation {
 
     private Var getMatrixMulMatrix(double[][] a, double[][] b) {
         double[][] result = new double[a.length][a[0].length];
-        double[][] arrayOtherMatrix = b;
+        //double[][] arrayOtherMatrix = b;
         int verticalMatrixSize = a[0].length;
-        int horizontalMatrixSize = arrayOtherMatrix.length;
+        int horizontalMatrixSize = b.length;
 
         //TODO Throws exception Incorrect operation
         if (verticalMatrixSize != horizontalMatrixSize) {
-            System.out.printf("Incorrect operation");
+            //System.out.printf("Incorrect operation");
         }
 
         for (int i = 0; i < verticalMatrixSize; i++) {
             for (int j = 0; j < horizontalMatrixSize; j++) {
                 for (int k = 0; k < result.length; k++) {
-                    result[i][j] = result[i][j] + (a[i][k]) * (arrayOtherMatrix[k][j]);
+                    result[i][j] = result[i][j] + (a[i][k]) * (b[k][j]);
                 }
             }
         }
@@ -225,7 +225,7 @@ public class MathExpressions implements Operation {
         double[] result = new double[1];
         //TODO Throws exception Incorrect operation
         if (a.length != b.length) {
-            System.out.printf("Incorrect operation");
+            //System.out.printf("Incorrect operation");
         }
         for (int i = 0; i < a.length; i++) {
             result[0] = result[0] + (a[i] * b[i]);
@@ -255,7 +255,7 @@ public class MathExpressions implements Operation {
         double[][] result = new double[a.length][a[0].length];
         //TODO Throws exception Incorrect operation
         if (result.length != b.length) {
-            System.out.printf("Incorrect operation");
+            //System.out.printf("Incorrect operation");
         }
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result[i].length; j++) {
@@ -279,7 +279,7 @@ public class MathExpressions implements Operation {
         double[] result = new double[a.length];
         //TODO Throws exception Incorrect operation
         if (result.length != b.length) {
-            System.out.printf("Incorrect operation");
+            //System.out.printf("Incorrect operation");
         }
         for (int i = 0; i < result.length; i++) {
             result[i] = a[i] + b[i];

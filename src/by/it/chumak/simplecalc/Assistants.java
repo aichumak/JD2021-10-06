@@ -5,33 +5,33 @@ import java.util.ArrayList;
 
 public class Assistants {
 
-    public static ArrayList getValues(Var varLeftPartExpression, Var varRightPartExpression) {
-        ArrayList list = new ArrayList();
+    public static ArrayList<Object> getValues(Var varLeftPartExpression, Var varRightPartExpression) {
+        ArrayList<Object> list = new ArrayList<>();
         Field fieldLeftPartExpression = null;
         Field fieldRightPartExpression = null;
 
+        try {
+            fieldLeftPartExpression = varLeftPartExpression.getClass().getDeclaredField("value");
+        } catch (NoSuchFieldException e) {
             try {
-                fieldLeftPartExpression = varLeftPartExpression.getClass().getDeclaredField("value");
-            } catch (NoSuchFieldException e) {
-                try {
-                    fieldLeftPartExpression = varLeftPartExpression.getClass().getDeclaredField("values");
-                } catch (NoSuchFieldException e2) {
-                    e2.printStackTrace();
-                }
+                fieldLeftPartExpression = varLeftPartExpression.getClass().getDeclaredField("values");
+            } catch (NoSuchFieldException e2) {
+                e2.printStackTrace();
             }
+        }
 
+        try {
+            fieldRightPartExpression = varRightPartExpression.getClass().getDeclaredField("value");
+        } catch (NoSuchFieldException e) {
             try {
-                fieldRightPartExpression = varRightPartExpression.getClass().getDeclaredField("value");
-            } catch (NoSuchFieldException e) {
-                try {
-                    fieldRightPartExpression = varRightPartExpression.getClass().getDeclaredField("values");
-                } catch (NoSuchFieldException e2) {
-                    e2.printStackTrace();
-                }
+                fieldRightPartExpression = varRightPartExpression.getClass().getDeclaredField("values");
+            } catch (NoSuchFieldException e2) {
+                e2.printStackTrace();
             }
-
-        fieldLeftPartExpression.setAccessible(true);
-        fieldRightPartExpression.setAccessible(true);
+        }
+        if (fieldLeftPartExpression != null && fieldRightPartExpression != null) {
+            fieldLeftPartExpression.setAccessible(true);
+            fieldRightPartExpression.setAccessible(true);
 
             try {
                 if (varLeftPartExpression instanceof Scalar) {
@@ -65,5 +65,7 @@ public class Assistants {
                 e.printStackTrace();
             }
             return list;
+        }
+        return null;
     }
 }
