@@ -24,9 +24,7 @@ public class Parser {
             Pattern pattern = Pattern.compile(Patterns.OPERATION);
             Matcher matcher = pattern.matcher(expression);
             if (matcher.find()) {
-                calcProcessor.setVarLeftPartExpression(varLeftPartExpression);
-                calcProcessor.setVarRightPartExpression(varRightPartExpression);
-                return calcProcessor.calc(matcher.group());
+               return calcProcessor.calc(matcher.group(), varLeftPartExpression, varRightPartExpression);
             }
         }
 

@@ -8,6 +8,4 @@ interface Operation {
     Var mul(Var varLeftPartExpression, Var varRightPartExpression);
 
     Var div(Var varLeftPartExpression, Var varRightPartExpression);
-
-    //Var getCurr(Var other);
 }

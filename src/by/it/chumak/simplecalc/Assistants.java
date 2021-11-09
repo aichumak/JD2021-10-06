@@ -7,40 +7,41 @@ public class Assistants {
 
     public static ArrayList getValues(Var varLeftPartExpression, Var varRightPartExpression) {
         ArrayList list = new ArrayList();
-        Field field1 = null;
-        Field field2 = null;
+        Field fieldLeftPartExpression = null;
+        Field fieldRightPartExpression = null;
 
             try {
-                field1 = varLeftPartExpression.getClass().getDeclaredField("value");
+                fieldLeftPartExpression = varLeftPartExpression.getClass().getDeclaredField("value");
             } catch (NoSuchFieldException e) {
                 try {
-                    field1 = varLeftPartExpression.getClass().getDeclaredField("values");
+                    fieldLeftPartExpression = varLeftPartExpression.getClass().getDeclaredField("values");
                 } catch (NoSuchFieldException e2) {
                     e2.printStackTrace();
                 }
             }
 
             try {
-                field2 = varRightPartExpression.getClass().getDeclaredField("value");
+                fieldRightPartExpression = varRightPartExpression.getClass().getDeclaredField("value");
             } catch (NoSuchFieldException e) {
                 try {
-                    field2 = varRightPartExpression.getClass().getDeclaredField("values");
+                    fieldRightPartExpression = varRightPartExpression.getClass().getDeclaredField("values");
                 } catch (NoSuchFieldException e2) {
                     e2.printStackTrace();
                 }
             }
-            field1.setAccessible(true);
-            field2.setAccessible(true);
+
+        fieldLeftPartExpression.setAccessible(true);
+        fieldRightPartExpression.setAccessible(true);
 
             try {
                 if (varLeftPartExpression instanceof Scalar) {
-                    double a = (double) field1.get(varLeftPartExpression);
+                    double a = (double) fieldLeftPartExpression.get(varLeftPartExpression);
                     list.add(a);
                 } else if (varLeftPartExpression instanceof Vector) {
-                    double[] a = (double[]) field1.get(varLeftPartExpression);
+                    double[] a = (double[]) fieldLeftPartExpression.get(varLeftPartExpression);
                     list.add(a);
                 } else if (varLeftPartExpression instanceof Matrix) {
-                    double[][] a = (double[][]) field1.get(varLeftPartExpression);
+                    double[][] a = (double[][]) fieldLeftPartExpression.get(varLeftPartExpression);
                     list.add(a);
                 }
             } catch (IllegalAccessException e) {
@@ -50,13 +51,13 @@ public class Assistants {
 
             try {
                 if (varRightPartExpression instanceof Scalar) {
-                    double b = (double) field2.get(varRightPartExpression);
+                    double b = (double) fieldRightPartExpression.get(varRightPartExpression);
                     list.add(b);
                 } else if (varRightPartExpression instanceof Vector) {
-                    double[] b = (double[]) field2.get(varRightPartExpression);
+                    double[] b = (double[]) fieldRightPartExpression.get(varRightPartExpression);
                     list.add(b);
                 } else if (varRightPartExpression instanceof Matrix) {
-                    double[][] b = (double[][]) field2.get(varRightPartExpression);
+                    double[][] b = (double[][]) fieldRightPartExpression.get(varRightPartExpression);
                     list.add(b);
                 }
             } catch (IllegalAccessException e) {

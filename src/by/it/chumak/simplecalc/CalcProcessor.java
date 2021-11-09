@@ -5,37 +5,26 @@ import java.lang.reflect.Method;
 
 public class CalcProcessor {
 
-    public Var varLeftPartExpression, varRightPartExpression;
-
     public CalcProcessor() {
     }
 
-    public void setVarLeftPartExpression(Var varLeftPartExpression) {
-        this.varLeftPartExpression = varLeftPartExpression;
-    }
-
-    public void setVarRightPartExpression(Var varRightPartExpression) {
-        this.varRightPartExpression = varRightPartExpression;
-    }
-
-    public Var calc(String operation) {
+    public Var calc(String operation, Var varLeftPartExpression, Var varRightPartExpression) {
         return switch (operation) {
-            //case "+" -> varLeftPartExpression.add(varRightPartExpression);
-            case "+" -> add(varLeftPartExpression, varRightPartExpression);
-            //case "-" -> varLeftPartExpression.sub(varRightPartExpression);
-            //case "*" -> varLeftPartExpression.mul(varRightPartExpression);
-            //case "/" -> varLeftPartExpression.div(varRightPartExpression);
+            case "+" -> performCalculations("add", varLeftPartExpression, varRightPartExpression);
+            case "-" -> performCalculations("sub", varLeftPartExpression, varRightPartExpression);
+            case "*" -> performCalculations("mul", varLeftPartExpression, varRightPartExpression);
+            case "/" -> performCalculations("div", varLeftPartExpression, varRightPartExpression);
             default -> null;
         };
     }
 
-    private Var add(Var varLeftPartExpression, Var varRightPartExpression) {
+    private Var performCalculations(String operation, Var varLeftPartExpression, Var varRightPartExpression) {
         String fullClassName = varLeftPartExpression.getClass().getPackageName() + "." + "MathExpressions";
         try {
             Class<?> desiredClass = Class.forName(fullClassName);
             Object instanceClass = desiredClass.newInstance();
             Class[] arrayParameters = new Class[]{Var.class};
-            Method method = desiredClass.getDeclaredMethod("add", arrayParameters[0], arrayParameters[0]);
+            Method method = desiredClass.getDeclaredMethod(operation, arrayParameters[0], arrayParameters[0]);
             Object abc = method.invoke(instanceClass, varLeftPartExpression, varRightPartExpression);
             return (Var) abc;
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
