@@ -1,6 +1,6 @@
 package by.it.konon.jd01_07;
 
-public class Runner {
+class Runner {
     public static void main(String[] args) {
         Var var = new Scalar(3.1415);
         System.out.println(var);
@@ -22,8 +22,7 @@ public class Runner {
 
 
 
-        Var var6 = new Vector("1.0, 2.0, 4.0");
-        System.out.println(var6);
+
 
 
     }
