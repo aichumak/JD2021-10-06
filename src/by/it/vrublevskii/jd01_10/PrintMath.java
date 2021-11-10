@@ -27,6 +27,7 @@ public class PrintMath {
                 getType(output, declaredMathField);
                 output.append(declaredMathField.getName());
                 output.append("\n");
+
             }
         }
 
