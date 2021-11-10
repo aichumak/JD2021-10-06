@@ -28,7 +28,7 @@ class Matrix extends Var {
         int maxCountSubstrings = 0;
         strMatrix = strMatrix.replaceAll(" ", "");
         StringBuilder str = new StringBuilder(strMatrix);
-        Pattern pattern = Pattern.compile("[0-9,]+[^\\{|^\\}]");
+        Pattern pattern = Pattern.compile("[0-9,]+[^{|^}]");
         Matcher matcher = pattern.matcher(str);
 
         while (matcher.find()) {

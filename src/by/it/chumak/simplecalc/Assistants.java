@@ -64,7 +64,11 @@ public class Assistants {
                 list.add(null);
                 e.printStackTrace();
             }
-            return list;
+            if (list.get(0) != null && list.get(1) != null) {
+                return list;
+            } else {
+                return null;
+            }
         }
         return null;
     }

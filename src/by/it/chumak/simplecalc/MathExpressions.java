@@ -9,24 +9,28 @@ public class MathExpressions implements Operation {
     public Var add(Var varLeftPartExpression, Var varRightPartExpression) {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
-        if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
-            if (varLeftPartExpression instanceof Scalar) {
-                return new Scalar((double) values.get(0) + (double) values.get(1));
-            } else if (varLeftPartExpression instanceof Vector) {
-                return getVectorAddVector((double[]) values.get(0), (double[]) values.get(1));
-            } else if (varLeftPartExpression instanceof Matrix) {
-                return getMatrixAddMatrix((double[][]) values.get(0), (double[][]) values.get(1));
-            }
-        }
+        if (values != null) {
 
-        if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
-            return getVectorAddScalar((double) values.get(0), (double[]) values.get(1));
-        } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
-            return getVectorAddScalar((double) values.get(1), (double[]) values.get(0));
-        } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
-            return getMatrixAddScalar((double) values.get(0), (double[][]) values.get(1));
-        } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
-            return getMatrixAddScalar((double) values.get(1), (double[][]) values.get(0));
+            if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
+                if (varLeftPartExpression instanceof Scalar) {
+                    return new Scalar((double) values.get(0) + (double) values.get(1));
+                } else if (varLeftPartExpression instanceof Vector) {
+                    return getVectorAddVector((double[]) values.get(0), (double[]) values.get(1));
+                } else if (varLeftPartExpression instanceof Matrix) {
+                    return getMatrixAddMatrix((double[][]) values.get(0), (double[][]) values.get(1));
+                }
+            }
+
+            if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
+                return getVectorAddScalar((double) values.get(0), (double[]) values.get(1));
+            } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
+                return getVectorAddScalar((double) values.get(1), (double[]) values.get(0));
+            } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
+                return getMatrixAddScalar((double) values.get(0), (double[][]) values.get(1));
+            } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
+                return getMatrixAddScalar((double) values.get(1), (double[][]) values.get(0));
+            }
+
         }
         return null;
     }
@@ -35,24 +39,28 @@ public class MathExpressions implements Operation {
     public Var sub(Var varLeftPartExpression, Var varRightPartExpression) {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
-        if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
-            if (varLeftPartExpression instanceof Scalar) {
-                return new Scalar((double) values.get(0) - (double) values.get(1));
-            } else if (varLeftPartExpression instanceof Vector) {
-                return getVectorSubVector((double[]) values.get(0), (double[]) values.get(1));
-            } else if (varLeftPartExpression instanceof Matrix) {
-                return getMatrixSubMatrix((double[][]) values.get(0), (double[][]) values.get(1));
-            }
-        }
+        if (values != null) {
 
-        if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
-            return getVectorSubScalar((double) values.get(0), (double[]) values.get(1));
-        } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
-            return getVectorSubScalar((double) values.get(1), (double[]) values.get(0));
-        } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
-            return getMatrixSubScalar((double) values.get(0), (double[][]) values.get(1));
-        } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
-            return getMatrixSubScalar((double) values.get(1), (double[][]) values.get(0));
+            if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
+                if (varLeftPartExpression instanceof Scalar) {
+                    return new Scalar((double) values.get(0) - (double) values.get(1));
+                } else if (varLeftPartExpression instanceof Vector) {
+                    return getVectorSubVector((double[]) values.get(0), (double[]) values.get(1));
+                } else if (varLeftPartExpression instanceof Matrix) {
+                    return getMatrixSubMatrix((double[][]) values.get(0), (double[][]) values.get(1));
+                }
+            }
+
+            if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
+                return getVectorSubScalar((double) values.get(0), (double[]) values.get(1));
+            } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
+                return getVectorSubScalar((double) values.get(1), (double[]) values.get(0));
+            } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
+                return getMatrixSubScalar((double) values.get(0), (double[][]) values.get(1));
+            } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
+                return getMatrixSubScalar((double) values.get(1), (double[][]) values.get(0));
+            }
+
         }
         return null;
 
@@ -62,28 +70,32 @@ public class MathExpressions implements Operation {
     public Var mul(Var varLeftPartExpression, Var varRightPartExpression) {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
-        if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
-            if (varLeftPartExpression instanceof Scalar) {
-                return new Scalar((double) values.get(0) * (double) values.get(1));
-            } else if (varLeftPartExpression instanceof Vector) {
-                return getVectorMulVector((double[]) values.get(0), (double[]) values.get(1));
-            } else if (varLeftPartExpression instanceof Matrix) {
-                return getMatrixMulMatrix((double[][]) values.get(0), (double[][]) values.get(1));
-            }
-        }
+        if (values != null) {
 
-        if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
-            return getVectorMulScalar((double) values.get(0), (double[]) values.get(1));
-        } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
-            return getVectorMulScalar((double) values.get(1), (double[]) values.get(0));
-        } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
-            return getMatrixMulScalar((double) values.get(0), (double[][]) values.get(1));
-        } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
-            return getMatrixMulScalar((double) values.get(1), (double[][]) values.get(0));
-        } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Matrix) {
-            return getVectorMulMatrix((double[]) values.get(0), (double[][]) values.get(1));
-        } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Vector) {
-            return getVectorMulMatrix((double[]) values.get(1), (double[][]) values.get(0));
+            if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
+                if (varLeftPartExpression instanceof Scalar) {
+                    return new Scalar((double) values.get(0) * (double) values.get(1));
+                } else if (varLeftPartExpression instanceof Vector) {
+                    return getVectorMulVector((double[]) values.get(0), (double[]) values.get(1));
+                } else if (varLeftPartExpression instanceof Matrix) {
+                    return getMatrixMulMatrix((double[][]) values.get(0), (double[][]) values.get(1));
+                }
+            }
+
+            if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
+                return getVectorMulScalar((double) values.get(0), (double[]) values.get(1));
+            } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
+                return getVectorMulScalar((double) values.get(1), (double[]) values.get(0));
+            } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
+                return getMatrixMulScalar((double) values.get(0), (double[][]) values.get(1));
+            } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
+                return getMatrixMulScalar((double) values.get(1), (double[][]) values.get(0));
+            } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Matrix) {
+                return getVectorMulMatrix((double[]) values.get(0), (double[][]) values.get(1));
+            } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Vector) {
+                return getVectorMulMatrix((double[]) values.get(1), (double[][]) values.get(0));
+            }
+
         }
 
         return null;
@@ -93,22 +105,25 @@ public class MathExpressions implements Operation {
     public Var div(Var varLeftPartExpression, Var varRightPartExpression) {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
-        if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
-            if (varLeftPartExpression instanceof Scalar) {
-                return new Scalar((double) values.get(0) / (double) values.get(1));
+        if (values != null) {
+
+            if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
+                if (varLeftPartExpression instanceof Scalar) {
+                    return new Scalar((double) values.get(0) / (double) values.get(1));
+                }
             }
-        }
 
-        if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
-            return getVectorDivScalar((double) values.get(0), (double[]) values.get(1));
-        } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
-            return getVectorDivScalar((double) values.get(1), (double[]) values.get(0));
-        } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
-            return getMatrixDivScalar((double) values.get(0), (double[][]) values.get(1));
-        } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
-            return getMatrixDivScalar((double) values.get(1), (double[][]) values.get(0));
-        }
+            if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
+                return getVectorDivScalar((double) values.get(0), (double[]) values.get(1));
+            } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
+                return getVectorDivScalar((double) values.get(1), (double[]) values.get(0));
+            } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
+                return getMatrixDivScalar((double) values.get(0), (double[][]) values.get(1));
+            } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
+                return getMatrixDivScalar((double) values.get(1), (double[][]) values.get(0));
+            }
 
+        }
         return null;
     }
 
@@ -138,6 +153,7 @@ public class MathExpressions implements Operation {
         //TODO Throws exception Incorrect operation
         if (result.length != b.length) {
             //System.out.printf("Incorrect operation");
+            return  null;
         }
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result.length; j++) {
@@ -153,6 +169,7 @@ public class MathExpressions implements Operation {
         //TODO Throws exception Incorrect operation
         if (result.length != b.length) {
             //System.out.printf("Incorrect operation");
+            return null;
         }
         for (int i = 0; i < result.length; i++) {
             result[i] = a[i] - b[i];
@@ -169,7 +186,7 @@ public class MathExpressions implements Operation {
         //TODO Throws exception Incorrect operation
         if (verticalVectorSize != horizontalVectorSize) {
             //System.out.printf("Incorrect operation");
-            //return null;
+            return null;
         }
         for (int i = 0; i < horizontalVectorSize; i++) {
             for (int j = 0; j < result.length; j++) {
@@ -208,6 +225,7 @@ public class MathExpressions implements Operation {
 
         //TODO Throws exception Incorrect operation
         if (verticalMatrixSize != horizontalMatrixSize) {
+            return null;
             //System.out.printf("Incorrect operation");
         }
 
@@ -225,6 +243,7 @@ public class MathExpressions implements Operation {
         double[] result = new double[1];
         //TODO Throws exception Incorrect operation
         if (a.length != b.length) {
+            return null;
             //System.out.printf("Incorrect operation");
         }
         for (int i = 0; i < a.length; i++) {
@@ -255,6 +274,7 @@ public class MathExpressions implements Operation {
         double[][] result = new double[a.length][a[0].length];
         //TODO Throws exception Incorrect operation
         if (result.length != b.length) {
+            return null;
             //System.out.printf("Incorrect operation");
         }
         for (int i = 0; i < result.length; i++) {
@@ -279,6 +299,7 @@ public class MathExpressions implements Operation {
         double[] result = new double[a.length];
         //TODO Throws exception Incorrect operation
         if (result.length != b.length) {
+            return null;
             //System.out.printf("Incorrect operation");
         }
         for (int i = 0; i < result.length; i++) {
