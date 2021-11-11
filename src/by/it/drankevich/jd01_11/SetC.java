@@ -40,7 +40,7 @@ public class SetC<E> implements Set<E> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
