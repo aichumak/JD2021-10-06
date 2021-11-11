@@ -1,16 +1,15 @@
 package by.it.chumak.jd01_11;
 
 import java.util.*;
-import java.util.function.UnaryOperator;
 
-public class SetC<E> implements List<E> {
+public class SetC<E> implements Set<E> {
 
     private E[] arrayElements = (E[]) new Object[]{};
     private int size = 0;
 
     @Override
     public boolean add(E e) {
-        if (elementFoundInArray(e)) {
+        if (contains(e)) {
             return false;
         } else {
             if (size == arrayElements.length) {
@@ -23,21 +22,11 @@ public class SetC<E> implements List<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        if ((size + c.size() + 1) > arrayElements.length) {
-            arrayElements = Arrays.copyOf(arrayElements, size + c.size() + 1);
+        boolean result = false;
+        for (E element : c) {
+            result = add(element);
         }
-        System.arraycopy(c.toArray(), 0, arrayElements, size, c.size());
-        size = size + c.size();
-        return true;
-    }
-
-    private boolean elementFoundInArray(E e) {
-        for (E element : arrayElements) {
-            if (element.equals(e)) {
-                return true;
-            }
-        }
-        return false;
+        return result;
     }
 
     @Override
@@ -56,6 +45,11 @@ public class SetC<E> implements List<E> {
     @Override
     public boolean contains(Object o) {
         for (E element : arrayElements) {
+            if(element == null && o == null) {
+                return true;
+            } else if (element == null || o == null) {
+                return false;
+            }
             if (element.equals(o)) {
                 return true;
             }
@@ -70,27 +64,55 @@ public class SetC<E> implements List<E> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
-    public void replaceAll(UnaryOperator<E> operator) {
-        List.super.replaceAll(operator);
+    public boolean containsAll(Collection<?> c) {
+        boolean result = false;
+        for (Object element : c) {
+            result = contains(element);
+        }
+        return result;
     }
 
     @Override
-    public void sort(Comparator<? super E> c) {
-        List.super.sort(c);
-    }
-
-    @Override
-    public Spliterator<E> spliterator() {
-        return List.super.spliterator();
+    public boolean removeAll(Collection<?> c) {
+        boolean result = false;
+        for (Object element : c) {
+            result = remove(element);
+        }
+        return result;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new Iterator<>() {
+            private int position = 0;
+
+            @Override
+            public boolean hasNext() {
+                return position < size;
+            }
+
+            @Override
+            public E next() {
+                return arrayElements[position++];
+            }
+        };
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+        for (int i = 0; i < size; i++) {
+            if (arrayElements[i] != null) {
+                joiner.add(arrayElements[i].toString());
+            } else {
+                joiner.add("null");
+            }
+        }
+        return joiner.toString();
     }
 
     @Override
@@ -104,21 +126,6 @@ public class SetC<E> implements List<E> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
     public boolean retainAll(Collection<?> c) {
         return false;
     }
@@ -126,50 +133,5 @@ public class SetC<E> implements List<E> {
     @Override
     public void clear() {
 
-    }
-
-    @Override
-    public E get(int index) {
-        return null;
-    }
-
-    @Override
-    public E set(int index, E element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, E element) {
-
-    }
-
-    @Override
-    public E remove(int index) {
-        return null;
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public int lastIndexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public ListIterator<E> listIterator() {
-        return null;
-    }
-
-    @Override
-    public ListIterator<E> listIterator(int index) {
-        return null;
-    }
-
-    @Override
-    public List<E> subList(int fromIndex, int toIndex) {
-        return null;
     }
 }
