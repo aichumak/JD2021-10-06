@@ -20,7 +20,13 @@ public class Runner {
         listB.add("Five");
         System.out.println(listB.toString());
 
-
+        List<String> listC = new SetC<>();
+        listB.add("One");
+        listB.add("Two");
+        listB.add("Three");
+        listB.add("Four");
+        listB.add("Five");
+        System.out.println(listC.toString());
 
     }
 }

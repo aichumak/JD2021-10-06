@@ -21,12 +21,9 @@ public class ListB<E> implements List<E> {
     public boolean add(E e) {
         if (size == arrayElements.length) {
             arrayElements = Arrays.copyOf(arrayElements, (size * 3) / 2 + 1);
-            arrayElements[size++] = e;
-            return true;
-        } else {
-            arrayElements[size++] = e;
         }
-        return false;
+        arrayElements[size++] = e;
+        return true;
     }
 
     @Override
@@ -40,10 +37,11 @@ public class ListB<E> implements List<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        if ((size + c.size()) > arrayElements.length) {
+        if ((size + c.size() + 1) > arrayElements.length) {
             arrayElements = Arrays.copyOf(arrayElements, size + c.size() + 1);
         }
-        System.arraycopy(c, 0, arrayElements, size + 1, c.size() - 1);
+        System.arraycopy(c.toArray(), 0, arrayElements, size, c.size());
+        size = size + c.size();
         return true;
     }
 
@@ -72,6 +70,23 @@ public class ListB<E> implements List<E> {
     }
 
     @Override
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
+            private int position = 0;
+
+            @Override
+            public boolean hasNext() {
+                return position < size;
+            }
+
+            @Override
+            public E next() {
+                return arrayElements[position++];
+            }
+        };
+    }
+
+    @Override
     public int size() {
         return 0;
     }
@@ -84,11 +99,6 @@ public class ListB<E> implements List<E> {
     @Override
     public boolean contains(Object o) {
         return false;
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return null;
     }
 
     @Override
@@ -141,7 +151,6 @@ public class ListB<E> implements List<E> {
         return null;
     }
 
-
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
         return false;
@@ -161,6 +170,4 @@ public class ListB<E> implements List<E> {
     public void clear() {
 
     }
-
-
 }

@@ -12,12 +12,9 @@ public class ListA<E> implements List<E> {
     public boolean add(E e) {
         if (size == arrayElements.length) {
             arrayElements = Arrays.copyOf(arrayElements, (size * 3) / 2 + 1);
-            arrayElements[size++] = e;
-            return true;
-        } else {
-            arrayElements[size++] = e;
         }
-        return false;
+        arrayElements[size++] = e;
+        return true;
     }
 
     @Override
@@ -89,7 +86,6 @@ public class ListA<E> implements List<E> {
     public <T> T[] toArray(T[] a) {
         return null;
     }
-
 
     @Override
     public boolean remove(Object o) {
