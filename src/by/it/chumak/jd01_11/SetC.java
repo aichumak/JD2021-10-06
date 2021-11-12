@@ -31,8 +31,17 @@ public class SetC<E> implements Set<E> {
 
     @Override
     public boolean remove(Object o) {
-        for (int i = 0; i < arrayElements.length; i++) {
-            if (o.equals(arrayElements[i])) {
+
+        for (int i = 0; i < size; i++) {
+            if (arrayElements[i] == null && o == null) {
+                System.arraycopy(arrayElements, i + 1, arrayElements, i, size - 1 - i);
+                arrayElements[size] = null;
+                size--;
+                return true;
+            } else if (arrayElements[i] == null || o == null) {
+                continue;
+            }
+            if (arrayElements[i].equals(o)) {
                 System.arraycopy(arrayElements, i + 1, arrayElements, i, size - 1 - i);
                 arrayElements[size] = null;
                 size--;
@@ -44,13 +53,13 @@ public class SetC<E> implements Set<E> {
 
     @Override
     public boolean contains(Object o) {
-        for (E element : arrayElements) {
-            if(element == null && o == null) {
+        for (int i = 0; i < size; i++) {
+            if (arrayElements[i] == null && o == null) {
                 return true;
-            } else if (element == null || o == null) {
-                return false;
+            } else if (arrayElements[i] == null || o == null) {
+                continue;
             }
-            if (element.equals(o)) {
+            if (arrayElements[i].equals(o)) {
                 return true;
             }
         }
@@ -132,6 +141,9 @@ public class SetC<E> implements Set<E> {
 
     @Override
     public void clear() {
-
+        size = 0;
+        for (E element : arrayElements) {
+        element = null;
+        }
     }
 }
