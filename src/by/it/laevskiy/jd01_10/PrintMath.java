@@ -14,13 +14,12 @@ public class PrintMath {
     }
 
     private static void printMethod1(Method[] methods) {
-        StringBuilder stringName=new StringBuilder();
-        for (Method method : methods) {
+                for (Method method : methods) {
             if ((method.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC) {
                 if ((method.getModifiers() & Modifier.STATIC) == Modifier.STATIC) {
                     if (method.getReturnType().getSimpleName() == "float")
                         if (method.getName() == "abs")
-                            System.out.println(stringName);
+                            System.out.println(method);
                 }
             }
         }
