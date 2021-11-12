@@ -2,14 +2,14 @@ package by.it.drankevich.jd01_11;
 
 import java.util.*;
 
-public class ListB <E> implements List<E> {
+public class ListB<E> implements List<E> {
 
     private E[] elements = (E[]) new Object[]{};
-    private int size=0;
+    private int size = 0;
 
     @Override
     public String toString() {
-        StringJoiner sj=new StringJoiner(", ","[","]");
+        StringJoiner sj = new StringJoiner(", ", "[", "]");
         for (int i = 0; i < size; i++) {
             sj.add(String.valueOf(elements[i]));
 
@@ -19,19 +19,19 @@ public class ListB <E> implements List<E> {
 
     @Override
     public boolean add(E e) {
-        if(size== elements.length)
-        elements =Arrays.copyOf(elements,(size*3)/2+1);
-        elements[size++]=e;
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
+        elements[size++] = e;
 
         return true;
     }
 
     @Override
     public void add(int index, E element) {
-        if(size== elements.length)
-            elements =Arrays.copyOf(elements,(size*3)/2+1);
-        System.arraycopy(elements,index, elements, index+1,size-index);
-        elements[index]=element;
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = element;
         size++;
 
     }
@@ -48,8 +48,8 @@ public class ListB <E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        E del= elements[index];
-        System.arraycopy(elements,index+1, elements,index, size-1-index);
+        E del = elements[index];
+        System.arraycopy(elements, index + 1, elements, index, size - 1 - index);
         size--;
         return del;
     }
@@ -61,8 +61,8 @@ public class ListB <E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
-        E oldelement=elements[index];
-        elements[index]=element;
+        E oldelement = elements[index];
+        elements[index] = element;
         return oldelement;
     }
 
@@ -89,11 +89,11 @@ public class ListB <E> implements List<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private int position=0;
+            private int position = 0;
 
             @Override
             public boolean hasNext() {
-                return position<size;
+                return position < size;
             }
 
             @Override

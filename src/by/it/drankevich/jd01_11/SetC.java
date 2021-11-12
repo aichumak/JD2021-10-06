@@ -2,14 +2,14 @@ package by.it.drankevich.jd01_11;
 
 import java.util.*;
 
-public class SetC <E> implements Set<E> {
-    private E [] elements= (E[]) new Object[]{};
+public class SetC<E> implements Set<E> {
+    private E[] elements = (E[]) new Object[]{};
 
-    private int size=0;
+    private int size = 0;
 
     @Override
     public String toString() {
-        StringJoiner sj= new StringJoiner(", ", "[", "]");
+        StringJoiner sj = new StringJoiner(", ", "[", "]");
         for (int i = 0; i < size; i++) {
             sj.add(String.valueOf(elements[i]));
         }
@@ -21,18 +21,18 @@ public class SetC <E> implements Set<E> {
     @Override
     public boolean add(E e) {
 
-            for (int i = 0; i < size; i++) {
-                if(elements[i]==null) {
-                    if(elements[i]==e) return false;
-                    else continue;
-                }
-                if(elements[i].equals(e)) return false;
+        for (int i = 0; i < size; i++) {
+            if (elements[i] == null) {
+                if (elements[i] == e) return false;
+                else continue;
             }
-            if(size==elements.length)
-                elements= Arrays.copyOf(elements, (size*3)/2+1);
-            elements[size++]=e;
+            if (elements[i].equals(e)) return false;
+        }
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
+        elements[size++] = e;
 
-            return true;
+        return true;
 
     }
 
@@ -51,15 +51,15 @@ public class SetC <E> implements Set<E> {
     @Override
     public boolean remove(Object o) {
         for (int i = 0; i < size; i++) {
-            if(elements[i]==null){
-                if (elements[i]==o) {
-                    System.arraycopy(elements,i+1,elements, i, size-i-1 );
+            if (elements[i] == null) {
+                if (elements[i] == o) {
+                    System.arraycopy(elements, i + 1, elements, i, size - i - 1);
                     elements[--size] = null;
-                    return true;}
-                else continue ;
+                    return true;
+                } else continue;
             }
-            if(elements[i].equals(o)){
-                System.arraycopy(elements,i+1,elements, i, size-i-1 );
+            if (elements[i].equals(o)) {
+                System.arraycopy(elements, i + 1, elements, i, size - i - 1);
                 elements[--size] = null;
                 return true;
             }
@@ -80,15 +80,15 @@ public class SetC <E> implements Set<E> {
 
     @Override
     public boolean contains(Object o) {
-            for (int i = 0; i < size; i++) {
-                if(elements[i]==null){
-                    if (elements[i]==o) return true;
-                    else continue;
-                }
-
-                if (elements[i].equals(o))
-                    return true;
+        for (int i = 0; i < size; i++) {
+            if (elements[i] == null) {
+                if (elements[i] == o) return true;
+                else continue;
             }
+
+            if (elements[i].equals(o))
+                return true;
+        }
 
 
         return false;
@@ -97,7 +97,7 @@ public class SetC <E> implements Set<E> {
     @Override
     public boolean containsAll(Collection<?> c) {
         for (Object o : c) {
-            if(!contains(o)) return false;
+            if (!contains(o)) return false;
 
         }
         return true;
@@ -105,7 +105,7 @@ public class SetC <E> implements Set<E> {
 
     @Override
     public boolean isEmpty() {
-        if(size==0) return true;
+        if (size == 0) return true;
 
         return false;
     }
@@ -118,11 +118,11 @@ public class SetC <E> implements Set<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private int position=0;
+            private int position = 0;
 
             @Override
             public boolean hasNext() {
-                return position<size;
+                return position < size;
             }
 
             @Override
@@ -149,8 +149,8 @@ public class SetC <E> implements Set<E> {
 
     @Override
     public void clear() {
-        elements=Arrays.copyOf(elements,0);
-        size=0;
+        elements = Arrays.copyOf(elements, 0);
+        size = 0;
 
     }
 }

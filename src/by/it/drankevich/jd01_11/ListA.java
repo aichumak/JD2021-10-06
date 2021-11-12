@@ -2,24 +2,24 @@ package by.it.drankevich.jd01_11;
 
 import java.util.*;
 
-public class ListA <T> implements List<T> {
+public class ListA<T> implements List<T> {
 
-    private T [] elements= (T[]) new Object[] {};
-    private int size=0;
+    private T[] elements = (T[]) new Object[]{};
+    private int size = 0;
 
     @Override
     public boolean add(T t) {
-        if(size==elements.length)
-            elements= Arrays.copyOf(elements, (size*3)/2+1);
-        elements[size]=t;
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
+        elements[size] = t;
         size++;
         return true;
     }
 
     @Override
     public T remove(int index) {
-        T del=elements[index];
-        System.arraycopy(elements, index+1,elements,index, size-index-1);
+        T del = elements[index];
+        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
         size--;
         return del;
 
@@ -27,10 +27,10 @@ public class ListA <T> implements List<T> {
 
     @Override
     public void add(int index, T element) {
-        if(size==elements.length)
-            elements= Arrays.copyOf(elements, (size*3)/2+1);
-        System.arraycopy(elements, index,elements,index+1, size-index);
-        elements[index]=element;
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = element;
         size++;
 
     }
@@ -43,12 +43,12 @@ public class ListA <T> implements List<T> {
 
     @Override
     public String toString() {
-        StringJoiner sj=new StringJoiner(", ","[","]");
+        StringJoiner sj = new StringJoiner(", ", "[", "]");
         for (int i = 0; i < size; i++) {
 
             sj.add(elements[i].toString());
         }
-            return sj.toString();
+        return sj.toString();
 
 
     }
@@ -71,11 +71,11 @@ public class ListA <T> implements List<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            private int position=0;
+            private int position = 0;
 
             @Override
             public boolean hasNext() {
-                return position<size;
+                return position < size;
             }
 
             @Override
