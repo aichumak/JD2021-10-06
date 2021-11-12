@@ -2,41 +2,113 @@ package by.it.drankevich.jd01_11;
 
 import java.util.*;
 
-public class SetC<E> implements Set<E> {
+public class SetC <E> implements Set<E> {
+    private E [] elements= (E[]) new Object[]{};
 
-    private E[] elements = (E[]) new Object[]{};
     private int size=0;
-
 
     @Override
     public String toString() {
-        StringJoiner sj =new StringJoiner(", ","[","]");
+        StringJoiner sj= new StringJoiner(", ", "[", "]");
         for (int i = 0; i < size; i++) {
-            sj.add(elements[i].toString());
+            sj.add(String.valueOf(elements[i]));
         }
 
         return sj.toString();
+
     }
 
     @Override
     public boolean add(E e) {
-        if (size == elements.length)
-            elements = Arrays.copyOf(elements, (size * 3) / 2 + 1);
-        for (int i = 0; i < elements.length; i++) {
-            if(elements[i]==null) continue;
-            if (elements[i].equals(e)) return false;
+
+            for (int i = 0; i < size; i++) {
+                if(elements[i]==null) {
+                    if(elements[i]==e) return false;
+                    else continue;
+                }
+                if(elements[i].equals(e)) return false;
+            }
+            if(size==elements.length)
+                elements= Arrays.copyOf(elements, (size*3)/2+1);
+            elements[size++]=e;
+
+            return true;
+
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        for (E e : c) {
+            add(e);
+
         }
-                elements[size++] = e;
+
 
         return true;
     }
 
+
     @Override
     public boolean remove(Object o) {
+        for (int i = 0; i < size; i++) {
+            if(elements[i]==null){
+                if (elements[i]==o) {
+                    System.arraycopy(elements,i+1,elements, i, size-i-1 );
+                    elements[--size] = null;
+                    return true;}
+                else continue ;
+            }
+            if(elements[i].equals(o)){
+                System.arraycopy(elements,i+1,elements, i, size-i-1 );
+                elements[--size] = null;
+                return true;
+            }
+
+        }
+
         return false;
     }
 
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        for (Object o : c) {
+            remove(o);
 
+        }
+        return true;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+            for (int i = 0; i < size; i++) {
+                if(elements[i]==null){
+                    if (elements[i]==o) return true;
+                    else continue;
+                }
+
+                if (elements[i].equals(o))
+                    return true;
+            }
+
+
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        for (Object o : c) {
+            if(!contains(o)) return false;
+
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        if(size==0) return true;
+
+        return false;
+    }
 
     @Override
     public int size() {
@@ -44,18 +116,20 @@ public class SetC<E> implements Set<E> {
     }
 
     @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return false;
-    }
-
-    @Override
     public Iterator<E> iterator() {
-        return null;
+        return new Iterator<E>() {
+            private int position=0;
+
+            @Override
+            public boolean hasNext() {
+                return position<size;
+            }
+
+            @Override
+            public E next() {
+                return elements[position++];
+            }
+        };
     }
 
     @Override
@@ -69,27 +143,14 @@ public class SetC<E> implements Set<E> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        return false;
-    }
-
-    @Override
     public boolean retainAll(Collection<?> c) {
         return false;
     }
 
     @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
     public void clear() {
+        elements=Arrays.copyOf(elements,0);
+        size=0;
 
     }
 }
