@@ -31,6 +31,7 @@ public class Vector extends Var{
         }
 
         this.value = newArray;
+
     }
 
     @Override
