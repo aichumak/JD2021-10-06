@@ -1,7 +1,5 @@
-package by.it.astapchik.jd01_08;
+package by.it.astapchik.jd01_09;
 
-
-import by.it.astapchik.jd01_08.Var;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -62,7 +60,7 @@ class Vector extends Var {
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar otherScalar){
-            double[ ] result = Arrays.copyOf(value, value.length);
+            double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
                 result[i] = result[i] * otherScalar.getValue();
             }

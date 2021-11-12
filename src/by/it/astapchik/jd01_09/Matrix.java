@@ -1,10 +1,7 @@
-package by.it.astapchik.jd01_08;
+package by.it.astapchik.jd01_09;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 class Matrix extends Var {
 
@@ -13,7 +10,6 @@ class Matrix extends Var {
     public Matrix(double[ ][ ] value){ this.value = Arrays.copyOf(value, value.length); }
 
     public Matrix(Matrix matrix){ this.value = matrix.value; }
-
 
     public Matrix(String strMatrix){
         String str = strMatrix.replace('{', ' ');

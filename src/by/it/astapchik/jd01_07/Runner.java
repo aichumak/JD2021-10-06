@@ -11,12 +11,13 @@ public class Runner {
         Var var4 = new Vector(vector);
         Var var5 = new Vector(vector);
         Var var6 = new Vector("{1.0, 2.0, 4.0}");
+        System.out.println(var6);
 
 
         double[ ][ ] matrix = { { 1.0, 2.0 }, { 3.0, 4.0 } };
         Var var7 = new Matrix(matrix);
         Var var8 = new Matrix("{{1.0, 2.0}, {3.0, 4.0}}");
-        System.out.println("Result: " + var8);
+//        System.out.println("Result: " + var8);
 
     }
 }
