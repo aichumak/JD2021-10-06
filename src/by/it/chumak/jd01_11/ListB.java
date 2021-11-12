@@ -88,16 +88,31 @@ public class ListB<E> implements List<E> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
+    }
+
+    @Override
+    public E get(int index) {
+        return arrayElements[index];
     }
 
     @Override
     public boolean contains(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (arrayElements[i] == null && o == null) {
+                return true;
+            } else if (arrayElements[i] == null || o == null) {
+                continue;
+            }
+            if (arrayElements[i].equals(o)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -119,11 +134,6 @@ public class ListB<E> implements List<E> {
     @Override
     public boolean containsAll(Collection<?> c) {
         return false;
-    }
-
-    @Override
-    public E get(int index) {
-        return arrayElements[index];
     }
 
     @Override
@@ -168,6 +178,9 @@ public class ListB<E> implements List<E> {
 
     @Override
     public void clear() {
-
+        size = 0;
+        for (E element : arrayElements) {
+            element = null;
+        }
     }
 }

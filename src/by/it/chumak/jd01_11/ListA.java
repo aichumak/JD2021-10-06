@@ -43,6 +43,56 @@ public class ListA<E> implements List<E> {
     }
 
     @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public void clear() {
+        size = 0;
+        for (E element : arrayElements) {
+            element = null;
+        }
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
+            private int position = 0;
+
+            @Override
+            public boolean hasNext() {
+                return position < size;
+            }
+
+            @Override
+            public E next() {
+                return arrayElements[position++];
+            }
+        };
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (arrayElements[i] == null && o == null) {
+                return true;
+            } else if (arrayElements[i] == null || o == null) {
+                continue;
+            }
+            if (arrayElements[i].equals(o)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void replaceAll(UnaryOperator<E> operator) {
         List.super.replaceAll(operator);
     }
@@ -55,26 +105,6 @@ public class ListA<E> implements List<E> {
     @Override
     public Spliterator<E> spliterator() {
         return List.super.spliterator();
-    }
-
-    @Override
-    public int size() {
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return false;
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return null;
     }
 
     @Override
@@ -115,11 +145,6 @@ public class ListA<E> implements List<E> {
     @Override
     public boolean retainAll(Collection<?> c) {
         return false;
-    }
-
-    @Override
-    public void clear() {
-
     }
 
     @Override

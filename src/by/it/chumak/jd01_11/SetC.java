@@ -125,6 +125,14 @@ public class SetC<E> implements Set<E> {
     }
 
     @Override
+    public void clear() {
+        size = 0;
+        for (E element : arrayElements) {
+        element = null;
+        }
+    }
+
+    @Override
     public Object[] toArray() {
         return new Object[0];
     }
@@ -137,13 +145,5 @@ public class SetC<E> implements Set<E> {
     @Override
     public boolean retainAll(Collection<?> c) {
         return false;
-    }
-
-    @Override
-    public void clear() {
-        size = 0;
-        for (E element : arrayElements) {
-        element = null;
-        }
     }
 }
