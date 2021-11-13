@@ -5,13 +5,9 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    private VarRepository varRepository;
+    private final VarRepository varRepository;
 
-    private VarCreator varCreator;
-
-    public Parser(VarRepository varRepository) {
-        this.varRepository = varRepository;
-    }
+    private final VarCreator varCreator;
 
     public Parser(VarRepository varRepository, VarCreator varCreator) {
         this.varRepository = varRepository;
