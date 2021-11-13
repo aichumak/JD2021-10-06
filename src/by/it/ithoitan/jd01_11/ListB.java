@@ -2,9 +2,20 @@ package by.it.ithoitan.jd01_11;
 
 import java.util.*;
 
-public class ListA<E> implements List<E> {
-    private E[] elements =(E[]) new Object[10];
+public class ListB<E> implements List<E> {
+    private E[] elements = (E[]) new Object[10];
     private int size = 0;
+
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+        for (int i = 0; i < size; i++) {
+            joiner.add(String.valueOf(elements[i]));
+
+        }
+        return joiner.toString();
+    }
+
     @Override
     public boolean add(E e) {
         if (size == elements.length) {
@@ -17,29 +28,34 @@ public class ListA<E> implements List<E> {
     @Override
     public E remove(int index) {
         E returnElement = elements[index];
-        System.arraycopy(elements,index+1,elements,index,size-index-1);
-        elements[--size]=null; //GC
+        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
+        elements[--size] = null; //GC
         return returnElement;
     }
 
     @Override
     public E get(int index) {
-
         return elements[index];
     }
 
     @Override
-    public boolean remove(Object o) {
-        return false;
+    public E set(int index, E element) {
+        E changeElement = elements[index];
+        elements[index] = element;
+        return changeElement;
     }
-    @Override
-    public String toString(){
-        StringJoiner joiner = new StringJoiner(", ","[","]");
-        for (int i = 0; i < size; i++) {
-            joiner.add(String.valueOf(elements[i]));
 
-        }
-        return joiner.toString();
+    @Override
+    public void add(int index, E element) {
+
+
+
+        System.arraycopy(elements, index+1, elements, index , size-index);
+        elements[index] = element;
+        
+
+
+
     }
 
     @Override
@@ -73,6 +89,11 @@ public class ListA<E> implements List<E> {
     }
 
     @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
     public boolean containsAll(Collection<?> c) {
         return false;
     }
@@ -99,16 +120,6 @@ public class ListA<E> implements List<E> {
 
     @Override
     public void clear() {
-
-    }
-
-    @Override
-    public E set(int index, E element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, E element) {
 
     }
 
