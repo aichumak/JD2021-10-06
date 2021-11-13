@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class VarRepository implements Repository<String, Var>{
 
-    private Map<String, Var> map = new HashMap<>();
+    private final Map<String, Var> map = new HashMap<>();
 
     public void save(String name, Var value) {
         map.put(name, value);
