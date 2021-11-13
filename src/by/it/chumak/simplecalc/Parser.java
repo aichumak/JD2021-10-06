@@ -5,20 +5,24 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    public Var evaluate(String expression) {
-        VarCreator varCreator = new VarCreator();
+    public Var evaluate(String expression, VarRepository varRepository) {
+        VarCreator varCreator = new VarCreator(varRepository);
         CalcProcessor calcProcessor = new CalcProcessor();
         expression = expression.replace(" ", "").trim();
         String[] arrayExpressionParts = expression.split(Patterns.OPERATION, 2);
-        String stringLeftPartExpression = arrayExpressionParts[0];
-        Var varLeftPartExpression = varCreator.create(stringLeftPartExpression);
 
         if (arrayExpressionParts.length == 1) {
-            return varLeftPartExpression;
+            return varCreator.create(arrayExpressionParts[0]);
         }
 
-        String stringRightPartExpression = arrayExpressionParts[1];
-        Var varRightPartExpression = varCreator.create(stringRightPartExpression);
+        Var varRightPartExpression = varCreator.create(arrayExpressionParts[1]);
+
+        if(expression.contains("=")){
+            varRepository.save(arrayExpressionParts[0], varRightPartExpression);
+            return varRightPartExpression;
+        }
+
+        Var varLeftPartExpression = varCreator.create(arrayExpressionParts[0]);
 
         if (varLeftPartExpression != null && varRightPartExpression != null) {
             Pattern pattern = Pattern.compile(Patterns.OPERATION);
