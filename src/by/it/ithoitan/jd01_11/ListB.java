@@ -47,15 +47,20 @@ public class ListB<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-
-
-
-        System.arraycopy(elements, index+1, elements, index , size-index);
+        if(size == elements.length)
+        elements = Arrays.copyOf(elements, size*3/2 + 1);
+        System.arraycopy(elements, index, elements, index+1 , size-index);
         elements[index] = element;
-        
+        size++;
+    }
 
-
-
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + c.size());
+        System.arraycopy(c.toArray(),0,elements,size,c.size());
+        size = size + c.size();
+        return true;
     }
 
     @Override
@@ -95,11 +100,6 @@ public class ListB<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
         return false;
     }
 

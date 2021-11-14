@@ -8,21 +8,21 @@ public class TaskA2 {
         List<Integer> ints2 = Arrays.asList(99, 9, 8, 8, 7, 7, 6, 5, 4, 7);
         HashSet<Integer> hashSet = new HashSet<>(ints1);
         TreeSet<Integer> treeSet = new TreeSet<>(ints2);
-        System.out.println();
-        System.out.println();
+        System.out.println("h:" + hashSet);
+        System.out.println("t:" + treeSet);
         Set<Integer> union = getUnion(treeSet,hashSet);
         Set<Integer> cross = getCross(treeSet,hashSet);
-        System.out.println();
-        System.out.println();
+        System.out.println("u:" + union);
+        System.out.println("c:" + cross);
     }
     static  Set<Integer> getUnion(Set<Integer> left, Set<Integer> right){
         HashSet<Integer> result = new HashSet<>(left);
-        left.addAll(right);
-        return left;
+        result.addAll(right);
+        return result;
     }
     static  Set<Integer> getCross(Set<Integer> left, Set<Integer> right) {
         HashSet<Integer> result = new HashSet<>(left);
-        left.retainAll(right);
-        return left;
+        result.retainAll(right);
+        return result;
     }
 }

@@ -7,20 +7,24 @@ import java.util.Random;
 
 public class TaskA1 {
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
+        List<Integer> grades = new ArrayList<>();
         Random random = new Random();
         int count = random.nextInt(20)+20;
         for (int i = 0; i < count; i++) {
-            list.add(1+ random.nextInt(10));
+            grades.add(1+ random.nextInt(10));
         }
-        System.out.println("list:" +list);
+        System.out.println("grades:" +grades);
         TaskA1 task = new TaskA1();
-        System.out.println("list:" +list);
+        task.clearBad(grades);
+        System.out.println("grades:" +grades);
     }
-    void clearBad(List<Integer> list) {
-        Iterator<Integer> iterator = list.iterator();
+    void clearBad(List<Integer> grades) {
+        Iterator<Integer> iterator = grades.iterator();
         while (iterator.hasNext()){
-            Integer lis = iterator.next();
+            Integer grade = iterator.next();
+            if(grade<4){
+                iterator.remove();
+            }
         }
     }
 
