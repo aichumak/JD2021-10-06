@@ -6,35 +6,28 @@ public class TaskC3 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String s = sc.next();
-        s.trim();
         String[] array = s.split("");
         String[] array1 = {};
-        for (int i = 0; i < array.length; i++) {
+        for (String value : array) {
 
-            if (array[i].equals("{") || array[i].equals("}") || array[i].equals("(") || array[i].equals(")")
-                    || array[i].equals("[") || array[i].equals("]")) {
+            if (value.equals("{") || value.equals("}") || value.equals("(") || value.equals(")")
+                    || value.equals("[") || value.equals("]")) {
 
                 array1 = Arrays.copyOf(array1, array1.length + 1);
-                array1[array1.length - 1] = array[i];
+                array1[array1.length - 1] = value;
 
             }
         }
 
         List<String> array2 = Arrays.asList(array1);
 
-        LinkedList<String> list = new LinkedList<>();
-        for (int i = 0; i < array2.size(); i++) {
-            list.add(array2.get(i));
-
-        }
+        LinkedList<String> list = new LinkedList<>(array2);
 
         System.out.println(result(list));
-
 
     }
 
     private static boolean result(LinkedList<String> list) {
-        LinkedList<String> list1 = new LinkedList<>();
 
         if (list.size() % 2 != 0) {
             return false;
@@ -45,23 +38,18 @@ public class TaskC3 {
             int d = Collections.frequency(list, ")");
             int i = Collections.frequency(list, "{");
             int f = Collections.frequency(list, "}");
-            if(a!=b||c!=d||i!=f){
+            if (a != b || c != d || i != f) {
                 return false;
             }
-
-          /*  int a=list.size();
-            while (list.size() != (a/ 2)) {
-
-                list1.addLast(list.removeFirst());
-
+            for (int i1 = 0; i1 < list.size(); i1++) {
+                if (list.get(i1).equals("[") && list.get(i1 + 1).equals("}")) return false;
+                if (list.get(i1).equals("[") && list.get(i1 + 1).equals(")")) return false;
+                if (list.get(i1).equals("(") && list.get(i1 + 1).equals("]")) return false;
+                if (list.get(i1).equals("(") && list.get(i1 + 1).equals("}")) return false;
+                if (list.get(i1).equals("{") && list.get(i1 + 1).equals("]")) return false;
+                if (list.get(i1).equals("{") && list.get(i1 + 1).equals(")")) return false;
             }
-            System.out.println(list1);
-            System.out.println(list);
-            list.retainAll(list1);
-            System.out.println(list);
-            if (list.size() == 0) {
-                return true;
-            }  */
+
 
         }
         return true;
