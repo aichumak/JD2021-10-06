@@ -21,7 +21,7 @@ public class TaskB3 {
         return peoples.get(0);
     }
 
-    private static void processCollection(List<?> arrayPeoples) {
+    private static void processCollection(ArrayList<?> arrayPeoples) {
         if (arrayPeoples.size() == 1) {
             return;
         }
@@ -49,14 +49,17 @@ public class TaskB3 {
         }
 
         for (int i = 0; i < arrayPeoples.size(); i++) {
-            if (arrayPeoples.size() == i+1 && arrayPeoples.size() > 1){
-                arrayPeoples.remove(arrayPeoples.get(0));
-                i = 0;
+            if (arrayPeoples.size() - 1 == i && arrayPeoples.size() > 2) {
+                arrayPeoples.removeFirst();
+                i = -1;
+            } else {
+                if (arrayPeoples.size() - 1 == i + 1) {
+                    arrayPeoples.removeLast();
+                } else {
+                    arrayPeoples.remove(i + 1);
+                }
             }
-            int size = arrayPeoples.size();
-            arrayPeoples.remove(arrayPeoples.get(i+1));
         }
-
     }
 
 }
