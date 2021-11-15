@@ -15,18 +15,16 @@ public class TaskB3 {
             linked.add("number+" + i);
         }
 
-        long timestart=System.nanoTime();
+        long timestart = System.nanoTime();
         System.out.println(process(array));
-        long delta=(System.nanoTime()-timestart);
+        long delta = (System.nanoTime() - timestart);
         System.out.println(delta);
 
-        long timestart1=System.nanoTime();
+        long timestart1 = System.nanoTime();
         System.out.println(process(linked));
-        long delta1=(System.nanoTime()-timestart1);
+        long delta1 = (System.nanoTime() - timestart1);
         System.out.println(delta1);
     }
-
-
 
 
     static String process(ArrayList<String> peoples) {
@@ -66,21 +64,16 @@ public class TaskB3 {
 
 
     static String process(LinkedList<String> peoples) {
-        while (peoples.size()>1) {
-            for (int i = 0; i < 1; i++) {
-                peoples.addLast(peoples.get(i));
-                peoples.removeFirst();
-                peoples.removeFirst();
+        while (peoples.size() > 1) {
+            peoples.addLast(peoples.removeFirst());
+            peoples.removeFirst();
 
-
-            }
         }
         return peoples.get(0).toString();
 
-        }
-
-
-
     }
+
+
+}
 
 
