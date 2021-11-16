@@ -9,6 +9,7 @@ public class TaskA3 {
         int posZero = 0;
         List<Integer> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
         for (; ; ) {
             String line = sc.next();
             if (line.equals("end")) {
@@ -24,6 +25,7 @@ public class TaskA3 {
                 }
             }
         }
+
         System.out.println(list);
     }
 }
