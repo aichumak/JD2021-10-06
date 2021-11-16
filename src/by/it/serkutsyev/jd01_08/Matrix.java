@@ -64,6 +64,9 @@ class Matrix extends Var {
         if (other instanceof Matrix otherMatrix)
         {
             double [][] arrayCopy = Arrays.copyOf(this.value,value.length);
+            for (int i = 0; i < arrayCopy.length; i++) {
+                arrayCopy[i]=Arrays.copyOf(value[i],value[i].length);
+            }
             if (arrayCopy.length!=otherMatrix.value.length)
             {
                 System.out.printf("Matrix of different size %s and %s", this, otherMatrix);
@@ -94,6 +97,9 @@ class Matrix extends Var {
         if (other instanceof Matrix otherMatrix)
         {
             double [][] arrayCopy = Arrays.copyOf(this.value,value.length);
+            for (int i = 0; i < arrayCopy.length; i++) {
+                arrayCopy[i]=Arrays.copyOf(value[i],value[i].length);
+            }
             if (arrayCopy.length!=otherMatrix.value.length)
             {
                 System.out.printf("Matrix of different size %s and %s", this, otherMatrix);
