@@ -13,7 +13,6 @@ public class TaskC1 {
         Map<Integer, String> compressedArrayWords = compressMap(arrayWords);
         System.out.println(arrayWords);
         System.out.println(compressedArrayWords);
-
     }
 
     private static Map<Integer, String> compressMap(Map<Integer, String> arrayWords) {
@@ -47,8 +46,6 @@ public class TaskC1 {
         while (matcher.find()) {
             arrayWordsOut.put(Math.abs(UUID.randomUUID().hashCode()), matcher.group());
         }
-
-        //arrayWordsOut.entrySet().stream().sorted(Map.Entry.comparingByKey());
 
         return arrayWordsOut;
     }
