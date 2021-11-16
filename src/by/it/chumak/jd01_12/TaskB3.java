@@ -43,22 +43,14 @@ public class TaskB3 {
         }
     }
 
-    private static void processLinkedCollection(LinkedList<?> arrayPeoples) {
+    private static void processLinkedCollection(LinkedList<String> arrayPeoples) {
         if (arrayPeoples.size() == 1) {
             return;
         }
 
-        for (int i = 0; i < arrayPeoples.size(); i++) {
-            if (arrayPeoples.size() - 1 == i && arrayPeoples.size() > 2) {
-                arrayPeoples.removeFirst();
-                i = -1;
-            } else {
-                if (arrayPeoples.size() - 1 == i + 1) {
-                    arrayPeoples.removeLast();
-                } else {
-                    arrayPeoples.remove(i + 1);
-                }
-            }
+        while (arrayPeoples.size() > 1) {
+            arrayPeoples.addLast(arrayPeoples.pollFirst());
+            arrayPeoples.pollFirst();
         }
     }
 
