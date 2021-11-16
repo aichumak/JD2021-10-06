@@ -63,7 +63,7 @@ public class ListB<E> implements List<E> {
         }
         size++;
         for (int i = size - 1; i > index; i--) {
-            elements[i] = elements[i-1];
+            elements[i] = elements[i - 1];
         }
         elements[index] = element;
     }

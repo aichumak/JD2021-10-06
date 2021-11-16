@@ -60,7 +60,6 @@ public class ListA<E> implements List<E> {
     }
 
 
-
     @Override
     public int size() {
         return 0;
