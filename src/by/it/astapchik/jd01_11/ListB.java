@@ -5,22 +5,50 @@ import java.util.*;
 class ListB <E> implements List<E> {
 
     @SuppressWarnings("unchecked")
-    private E[] elements = (E[]) new Object[10];
-
+    private E[] elements = (E[]) new Object[]{};
     private int size = 0;
 
     @Override
+    public void add(int index, E element) {
+        if (size == elements.length){
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
+        }
+        System.arraycopy(elements, index, elements, index + 1, size + 1 - index);
+        size++;
+        elements[index] = element;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        Object[] array = c.toArray();
+        int arrayLength = array.length;
+        if ((size + arrayLength + 1) > elements.length){
+            elements = Arrays.copyOf(elements, elements.length + arrayLength + 1);
+        }
+        System.arraycopy(array, 0, elements, size, arrayLength);
+        size += arrayLength;
+        return true;
+    }
+
+
+    @Override
     public E set(int index, E element) {
-        return null;
+        E temp = elements[index];
+        if (index < size) {
+            elements[index] = element;
+            return temp;
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean add(E e) {
         if (size == elements.length){
-            elements = Arrays.copyOf(elements, elements.length*3/2+1);
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
         }
         elements[size++] = e;
-        return false;
+        return true;
     }
 
     @Override
@@ -88,11 +116,6 @@ class ListB <E> implements List<E> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends E> collection) {
-        return false;
-    }
-
-    @Override
     public boolean addAll(int i, Collection<? extends E> collection) {
         return false;
     }
@@ -112,10 +135,7 @@ class ListB <E> implements List<E> {
 
     }
 
-    @Override
-    public void add(int i, E e) {
 
-    }
 
 
 
