@@ -14,7 +14,7 @@ public class Parser {
         this.varCreator=varCreator;
     }
 
-    public Var evaluate(String expression) {
+    public Var evaluate(String expression) throws CalcException {
         //2+2 {1,3}*5
         expression = expression
                 .replace(" ", "")
