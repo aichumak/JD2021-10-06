@@ -56,10 +56,10 @@ class Matrix extends Var {
     public Var add(Var other) {
         if (other instanceof Scalar otherScalar)
         {
-            double [][] arrayCopy = Arrays.copyOf(value,value.length);
+            double [][] arrayCopy = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < arrayCopy.length; i++) {
                 for (int j = 0; j < arrayCopy.length; j++) {
-                    arrayCopy[i][j] = arrayCopy[i][j] + otherScalar.getValue();
+                    arrayCopy[i][j] = otherScalar.getValue()+this.value[i][j];
                 }
             }
             return new Matrix(arrayCopy);
@@ -67,6 +67,10 @@ class Matrix extends Var {
         if (other instanceof Matrix otherMatrix)
         {
             double [][] arrayCopy = Arrays.copyOf(value,value.length);
+            for (int i = 0; i < arrayCopy.length; i++) {
+                arrayCopy[i]=Arrays.copyOf(value[i],value[i].length);
+            }
+           // double [][] arrayOtherMatrix = otherMatrix.getValue();
             if (arrayCopy.length!=otherMatrix.value.length)
             {
                 System.out.printf("Matrix of different size %s and %s", this, otherMatrix);
@@ -97,6 +101,9 @@ class Matrix extends Var {
         if (other instanceof Matrix otherMatrix)
         {
             double [][] arrayCopy = Arrays.copyOf(this.value,value.length);
+            for (int i = 0; i < arrayCopy.length; i++) {
+                arrayCopy[i]=Arrays.copyOf(value[i],value[i].length);
+            }
             if (arrayCopy.length!=otherMatrix.value.length)
             {
                 System.out.printf("Matrix of different size %s and %s", this, otherMatrix);
