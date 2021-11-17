@@ -14,35 +14,6 @@ public class TaskB1 {
         printArray(resultingArray);
     }
 
-    private static void printArray(HashMap<String, Integer> resultingArray) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Map.Entry<String, Integer> entry : resultingArray.entrySet()) {
-            stringBuilder.append(entry.getKey());
-            stringBuilder.append("=");
-            stringBuilder.append(entry.getValue().toString());
-            stringBuilder.append("\n");
-        }
-
-        System.out.println(stringBuilder);
-    }
-
-    private static HashMap<String, Integer> getResultArray(List<String> arrayWords, HashSet<String> arrayUniqueWords) {
-        HashMap<String, Integer> resultingArray = new HashMap<>();
-
-        for (String uniqueWord : arrayUniqueWords) {
-            int count = 0;
-            for (String word : arrayWords) {
-                if (uniqueWord.equals(word)) {
-                    count++;
-                }
-            }
-            resultingArray.put(uniqueWord, count);
-        }
-
-        return resultingArray;
-    }
-
     private static List<String> scanTextToList() {
         List<String> arrayWordsOut = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -65,6 +36,35 @@ public class TaskB1 {
         }
 
         return arrayWordsOut;
+    }
+
+    private static HashMap<String, Integer> getResultArray(List<String> arrayWords, HashSet<String> arrayUniqueWords) {
+        HashMap<String, Integer> resultingArray = new HashMap<>();
+
+        for (String uniqueWord : arrayUniqueWords) {
+            int count = 0;
+            for (String word : arrayWords) {
+                if (uniqueWord.equals(word)) {
+                    count++;
+                }
+            }
+            resultingArray.put(uniqueWord, count);
+        }
+
+        return resultingArray;
+    }
+
+    private static void printArray(HashMap<String, Integer> resultingArray) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Map.Entry<String, Integer> entry : resultingArray.entrySet()) {
+            stringBuilder.append(entry.getKey());
+            stringBuilder.append("=");
+            stringBuilder.append(entry.getValue().toString());
+            stringBuilder.append("\n");
+        }
+
+        System.out.println(stringBuilder);
     }
 
 }

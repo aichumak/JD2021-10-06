@@ -21,7 +21,7 @@ public class TaskA3 {
                 } else if (value == 0) {
                     list.add(posZero, value);
                 } else {
-                    list.add(Integer.valueOf(line));
+                    list.add(value);
                 }
             }
         }

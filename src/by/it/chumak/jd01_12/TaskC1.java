@@ -30,7 +30,7 @@ public class TaskC1 {
         Map<Integer, String> arrayWordsOut = new HashMap<>();
         Scanner sc = new Scanner(System.in);
         String line;
-        StringBuilder text = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         Pattern pattern = Pattern.compile("[a-zA-Z']+");
 
         for (; ; ) {
@@ -38,11 +38,11 @@ public class TaskC1 {
             if (line.equals("end")) {
                 break;
             }
-            text.append(line);
-            text.append(" ");
+            stringBuilder.append(line);
+            stringBuilder.append(" ");
         }
 
-        Matcher matcher = pattern.matcher(text);
+        Matcher matcher = pattern.matcher(stringBuilder);
         while (matcher.find()) {
             arrayWordsOut.put(Math.abs(UUID.randomUUID().hashCode()), matcher.group());
         }

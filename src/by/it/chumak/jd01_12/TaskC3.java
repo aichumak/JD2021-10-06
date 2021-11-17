@@ -48,7 +48,6 @@ public class TaskC3 {
         return true;
     }
 
-
     private static boolean openingBrackets(String element) {
         return element.equals("{") || element.equals("[") || element.equals("(");
     }
