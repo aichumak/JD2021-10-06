@@ -34,8 +34,8 @@ class SetC <E> implements Set<E> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends E> c) {
-        for (E element : c) {
+    public boolean addAll(Collection<? extends E> collection) {
+        for (E element : collection) {
             add(element);
         }
         return true;
