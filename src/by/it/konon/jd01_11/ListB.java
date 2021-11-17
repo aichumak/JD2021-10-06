@@ -32,7 +32,7 @@ public class ListB<E> implements List<E> {
     @Override
     public E remove(int index) {
         E returnElement = elements[index];
-        System.arraycopy(elements, index - 1, elements, index, size - index - 1);
+        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
         elements[--size] = null;
         return returnElement;
     }
@@ -45,28 +45,55 @@ public class ListB<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
-        return null;
+        E nextElement = elements[index];
+        if (size < elements.length) {
+            elements[index] = element;
+            return nextElement;
+        } else {
+
+            return null;
+        }
+
+
     }
 
     @Override
     public void add(int index, E element) {
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 - 1);
+
+        }
+        System.arraycopy(elements, index , elements, index +1 , size - index);
+        elements[index] = element;
+        size++;
 
     }
 
     @Override
+    public boolean addAll(int index, Collection<? extends E> c) {
+        boolean mod = false;
+        for (E element : c) {
+            add(index++,element);
+            mod = true;
+
+        }
+        return mod;
+    }
+
+    @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        return addAll(size,c);
     }
 
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     @Override
@@ -96,11 +123,6 @@ public class ListB<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
         return false;
     }
 
