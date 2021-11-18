@@ -4,50 +4,46 @@ import java.util.*;
 
 public class TaskC {
     static Stack<Double> doubleStack = new Stack<>();
-    static Scanner sc = new Scanner(System.in);
+    static Scanner sc;
 
     public static void main(String[] args) {
-
-        int countErrors = 0;
+        sc = new Scanner(System.in);
         readData();
-
-
     }
 
     static void readData() {
         int countErrors = 0;
+        String text = "";
 
         while (countErrors < 6) {
+
             try {
-                String text = sc.nextLine();
-                List<String> arrayList = List.of(text.split(" "));
-                for (String element : arrayList) {
-                    try {
-                        doubleStack.add(Double.valueOf(element));
-                    } catch (NumberFormatException e) {
-                        throw e;
-                    }
-                }
-                //readData();
-            } catch (InputMismatchException | NullPointerException | NumberFormatException e) {
-
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+                text = sc.next();
+            } catch (NoSuchElementException | IllegalStateException ex) {
                 countErrors++;
-                StringJoiner stringJoiner = new StringJoiner(" ");
-                Stack<Double> bufferStack = (Stack<Double>) doubleStack.clone();
-                bufferStack.sort(Collections.reverseOrder());
-                Iterator<Double> iterator = bufferStack.iterator();
-                while (iterator.hasNext()) {
-                    stringJoiner.add(iterator.next().toString());
-                }
-                System.out.println(stringJoiner);
+            }
 
+            List<String> arrayList = List.of(text.split(" "));
+            for (String element : arrayList) {
                 if (countErrors == 5) {
-                    throw new Exception;
+                    throw new RuntimeException("123");
+                }
+                try {
+                    doubleStack.add(Double.valueOf(element));
+                } catch (NumberFormatException e) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        //ex.printStackTrace();
+                    }
+                    countErrors++;
+                    StringJoiner stringJoiner = new StringJoiner(" ");
+                    Stack<Double> bufferStack = (Stack<Double>) doubleStack.clone();
+                    bufferStack.sort(Collections.reverseOrder());
+                    for (Double aDouble : bufferStack) {
+                        stringJoiner.add(aDouble.toString());
+                    }
+                    System.out.println(stringJoiner);
                 }
             }
         }
