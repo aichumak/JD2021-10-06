@@ -22,28 +22,22 @@ public class TaskC {
     private static int[][] step1(int n) {
         int[][] arr = new int[n][n];
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                arr[i][j] = (int) ((Math.random() * n) - (n / 2));
-                if (arr[i][j] < 0) {
+                arr[i][i] = (int) ((Math.random() * n) - (n / 2));
 
-                    System.out.println(arr[i][j]);
-                    break;
-
-                } else if (arr[i][j] > 0) {
-                    System.out.println(arr[i][j]);
+                    System.out.println(arr[i][i]);
                     break;
                 }
 
-            }
-
-
-        }
 
 
         return step1(n);
+        }
 
 
-    }
+
+
+
+
 
     private static int step2(int[][] arr) {
 
