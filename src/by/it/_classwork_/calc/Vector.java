@@ -26,7 +26,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar otherScalar) {
             double[] result = Arrays.copyOf(values, values.length);
             for (int i = 0; i < result.length; i++) {
@@ -36,9 +36,8 @@ class Vector extends Var {
         }
         if (other instanceof Vector otherVector) {
             double[] result = Arrays.copyOf(values, values.length);
-            //TODO throw Exception Incorrect operation
             if (values.length != otherVector.values.length) {
-                System.out.printf("Incorrect operation %s / %s%n", this, other);
+                throw new CalcException("Incorrect operation %s / %s%n", this, other);
             }
             for (int i = 0; i < result.length; i++) {
                 result[i] = result[i] + otherVector.values[i];
