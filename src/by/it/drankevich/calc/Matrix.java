@@ -20,7 +20,7 @@ class Matrix extends Var {
         String str1 = str0.replace('}', ' ');
         String str2 = str1.trim();
         String[] arraystr = str2.split("[,\\s]+");
-        String str01 = str[1].replace('{', ' ');
+        String str01 = str[str.length-1].replace('{', ' ');
         String str12 = str01.replace('}', ' ');
         String str22 = str12.trim();
         String[] arraystr1 = str22.split("[,\\s]+");
@@ -30,7 +30,7 @@ class Matrix extends Var {
 
             for (int j = 0; j < arraystr.length; j++) {
                 array1[0][j] = Double.parseDouble(arraystr[k]);
-                array1[1][j] = Double.parseDouble(arraystr1[k]);
+                array1[str.length-1][j] = Double.parseDouble(arraystr1[k]);
                 k++;
 
         }
