@@ -10,10 +10,11 @@ public class ConsoleRunner {
         Scanner scanner = new Scanner(System.in);
         Printer printer = new Printer();
         Parser parser = new Parser();
+        VarRepository varRepository = new VarRepository();
         for (; ; ) {
             String expression = scanner.nextLine();
             if (!expression.equals(STOP_APP_COMMAND)) {
-                Var result = parser.evaluate(expression);
+                Var result = parser.evaluate(expression, varRepository);
                 printer.print(result);
             } else {
                 break;
