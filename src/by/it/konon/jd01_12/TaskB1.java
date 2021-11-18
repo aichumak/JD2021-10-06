@@ -1,42 +1,38 @@
 package by.it.konon.jd01_12;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class TaskB1 {
     public static void main(String[] args) {
-        List<String> text = new ArrayList<>();
+
+
+        ArrayList<String> text = new ArrayList<>();
+        HashSet<String> strings = new HashSet<>();
         Scanner scanner = new Scanner(System.in);
-
         for (; ; ) {
-            String word = scanner.next();
-            if (word.equals("end")) {
-                break;
-            } else {
-                text.add(word);
-            }
-        }
-        Object[] array = text.toArray();
-
-        for (int i = 0; i < array.length; i++) {
-            Object wordDepot;
-            wordDepot = array[i];
-            int count = 0;
-            for (int j = 0; j < array.length; j++) {
-                if (wordDepot.equals(array[j])) {
-
-                    count++;
+            String words = scanner.nextLine();
+            if (words.equals("end")) break;
+            else {
+                String[] str = words.trim().split("[,;:!?\\s]+");
+                for (String s : str) {
+                    text.add(s);
 
                 }
-                System.out.println(array[j] + " " + count);
             }
+        }
+        Iterator<String> iterator = text.iterator();
+        while (iterator.hasNext()) {
+            String word = iterator.next();
+
+            int wordCount = Collections.frequency(text, word);
+            strings.add(word + ": " + wordCount);
 
         }
 
 
-    }
+        System.out.println(strings);
 
+    }
 }
 
 
