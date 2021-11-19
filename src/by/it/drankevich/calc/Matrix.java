@@ -14,18 +14,29 @@ class Matrix extends Var {
     }
 
     Matrix(String strMatrix) {
-        String str = strMatrix.replace('{', ' ');
-        String str1 = str.replace('}', ' ');
+        String[]str=strMatrix.split("\\}\\,[ ]?\\{");
+        int arrayx=str.length;
+
+        String str0 = str[0].replace('{', ' ');
+        String str1 = str0.replace('}', ' ');
         String str2 = str1.trim();
         String[] arraystr = str2.split("[,\\s]+");
+        int arrayy=arraystr.length;
 
-        double[][] array1 = new double[2][2];
+        String strMatrix1 = strMatrix.replace('{', ' ');
+        String strMatrix2 = strMatrix1.replace('}', ' ');
+        String strMatrix3 = strMatrix2.trim();
+        String[] strMatrixarr = strMatrix3.split("[,\\s]+");
+
+        double[][] array1 = new double[arrayx][ arrayy];
         int k = 0;
-        for (int i = 0; i < array1.length; i++) {
-            for (int j = 0; j < array1[0].length; j++) {
-                array1[i][j] = Double.parseDouble(arraystr[k]);
+        for (int i = 0; i < arrayx; i++) {
+
+            for (int j = 0; j < arrayy; j++) {
+                array1[i][j] = Double.parseDouble(strMatrixarr[k]);
                 k++;
             }
+
         }
         this.value = array1;
 
@@ -33,7 +44,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcExeption {
 
         if ((other instanceof Scalar)) {
             double[][] res = copymatrix(value);
@@ -48,9 +59,9 @@ class Matrix extends Var {
 
         if ((other instanceof Matrix)) {
             double[][] res = copymatrix(value);
-            if (res[0].length != ((Matrix) other).value[0].length &&
+            if (res[0].length != ((Matrix) other).value[0].length ||
                     res.length != ((Matrix) other).value.length) {
-                System.out.printf("Incorrect operation %s + %s%n", this, other);
+                throw new CalcExeption("Incorrect operation %s + %s%n", this, other);
             } else {
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res[0].length; j++) {
@@ -67,7 +78,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcExeption {
         if ((other instanceof Scalar)) {
             double[][] res = copymatrix(value);
             for (int i = 0; i < res.length; i++) {
@@ -81,9 +92,9 @@ class Matrix extends Var {
 
         if ((other instanceof Matrix)) {
             double[][] res = copymatrix(value);
-            if (res[0].length != ((Matrix) other).value[0].length &&
+            if (res[0].length != ((Matrix) other).value[0].length ||
                     res.length != ((Matrix) other).value.length) {
-                System.out.printf("Incorrect operation %s - %s%n", this, other);
+                throw new CalcExeption("Incorrect operation %s - %s%n", this, other);
             } else {
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res[0].length; j++) {
@@ -100,7 +111,7 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcExeption {
         if ((other instanceof Scalar)) {
             double[][] res = copymatrix(value);
             for (int i = 0; i < res.length; i++) {
@@ -115,7 +126,7 @@ class Matrix extends Var {
         if ((other instanceof Matrix othermatrix)) {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value.length) {
-                System.out.printf("Incorrect operation %s * %s%n", this, other);
+                throw new CalcExeption("Incorrect operation %s * %s%n", this, other);
             } else {
                 double[][] newres = new double[res.length][othermatrix.value[0].length];
 
@@ -136,7 +147,7 @@ class Matrix extends Var {
         if ((other instanceof Vector othervector)) {
             double[][] res = copymatrix(value);
             if (res[0].length != othervector.getValues().length) {
-                System.out.printf("Incorrect operation %s * %s%n", this, other);
+                throw new CalcExeption("Incorrect operation %s * %s%n", this, other);
             } else {
                 double[] newres = new double[res.length];
 
@@ -157,10 +168,10 @@ class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcExeption {
         if ((other instanceof Scalar)) {
             if (((Scalar) other).getValue() == 0) {
-                System.out.printf("Division by zero %s / %s%n", this, other);
+                throw new CalcExeption("Division by zero %s / %s%n", this, other);
             } else {
                 double[][] res = copymatrix(value);
                 for (int i = 0; i < res.length; i++) {

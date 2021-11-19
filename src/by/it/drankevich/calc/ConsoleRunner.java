@@ -1,6 +1,5 @@
 package by.it.drankevich.calc;
 
-
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -17,8 +16,13 @@ public class ConsoleRunner {
         for (;;){
            String expression=scanner.nextLine();
            if(!expression.equals(STOP_APP_COMMAND)){
-               Var result=parser.evaluate(expression);
-               printer.print(result);
+               try {
+                   Var result = parser.evaluate(expression);
+                   printer.print(result);
+               } catch (CalcExeption e) {
+                   printer.print(e);
+               }
+
            }
            else break;
         }

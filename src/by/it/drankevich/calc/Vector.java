@@ -31,7 +31,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcExeption {
         if ((other instanceof Scalar)){
             double[] res= Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -44,7 +44,7 @@ class Vector extends Var {
         if ((other instanceof Vector)) {
             double[] res = Arrays.copyOf(value, value.length);
             if (value.length!=((Vector) other).value.length) {
-                System.out.printf("Incorrect operation %s + %s%n", this, other);
+                throw new CalcExeption("Incorrect operation %s + %s%n", this, other);
             }
             else {
                 for (int i = 0; i < res.length; i++) {
@@ -62,7 +62,7 @@ class Vector extends Var {
 
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcExeption {
         if ((other instanceof Scalar)){
             double[] res= Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {
@@ -75,7 +75,7 @@ class Vector extends Var {
         if ((other instanceof Vector)) {
             double[] res = Arrays.copyOf(value, value.length);
             if (value.length != ((Vector) other).value.length) {
-                System.out.printf("Incorrect operation %s / %s%n", this, other);
+                throw new CalcExeption("Incorrect operation %s / %s%n", this, other);
             } else {
                 for (int i = 0; i < ((Vector) other).value.length; i++) {
                     res[i] = res[i] - ((Vector) other).value[i];
@@ -89,7 +89,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcExeption {
         if ((other instanceof Scalar)){
             double[] res= Arrays.copyOf(value, value.length);
 
@@ -103,7 +103,7 @@ class Vector extends Var {
         if ((other instanceof Vector )) {
             double[] res = Arrays.copyOf(value, value.length);
             if (value.length!=((Vector) other).value.length) {
-                System.out.printf("Incorrect operation %s / %s%n", this, other);
+                throw new CalcExeption("Incorrect operation %s / %s%n", this, other);
             }
             else {
                 for (int i = 0; i < res.length; i++) {
@@ -123,10 +123,10 @@ class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcExeption {
         if ((other instanceof Scalar)){
             if ( ((Scalar) other).getValue() == 0) {
-                System.out.printf("Division by zero %s / %s%n", this, other);
+                throw new CalcExeption("Division by zero %s / %s%n", this, other);
             }
             else {
                 double[] res = Arrays.copyOf(value, value.length);
