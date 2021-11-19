@@ -14,24 +14,28 @@ class Matrix extends Var {
     }
 
     Matrix(String strMatrix) {
-        String[]str=strMatrix.split("\\}\\,\\{");
+        String[]str=strMatrix.split("\\}\\,[ ]?\\{");
+        int arrayx=str.length;
 
         String str0 = str[0].replace('{', ' ');
         String str1 = str0.replace('}', ' ');
         String str2 = str1.trim();
         String[] arraystr = str2.split("[,\\s]+");
-        String str01 = str[str.length-1].replace('{', ' ');
-        String str12 = str01.replace('}', ' ');
-        String str22 = str12.trim();
-        String[] arraystr1 = str22.split("[,\\s]+");
+        int arrayy=arraystr.length;
 
-        double[][] array1 = new double[str.length][arraystr.length];
+        String strMatrix1 = strMatrix.replace('{', ' ');
+        String strMatrix2 = strMatrix1.replace('}', ' ');
+        String strMatrix3 = strMatrix2.trim();
+        String[] strMatrixarr = strMatrix3.split("[,\\s]+");
+
+        double[][] array1 = new double[arrayx][ arrayy];
         int k = 0;
+        for (int i = 0; i < arrayx; i++) {
 
-            for (int j = 0; j < arraystr.length; j++) {
-                array1[0][j] = Double.parseDouble(arraystr[k]);
-                array1[str.length-1][j] = Double.parseDouble(arraystr1[k]);
+            for (int j = 0; j < arrayy; j++) {
+                array1[i][j] = Double.parseDouble(strMatrixarr[k]);
                 k++;
+            }
 
         }
         this.value = array1;
