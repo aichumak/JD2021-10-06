@@ -35,7 +35,7 @@ public class TaskC{
                      System.out.println();
                      count++;
                      if (count == 5) {
-                         throw new RuntimeException();
+                         throw  e;
 
                      }
 
