@@ -26,12 +26,16 @@ public class TaskC {
                 System.out.println();
             }
         }
-        inputDouble(inputs);
+        for (;;){
+            inputDouble(inputs);
+        }
+
     }
 
     private static void inputDouble(ArrayList<Double> inputs) {
         String stringElement = sc.next();
         double element = Double.parseDouble(stringElement);
         inputs.add(element);
+
     }
 }
