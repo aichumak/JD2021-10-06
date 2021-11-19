@@ -1,11 +1,11 @@
-package by.it.chumak.simplecalc;
+package by.it.chumak.calc;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
 
-    public Var evaluate(String expression, VarRepository varRepository) {
+    public Var evaluate(String expression, VarRepository varRepository) throws CalcException {
         VarCreator varCreator = new VarCreator(varRepository);
         CalcProcessor calcProcessor = new CalcProcessor();
         expression = expression.replace(" ", "").trim();
@@ -32,7 +32,6 @@ public class Parser {
             }
         }
 
-        System.err.println("Incorrect expression");
-        return null;
+        throw new CalcException("Incorrect expression");
     }
 }

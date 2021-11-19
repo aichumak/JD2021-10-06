@@ -1,4 +1,4 @@
-package by.it.chumak.simplecalc;
+package by.it.chumak.calc;
 
 import java.util.Objects;
 
@@ -8,4 +8,9 @@ public class Printer {
             System.out.println(result);
         }
     }
+
+    public void print(CalcException e) {
+        System.out.println(e.getMessage());
+    }
+
 }

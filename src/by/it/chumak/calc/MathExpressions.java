@@ -1,4 +1,4 @@
-package by.it.chumak.simplecalc;
+package by.it.chumak.calc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class MathExpressions implements Operation {
 
     @Override
-    public Var add(Var varLeftPartExpression, Var varRightPartExpression) {
+    public Var add(Var varLeftPartExpression, Var varRightPartExpression) throws CalcException {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
         if (values != null) {
@@ -35,7 +35,7 @@ public class MathExpressions implements Operation {
     }
 
     @Override
-    public Var sub(Var varLeftPartExpression, Var varRightPartExpression) {
+    public Var sub(Var varLeftPartExpression, Var varRightPartExpression) throws CalcException {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
         if (values != null) {
@@ -64,7 +64,7 @@ public class MathExpressions implements Operation {
     }
 
     @Override
-    public Var mul(Var varLeftPartExpression, Var varRightPartExpression) {
+    public Var mul(Var varLeftPartExpression, Var varRightPartExpression) throws CalcException {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
         if (values != null) {
@@ -97,18 +97,22 @@ public class MathExpressions implements Operation {
     }
 
     @Override
-    public Var div(Var varLeftPartExpression, Var varRightPartExpression) {
+    public Var div(Var varLeftPartExpression, Var varRightPartExpression) throws CalcException {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
 
         if (values != null) {
-
             if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
                 if (varLeftPartExpression instanceof Scalar) {
-                    return new Scalar((double) values.get(0) / (double) values.get(1));
+                    double doubleValue = (double) values.get(0) / (double) values.get(1);
+                    if (Double.isInfinite(doubleValue) || Double.isNaN(doubleValue)) {
+                        throw new CalcException("Incorrect operation, division by zero\n");
+                    } else {
+                        return new Scalar(doubleValue);
+                    }
                 }
             } else {
                 if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
-                    return getVectorDivScalar((double) values.get(0), (double[]) values.get(1));
+                    throw new CalcException("Incorrect operation, %s / %s%n", varLeftPartExpression, varRightPartExpression);
                 } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
                     return getVectorDivScalar((double) values.get(1), (double[]) values.get(0));
                 } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
@@ -141,13 +145,11 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getMatrixSubMatrix(double[][] a, double[][] b) {
+    private Var getMatrixSubMatrix(double[][] a, double[][] b) throws CalcException {
         double[][] result = new double[a.length][a[0].length];
 
-        //TODO Throws exception Incorrect operation
-        if (result.length != b.length) {
-            //System.out.printf("Incorrect operation");
-            return null;
+        if (result.length != b[0].length) {
+            throw new CalcException("Incorrect operation %s - %s%n", a, b);
         }
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result.length; j++) {
@@ -157,13 +159,11 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Var getVectorSubVector(double[] a, double[] b) {
+    private Var getVectorSubVector(double[] a, double[] b) throws CalcException {
         double[] result = new double[a.length];
 
-        //TODO Throws exception Incorrect operation
         if (result.length != b.length) {
-            //System.out.printf("Incorrect operation");
-            return null;
+            throw new CalcException("Incorrect operation %s - %s%n", a, b);
         }
         for (int i = 0; i < result.length; i++) {
             result[i] = a[i] - b[i];
@@ -171,16 +171,13 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getVectorMulMatrix(double[] a, double[][] b) {
+    private Var getVectorMulMatrix(double[] a, double[][] b) throws CalcException {
         double[] result = new double[a.length];
-        //double[][] arrayOtherMatrix = b;
         int verticalVectorSize = b[0].length;
         int horizontalVectorSize = a.length;
 
-        //TODO Throws exception Incorrect operation
         if (verticalVectorSize != horizontalVectorSize) {
-            //System.out.printf("Incorrect operation");
-            return null;
+            throw new CalcException("Incorrect operation %s * %s%n", a, b);
         }
         for (int i = 0; i < horizontalVectorSize; i++) {
             for (int j = 0; j < result.length; j++) {
@@ -211,16 +208,13 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getMatrixMulMatrix(double[][] a, double[][] b) {
+    private Var getMatrixMulMatrix(double[][] a, double[][] b) throws CalcException {
         double[][] result = new double[a.length][a[0].length];
-        //double[][] arrayOtherMatrix = b;
         int verticalMatrixSize = a[0].length;
         int horizontalMatrixSize = b.length;
 
-        //TODO Throws exception Incorrect operation
         if (verticalMatrixSize != horizontalMatrixSize) {
-            return null;
-            //System.out.printf("Incorrect operation");
+            throw new CalcException("Incorrect operation %s * %s%n", a, b);
         }
 
         for (int i = 0; i < verticalMatrixSize; i++) {
@@ -233,12 +227,11 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Var getVectorMulVector(double[] a, double[] b) {
+    private Var getVectorMulVector(double[] a, double[] b) throws CalcException {
         double[] result = new double[1];
-        //TODO Throws exception Incorrect operation
+
         if (a.length != b.length) {
-            return null;
-            //System.out.printf("Incorrect operation");
+            throw new CalcException("Incorrect operation %s * %s%n", a, b);
         }
         for (int i = 0; i < a.length; i++) {
             result[0] = result[0] + (a[i] * b[i]);
@@ -246,7 +239,10 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getMatrixDivScalar(double a, double[][] b) {
+    private Var getMatrixDivScalar(double a, double[][] b) throws CalcException {
+        if (Double.isNaN(a) || Double.isInfinite(a) || a == 0) {
+            throw new CalcException("Incorrect operation, division by zero\n");
+        }
         double[][] result = Arrays.copyOf(b, b.length);
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result[i].length; j++) {
@@ -256,7 +252,10 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Var getVectorDivScalar(double a, double[] b) {
+    private Var getVectorDivScalar(double a, double[] b) throws CalcException {
+        if (Double.isNaN(a) || Double.isInfinite(a) || a == 0) {
+            throw new CalcException("Incorrect operation, division by zero\n");
+        }
         double[] result = new double[b.length];
         for (int i = 0; i < result.length; i++) {
             result[i] = b[i] / a;
@@ -264,12 +263,11 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getMatrixAddMatrix(double[][] a, double[][] b) {
+    private Var getMatrixAddMatrix(double[][] a, double[][] b) throws CalcException {
         double[][] result = new double[a.length][a[0].length];
-        //TODO Throws exception Incorrect operation
+
         if (result.length != b.length) {
-            return null;
-            //System.out.printf("Incorrect operation");
+            throw new CalcException("Incorrect operation %s + %s%n", a, b);
         }
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result[i].length; j++) {
@@ -289,12 +287,11 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Vector getVectorAddVector(double[] a, double[] b) {
+    private Vector getVectorAddVector(double[] a, double[] b) throws CalcException {
         double[] result = new double[a.length];
-        //TODO Throws exception Incorrect operation
+
         if (result.length != b.length) {
-            return null;
-            //System.out.printf("Incorrect operation");
+            throw new CalcException("Incorrect operation %s + %s%n", a, b);
         }
         for (int i = 0; i < result.length; i++) {
             result[i] = a[i] + b[i];

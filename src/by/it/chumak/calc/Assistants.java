@@ -1,4 +1,4 @@
-package by.it.chumak.simplecalc;
+package by.it.chumak.calc;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
