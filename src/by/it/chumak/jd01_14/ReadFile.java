@@ -19,6 +19,22 @@ public class ReadFile implements ReadFileMethods {
         dataInputStream.close();
     }
 
+    @Override
+    public void readFile(String path, StringBuilder stringBuilder) throws IOException {
+        BufferedReader inputFileReader = getInputFileReader(path);
+        int count;
+
+        while ((count = inputFileReader.read()) != -1) {
+            stringBuilder.append((char) count);
+        }
+
+    }
+
+    private BufferedReader getInputFileReader(String path) throws FileNotFoundException {
+        FileReader fileReader = new FileReader(path);
+        return new BufferedReader(fileReader);
+    }
+
     private DataInputStream getDataInputStream(String path) throws FileNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(path);
         BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);

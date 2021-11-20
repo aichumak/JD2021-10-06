@@ -10,4 +10,7 @@ public interface ReadFileMethods {
     default void readFile(String path, ArrayList<Integer> integerArrayList) throws IOException {
     }
 
+    default void readFile(String path, StringBuilder stringBuilder) throws IOException {
+    }
+
 }

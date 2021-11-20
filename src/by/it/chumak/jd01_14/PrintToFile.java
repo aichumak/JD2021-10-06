@@ -21,4 +21,11 @@ public class PrintToFile implements PrintFileMethods {
         }
         printWriter.printf(FORMAT_AVG, avg);
     }
+
+    @Override
+    public void printStringToFile(String path, String textLine) throws IOException {
+        PrintWriter printWriter = new PrintWriter(path);
+        printWriter.print(textLine);
+        printWriter.close();
+    }
 }

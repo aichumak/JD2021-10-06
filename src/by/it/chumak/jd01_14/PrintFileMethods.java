@@ -9,4 +9,7 @@ public interface PrintFileMethods {
 
     default void printListToFile(String path, double avg, ArrayList<Integer> integerArrayList) throws IOException {
     }
+
+    default void printStringToFile(String path, String textLine) throws IOException {
+    }
 }
