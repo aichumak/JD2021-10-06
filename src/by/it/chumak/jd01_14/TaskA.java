@@ -2,6 +2,7 @@ package by.it.chumak.jd01_14;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 public class TaskA {
@@ -20,7 +21,6 @@ public class TaskA {
         readIntFileToArrayListAndPrint(path, pathResult);
     }
 
-
     private static void writeRandomIntToFile(String path) throws IOException {
         Random random = new Random();
         ArrayList<Integer> integerArrayList = new ArrayList<>();
@@ -38,7 +38,7 @@ public class TaskA {
         ReadFile readFile = new ReadFile();
         readFile.readFile(path, integerArrayList);
         PrintToFile printToFile = new PrintToFile();
-        int sum = 0;
+        double sum = 0;
         double avg;
 
         for (Integer integer : integerArrayList) {
@@ -46,8 +46,8 @@ public class TaskA {
             System.out.print(integer + " ");
         }
 
-        avg = (double) sum / integerArrayList.size();
-        System.out.println("avg=" + avg + "\n");
+        avg = sum / integerArrayList.size();
+        System.out.print(String.format(Locale.US, "avg=%f%n", avg));
         printToFile.printListToFile(pathResult, avg, integerArrayList);
     }
 
