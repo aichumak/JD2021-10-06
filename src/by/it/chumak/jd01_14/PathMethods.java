@@ -2,9 +2,13 @@ package by.it.chumak.jd01_14;
 
 public interface PathMethods {
 
-    String getPath();
+    String getFilePath();
 
-    default String getPath(Class<?> structureClass, String fileName) {
+    default String getFilePath(Class<?> structureClass, String fileName) {
+        return null;
+    }
+
+    default String getDirPath(Class<?> structureClass) {
         return null;
     }
 

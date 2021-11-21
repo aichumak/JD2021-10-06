@@ -25,7 +25,7 @@ public class PrintToFile implements PrintFileMethods {
     @Override
     public void printStringToFile(String path, String textLine) throws IOException {
         PrintWriter printWriter = new PrintWriter(path);
-        printWriter.print(textLine);
+        printWriter.printf("%s%n", textLine);
         printWriter.close();
     }
 }

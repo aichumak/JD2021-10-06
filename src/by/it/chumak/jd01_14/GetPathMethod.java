@@ -10,13 +10,22 @@ public class GetPathMethod implements PathMethods {
     }
 
     @Override
-    public String getPath() {
+    public String getFilePath() {
         return null;
     }
 
     @Override
-    public String getPath(Class<?> structureClass, String fileName) {
+    public String getFilePath(Class<?> structureClass, String fileName) {
         String relationPath = structureClass.getName().replace(structureClass.getSimpleName(), "").replace(".", File.separator);
+
         return SRC_PROJECT + relationPath + fileName;
+    }
+
+    @Override
+    public String getDirPath(Class<?> structureClass) {
+        String path = structureClass.getName().replace(structureClass.getSimpleName(), "").replace(".", File.separator);
+        File directory = new File(SRC_PROJECT + path);
+
+        return directory.getPath().replace(directory.getName(), "");
     }
 }

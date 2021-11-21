@@ -14,8 +14,8 @@ public class TaskB {
     public static void main(String[] args) throws IOException {
         Class<?> structureClass = TaskA.class;
         GetPathMethod getPathMethod = new GetPathMethod();
-        String path = getPathMethod.getPath(structureClass, FILENAME_TASK_A1);
-        String pathResult = getPathMethod.getPath(structureClass, FILENAME_TASK_A2);
+        String path = getPathMethod.getFilePath(structureClass, FILENAME_TASK_A1);
+        String pathResult = getPathMethod.getFilePath(structureClass, FILENAME_TASK_A2);
         StringBuilder stringBuilder = new StringBuilder();
 
         readFile(path, stringBuilder);
