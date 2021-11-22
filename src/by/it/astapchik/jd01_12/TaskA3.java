@@ -30,6 +30,6 @@ class TaskA3 {
             }
         }
         System.out.println(integers);
-        System.out.println("App Calculator closed.");
+        System.out.println("App closed.");
     }
 }
