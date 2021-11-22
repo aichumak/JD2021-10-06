@@ -11,14 +11,19 @@ public class TaskA {
     private static final String FILENAME_TASK_A2 = "resultTaskA.txt";
     public static final int MAX_INT = 100;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Class<?> structureClass = TaskA.class;
         GetPathMethod getPathMethod = new GetPathMethod();
         String path = getPathMethod.getFilePath(structureClass, FILENAME_TASK_A1);
         String pathResult = getPathMethod.getFilePath(structureClass, FILENAME_TASK_A2);
 
-        writeRandomIntToFile(path);
-        readIntFileToArrayListAndPrint(path, pathResult);
+        try {
+            writeRandomIntToFile(path);
+            readIntFileToArrayListAndPrint(path, pathResult);
+        } catch (IOException e) {
+            ExceptionsInfo exceptionsInfo = new ExceptionsInfo();
+            System.out.println(exceptionsInfo.getExceptionInfo(e, TaskA.class.getName()));
+        }
     }
 
     private static void writeRandomIntToFile(String path) throws IOException {

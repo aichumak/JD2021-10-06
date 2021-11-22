@@ -11,15 +11,20 @@ public class TaskB {
     private static final String WORDS = "words=";
     private static final String PUNCTUATION_MARKS = "punctuation marks=";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Class<?> structureClass = TaskA.class;
         GetPathMethod getPathMethod = new GetPathMethod();
         String path = getPathMethod.getFilePath(structureClass, FILENAME_TASK_A1);
         String pathResult = getPathMethod.getFilePath(structureClass, FILENAME_TASK_A2);
         StringBuilder stringBuilder = new StringBuilder();
 
-        readFile(path, stringBuilder);
-        printResults(pathResult, calculateNumberPunctuationMarksAndWords(stringBuilder));
+        try {
+            readFile(path, stringBuilder);
+            printResults(pathResult, calculateNumberPunctuationMarksAndWords(stringBuilder));
+        } catch (IOException e) {
+            ExceptionsInfo exceptionsInfo = new ExceptionsInfo();
+            System.out.println(exceptionsInfo.getExceptionInfo(e, TaskB.class.getName()));
+        }
     }
 
     private static void readFile(String path, StringBuilder stringBuilder) throws IOException {
@@ -40,11 +45,11 @@ public class TaskB {
         Pattern pattern = Pattern.compile(regEx);
         Matcher matcher = pattern.matcher(stringBuilder);
 
-        while (matcher.find()){
+        while (matcher.find()) {
             count++;
         }
 
-        return title+count;
+        return title + count;
     }
 
     private static void printResults(String path, String textLine) throws IOException {

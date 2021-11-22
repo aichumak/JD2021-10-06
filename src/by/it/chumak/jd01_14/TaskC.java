@@ -10,14 +10,19 @@ public class TaskC {
     private static final String PREFIX_FILE = "file:";
     private static final String PREFIX_DIR = "dir:";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         GetPathMethod getPathMethod = new GetPathMethod();
         String path = getPathMethod.getDirPath(TaskC.class);
         ArrayList<File> fileList = new ArrayList<>();
         ArrayList<File> folderList = new ArrayList<>();
 
-        completeArrayLists(path, fileList, folderList);
-        printResults(getPathMethod.getFilePath(TaskC.class, FILENAME_TASK_C), fileList, folderList);
+        try {
+            completeArrayLists(path, fileList, folderList);
+            printResults(getPathMethod.getFilePath(TaskC.class, FILENAME_TASK_C), fileList, folderList);
+        } catch (IOException e) {
+            ExceptionsInfo exceptionsInfo = new ExceptionsInfo();
+            System.out.println(exceptionsInfo.getExceptionInfo(e, TaskC.class.getName()));
+        }
     }
 
     private static void completeArrayLists(String path, ArrayList<File> fileList, ArrayList<File> folderList) {
