@@ -13,9 +13,9 @@ public class TaskB1 {
             String words = scanner.nextLine();
             if (words.equals("end")) break;
             else {
-                String[] s = words.trim().split("[,\\.;:!?\\s]+");
-                for (int i = 0; i < s.length; i++) {
-                    text.add(s[i]);
+                String[] str = words.trim().split("[,\\.;:!?\\s]+");
+                for (int i = 0; i < str.length; i++) {
+                    text.add(str[i]);
 
                 }
             }
