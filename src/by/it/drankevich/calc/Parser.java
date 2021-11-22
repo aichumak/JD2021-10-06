@@ -12,7 +12,7 @@ public class Parser {
         this.varRepository = varRepository; this.varcreator = varcreator;
     }
 
-    public Var evaluate(String expression){
+    public Var evaluate(String expression) throws CalcExeption {
         expression=expression.trim().replace(" ", "");
         String[]parts=expression.split(Patterns.OPERATION,2);
         String stringleftVar=parts[0];
