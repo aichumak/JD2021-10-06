@@ -7,15 +7,15 @@ public class TaskB1 {
 
 
         ArrayList<String> text = new ArrayList<>();
-        HashSet<String> strings = new HashSet<>();
+        HashSet<String> result=new HashSet<>();
         Scanner scanner = new Scanner(System.in);
         for (; ; ) {
             String words = scanner.nextLine();
             if (words.equals("end")) break;
             else {
-                String[] str = words.trim().split("[,;:!?\\s]+");
-                for (String s : str) {
-                    text.add(s);
+                String[] s = words.trim().split("[,\\.;:!?\\s]+");
+                for (int i = 0; i < s.length; i++) {
+                    text.add(s[i]);
 
                 }
             }
@@ -24,13 +24,15 @@ public class TaskB1 {
         while (iterator.hasNext()) {
             String word = iterator.next();
 
-            int wordCount = Collections.frequency(text, word);
-            strings.add(word + ": " + wordCount);
+            int count = Collections.frequency(text,word );
+            result.add(word+"="+count);
 
         }
 
 
-        System.out.println(strings);
+
+
+        System.out.println(result);
 
     }
 }
