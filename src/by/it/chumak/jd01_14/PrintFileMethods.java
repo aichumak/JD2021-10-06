@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public interface PrintFileMethods {
 
+    @SuppressWarnings("unused")
     void printToFile();
 
     default void printListToFile(String path, double avg, ArrayList<Integer> integerArrayList) throws IOException {

@@ -52,7 +52,7 @@ public class TaskA {
         }
 
         avg = sum / integerArrayList.size();
-        System.out.print(String.format(Locale.US, "avg=%f%n", avg));
+        System.out.printf(Locale.US, "avg=%f%n", avg);
         printToFile.printListToFile(pathResult, avg, integerArrayList);
     }
 

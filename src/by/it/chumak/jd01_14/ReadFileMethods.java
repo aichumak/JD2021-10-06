@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public interface ReadFileMethods {
 
+    @SuppressWarnings("unused")
     void readFile() throws IOException;
 
     default void readFile(String path, ArrayList<Integer> integerArrayList) throws IOException {
