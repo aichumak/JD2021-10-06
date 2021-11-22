@@ -3,7 +3,7 @@ package by.it.chumak.jd01_14;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public interface PrintFileMethods {
+public interface PrintToFileMethods {
 
     @SuppressWarnings("unused")
     void printToFile();

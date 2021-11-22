@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class PrintToFile implements PrintFileMethods {
+public class PrintToFile implements PrintToFileMethods {
     public static final String FORMAT_ONE_INT = "%d ";
 
     @Override
