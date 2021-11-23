@@ -3,7 +3,7 @@ package by.it.chumak.jd01_14;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class ExceptionsInfo {
+public class ExceptionsInfo extends Exception{
     public String getExceptionInfo(IOException e, String className) {
         Class<? extends IOException> exceptionClass = e.getClass();
 
