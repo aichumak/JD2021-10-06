@@ -11,13 +11,13 @@ public class TaskB2 {
         while (true) {
             Iterator<String> iterator = peoples.iterator();
             while (iterator.hasNext()) {
-                String s = iterator.next();
+                String skip = iterator.next();
                 if (remove) {
                     iterator.remove();
                 }
                 remove = !remove;
                 if (peoples.size()==1){
-                    return peoples.get(0);
+                    return skip;
                 }
             }
         }
@@ -28,13 +28,13 @@ public class TaskB2 {
         while (true) {
             Iterator<String> iterator = peoples.iterator();
             while (iterator.hasNext()) {
-                String s = iterator.next();
+                String skip = iterator.next();
                 if (remove) {
                     iterator.remove();
                 }
                 remove = !remove;
                 if (peoples.size()==1){
-                    return peoples.get(0);
+                    return skip;
                 }
             }
         }
