@@ -1,6 +1,8 @@
-package by.it._classwork_.calc;
+package by.it._classwork_.calc.model;
 
-abstract class Var implements Operation {
+import by.it._classwork_.calc.exception.CalcException;
+
+public abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {

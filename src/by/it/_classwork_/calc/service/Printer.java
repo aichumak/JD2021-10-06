@@ -1,4 +1,7 @@
-package by.it._classwork_.calc;
+package by.it._classwork_.calc.service;
+
+import by.it._classwork_.calc.exception.CalcException;
+import by.it._classwork_.calc.model.Var;
 
 import java.util.Objects;
 

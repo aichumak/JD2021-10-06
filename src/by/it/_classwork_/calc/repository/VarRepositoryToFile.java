@@ -1,15 +1,19 @@
-package by.it._classwork_.calc;
+package by.it._classwork_.calc.repository;
+
+import by.it._classwork_.calc.exception.CalcException;
+import by.it._classwork_.calc.model.Var;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class VarRepository implements Repository<String, Var>{
-
+public class VarRepositoryToFile implements Repository<String, Var>{
+    //TODO in progress...
     private final Map<String, Var> map = new HashMap<>();
 
-    public void save(String name, Var value)  throws CalcException{
+    public void save(String name, Var value)  throws CalcException {
         map.put(name, value);
+        
     }
 
     public Var find(String name) throws CalcException {

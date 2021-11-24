@@ -1,6 +1,6 @@
-package by.it._classwork_.calc;
+package by.it._classwork_.calc.model;
 
-class Matrix extends Var {
+public class Matrix extends Var {
 
     public Matrix(String stringValues) {
         super();
