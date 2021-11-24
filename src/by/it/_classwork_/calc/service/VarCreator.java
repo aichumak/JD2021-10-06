@@ -1,4 +1,12 @@
-package by.it._classwork_.calc;
+package by.it._classwork_.calc.service;
+
+import by.it._classwork_.calc.exception.CalcException;
+import by.it._classwork_.calc.constant.Patterns;
+import by.it._classwork_.calc.model.Matrix;
+import by.it._classwork_.calc.model.Scalar;
+import by.it._classwork_.calc.model.Var;
+import by.it._classwork_.calc.model.Vector;
+import by.it._classwork_.calc.repository.VarRepository;
 
 public class VarCreator {
 
