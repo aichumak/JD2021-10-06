@@ -30,7 +30,7 @@ public class TaskC {
 
 
 
-        return step1(n);
+        return arr;
         }
 
 
@@ -42,7 +42,7 @@ public class TaskC {
     private static int step2(int[][] arr) {
 
 
-        return step2(arr);
+        return -1;
     }
 
 
