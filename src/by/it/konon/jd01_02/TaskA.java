@@ -38,25 +38,27 @@ public class TaskA {
         double avg = sum / (double) array.length;
         for (int element : array) {
             if (element < avg) {
-                System.out.print(element + " ");
+                System.out.println(element);
             }
         }
-        System.out.println();
+
     }
 
     private static void step3(int[] array) {
         int min = array[0];
         for (int element : array) {
-            if (element < min) {
+            if (min > element) {
                 min = element;
             }
-            for (int i = array.length - 1; i >= 0; i--) {
-                if (element == array[i]) {
-                    System.out.print(i + " ");
-                }
-
-            }
         }
+        for (int i = array.length-1; i >=0; i--) {
+            if (array[i] == min) {
+                System.out.print(i+" ");
+            }
+
+        }
+
+
     }
 
 }

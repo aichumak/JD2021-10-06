@@ -1,6 +1,5 @@
 package by.it.konon.jd01_02;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class TaskB {
@@ -92,7 +91,8 @@ public class TaskB {
             if(d > 0){
                 x1 = (-b + Math.sqrt(d)) / 2*a;
                 x2 = (-b - Math.sqrt(d)) / 2*a;
-                System.out.println(x2+" "+x1);
+                System.out.println(x1);
+                System.out.println(x2);
             } else if (d == 0){
                 x = -b / (2*a);
                 System.out.println(x);
