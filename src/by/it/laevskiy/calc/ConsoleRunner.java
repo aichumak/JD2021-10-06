@@ -1,11 +1,4 @@
-package by.it._classwork_.calc;
-
-import by.it._classwork_.calc.exception.CalcException;
-import by.it._classwork_.calc.model.Var;
-import by.it._classwork_.calc.repository.VarRepository;
-import by.it._classwork_.calc.service.Parser;
-import by.it._classwork_.calc.service.Printer;
-import by.it._classwork_.calc.service.VarCreator;
+package by.it.laevskiy.calc;
 
 import java.util.Scanner;
 
@@ -13,7 +6,7 @@ public class ConsoleRunner {
 
     public static final String STOP_APP_COMMAND = "end";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CalcException {
         //2+2
         Scanner scanner = new Scanner(System.in);
         Printer printer = new Printer();
