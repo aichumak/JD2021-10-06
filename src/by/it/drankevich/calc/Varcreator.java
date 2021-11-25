@@ -1,7 +1,5 @@
 package by.it.drankevich.calc;
 
-import by.it._classwork_.calc.CalcException;
-
 public class Varcreator {
     private final VarRepository varRepository;
 
