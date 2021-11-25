@@ -44,16 +44,11 @@ public class TaskB {
                 stringBuilder.append((char) bufferedReader.read());
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return stringBuilder.toString();
     }
-
-
-
 
 
     private static String formattedString(String allFileTaskBJavaToString) {
@@ -91,9 +86,6 @@ public class TaskB {
     }
 
 
-
-
-
     private static void printToTaskBtxt(String formattedFileTaskBJavaToString, String txtFilename) {
 
         try (PrintWriter printWriter = new PrintWriter(txtFilename)) {
@@ -103,9 +95,6 @@ public class TaskB {
             e.printStackTrace();
         }
     }
-
-
-
 
 
 }
