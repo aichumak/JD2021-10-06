@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class TaskA {
     private static final String FILENAME = "matrix.txt";
-    private static final String PATH = new GetPathMethod().getFilePath(TaskA.class, FILENAME);
+    private static final String PATH = new GetPath().getFilePath(TaskA.class, FILENAME);
     private static final int LENGTH1 = 6;
     private static final int LENGTH2 = 4;
     private static final int MIN = -15;

@@ -2,7 +2,7 @@ package by.it.chumak.jd01_15;
 
 import java.io.File;
 
-public class GetPathMethod implements PathMethods {
+public class GetPath implements PathMethods {
 
     private final String SRC_PROJECT = System.getProperty("user.dir") + File.separator + "src" + File.separator;
 

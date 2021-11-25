@@ -7,7 +7,7 @@ public class TaskB { // class TaskB
     private static final String FILENAME = TaskB.class.getSimpleName(); //FILENAME
     private static final String FILE_EXTENSION_JAVA = ".java";
     private static final String FILE_EXTENSION_TXT = ".txt"; //FILE_EXTENSION
-    private static final String PATH = new GetPathMethod().getFilePath(TaskB.class, FILENAME); // PATH
+    private static final String PATH = new GetPath().getFilePath(TaskB.class, FILENAME); // PATH
 
     public static void main(String[] args) throws ExceptionsInfo { //main method class TaskB
         StringBuilder stringBuilder = new StringBuilder();

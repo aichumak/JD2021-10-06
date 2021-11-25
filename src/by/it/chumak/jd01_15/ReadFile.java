@@ -32,8 +32,8 @@ public class ReadFile implements ReadFileMethods {
     }
 
     @Override
-    public void readClassFile(String path, StringBuilder stringBuilder, Boolean deleteAllComments) throws ExceptionsInfo {
-        if (deleteAllComments) {
+    public void readClassFile(String path, StringBuilder stringBuilder, Boolean withoutComments) throws ExceptionsInfo {
+        if (withoutComments) {
             int count;
             States state = States.Code;
 
@@ -57,8 +57,7 @@ public class ReadFile implements ReadFileMethods {
                         stringBuilder.append((char) count);
                     } else if (state == States.MaybeComment) {
                         state = States.Code;
-                        stringBuilder.append('/');
-                        stringBuilder.append((char) count);
+                        stringBuilder.append('/').append((char) count);
                     } else if (state == States.MaybeEndMulti) {
                         state = States.MultiLine;
                     } else if (state == States.Code) {
