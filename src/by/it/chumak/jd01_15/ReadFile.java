@@ -36,11 +36,34 @@ public class ReadFile implements ReadFileMethods {
         if (deleteAllComments) {
             int count;
             States state = States.Code;
-            StringBuilder buffer = new StringBuilder();
 
             try (BufferedReader inputFileReader = getInputFileReader(path)) {
                 while ((count = inputFileReader.read()) != -1) {
-                    stringBuilder.append((char) count);
+                    if ((char) count == '/' && state == States.Code) {
+                        state = States.MaybeComment;
+                    } else if ((char) count == '/' && state == States.MaybeComment) {
+                        state = States.OneLine;
+                    } else if ((char) count == '*' && state == States.MaybeComment) {
+                        state = States.MultiLine;
+                    } else if ((char) count == '*' && state == States.MultiLine) {
+                        state = States.MaybeEndMulti;
+                    } else if ((char) count == '/' && state == States.MaybeEndMulti) {
+                        state = States.Code;
+                    } else if ((char) count == '\n' && state == States.OneLine) {
+                        state = States.Code;
+                        stringBuilder.append((char) count);
+                    } else if ((char) count == '\r' && state == States.OneLine) {
+                        state = States.Code;
+                        stringBuilder.append((char) count);
+                    } else if (state == States.MaybeComment) {
+                        state = States.Code;
+                        stringBuilder.append('/');
+                        stringBuilder.append((char) count);
+                    } else if (state == States.MaybeEndMulti) {
+                        state = States.MultiLine;
+                    } else if (state == States.Code) {
+                        stringBuilder.append((char) count);
+                    }
                 }
             } catch (IOException e) {
                 throw new ExceptionsInfo();
