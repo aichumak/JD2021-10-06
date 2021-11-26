@@ -12,7 +12,6 @@ public class TaskC {
 
     }
 
-
     private static int[][] step1(int n) {
         boolean min = false;
         boolean max = false;
@@ -62,10 +61,8 @@ public class TaskC {
                 if (search) {
                     result = result + i;
                 }
-
             }
         }
-
         System.out.println(result);
         return result;
     }
