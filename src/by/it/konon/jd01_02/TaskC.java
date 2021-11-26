@@ -8,12 +8,14 @@ public class TaskC {
         int n = scanner.nextInt();
         int[][] array = new int[n][n];
         array = step1(n);
+        int result = step2(array);
+
     }
+
 
     private static int[][] step1(int n) {
         boolean min = false;
         boolean max = false;
-
 
         int[][] array = new int[n][n];
         while (!min || !max) {
@@ -30,7 +32,6 @@ public class TaskC {
                     }
                 }
             }
-
         }
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length; j++) {
@@ -40,4 +41,33 @@ public class TaskC {
         }
         return array;
     }
+
+    private static int step2(int[][] array) {
+        int result = 0;
+        boolean search = false;
+
+        for (int[] element : array) {
+            search = false;
+
+            for (int i : element) {
+                if (i >= 0) {
+                    if (!search) {
+                        search = true;
+                        continue;
+                    }
+                    if (search) {
+                        break;
+                    }
+                }
+                if (search) {
+                    result = result + i;
+                }
+
+            }
+        }
+
+        System.out.println(result);
+        return result;
+    }
+
 }
