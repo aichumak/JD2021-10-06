@@ -15,7 +15,7 @@ public class TaskB3 {
 
     static String process(LinkedList<String> peoples) {
         while (peoples.size() > 1) {
-            String first = peoples.pollFirst();
+            String first = peoples.removeFirst();
             peoples.removeFirst();
             peoples.addLast(first);
         }
