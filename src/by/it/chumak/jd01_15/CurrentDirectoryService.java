@@ -1,6 +1,6 @@
 package by.it.chumak.jd01_15;
 
-public class CurrentDirectoryService implements CurrentDirectoryMethods{
+public class CurrentDirectoryService implements CurrentDirectoryMethods {
 
     @Override
     public void setCurrentDirectory(CurrentDirectoryEntity currentDirectoryEntity, String currentDirectory) {

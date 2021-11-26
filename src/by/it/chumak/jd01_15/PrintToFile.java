@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class PrintToFile implements PrintToFileMethods {
+
     public static final String FORMAT_ONE_INT = "%3d ";
 
     @Override

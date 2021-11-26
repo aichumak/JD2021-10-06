@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface ReadFileMethods {
 
+    @SuppressWarnings("unused")
     default void readFile(String path, ArrayList<Integer> integerArrayList) throws ExceptionsInfo {
     }
 

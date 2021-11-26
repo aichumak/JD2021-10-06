@@ -4,6 +4,7 @@ package by.it.chumak.jd01_15;
  * This method is used to ...
  */
 public class TaskB { // class TaskB
+
     private static final String FILENAME = TaskB.class.getSimpleName(); //FILENAME
     private static final String FILE_EXTENSION_JAVA = ".java";
     private static final String FILE_EXTENSION_TXT = ".txt"; //FILE_EXTENSION
@@ -23,6 +24,7 @@ public class TaskB { // class TaskB
      */
     private static void readClass(StringBuilder stringBuilder) throws ExceptionsInfo {
         ReadFileMethods readFileMethods = new ReadFile();
+
         readFileMethods.readClassFile(PATH + FILE_EXTENSION_JAVA, stringBuilder, true);
     }
 
@@ -32,8 +34,8 @@ public class TaskB { // class TaskB
      */
     private static void printToFile(StringBuilder stringBuilder) throws ExceptionsInfo {
         PrintToFileMethods printToFileMethods = new PrintToFile();
-        printToFileMethods.printStringToFile(PATH + FILE_EXTENSION_TXT, stringBuilder.toString());
 
+        printToFileMethods.printStringToFile(PATH + FILE_EXTENSION_TXT, stringBuilder.toString());
     }
 
 }

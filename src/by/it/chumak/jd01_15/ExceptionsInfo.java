@@ -8,6 +8,7 @@ public class ExceptionsInfo extends Exception {
 
     }
 
+    @SuppressWarnings("unused")
     public String getExceptionInfo(Exception e, String className) {
         Class<? extends Exception> exceptionClass = e.getClass();
 

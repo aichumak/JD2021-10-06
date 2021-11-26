@@ -6,29 +6,31 @@ public class TaskC {
     private static final String EXIT_COMMAND = "end";
 
     public static void main(String[] args) {
-        CurrentDirectoryEntity currentDirectoryEntity = initCommandLine();
-        runCommandLine(currentDirectoryEntity);
+        CurrentDirectoryEntity currentDirectoryEntity = setCurrentDirectoryEntity();
+
+        runCommand(currentDirectoryEntity);
     }
 
-    private static CurrentDirectoryEntity initCommandLine() {
+    private static CurrentDirectoryEntity setCurrentDirectoryEntity() {
         PathMethods pathMethods = new GetPath();
         String path = pathMethods.getDirPath(TaskC.class);
 
         return new CurrentDirectoryEntity(path);
     }
 
-    private static void runCommandLine(CurrentDirectoryEntity currentDirectoryEntity) {
-        CommandProcessorMethods commandHandler = new CommandProcessor();
+    private static void runCommand(CurrentDirectoryEntity currentDirectoryEntity) {
+        CommandProcessorMethods commandProcessor = new CommandProcessor();
         Scanner sc = new Scanner(System.in);
         String command;
 
-        for (;;) {
+        for (; ; ) {
             System.out.print(currentDirectoryEntity.getValue());
             command = sc.nextLine();
-            if (command.equalsIgnoreCase(EXIT_COMMAND)){
+            if (command.equalsIgnoreCase(EXIT_COMMAND)) {
                 break;
             } else {
-                commandHandler.processCommand(command, currentDirectoryEntity);
+                commandProcessor.processCommand(command, currentDirectoryEntity);
+                System.out.println();
             }
 
         }

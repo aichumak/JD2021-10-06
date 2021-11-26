@@ -18,6 +18,6 @@ public class GetPath implements PathMethods {
         String path = structureClass.getName().replace(structureClass.getSimpleName(), "").replace(".", File.separator);
         File directory = new File(SRC_PROJECT + path);
 
-        return directory.getPath().replace(directory.getName(), "");
+        return directory.getPath();
     }
 }

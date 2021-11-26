@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public interface PrintToFileMethods {
 
+    @SuppressWarnings("unused")
     default void printListToFile(String path, double avg, ArrayList<Integer> integerArrayList) throws ExceptionsInfo {
     }
 
