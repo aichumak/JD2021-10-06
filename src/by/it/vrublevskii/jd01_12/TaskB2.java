@@ -33,9 +33,11 @@ public class TaskB2 {
             Iterator<String> iterator = peoples.iterator();
             while (iterator.hasNext()) {
                 numberPerson++;
+                System.out.println(numberPerson);
                 if (numberPerson % 2 == 0) {
                     iterator.next();
                     iterator.remove();
+                    System.out.println(peoples);
                 }else{
                     iterator.next();
                 }
@@ -51,9 +53,11 @@ public class TaskB2 {
             Iterator<String> iterator = peoples.iterator();
             while (iterator.hasNext()) {
                 numberPerson++;
+                System.out.println(numberPerson);
                 if (numberPerson % 2 == 0) {
                     iterator.next();
                     iterator.remove();
+                    System.out.println(peoples);
                 }else{
                     iterator.next();
                 }
