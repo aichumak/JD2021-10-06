@@ -28,42 +28,33 @@ public class TaskB3 {
         }
 
         static String process(ArrayList<String> peoples) {
-//            System.out.println(peoples);
             int numberPerson = 0;
             while (peoples.size() > 1){
                 Iterator<String> iterator = peoples.iterator();
-                while (iterator.hasNext()) {
-                    numberPerson++;
-//                    System.out.println(numberPerson);
-                    if (numberPerson % 2 == 0) {
-                        iterator.next();
-                        iterator.remove();
-//                        System.out.println(peoples);
-                    }else{
-                        iterator.next();
-                    }
-                }
+                numberPerson = terminatePersons(numberPerson, iterator);
             }
             return peoples.get(0);
         }
 
-        static String process(LinkedList<String> peoples) {
-//            System.out.println(peoples);
+    static String process(LinkedList<String> peoples) {
             int numberPerson = 0;
             while (peoples.size() > 1){
                 Iterator<String> iterator = peoples.iterator();
-                while (iterator.hasNext()) {
-                    numberPerson++;
-//                    System.out.println(numberPerson);
-                    if (numberPerson % 2 == 0) {
-                        iterator.next();
-                        iterator.remove();
-//                        System.out.println(peoples);
-                    }else{
-                        iterator.next();
-                    }
-                }
+                numberPerson = terminatePersons(numberPerson, iterator);
             }
             return peoples.get(0);
         }
+
+    private static int terminatePersons(int numberPerson, Iterator<String> iterator) {
+        while (iterator.hasNext()) {
+            numberPerson++;
+            if (numberPerson % 2 == 0) {
+                iterator.next();
+                iterator.remove();
+            } else {
+                iterator.next();
+            }
+        }
+        return numberPerson;
+    }
 }
