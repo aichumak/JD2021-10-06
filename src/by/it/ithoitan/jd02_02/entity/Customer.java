@@ -1,13 +1,22 @@
 package by.it.ithoitan.jd02_02.entity;
 
-public class Customer {
+public class Customer  {
     private final String name;
+    private double total;
     public Customer(int number){
-        name = "Customer #" + number;
+        name = "Customer № " + number;
     }
 
     public Customer() {
         name = "unknown";
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
