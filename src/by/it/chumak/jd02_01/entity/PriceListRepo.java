@@ -6,17 +6,15 @@ import java.util.HashMap;
 
 public class PriceListRepo {
 
-    private HashMap<String, Integer> priceList;
+    private final HashMap<String, Integer> priceList;
 
     public PriceListRepo() {
-        String[] arrayItems = new Goods().getItems();
+        String[] arrayItems = new Goods().getGoods();
         priceList = new HashMap<>();
 
         for (String item : arrayItems) {
             priceList.put(item, RandomGenerator.get(1, 100));
         }
-
-        this.priceList = priceList;
     }
 
     public HashMap<String, Integer> getPriceList() {

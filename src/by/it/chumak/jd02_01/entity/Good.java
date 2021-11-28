@@ -2,16 +2,14 @@ package by.it.chumak.jd02_01.entity;
 
 public class Good {
 
-    private final Customer customer;
     private final String goodsName;
     private final double goodsPrice;
 
     public Good() {
-        this(new Customer() ,"noname", 0);
+        this("noname", 0);
     }
 
-    public Good(Customer customer, String goodsName, double goodsPrice) {
-        this.customer = customer;
+    public Good(String goodsName, double goodsPrice) {
         this.goodsName = goodsName;
         this.goodsPrice = goodsPrice;
     }
@@ -32,4 +30,5 @@ public class Good {
                 ", price=" + goodsPrice +
                 '}';
     }
+
 }

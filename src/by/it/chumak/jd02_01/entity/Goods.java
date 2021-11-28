@@ -2,13 +2,13 @@ package by.it.chumak.jd02_01.entity;
 
 public class Goods {
 
-    private String[] items;
+    private final String[] goods;
 
     public Goods() {
-        this.items = new String[]{"bread", "loaf", "milk", "yogurt", "water", "fish", "chicken", "meat", "chips", "candy", "sugar", "flour", "rice", "fruit", "salad", "cake", "cola"};
+        this.goods = new String[]{"bread", "loaf", "milk", "yogurt", "water", "fish", "chicken", "meat", "chips", "candy", "sugar", "flour", "rice", "fruit", "salad", "cake", "cola"};
     }
 
-    public String[] getItems() {
-        return items;
+    public String[] getGoods() {
+        return goods;
     }
 }

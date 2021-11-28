@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 public class ShoppingCard {
 
-    private HashMap<Integer, String> cart;
+    private final HashMap<Integer, String> cart;
 
     public ShoppingCard() {
-        this.cart = new HashMap<Integer, String>();
+        this.cart = new HashMap<>();
     }
 
     public ShoppingCard(HashMap<Integer, String> cart) {

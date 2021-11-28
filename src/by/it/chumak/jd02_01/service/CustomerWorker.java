@@ -40,11 +40,14 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         System.out.println(customer + " started to choose good");
         oversleep(500, 2000);
 
-        Optional<String> goodsName = priceList.getPriceList().keySet().stream().findAny();
-        Good good = new Good(customer, goodsName.get(), priceList.getPriceList().get(goodsName.get()));
-        System.out.println(customer + " finished to choose good");
+        Optional<String> foundGood = priceList.getPriceList().keySet().stream().findAny();
 
-        return good;
+        if (foundGood.isPresent()) {
+            System.out.println(customer + " finished to choose good");
+            return new Good(foundGood.get(), priceList.getPriceList().get(foundGood.get()));
+        } else {
+            return new Good();
+        }
     }
 
     @Override
