@@ -15,6 +15,11 @@ public class Customer {
 
     }
 
+    public Customer(int number, String buyerName) {
+        name="Customer №"+number+" "+buyerName;
+
+    }
+
     public String getName() {
         return name;
     }
