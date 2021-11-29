@@ -11,6 +11,10 @@ public class RandomGenerator {
     }
 
     public static int get(int max) {
-        return get(0, max);
+        if (max <= 0) {
+            return 0;
+        } else {
+            return get(0, max);
+        }
     }
 }

@@ -1,8 +1,6 @@
 package by.it.chumak.jd02_01.service;
 
-import by.it.chumak.jd02_01.entity.Customer;
-import by.it.chumak.jd02_01.entity.Good;
-import by.it.chumak.jd02_01.entity.PriceListRepo;
+import by.it.chumak.jd02_01.entity.*;
 import by.it.chumak.jd02_01.helper.RandomGenerator;
 import by.it.chumak.jd02_01.helper.Timeout;
 
@@ -12,14 +10,17 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
 
     private final Customer customer;
     private final PriceListRepo priceList;
+    private final CustomersCountRepo customersCountRepo;
 
-    public CustomerWorker(Customer customer, PriceListRepo priceList) {
+    public CustomerWorker(Customer customer, CustomersCountRepo customersCount, PriceListRepo priceList) {
         this.customer = customer;
         this.priceList = priceList;
+        this.customersCountRepo = customersCount;
     }
 
     @Override
     public void run() {
+        //customersCountRepo.addCustomer();
         enteredStore();
         takeCart();
 
@@ -38,7 +39,12 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
     @Override
     public Good chooseGood() {
         System.out.println(customer + " started to choose good");
-        oversleep(500, 2000);
+
+        if (customer.getCustomerType() == CustomerType.Pensioner) {
+            oversleep(750, 3000);
+        } else {
+            oversleep(500, 2000);
+        }
 
         Optional<String> foundGood = priceList.getPriceList().keySet().stream().findAny();
 
@@ -52,21 +58,38 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
 
     @Override
     public void goOut() {
+        customersCountRepo.removeCustomer();
         System.out.println(customer + " leaves the Shop");
     }
 
     @Override
     public void takeCart() {
-        oversleep(100, 300);
+        if (customer.getCustomerType() == CustomerType.Pensioner) {
+            oversleep(150, 450);
+        } else {
+            oversleep(100, 300);
+        }
         System.out.println(customer + " took the shopping cart");
     }
 
     @Override
     public int putToCart(Good good) {
-        oversleep(100, 300);
+        int goodsQuantity = 0;
+
+        if (customer.getCustomerType() == CustomerType.Pensioner) {
+            oversleep(150, 450);
+            goodsQuantity = RandomGenerator.get(1, 5);
+        } else {
+            oversleep(100, 300);
+            if (customer.getCustomerType() == CustomerType.Student) {
+                goodsQuantity = RandomGenerator.get(0, 2);
+            } else {
+                goodsQuantity = RandomGenerator.get(1, 5);
+            }
+        }
         System.out.println(customer + " put " + good.getName() + " to the shopping cart");
 
-        return RandomGenerator.get(1, 5);
+        return goodsQuantity;
     }
 
     private void oversleep(int min, int max) {
