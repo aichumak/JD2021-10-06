@@ -1,5 +1,6 @@
 package by.it.drankevich.jd02_01.service;
 
+import by.it.drankevich.jd02_01.Store;
 import by.it.drankevich.jd02_01.entity.*;
 import by.it.drankevich.jd02_01.helper.RandomGenerator;
 import by.it.drankevich.jd02_01.helper.Timeout;
@@ -15,12 +16,14 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
         takeCart();
         chooseGood();
         goOut();
+        Store.numberPeopleInStore=Store.numberPeopleInStore-1;
+
 
     }
 
     public CustomerWorker(Customer customer, ShoppingCart shoppingCart) {
         this.customer = customer;
-        this.shoppingCart=shoppingCart;
+        this.shoppingCart = shoppingCart;
     }
 
     @Override
@@ -34,15 +37,16 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
         System.out.println(customer + " started to choose goods");
         Good good = null;
         int numberProducts;
-        if(customer instanceof Student){
-            numberProducts=RandomGenerator.get(2);}
-        else {
-            numberProducts=RandomGenerator.get(2, 5);}
+        if (customer instanceof Student) {
+            numberProducts = RandomGenerator.get(2);
+        } else {
+            numberProducts = RandomGenerator.get(2, 5);
+        }
 
         for (int i = 0; i < numberProducts; i++) {
             int timeout = RandomGenerator.get(500, 2000);
-            if(customer instanceof Pensioner){
-                timeout= (int) (timeout*1.5);
+            if (customer instanceof Pensioner) {
+                timeout = (int) (timeout * 1.5);
             }
             Timeout.sleep(timeout);
             good = PriceListRepo.goodChoise();
@@ -59,14 +63,15 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     public void goOut() {
         System.out.println(customer + " leaves the Shop");
 
+
     }
 
     @Override
     public void takeCart() {
         System.out.println(customer + " took the takeCart");
         int timeout = RandomGenerator.get(100, 300);
-        if(customer instanceof Pensioner){
-            timeout= (int) (timeout*1.5);
+        if (customer instanceof Pensioner) {
+            timeout = (int) (timeout * 1.5);
         }
         Timeout.sleep(timeout);
 
@@ -78,8 +83,8 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
         int goodsCount = shoppingCart.add(good);
         System.out.println(customer + " put good to Cart, all goods: " + (goodsCount));
         int timeout = RandomGenerator.get(100, 300);
-        if(customer instanceof Pensioner){
-            timeout= (int) (timeout*1.5);
+        if (customer instanceof Pensioner) {
+            timeout = (int) (timeout * 1.5);
         }
         Timeout.sleep(timeout);
 
