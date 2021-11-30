@@ -24,7 +24,6 @@ public class TaskB3 {
         peoplesLinkedList.add("Анастасия1");
         System.out.println(process(peoplesArrayList));
         System.out.println(process(peoplesLinkedList));
-
     }
 
     static String process(ArrayList<?> peoples) {
