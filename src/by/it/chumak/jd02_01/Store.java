@@ -75,6 +75,7 @@ public class Store extends Thread {
         customerWorkers.add(customerWorker);
         customersCount.addCustomer();
         customerWorker.start();
+
         if (customerType == CustomerType.Pensioner) {
             Timeout.sleep(1500);
         } else {

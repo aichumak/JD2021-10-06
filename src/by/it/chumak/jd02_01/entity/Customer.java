@@ -7,7 +7,7 @@ public class Customer {
     private final CustomerType customerType;
 
     public Customer(int number, CustomerType currentCustomerType) {
-        name = "Customer № " + number;
+        name = currentCustomerType + " № " + number;
         customerType = currentCustomerType;
     }
 

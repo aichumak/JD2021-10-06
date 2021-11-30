@@ -22,5 +22,4 @@ public class ShoppingCard {
         return this.cart.toString();
     }
 
-
 }

@@ -73,7 +73,7 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         } else {
             oversleep(100, 300);
             if (customer.getCustomerType() == CustomerType.Student) {
-                goodsQuantity = RandomGenerator.get(0, 2);
+                goodsQuantity = RandomGenerator.get(1, 2);
             } else {
                 goodsQuantity = RandomGenerator.get(1, 5);
             }

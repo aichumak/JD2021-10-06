@@ -5,8 +5,9 @@ public class Good {
     private final String goodsName;
     private final double goodsPrice;
 
+    @SuppressWarnings("unused")
     public Good() {
-        this("noname", 0);
+        this("no name", 0);
     }
 
     public Good(String goodsName, double goodsPrice) {

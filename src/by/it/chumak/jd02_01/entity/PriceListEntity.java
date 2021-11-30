@@ -20,4 +20,5 @@ public class PriceListEntity {
     public HashMap<String, Integer> getPriceList() {
         return priceList;
     }
+
 }
