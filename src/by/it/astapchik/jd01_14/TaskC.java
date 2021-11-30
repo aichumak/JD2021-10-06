@@ -1,16 +1,15 @@
 package by.it.astapchik.jd01_14;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringJoiner;
+
 
 class TaskC {
+
     public static ArrayList<String> arrayList = new ArrayList<>();
+
     public static void main(String[] args) {
         File directoryPath = new File(System.getProperty("user.dir") + "/src/by/it/astapchik/");
         get(directoryPath);
