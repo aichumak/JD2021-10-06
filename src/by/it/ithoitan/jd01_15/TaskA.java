@@ -1,12 +1,4 @@
 package by.it.ithoitan.jd01_15;
-/**
- * Создайте матрицу 6 строк на 4 столбца из целых случайных чисел от -15 до 15 включительно.
- * 
- * Выведите матрицу в текстовый файл matrix.txt, расположенный в папке задания jd01_15. При выводе для
- * каждого числа нужно предусмотреть для него три знакоместа, после чисел – один пробел.
- * 
- * Прочитайте файл и покажите его в консоли. Класс Scanner использовать нельзя.
- */
 
 import java.io.*;
 import java.util.ArrayList;
@@ -31,7 +23,6 @@ public class TaskA {
         }
     }
 
-    //Обдумайте или реализуйте рекомендуемую доработку учебного проекта calc
     private static List<String> readFromFile(String filename)  {
         List<String> stringList = new ArrayList<>();
        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))){
@@ -46,16 +37,7 @@ public class TaskA {
        } catch (IOException e) {
            throw new RuntimeException();
        }
-       /*
-       int rowCount = stringList.size();
-       int[][] resultArray = new int[rowCount][0];
-        for (int i = 0; i < resultArray.length; i++) {
-            String[] parts = stringList.get(i).trim().split("\\s+");
-            resultArray[i] = new int[parts.length];
-            for (int j = 0; j < resultArray[i].length; j++) {
-                resultArray[i][j] = Integer.parseInt(parts[j]);
-            }
-        }*/
+
        return stringList;
     }
 
