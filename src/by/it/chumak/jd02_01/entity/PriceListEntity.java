@@ -4,11 +4,11 @@ import by.it.chumak.jd02_01.helper.RandomGenerator;
 
 import java.util.HashMap;
 
-public class PriceListRepo {
+public class PriceListEntity {
 
     private final HashMap<String, Integer> priceList;
 
-    public PriceListRepo() {
+    public PriceListEntity() {
         String[] arrayItems = new Goods().getGoods();
         priceList = new HashMap<>();
 

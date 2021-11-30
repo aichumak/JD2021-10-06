@@ -3,7 +3,7 @@ package by.it.chumak.jd02_01;
 import by.it.chumak.jd02_01.entity.Customer;
 import by.it.chumak.jd02_01.entity.CustomerType;
 import by.it.chumak.jd02_01.entity.CustomersCountRepo;
-import by.it.chumak.jd02_01.entity.PriceListRepo;
+import by.it.chumak.jd02_01.helper.PriceListRepo;
 import by.it.chumak.jd02_01.helper.RandomGenerator;
 import by.it.chumak.jd02_01.helper.Timeout;
 import by.it.chumak.jd02_01.service.CustomerWorker;

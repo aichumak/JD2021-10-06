@@ -1,30 +1,28 @@
 package by.it.chumak.jd02_01.service;
 
 import by.it.chumak.jd02_01.entity.*;
+import by.it.chumak.jd02_01.helper.PriceListRepo;
 import by.it.chumak.jd02_01.helper.RandomGenerator;
 import by.it.chumak.jd02_01.helper.Timeout;
-
-import java.util.Optional;
 
 public class CustomerWorker extends Thread implements ShoppingCardAction, CustomerAction {
 
     private final Customer customer;
-    private final PriceListRepo priceList;
     private final CustomersCountRepo customersCountRepo;
+    private final PriceListRepo priceListRepo;
+    private ShoppingCard shoppingCard;
 
-    public CustomerWorker(Customer customer, CustomersCountRepo customersCountRepo, PriceListRepo priceList) {
+    public CustomerWorker(Customer customer, CustomersCountRepo customersCountRepo, PriceListRepo priceListRepo) {
         this.customer = customer;
-        this.priceList = priceList;
         this.customersCountRepo = customersCountRepo;
+        this.priceListRepo = priceListRepo;
     }
 
     @Override
     public void run() {
         enteredStore();
         takeCart();
-        Good good = chooseGood();
-        System.out.printf("%s choose %s that costs $%.2f%n", customer, good.getName(), good.getPrice());
-        customer.setTotal(customer.getTotal() + (putToCart(good) * good.getPrice()));
+        chooseGoodsAndPutItToCart();
         goOut();
     }
 
@@ -43,20 +41,15 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
             oversleep(500, 2000);
         }
 
-        Optional<String> foundGood = priceList.getPriceList().keySet().stream().findAny();
-
-        if (foundGood.isPresent()) {
-            System.out.println(customer + " finished to choose good");
-            return new Good(foundGood.get(), priceList.getPriceList().get(foundGood.get()));
-        } else {
-            return new Good();
-        }
+        String nameSelectedGood = priceListRepo.chooseGoodFromPriceList();
+        System.out.println(customer + " finished to choose good");
+        return new Good(nameSelectedGood, priceListRepo.getGoodPrice(nameSelectedGood));
     }
 
     @Override
     public void goOut() {
         customersCountRepo.removeCustomer();
-        System.out.printf("%s bought goods for a total of $%.2f and leaves the Shop%n", customer, customer.getTotal());
+        System.out.printf("%s bought goods: %s, for a total of $%.2f and leaves the Shop%n", customer, shoppingCard.getGoodsList(), customer.getTotal());
     }
 
     @Override
@@ -66,6 +59,7 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         } else {
             oversleep(100, 300);
         }
+        shoppingCard = new ShoppingCard();
         System.out.println(customer + " took the shopping cart");
     }
 
@@ -86,7 +80,26 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         }
         System.out.printf("%s put %s to the shopping cart%n", customer, good.getName());
 
+        shoppingCard.addGoodToCart(good, goodsQuantity);
+
         return goodsQuantity;
+    }
+
+    private void chooseGoodsAndPutItToCart() {
+        int goodsCounter;
+
+        if (customer.getCustomerType() == CustomerType.Student) {
+            goodsCounter = RandomGenerator.get(0, 2);
+        } else {
+            goodsCounter = RandomGenerator.get(2, 5);
+        }
+
+        for (int i = 0; i < goodsCounter; i++) {
+            Good good = chooseGood();
+            System.out.printf("%s choose %s that costs $%.2f%n", customer, good.getName(), good.getPrice());
+            shoppingCard.addGoodToCart(good, putToCart(good));
+            customer.setTotal(customer.getTotal() + (shoppingCard.getGoodCount(good) * good.getPrice()));
+        }
     }
 
     private void oversleep(int min, int max) {

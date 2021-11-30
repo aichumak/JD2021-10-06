@@ -4,18 +4,23 @@ import java.util.HashMap;
 
 public class ShoppingCard {
 
-    private final HashMap<Integer, String> cart;
+    private final HashMap<Good, Integer> cart;
 
     public ShoppingCard() {
         this.cart = new HashMap<>();
     }
 
-    public ShoppingCard(HashMap<Integer, String> cart) {
-        this.cart = cart;
+    public void addGoodToCart(Good good, int count) {
+        this.cart.put(good, count);
     }
 
-    public HashMap<Integer, String> getCart() {
-        return cart;
+    public int getGoodCount(Good good) {
+        return this.cart.get(good);
     }
+
+    public String getGoodsList() {
+        return this.cart.toString();
+    }
+
 
 }
