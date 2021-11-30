@@ -12,10 +12,6 @@ public class CustomersCountRepo {
         return customersCount;
     }
 
-    public void setCustomersCount(int customersCount) {
-        this.customersCount = customersCount;
-    }
-
     public void addCustomer() {
         this.customersCount = this.customersCount + 1;
     }

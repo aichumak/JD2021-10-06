@@ -12,22 +12,19 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
     private final PriceListRepo priceList;
     private final CustomersCountRepo customersCountRepo;
 
-    public CustomerWorker(Customer customer, CustomersCountRepo customersCount, PriceListRepo priceList) {
+    public CustomerWorker(Customer customer, CustomersCountRepo customersCountRepo, PriceListRepo priceList) {
         this.customer = customer;
         this.priceList = priceList;
-        this.customersCountRepo = customersCount;
+        this.customersCountRepo = customersCountRepo;
     }
 
     @Override
     public void run() {
-        //customersCountRepo.addCustomer();
         enteredStore();
         takeCart();
-
         Good good = chooseGood();
-        System.out.println(customer + " choose " + good.getName() + " that costs " + good.getPrice() + "$");
-        int countGoods = putToCart(good);
-
+        System.out.printf("%s choose %s that costs $%.2f%n", customer, good.getName(), good.getPrice());
+        customer.setTotal(customer.getTotal() + (putToCart(good) * good.getPrice()));
         goOut();
     }
 
@@ -59,7 +56,7 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
     @Override
     public void goOut() {
         customersCountRepo.removeCustomer();
-        System.out.println(customer + " leaves the Shop");
+        System.out.printf("%s bought goods for a total of $%.2f and leaves the Shop%n", customer, customer.getTotal());
     }
 
     @Override
@@ -74,7 +71,7 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
 
     @Override
     public int putToCart(Good good) {
-        int goodsQuantity = 0;
+        int goodsQuantity;
 
         if (customer.getCustomerType() == CustomerType.Pensioner) {
             oversleep(150, 450);
@@ -87,18 +84,13 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
                 goodsQuantity = RandomGenerator.get(1, 5);
             }
         }
-        System.out.println(customer + " put " + good.getName() + " to the shopping cart");
+        System.out.printf("%s put %s to the shopping cart%n", customer, good.getName());
 
         return goodsQuantity;
     }
 
     private void oversleep(int min, int max) {
         int timeout = RandomGenerator.get(min, max);
-        Timeout.sleep(timeout);
-    }
-
-    private void oversleep(int max) {
-        int timeout = RandomGenerator.get(max);
         Timeout.sleep(timeout);
     }
 
