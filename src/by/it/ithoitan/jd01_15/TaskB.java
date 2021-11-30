@@ -51,7 +51,7 @@ public class TaskB {
                         out = false;
                     }
                 } else if(inLineComents){
-                    if(prev=='\r'&&cur == '\n'){
+                    if(cur == '\n'){
                         inLineComents = false;
                         out = false;
                     }
@@ -93,7 +93,7 @@ public class TaskB {
 //            int start = stringBuilder.indexOf("/*");
 //            int end = stringBuilder.indexOf("*/");
 //            stringBuilder.delete(start,end+2);
-            System.out.println(stringBuilder);
+            System.out.print(stringBuilder);
 //Задания на практику по потокам ввода-вывода
         } catch (IOException e) {
 /*
