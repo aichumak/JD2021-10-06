@@ -1,4 +1,4 @@
-package by.it._classwork_.calc;
+package by.it._classwork_.calc.test;
 
 
 import by.it.HomeWork;
