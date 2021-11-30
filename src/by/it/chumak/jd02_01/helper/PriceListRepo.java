@@ -17,7 +17,7 @@ public class PriceListRepo {
     }
 
 
-    public double getGoodPrice(String nameSelectedGood) {
+    public double getGoodsPrice(String nameSelectedGood) {
         return priceListEntity.getPriceList().get(nameSelectedGood);
     }
 }

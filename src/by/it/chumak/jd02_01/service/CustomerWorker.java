@@ -43,7 +43,7 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
 
         String nameSelectedGood = priceListRepo.chooseGoodFromPriceList();
         System.out.println(customer + " finished to choose good");
-        return new Good(nameSelectedGood, priceListRepo.getGoodPrice(nameSelectedGood));
+        return new Good(nameSelectedGood, priceListRepo.getGoodsPrice(nameSelectedGood));
     }
 
     @Override
