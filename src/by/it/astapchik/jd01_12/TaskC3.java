@@ -5,11 +5,7 @@ import java.util.Scanner;
 
 class TaskC3 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.next();
-
-
-
-
+        Scanner input = new Scanner(System.in);
+        String brackets = input.next();
     }
 }
