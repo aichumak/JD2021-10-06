@@ -2,15 +2,19 @@ package by.it._classwork_.jd02_02.service;
 
 import by.it._classwork_.jd02_02.entity.Customer;
 import by.it._classwork_.jd02_02.entity.Good;
+import by.it._classwork_.jd02_02.entity.Store;
 import by.it._classwork_.jd02_02.helper.RandomGenerator;
 import by.it._classwork_.jd02_02.helper.Timeout;
 
 public class CustomerWorker extends Thread implements CustomerAction {
 
     private final Customer customer;
+    private final Store store;
 
-    public CustomerWorker(Customer customer) {
+    public CustomerWorker(Store store, Customer customer) {
         this.customer = customer;
+        this.store = store;
+        store.getManager().addCustomer();
     }
 
     @Override
@@ -18,7 +22,9 @@ public class CustomerWorker extends Thread implements CustomerAction {
         enteredStore();
         Good good = chooseGood();
         System.out.println(customer + " choose " + good);
+        goToQueue();
         goOut();
+        store.getManager().finishedCustomer();
     }
 
     @Override
@@ -37,8 +43,26 @@ public class CustomerWorker extends Thread implements CustomerAction {
     }
 
     @Override
+    public void goToQueue() {
+        System.out.println(customer + " go to the Queue");
+        synchronized (customer.getMonitor()) {
+            store.getQueue().add(customer);
+            customer.setFlagWaining(true);
+            try {
+                while (customer.isFlagWaining()) {
+                    customer.getMonitor().wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(customer + " finished to choose good");
+    }
+
+    @Override
     public void goOut() {
         System.out.println(customer + " leaves the Shop");
-
     }
+
+
 }
