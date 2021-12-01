@@ -1,7 +1,5 @@
 package by.it.vrublevskii.jd01_14;
 
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,8 +15,8 @@ public class TaskB {
     public static void main(String[] args) {
         String fullPathIn = FileNames.getFullPath(FILE_TXT, TaskB.class);
         String text = readTextFromFile(fullPathIn);
-        int words = countElements(text, REGEX_WORDS);
-        int punctuationMarks = countElements(text, REGEX_PUNCTUATION);
+        int words = countElement(text, REGEX_WORDS);
+        int punctuationMarks = countElement(text, REGEX_PUNCTUATION);
         System.out.println("words=" + words + " punctuation marks=" + punctuationMarks);
         String fullPathOut = FileNames.getFullPath(RESULT_FILE_TXT, TaskB.class);
         printToFile(words, punctuationMarks, fullPathOut);
@@ -50,7 +48,7 @@ public class TaskB {
         return String.valueOf(stringBuilder);
     }
 
-    private static int countElements(String text, String regex) {
+    private static int countElement(String text, String regex) {
         int counter = 0;
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(text);
