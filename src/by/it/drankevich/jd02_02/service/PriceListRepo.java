@@ -12,7 +12,7 @@ public class PriceListRepo {
      Map<String, Double> priseList = new HashMap<>();{
 
               priseList.put("potato", 4.0);
-                priseList.put("totato", 5.0);
+                priseList.put("tomato", 5.0);
                 priseList.put("water", 12.0);
                 priseList.put("lemon", 7.0);
                 priseList.put("carrot", 9.0);
