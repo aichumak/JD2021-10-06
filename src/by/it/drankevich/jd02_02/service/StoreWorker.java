@@ -26,7 +26,7 @@ public class StoreWorker extends Thread {
 
 
         ArrayList<Thread> threads = new ArrayList<>();
-        for (int numberCashier = 1; numberCashier <= 2; numberCashier++) {
+        for (int numberCashier = 1; numberCashier <= 5; numberCashier++) {
             Cashier cashier = new Cashier(numberCashier);
             CashierWorker cashierWorker = new CashierWorker(cashier, store);
             Thread thread = new Thread(cashierWorker);

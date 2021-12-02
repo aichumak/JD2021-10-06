@@ -20,4 +20,7 @@ public class Queue {
         }
     }
 
+    public Deque<Customer> getCustomerDeque() {
+        return customerDeque;
+    }
 }

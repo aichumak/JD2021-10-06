@@ -10,6 +10,10 @@ public class CashierWorker implements Runnable {
 
     private final Cashier cashier;
     private final Store store;
+    public static final Integer monitorCountQueue = 0;
+    public static volatile Integer countQueue = 0;
+    public static final Integer monitorSizeQueue = 0;
+    public int sizeQueue=0;
 
     public CashierWorker(Cashier cashier, Store store) {
         this.cashier = cashier;
@@ -18,23 +22,39 @@ public class CashierWorker implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(cashier + "opened");
         while (!store.getManager().isClosedStore()) {
-            Customer customer = store.getQueue().extract();
-            if (customer != null) {
-                synchronized (customer.getMonitor()) {
-                    System.out.println(cashier + "started servise " + customer);
-                    int timeout = RandomGenerator.get(2000, 5000);
-                    Timeout.sleep(timeout);
-                    cashier.setTotal(customer.getTotal());
-                    System.out.println(cashier + "finished servise " + customer+" TOTAL PRISE=" + customer.getTotal());
+            Timeout.sleep(1000);
 
-                    customer.setFlagWaiting(false);
-                    customer.getMonitor().notify();
-                }
-            } else {
-                Timeout.sleep(100);
+            synchronized (monitorSizeQueue) {
+                sizeQueue = store.getQueue().getCustomerDeque().size() - countQueue;
+            }
 
+            if(sizeQueue>0) {
+                System.out.println(cashier + "opened");
+                synchronized (monitorCountQueue){
+                countQueue = countQueue + 5;}
+
+
+                do {
+                    Customer customer = store.getQueue().extract();
+                    if (customer != null) {
+                        synchronized (customer.getMonitor()) {
+                            System.out.println(cashier + "started servise " + customer);
+                            int timeout = RandomGenerator.get(2000, 5000);
+                            Timeout.sleep(timeout);
+                            cashier.setTotal(customer.getTotal());
+                            System.out.println(cashier + "finished servise " + customer + " TOTAL PRISE=" + customer.getTotal());
+
+                            customer.setFlagWaiting(false);
+                            customer.getMonitor().notify();
+                        }
+                    } else {
+                        System.out.println(cashier + "closed");
+                        synchronized (monitorCountQueue){
+                        countQueue = countQueue - 5;}
+
+                    }
+                }while (store.getQueue().getCustomerDeque().size()>0);
             }
         }
         System.out.println(cashier + "closed");
