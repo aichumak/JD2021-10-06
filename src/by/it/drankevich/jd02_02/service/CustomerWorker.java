@@ -64,7 +64,7 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
             putToCart(good);
 
         }
-        System.out.println(customer + " finished to choose good");
+        System.out.println(customer + " finished to choose good "+shoppingCart.cart.toString());
 
         return good;
 
