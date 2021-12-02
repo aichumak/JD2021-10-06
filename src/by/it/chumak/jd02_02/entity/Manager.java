@@ -2,29 +2,28 @@ package by.it.chumak.jd02_02.entity;
 
 public class Manager {
 
-        private final int PLAN;
-        private volatile int countInCustomer = 0;
-        private volatile int countOutCustomer = 0;
+    private final int PLAN;
+    private volatile int countInCustomer = 0;
+    private volatile int countOutCustomer = 0;
 
-        public Manager(int plan) {
-            this.PLAN = plan;
-        }
+    public Manager(int plan) {
+        this.PLAN = plan;
+    }
 
-        void addCustomer() {
-            countInCustomer++;
-        }
+    public synchronized void addCustomer() {
+        countInCustomer++;
+    }
 
-        void leaveCustomer() {
-            countOutCustomer++;
-        }
+    public synchronized void finishedCustomer() {
+        countOutCustomer++;
+    }
 
-        boolean isOpenedStore() {
-            return countInCustomer != PLAN;
-        }
+    public boolean isOpenedStore() {
+        return countInCustomer != PLAN;
+    }
 
-        boolean isClosedStore() {
-            return countOutCustomer == PLAN;
-        }
-
+    public boolean isClosedStore() {
+        return countOutCustomer == PLAN;
+    }
 
 }

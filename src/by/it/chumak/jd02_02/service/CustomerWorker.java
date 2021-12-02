@@ -1,23 +1,19 @@
 package by.it.chumak.jd02_02.service;
 
 import by.it.chumak.jd02_02.entity.*;
-import by.it.chumak.jd02_02.helper.PriceListRepo;
 import by.it.chumak.jd02_02.helper.RandomGenerator;
 import by.it.chumak.jd02_02.helper.Timeout;
 
 public class CustomerWorker extends Thread implements ShoppingCardAction, CustomerAction {
 
     private final Customer customer;
-    private final CustomersCountRepo customersCountRepo;
-    private final PriceListRepo priceListRepo;
     private ShoppingCard shoppingCard;
     private final Store store;
 
-    public CustomerWorker(Customer customer, CustomersCountRepo customersCountRepo, PriceListRepo priceListRepo, Store store) {
+    public CustomerWorker(Customer customer, Store store) {
         this.customer = customer;
-        this.customersCountRepo = customersCountRepo;
-        this.priceListRepo = priceListRepo;
         this.store = store;
+        store.getManager().addCustomer();
     }
 
     @Override
@@ -25,33 +21,14 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         enteredStore();
         takeCart();
         chooseGoodsAndPutItToCart();
+        goToQueue();
         goOut();
+        store.getManager().finishedCustomer();
     }
 
     @Override
     public void enteredStore() {
         System.out.println(customer + " entered to Shop");
-    }
-
-    @Override
-    public Good chooseGood() {
-        System.out.println(customer + " started to choose good");
-
-        if (customer.getCustomerType() == CustomerType.Pensioner) {
-            oversleep(750, 3000);
-        } else {
-            oversleep(500, 2000);
-        }
-
-        String nameSelectedGood = priceListRepo.chooseGoodFromPriceList();
-        System.out.println(customer + " finished to choose good");
-        return new Good(nameSelectedGood, priceListRepo.getGoodsPrice(nameSelectedGood));
-    }
-
-    @Override
-    public void goOut() {
-        customersCountRepo.removeCustomer();
-        System.out.printf("%s bought goods: %s, for a total of $%.2f and leaves the Shop%n", customer, shoppingCard.getGoodsList(), customer.getTotal());
     }
 
     @Override
@@ -64,6 +41,28 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         shoppingCard = new ShoppingCard();
         System.out.println(customer + " took the shopping cart");
     }
+
+    @Override
+    public Good chooseGood() {
+        System.out.println(customer + " started to choose good");
+
+        if (customer.getCustomerType() == CustomerType.Pensioner) {
+            oversleep(750, 3000);
+        } else {
+            oversleep(500, 2000);
+        }
+
+        String nameSelectedGood = store.getStorePriceList().chooseGoodFromPriceList();
+        System.out.println(customer + " finished to choose good");
+        return new Good(nameSelectedGood, store.getStorePriceList().getGoodsPrice(nameSelectedGood));
+    }
+
+    @Override
+    public void goOut() {
+        //customersCountRepo.removeCustomer();
+        System.out.printf("%s bought goods: %s, for a total of $%.2f and leaves the Shop%n", customer, shoppingCard.getGoodsList(), customer.getTotal());
+    }
+
 
     @Override
     public int putToCart(Good good) {
@@ -89,7 +88,19 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
 
     @Override
     public void goToQueue() {
-
+        System.out.println(customer + " go to the Queue");
+        synchronized (customer.getMonitor()) {
+            store.getQueue().add(customer);
+            customer.setFlagWaiting(true);
+            try {
+                while (customer.isFlagWaiting()) {
+                    customer.getMonitor().wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(customer + " finished to choose good");
     }
 
     private void chooseGoodsAndPutItToCart() {
@@ -113,7 +124,5 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         int timeout = RandomGenerator.get(min, max);
         Timeout.sleep(timeout);
     }
-
-
 
 }

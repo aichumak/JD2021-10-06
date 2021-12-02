@@ -3,10 +3,11 @@ package by.it.chumak.jd02_02.entity;
 public class Cashier {
 
     private final String name;
+
     private double total;
 
     public Cashier(int number) {
-        this.name = "Cashier" + number;
+        this.name = "Cashier № " + number;
     }
 
     public String getName() {
@@ -23,9 +24,6 @@ public class Cashier {
 
     @Override
     public String toString() {
-        return "Cashier{" +
-                "name='" + name + '\'' +
-                ", TOTAL=" + total +
-                '}';
+        return "\t" + name + " TOTAL=" + total + " ";
     }
 }

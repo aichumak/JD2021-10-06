@@ -5,7 +5,7 @@ public class Customer {
     private final String name;
     private double total;
     private final CustomerType customerType;
-    private boolean CustomerType flagWaiting;
+    private boolean flagWaiting;
 
 
     public Customer(int number, CustomerType currentCustomerType) {
@@ -29,7 +29,15 @@ public class Customer {
         return customerType;
     }
 
-    public Object getMonitor(){
+    public boolean isFlagWaiting() {
+        return flagWaiting;
+    }
+
+    public void setFlagWaiting(boolean flagWaiting) {
+        this.flagWaiting = flagWaiting;
+    }
+
+    public Object getMonitor() {
         return this;
     }
 
@@ -37,4 +45,5 @@ public class Customer {
     public String toString() {
         return name;
     }
+
 }
