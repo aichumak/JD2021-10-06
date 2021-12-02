@@ -6,11 +6,20 @@ public class Customer {
     private double total;
     private final CustomerType customerType;
     private boolean flagWaiting;
+    private ShoppingCard shoppingCard;
 
 
     public Customer(int number, CustomerType currentCustomerType) {
         name = currentCustomerType + " № " + number;
         customerType = currentCustomerType;
+    }
+
+    public ShoppingCard getShoppingCard() {
+        return shoppingCard;
+    }
+
+    public void setShoppingCard(ShoppingCard shoppingCard) {
+        this.shoppingCard = shoppingCard;
     }
 
     public String getName() {

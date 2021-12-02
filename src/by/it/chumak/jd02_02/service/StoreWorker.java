@@ -47,7 +47,7 @@ public class StoreWorker extends Thread {
         CustomerType customerType;
         int customerTypeCounter = 0;
         int customerCount = 0;
-       // int randomCustomersCount = getRandomNumber(second, customersCount);
+        // int randomCustomersCount = getRandomNumber(second, customersCount);
 
         while (store.getManager().isOpenedStore()) {
             int count = RandomGenerator.get(0, 2);

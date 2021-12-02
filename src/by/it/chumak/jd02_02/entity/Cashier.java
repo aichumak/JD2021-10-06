@@ -3,11 +3,11 @@ package by.it.chumak.jd02_02.entity;
 public class Cashier {
 
     private final String name;
-
     private double total;
 
     public Cashier(int number) {
         this.name = "Cashier № " + number;
+        this.total = 0;
     }
 
     public String getName() {
@@ -19,7 +19,7 @@ public class Cashier {
     }
 
     public void setTotal(double total) {
-        this.total = total;
+        this.total = this.total + total;
     }
 
     @Override

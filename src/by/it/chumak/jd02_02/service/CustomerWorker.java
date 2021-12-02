@@ -7,7 +7,6 @@ import by.it.chumak.jd02_02.helper.Timeout;
 public class CustomerWorker extends Thread implements ShoppingCardAction, CustomerAction {
 
     private final Customer customer;
-    private ShoppingCard shoppingCard;
     private final Store store;
 
     public CustomerWorker(Customer customer, Store store) {
@@ -38,7 +37,7 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         } else {
             oversleep(100, 300);
         }
-        shoppingCard = new ShoppingCard();
+        customer.setShoppingCard(new ShoppingCard());
         System.out.println(customer + " took the shopping cart");
     }
 
@@ -60,7 +59,8 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
     @Override
     public void goOut() {
         //customersCountRepo.removeCustomer();
-        System.out.printf("%s bought goods: %s, for a total of $%.2f and leaves the Shop%n", customer, shoppingCard.getGoodsList(), customer.getTotal());
+        System.out.println(customer + " leaves shop");
+        //System.out.printf("%s bought goods: %s, for a total of $%.2f and leaves the Shop%n", customer, shoppingCard.getGoodsList(), customer.getTotal());
     }
 
 
@@ -81,7 +81,7 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         }
         System.out.printf("%s put %s to the shopping cart%n", customer, good.getName());
 
-        shoppingCard.addGoodToCart(good, goodsQuantity);
+        customer.getShoppingCard().addGoodToCart(good, goodsQuantity);
 
         return goodsQuantity;
     }
@@ -100,7 +100,6 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
                 e.printStackTrace();
             }
         }
-        System.out.println(customer + " finished to choose good");
     }
 
     private void chooseGoodsAndPutItToCart() {
@@ -114,9 +113,9 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
 
         for (int i = 0; i < goodsCounter; i++) {
             Good good = chooseGood();
-            System.out.printf("%s choose %s that costs $%.2f%n", customer, good.getName(), good.getPrice());
-            shoppingCard.addGoodToCart(good, putToCart(good));
-            customer.setTotal(customer.getTotal() + (shoppingCard.getGoodCount(good) * good.getPrice()));
+            System.out.printf("%s choose %s that costs $%.2f%n", customer, good.getName(), store.getStorePriceList().getGoodsPrice(good.getName()));
+            customer.getShoppingCard().addGoodToCart(good, putToCart(good));
+            customer.setTotal(customer.getTotal() + (customer.getShoppingCard().getGoodCount(good) * store.getStorePriceList().getGoodsPrice(good.getName())));
         }
     }
 

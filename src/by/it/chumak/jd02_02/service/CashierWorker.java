@@ -1,8 +1,13 @@
 package by.it.chumak.jd02_02.service;
 
-import by.it.chumak.jd02_02.entity.*;
+import by.it.chumak.jd02_02.entity.Cashier;
+import by.it.chumak.jd02_02.entity.Customer;
+import by.it.chumak.jd02_02.entity.Good;
+import by.it.chumak.jd02_02.entity.Store;
 import by.it.chumak.jd02_02.helper.RandomGenerator;
 import by.it.chumak.jd02_02.helper.Timeout;
+
+import java.util.Map;
 
 public class CashierWorker implements Runnable {
 
@@ -24,6 +29,9 @@ public class CashierWorker implements Runnable {
                     System.out.println(cashier + " started to service " + customer);
                     int timeout = RandomGenerator.get(2000, 5000);
                     Timeout.sleep(timeout);
+                    printReceipt(customer);
+                    //System.out.printf("%s bought goods: %s%nTotal amount of the receipt: $%.2f", customer, customer.getShoppingCard().getGoodsList(), customer.getTotal());
+                    cashier.setTotal(customer.getTotal());
                     System.out.println(cashier + " finished to service " + customer);
                     customer.setFlagWaiting(false);
                     customer.getMonitor().notify();
@@ -33,6 +41,40 @@ public class CashierWorker implements Runnable {
             }
         }
         System.out.println(cashier + " closed");
+    }
+
+    private void printReceipt(Customer customer) {
+        StringBuffer stringBuffer = new StringBuffer();
+
+        stringBuffer.append(customer.getName());
+        System.out.println();
+        stringBuffer.append(" RECEIPT\n");
+        stringBuffer.append("-------------------------------\n");
+        stringBuffer.append("-------------------------------\n");
+
+        for (Map.Entry<Good, Integer> entry : customer.getShoppingCard().getGoods().entrySet()) {
+            double goodsPrice = store.getStorePriceList().getGoodsPrice(entry.getKey().getName());
+            double goodsCount = customer.getShoppingCard().getGoodCount(entry.getKey());
+
+            stringBuffer.append("*** Good: ");
+            stringBuffer.append(entry.getKey().getName());
+            stringBuffer.append(", goods price: ");
+            stringBuffer.append(goodsPrice);
+            stringBuffer.append("$   ");
+            stringBuffer.append(goodsCount);
+            stringBuffer.append(" * ");
+            stringBuffer.append(goodsPrice);
+            stringBuffer.append("$ = ");
+            stringBuffer.append(goodsCount*goodsPrice);
+            stringBuffer.append("$\n");
+        }
+
+        stringBuffer.append("-------------------------------\n");
+        stringBuffer.append("RECEIPT TOTAL: ");
+        stringBuffer.append(customer.getTotal());
+        stringBuffer.append("$\n");
+
+        System.out.println(stringBuffer);
     }
 
 

@@ -18,8 +18,8 @@ public class ShoppingCard {
         return this.cart.get(good);
     }
 
-    public String getGoodsList() {
-        return this.cart.toString();
+    public HashMap<Good, Integer> getGoods() {
+        return this.cart;
     }
 
 }

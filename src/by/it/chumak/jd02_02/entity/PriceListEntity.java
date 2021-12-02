@@ -13,7 +13,7 @@ public class PriceListEntity {
         priceList = new HashMap<>();
 
         for (String item : arrayItems) {
-            priceList.put(item, RandomGenerator.get(1, 100));
+            priceList.put(item, RandomGenerator.get(1, 50));
         }
     }
 
