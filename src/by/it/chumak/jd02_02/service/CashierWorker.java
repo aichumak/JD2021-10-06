@@ -28,11 +28,14 @@ public class CashierWorker implements Runnable {
                 synchronized (customer.getMonitor()) {
                     System.out.println(cashier + " started to service " + customer);
                     int timeout = RandomGenerator.get(2000, 5000);
+
                     Timeout.sleep(timeout);
-                    printReceipt(customer);
-                    //System.out.printf("%s bought goods: %s%nTotal amount of the receipt: $%.2f", customer, customer.getShoppingCard().getGoodsList(), customer.getTotal());
+
                     cashier.setTotal(customer.getTotal());
+                    printReceipt(customer);
+
                     System.out.println(cashier + " finished to service " + customer);
+
                     customer.setFlagWaiting(false);
                     customer.getMonitor().notify();
                 }
@@ -52,7 +55,7 @@ public class CashierWorker implements Runnable {
         stringBuffer.append("-------------------------------\n");
         stringBuffer.append("-------------------------------\n");
 
-        for (Map.Entry<Good, Integer> entry : customer.getShoppingCard().getGoods().entrySet()) {
+        for (Map.Entry<Good, Integer> entry : customer.getShoppingCard().getCart().entrySet()) {
             double goodsPrice = store.getStorePriceList().getGoodsPrice(entry.getKey().getName());
             double goodsCount = customer.getShoppingCard().getGoodCount(entry.getKey());
 
@@ -65,7 +68,7 @@ public class CashierWorker implements Runnable {
             stringBuffer.append(" * ");
             stringBuffer.append(goodsPrice);
             stringBuffer.append("$ = ");
-            stringBuffer.append(goodsCount*goodsPrice);
+            stringBuffer.append(goodsCount * goodsPrice);
             stringBuffer.append("$\n");
         }
 
@@ -76,6 +79,5 @@ public class CashierWorker implements Runnable {
 
         System.out.println(stringBuffer);
     }
-
 
 }

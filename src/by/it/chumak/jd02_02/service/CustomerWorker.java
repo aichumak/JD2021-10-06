@@ -20,7 +20,9 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         enteredStore();
         takeCart();
         chooseGoodsAndPutItToCart();
-        goToQueue();
+        if (customer.getShoppingCard().getCart().size() > 0) {
+            goToQueue();
+        }
         goOut();
         store.getManager().finishedCustomer();
     }

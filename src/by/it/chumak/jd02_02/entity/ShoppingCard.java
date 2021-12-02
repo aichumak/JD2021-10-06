@@ -18,7 +18,7 @@ public class ShoppingCard {
         return this.cart.get(good);
     }
 
-    public HashMap<Good, Integer> getGoods() {
+    public HashMap<Good, Integer> getCart() {
         return this.cart;
     }
 

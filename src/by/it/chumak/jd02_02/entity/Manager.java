@@ -26,4 +26,8 @@ public class Manager {
         return countOutCustomer == PLAN;
     }
 
+    public int numberCustomersInStore() {
+        return countInCustomer - countOutCustomer;
+    }
+
 }

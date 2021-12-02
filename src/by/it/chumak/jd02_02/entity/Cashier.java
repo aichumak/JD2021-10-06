@@ -14,10 +14,6 @@ public class Cashier {
         return name;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
     public void setTotal(double total) {
         this.total = this.total + total;
     }
