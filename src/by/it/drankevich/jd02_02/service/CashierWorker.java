@@ -23,16 +23,16 @@ public class CashierWorker implements Runnable {
     @Override
     public void run() {
         while (!store.getManager().isClosedStore()) {
-            Timeout.sleep(1000);
+
 
             synchronized (monitorSizeQueue) {
                 sizeQueue = store.getQueue().getCustomerDeque().size() - countQueue;
+                if(sizeQueue>0){ synchronized (monitorSizeQueue){countQueue = countQueue + 5;}}
             }
 
             if(sizeQueue>0) {
                 System.out.println(cashier + "opened");
-                synchronized (monitorCountQueue){
-                countQueue = countQueue + 5;}
+
 
 
                 do {
@@ -50,7 +50,7 @@ public class CashierWorker implements Runnable {
                         }
                     } else {
                         System.out.println(cashier + "closed");
-                        synchronized (monitorCountQueue){
+                        synchronized (monitorSizeQueue){
                         countQueue = countQueue - 5;}
 
                     }
