@@ -1,6 +1,7 @@
 package by.it.vrublevskii.jd02_01;
 
 import by.it.vrublevskii.jd02_01.entity.Customer;
+import by.it.vrublevskii.jd02_01.entity.PriceListRepo;
 import by.it.vrublevskii.jd02_01.helper.RandomGenerator;
 import by.it.vrublevskii.jd02_01.helper.Timeout;
 import by.it.vrublevskii.jd02_01.service.CustomerWorker;
@@ -17,13 +18,13 @@ public class Store extends Thread{
             int count = RandomGenerator.get(2);
             for (int i = 0; i < count; i++) {
                 Customer customer = new Customer(++customerCounter);
-                CustomerWorker customerWorker = new CustomerWorker(customer);
+                PriceListRepo priceListRepo = new PriceListRepo();
+                CustomerWorker customerWorker = new CustomerWorker(customer,priceListRepo);
                 customerWorkers.add(customerWorker);
                 customerWorker.start();
                 Timeout.sleep(1000);
             }
         }
-
 
         for (CustomerWorker customerWorker : customerWorkers) {
             try {

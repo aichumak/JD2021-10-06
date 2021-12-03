@@ -24,9 +24,6 @@ public class Good {
 
     @Override
     public String toString() {
-        return "Good{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+        return "Good " + name + '\'' + ", price=" + price;
     }
 }
