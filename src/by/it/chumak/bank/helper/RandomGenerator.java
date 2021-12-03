@@ -1,4 +1,4 @@
-package by.it.chumak.jd02_02.helper;
+package by.it.chumak.bank.helper;
 
 import java.util.Random;
 

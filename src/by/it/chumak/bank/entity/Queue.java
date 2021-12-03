@@ -1,10 +1,11 @@
-package by.it.chumak.jd02_02.entity;
+package by.it.chumak.bank.entity;
+
+import by.it.chumak.jd02_02.entity.Customer;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Queue {
-
     public final Object QUEUE_MONITOR = new Object();
     private final Deque<Customer> CUSTOMER_DEQUEUE = new ArrayDeque<>();
 
