@@ -6,12 +6,12 @@ import by.it.chumak.jd02_02.helper.Timeout;
 
 public class CustomerWorker extends Thread implements ShoppingCardAction, CustomerAction {
 
-    private final Customer customer;
-    private final Store store;
+    private final Customer CUSTOMER;
+    private final Store STORE;
 
     public CustomerWorker(Customer customer, Store store) {
-        this.customer = customer;
-        this.store = store;
+        this.CUSTOMER = customer;
+        this.STORE = store;
         store.getManager().addCustomer();
     }
 
@@ -20,49 +20,47 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
         enteredStore();
         takeCart();
         chooseGoodsAndPutItToCart();
-        if (customer.getShoppingCard().getCart().size() > 0) {
+        if (CUSTOMER.getShoppingCard().getCart().size() > 0) {
             goToQueue();
         }
         goOut();
-        store.getManager().finishedCustomer();
+        STORE.getManager().finishedCustomer();
     }
 
     @Override
     public void enteredStore() {
-        System.out.println(customer + " entered to Shop");
+        System.out.println(CUSTOMER + " entered to Shop");
     }
 
     @Override
     public void takeCart() {
-        if (customer.getCustomerType() == CustomerType.Pensioner) {
+        if (CUSTOMER.getCustomerType() == CustomerType.Pensioner) {
             oversleep(150, 450);
         } else {
             oversleep(100, 300);
         }
-        customer.setShoppingCard(new ShoppingCard());
-        System.out.println(customer + " took the shopping cart");
+        CUSTOMER.setShoppingCard(new ShoppingCard());
+        System.out.println(CUSTOMER + " took the shopping cart");
     }
 
     @Override
     public Good chooseGood() {
-        System.out.println(customer + " started to choose good");
+        System.out.println(CUSTOMER + " started to choose good");
 
-        if (customer.getCustomerType() == CustomerType.Pensioner) {
+        if (CUSTOMER.getCustomerType() == CustomerType.Pensioner) {
             oversleep(750, 3000);
         } else {
             oversleep(500, 2000);
         }
 
-        String nameSelectedGood = store.getStorePriceList().chooseGoodFromPriceList();
-        System.out.println(customer + " finished to choose good");
-        return new Good(nameSelectedGood, store.getStorePriceList().getGoodsPrice(nameSelectedGood));
+        String nameSelectedGood = STORE.getStorePriceList().chooseGoodFromPriceList();
+        System.out.println(CUSTOMER + " finished to choose good");
+        return new Good(nameSelectedGood);
     }
 
     @Override
     public void goOut() {
-        //customersCountRepo.removeCustomer();
-        System.out.println(customer + " leaves shop");
-        //System.out.printf("%s bought goods: %s, for a total of $%.2f and leaves the Shop%n", customer, shoppingCard.getGoodsList(), customer.getTotal());
+        System.out.println(CUSTOMER + " leaves shop");
     }
 
 
@@ -70,33 +68,33 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
     public int putToCart(Good good) {
         int goodsQuantity;
 
-        if (customer.getCustomerType() == CustomerType.Pensioner) {
+        if (CUSTOMER.getCustomerType() == CustomerType.Pensioner) {
             oversleep(150, 450);
             goodsQuantity = RandomGenerator.get(1, 5);
         } else {
             oversleep(100, 300);
-            if (customer.getCustomerType() == CustomerType.Student) {
+            if (CUSTOMER.getCustomerType() == CustomerType.Student) {
                 goodsQuantity = RandomGenerator.get(1, 2);
             } else {
                 goodsQuantity = RandomGenerator.get(1, 5);
             }
         }
-        System.out.printf("%s put %s to the shopping cart%n", customer, good.getName());
+        System.out.printf("%s put %s to the shopping cart%n", CUSTOMER, good.getName());
 
-        customer.getShoppingCard().addGoodToCart(good, goodsQuantity);
+        CUSTOMER.getShoppingCard().addGoodToCart(good, goodsQuantity);
 
         return goodsQuantity;
     }
 
     @Override
     public void goToQueue() {
-        System.out.println(customer + " go to the Queue");
-        synchronized (customer.getMonitor()) {
-            store.getQueue().add(customer);
-            customer.setFlagWaiting(true);
+        System.out.println(CUSTOMER + " go to the Queue");
+        synchronized (CUSTOMER.getMonitor()) {
+            STORE.getQueue().add(CUSTOMER);
+            CUSTOMER.setFlagWaiting(true);
             try {
-                while (customer.isFlagWaiting()) {
-                    customer.getMonitor().wait();
+                while (CUSTOMER.isFlagWaiting()) {
+                    CUSTOMER.getMonitor().wait();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -107,7 +105,7 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
     private void chooseGoodsAndPutItToCart() {
         int goodsCounter;
 
-        if (customer.getCustomerType() == CustomerType.Student) {
+        if (CUSTOMER.getCustomerType() == CustomerType.Student) {
             goodsCounter = RandomGenerator.get(0, 2);
         } else {
             goodsCounter = RandomGenerator.get(2, 5);
@@ -115,9 +113,9 @@ public class CustomerWorker extends Thread implements ShoppingCardAction, Custom
 
         for (int i = 0; i < goodsCounter; i++) {
             Good good = chooseGood();
-            System.out.printf("%s choose %s that costs $%.2f%n", customer, good.getName(), store.getStorePriceList().getGoodsPrice(good.getName()));
-            customer.getShoppingCard().addGoodToCart(good, putToCart(good));
-            customer.setTotal(customer.getTotal() + (customer.getShoppingCard().getGoodCount(good) * store.getStorePriceList().getGoodsPrice(good.getName())));
+            System.out.printf("%s choose %s that costs $%.2f%n", CUSTOMER, good.getName(), STORE.getStorePriceList().getGoodsPrice(good.getName()));
+            CUSTOMER.getShoppingCard().addGoodToCart(good, putToCart(good));
+            CUSTOMER.setTotal(CUSTOMER.getTotal() + (CUSTOMER.getShoppingCard().getGoodCount(good) * STORE.getStorePriceList().getGoodsPrice(good.getName())));
         }
     }
 

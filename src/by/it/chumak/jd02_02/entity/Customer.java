@@ -2,20 +2,20 @@ package by.it.chumak.jd02_02.entity;
 
 public class Customer {
 
-    private final String name;
+    private final String NAME;
+    private final CustomerType CUSTOMER_TYPE;
     private double total;
-    private final CustomerType customerType;
     private boolean flagWaiting;
     private ShoppingCard shoppingCard;
 
 
     public Customer(int number, CustomerType currentCustomerType) {
-        name = currentCustomerType + " № " + number;
-        customerType = currentCustomerType;
+        this.NAME = currentCustomerType + " № " + number;
+        this.CUSTOMER_TYPE = currentCustomerType;
     }
 
     public ShoppingCard getShoppingCard() {
-        return shoppingCard;
+        return this.shoppingCard;
     }
 
     public void setShoppingCard(ShoppingCard shoppingCard) {
@@ -23,11 +23,11 @@ public class Customer {
     }
 
     public String getName() {
-        return name;
+        return this.NAME;
     }
 
     public double getTotal() {
-        return total;
+        return this.total;
     }
 
     public void setTotal(double total) {
@@ -35,11 +35,7 @@ public class Customer {
     }
 
     public CustomerType getCustomerType() {
-        return customerType;
-    }
-
-    public boolean isFlagWaiting() {
-        return flagWaiting;
+        return this.CUSTOMER_TYPE;
     }
 
     public void setFlagWaiting(boolean flagWaiting) {
@@ -50,9 +46,13 @@ public class Customer {
         return this;
     }
 
+    public boolean isFlagWaiting() {
+        return this.flagWaiting;
+    }
+
     @Override
     public String toString() {
-        return name;
+        return this.NAME;
     }
 
 }

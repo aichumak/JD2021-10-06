@@ -11,10 +11,10 @@ import java.util.ArrayList;
 
 public class StoreWorker extends Thread {
 
-    private final Store store;
+    private final Store STORE;
 
     public StoreWorker(Store store) {
-        this.store = store;
+        this.STORE = store;
     }
 
     @Override
@@ -22,20 +22,18 @@ public class StoreWorker extends Thread {
         System.out.println("Store opened");
         ArrayList<Thread> threads = new ArrayList<>();
 
-        for (int numberCashier = 1; numberCashier <= 2; numberCashier++) {
+        for (int numberCashier = 1; numberCashier <= STORE.getManager().getCashiersMaxCount(); numberCashier++) {
             Cashier cashier = new Cashier(numberCashier);
-            CashierWorker cashierWorker = new CashierWorker(store, cashier);
+            CashierWorker cashierWorker = new CashierWorker(STORE, cashier);
             Thread thread = new Thread(cashierWorker);
             threads.add(thread);
             thread.start();
         }
 
-        while (store.getManager().isOpenedStore()) {
-            int count = RandomGenerator.get(0, 2);
-            for (int i = 0; store.getManager().isOpenedStore() && i < count; i++) {
-                createAndStartCustomers(store);
-            }
+        while (STORE.getManager().isOpenedStore()) {
+            createAndStartCustomers(STORE);
         }
+
         for (Thread thread : threads) {
             try {
                 thread.join();

@@ -4,26 +4,26 @@ import by.it.chumak.jd02_02.service.PriceListRepo;
 
 public class Store {
 
-    private final Manager manager;
-    private final Queue queue;
-    private final PriceListRepo storePriceList;
+    private final Manager MANAGER;
+    private final Queue QUEUE;
+    private final PriceListRepo STORE_PRICE_LIST;
 
 
     public Store(Manager manager, Queue queue) {
-        this.manager = manager;
-        this.queue = queue;
-        this.storePriceList = new PriceListRepo();
+        this.MANAGER = manager;
+        this.QUEUE = queue;
+        this.STORE_PRICE_LIST = new PriceListRepo();
     }
 
     public Manager getManager() {
-        return manager;
+        return this.MANAGER;
     }
 
     public Queue getQueue() {
-        return queue;
+        return this.QUEUE;
     }
 
     public PriceListRepo getStorePriceList() {
-        return storePriceList;
+        return this.STORE_PRICE_LIST;
     }
 }

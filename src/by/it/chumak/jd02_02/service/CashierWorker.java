@@ -11,39 +11,49 @@ import java.util.Map;
 
 public class CashierWorker implements Runnable {
 
-    private final Cashier cashier;
-    private final Store store;
+    private final Cashier CASHIER;
+    private final Store STORE;
 
     public CashierWorker(Store store, Cashier cashier) {
-        this.cashier = cashier;
-        this.store = store;
+        this.CASHIER = cashier;
+        this.STORE = store;
     }
 
     @Override
     public void run() {
-        System.out.println(cashier + " opened");
-        while (!store.getManager().isClosedStore()) {
-            Customer customer = store.getQueue().extract();
-            if (customer != null) {
-                synchronized (customer.getMonitor()) {
-                    System.out.println(cashier + " started to service " + customer);
-                    int timeout = RandomGenerator.get(2000, 5000);
+        while (!STORE.getManager().isClosedStore()) {
+            int queueSize = STORE.getQueue().getSize();
+            if (queueSize > (5 * (CASHIER.getNumber() - 1))) {
 
-                    Timeout.sleep(timeout);
+                if (CASHIER.isClosed()) {
+                    CASHIER.openCashier();
+                    System.out.println(CASHIER + " opened");
+                }
 
-                    cashier.setTotal(customer.getTotal());
-                    printReceipt(customer);
-
-                    System.out.println(cashier + " finished to service " + customer);
-
-                    customer.setFlagWaiting(false);
-                    customer.getMonitor().notify();
+                Customer customer = STORE.getQueue().extract();
+                if (customer != null) {
+                    synchronized (customer.getMonitor()) {
+                        System.out.println(CASHIER + " started to service " + customer);
+                        int timeout = RandomGenerator.get(2000, 5000);
+                        Timeout.sleep(timeout);
+                        CASHIER.setTotal(customer.getTotal());
+                        printReceipt(customer);
+                        customer.setFlagWaiting(false);
+                        customer.getMonitor().notify();
+                        System.out.println(CASHIER + " finished to service " + customer);
+                    }
+                } else {
+                    Timeout.sleep(100);
                 }
             } else {
-                Timeout.sleep(100);
+                if (!CASHIER.isClosed()) {
+                    CASHIER.closeCashier();
+                    System.out.println(CASHIER + " is temporary closed");
+                }
+                //Timeout.sleep(100);
             }
         }
-        System.out.println(cashier + " closed");
+        System.out.println(CASHIER + " closed");
     }
 
     private void printReceipt(Customer customer) {
@@ -56,7 +66,7 @@ public class CashierWorker implements Runnable {
         stringBuffer.append("-------------------------------\n");
 
         for (Map.Entry<Good, Integer> entry : customer.getShoppingCard().getCart().entrySet()) {
-            double goodsPrice = store.getStorePriceList().getGoodsPrice(entry.getKey().getName());
+            double goodsPrice = STORE.getStorePriceList().getGoodsPrice(entry.getKey().getName());
             double goodsCount = customer.getShoppingCard().getGoodCount(entry.getKey());
 
             stringBuffer.append("*** Good: ");
@@ -76,7 +86,6 @@ public class CashierWorker implements Runnable {
         stringBuffer.append("RECEIPT TOTAL: ");
         stringBuffer.append(customer.getTotal());
         stringBuffer.append("$\n");
-
         System.out.println(stringBuffer);
     }
 
