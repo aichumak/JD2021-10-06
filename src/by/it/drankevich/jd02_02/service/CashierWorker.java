@@ -10,7 +10,6 @@ public class CashierWorker implements Runnable {
 
     private final Cashier cashier;
     private final Store store;
-    public static final Integer monitorCountQueue = 0;
     public static volatile Integer countQueue = 0;
     public static final Integer monitorSizeQueue = 0;
     public int sizeQueue=0;
@@ -27,7 +26,8 @@ public class CashierWorker implements Runnable {
 
             synchronized (monitorSizeQueue) {
                 sizeQueue = store.getQueue().getCustomerDeque().size() - countQueue;
-                if(sizeQueue>0){ synchronized (monitorSizeQueue){countQueue = countQueue + 5;}}
+                if(sizeQueue>0){ countQueue = countQueue + 5;
+                }
             }
 
             if(sizeQueue>0) {
