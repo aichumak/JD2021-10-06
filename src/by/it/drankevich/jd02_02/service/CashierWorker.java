@@ -25,9 +25,11 @@ public class CashierWorker implements Runnable {
 
 
             synchronized (monitorSizeQueue) {
+                if(countQueue<21){
                 sizeQueue = store.getQueue().getCustomerDeque().size() - countQueue;
                 if(sizeQueue>0){ countQueue = countQueue + 5;
                 }
+             }
             }
 
             if(sizeQueue>0) {
