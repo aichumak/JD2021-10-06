@@ -18,14 +18,12 @@ public class PriceListRepo {
 
     @SuppressWarnings("RedundantExplicitVariableType")
     public String getGoodName(int index){
-        Set<String> goodsNames = priceList.keySet();
-        Object[] goodsNameArray = goodsNames.toArray();
+        Object[] goodsNameArray = priceList.keySet().toArray();
         return String.valueOf(goodsNameArray[index]);
     }
 
     public double getGoodPrice(int index){
-        Collection<Double> values = priceList.values();
-        Object[] goodsPrices = values.toArray();
+        Object[] goodsPrices = priceList.values().toArray();
         return (double) goodsPrices[index];
     }
 

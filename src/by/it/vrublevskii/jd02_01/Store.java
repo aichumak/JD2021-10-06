@@ -14,6 +14,7 @@ public class Store extends Thread {
         System.out.println("Store is open");
         int customerCounter = 0;
         ArrayList<CustomerWorker> customerWorkers = new ArrayList<>();
+        PriceListRepo priceListRepo = new PriceListRepo();
         for (int second = 0; second < 120; second++) {
             int count = RandomGenerator.get(2);
             for (int i = 0; i < count; i++) {
@@ -26,8 +27,6 @@ public class Store extends Thread {
                 } else {
                     customer = new Customer(++customerCounter);
                 }
-//                Customer customer = new Customer(++customerCounter);
-                PriceListRepo priceListRepo = new PriceListRepo();
                 CustomerWorker customerWorker = new CustomerWorker(customer, priceListRepo);
                 customerWorkers.add(customerWorker);
                 customerWorker.start();
