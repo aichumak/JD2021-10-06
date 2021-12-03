@@ -1,10 +1,9 @@
 package by.it.astapchik.jd01_13;
 
-import by.it.chumak.jd01_13.ExceptionsInfo;
+
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import static java.lang.Double.NaN;
 
 
 class TaskB {
