@@ -20,9 +20,7 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
             goToQueue();
         }
         goOut();
-        synchronized (StoreWorker.monitorNumberPeopleInStore) {
-            StoreWorker.numberPeopleInStore = StoreWorker.numberPeopleInStore - 1;
-        }
+
         store.getManager().finishedCustomer();
 
 

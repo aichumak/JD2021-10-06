@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 public class StoreWorker extends Thread {
 
-    public static final Integer monitorNumberPeopleInStore = 0;
-    public static volatile Integer numberPeopleInStore = 0;
     private final Store store;
 
 
@@ -37,11 +35,11 @@ public class StoreWorker extends Thread {
 
         while (store.getManager().isOpenedStore()) {
             second++;
-
-            int count = numberOfPeople(second, numberPeopleInStore);
-            synchronized (monitorNumberPeopleInStore) {
-                numberPeopleInStore = numberPeopleInStore + count;
+            if (second > 60) {
+                second = second - 60;
             }
+
+            int count = numberOfPeople(second, store.getManager().customersInStore());
 
 
             for (int i = 0; store.getManager().isOpenedStore() && i < count; i++) {
@@ -90,10 +88,6 @@ public class StoreWorker extends Thread {
             return count = RandomGenerator.get(20);
         }
 
-
-        if (second > 60) {
-            second = second - 60;
-        }
 
         if (second <= 30 && numberPeople < (second + 10)) {
             count = RandomGenerator.get(((second + 10) - numberPeople) * 2);

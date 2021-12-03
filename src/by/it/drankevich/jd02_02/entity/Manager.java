@@ -23,6 +23,11 @@ public class Manager {
     public boolean isClosedStore(){
         return countOutCustomer==PLAN;
     }
+   private int customersInStore=countInCustomer-countOutCustomer;
+
+    public int customersInStore(){
+        return customersInStore;
+    }
 
 }
 

@@ -33,8 +33,6 @@ public class CashierWorker implements Runnable {
             if(sizeQueue>0) {
                 System.out.println(cashier + "opened");
 
-
-
                 do {
                     Customer customer = store.getQueue().extract();
                     if (customer != null) {
