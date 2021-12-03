@@ -16,12 +16,18 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     public void run() {
         enteredStore();
         takeCart();
-        int i = RandomGenerator.get(2, 5);
-        for (int j = 0; j < i; j++) {
-            Good good = chooseGood();
-            putToCart(good);
+        int customerNeedsGoods;
+        if (customer.getType().equals("Student")){
+            customerNeedsGoods = RandomGenerator.get(0, 2);
+        }else{
+            customerNeedsGoods = RandomGenerator.get(2, 5);
         }
-
+        if (customerNeedsGoods != 0){
+            for (int j = 0; j < customerNeedsGoods; j++) {
+                Good good = chooseGood();
+                putToCart(good);
+            }
+        }
         goOut();
     }
 
@@ -37,15 +43,23 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
 
     @Override
     public void takeCart() {
-        int timeout = RandomGenerator.get(100, 300);
+        double coefficient = 1;
+        if (customer.getType().equals("Pensioner")){
+            coefficient = 1.5;
+        }
+        int timeout = (int)(RandomGenerator.get(100, 300) * coefficient);
         Timeout.sleep(timeout);
         System.out.println(customer + " takes a cart");
     }
 
     @Override
     public Good chooseGood() {
+        double coefficient = 1;
+        if (customer.getType().equals("Pensioner")){
+            coefficient = 1.5;
+        }
         System.out.println(customer + " is choosing goods");
-        int timeout = RandomGenerator.get(500, 2000);
+        int timeout = (int)(RandomGenerator.get(500, 2000) * coefficient);
         Timeout.sleep(timeout);
         int index = RandomGenerator.get(0, 10);
         Good good = new Good(priceListRepo.getGoodName(index), priceListRepo.getGoodPrice(index));
@@ -56,15 +70,15 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     @Override
     public int putToCart(Good good) {
         goodsInCard++;
-        int timeout = RandomGenerator.get(100, 300);
+        double coefficient = 1;
+        if (customer.getType().equals("Pensioner")){
+            coefficient = 1.5;
+        }
+        int timeout = (int)(RandomGenerator.get(100, 300) * coefficient);
         Timeout.sleep(timeout);
         System.out.println(customer + " puts " + good + " in the cart");
         System.out.println("Goods in the cart total: " + goodsInCard);
-
-
-//        System.out.println(good.getName() + good.getPrice());
-
-        return 0;
+        return goodsInCard;
     }
 
     @Override

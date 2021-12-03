@@ -8,7 +8,7 @@ import by.it.vrublevskii.jd02_01.service.CustomerWorker;
 
 import java.util.ArrayList;
 
-public class Store extends Thread{
+public class Store extends Thread {
     @Override
     public void run() {
         System.out.println("Store is open");
@@ -17,9 +17,18 @@ public class Store extends Thread{
         for (int second = 0; second < 120; second++) {
             int count = RandomGenerator.get(2);
             for (int i = 0; i < count; i++) {
-                Customer customer = new Customer(++customerCounter);
+                Customer customer;
+                int customerType = RandomGenerator.get(3);
+                if (customerType == 0) {
+                    customer = new Customer("Pensioner", ++customerCounter);
+                } else if (customerType == 1 || customerType == 2) {
+                    customer = new Customer("Student", ++customerCounter);
+                } else {
+                    customer = new Customer(++customerCounter);
+                }
+//                Customer customer = new Customer(++customerCounter);
                 PriceListRepo priceListRepo = new PriceListRepo();
-                CustomerWorker customerWorker = new CustomerWorker(customer,priceListRepo);
+                CustomerWorker customerWorker = new CustomerWorker(customer, priceListRepo);
                 customerWorkers.add(customerWorker);
                 customerWorker.start();
                 Timeout.sleep(1000);
