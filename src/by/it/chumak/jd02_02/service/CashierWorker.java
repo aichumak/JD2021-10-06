@@ -50,7 +50,7 @@ public class CashierWorker implements Runnable {
                     CASHIER.closeCashier();
                     System.out.println(CASHIER + " is temporary closed");
                 }
-                //Timeout.sleep(100);
+                Timeout.sleep(100);
             }
         }
         System.out.println(CASHIER + " closed");
