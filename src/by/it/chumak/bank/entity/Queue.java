@@ -1,21 +1,19 @@
 package by.it.chumak.bank.entity;
 
-import by.it.chumak.jd02_02.entity.Customer;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Queue {
     public final Object QUEUE_MONITOR = new Object();
-    private final Deque<Customer> CUSTOMER_DEQUEUE = new ArrayDeque<>();
+    private final Deque<Client> CUSTOMER_DEQUEUE = new ArrayDeque<>();
 
-    public void add(Customer customer) {
+    public void add(Client client) {
         synchronized (this.QUEUE_MONITOR) {
-            this.CUSTOMER_DEQUEUE.addLast(customer);
+            this.CUSTOMER_DEQUEUE.addLast(client);
         }
     }
 
-    public Customer extract() {
+    public Client extract() {
         synchronized (this.QUEUE_MONITOR) {
             return this.CUSTOMER_DEQUEUE.pollFirst();
         }
