@@ -5,31 +5,50 @@ import by.it.drankevich.jd02_03.entity.*;
 import by.it.drankevich.jd02_03.helper.RandomGenerator;
 import by.it.drankevich.jd02_03.helper.Timeout;
 
+import java.util.concurrent.Semaphore;
+
 public class CustomerWorker extends Thread implements CustomerAction, ShoppingCardAction {
 
+    private Semaphore semaphore;
+    private Semaphore semaphoreShoppingCart;
     private final Customer customer;
     private final ShoppingCart shoppingCart;
     private final Store store;
 
     @Override
     public void run() {
+
         enteredStore();
+        try {
+            semaphoreShoppingCart.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         takeCart();
+        try {
+            semaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         chooseGood();
+        semaphore.release();
         if(shoppingCart.cart.size()!=0) {
             goToQueue();
         }
         goOut();
+        semaphoreShoppingCart.release();
 
         store.getManager().finishedCustomer();
 
 
     }
 
-    public CustomerWorker(Customer customer, Store store, ShoppingCart shoppingCart) {
+    public CustomerWorker(Customer customer, Store store, ShoppingCart shoppingCart, Semaphore semaphoreShoppingCart, Semaphore semaphore) {
         this.customer = customer;
         this.shoppingCart = shoppingCart;
         this.store = store;
+        this.semaphore=semaphore;
+        this.semaphoreShoppingCart=semaphoreShoppingCart;
         store.getManager().addCustomer();
     }
 

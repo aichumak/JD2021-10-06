@@ -5,10 +5,7 @@ import by.it.drankevich.jd02_03.helper.RandomGenerator;
 import by.it.drankevich.jd02_03.helper.Timeout;
 
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class StoreWorker extends Thread {
 
@@ -19,6 +16,11 @@ public class StoreWorker extends Thread {
         this.store = store;
 
     }
+   Semaphore semaphoreShoppingCart=new Semaphore(50);
+    Semaphore semaphore=new Semaphore(20);
+
+
+
 
     @Override
     public void run() {
@@ -35,6 +37,7 @@ public class StoreWorker extends Thread {
 
         }
         threadPool.shutdown();
+
 
         while (store.getManager().isOpenedStore()) {
             second++;
@@ -61,8 +64,13 @@ public class StoreWorker extends Thread {
                     }
 
                 }
+             //   try {
+               //     semaphoreShoppingCart.acquire();
+              //  } catch (InterruptedException e) {
+               //     e.printStackTrace();
+              //  }
                 ShoppingCart shoppingCart = new ShoppingCart();
-                CustomerWorker customerWorker = new CustomerWorker(customer, store, shoppingCart);
+                CustomerWorker customerWorker = new CustomerWorker(customer, store, shoppingCart,semaphore,semaphoreShoppingCart);
                 customerWorker.start();
                 Timeout.sleep(1000);
 
