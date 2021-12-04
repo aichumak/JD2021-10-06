@@ -1,5 +1,6 @@
 package by.it.drankevich.jd02_03.entity;
 
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Cashier {
@@ -7,6 +8,7 @@ public class Cashier {
 
     private double total;
     private static double totalStoreCash=0;
+    private static final Semaphore semaphore=new Semaphore(1);
 
     public Cashier(int number) {
         this.name = "Cashier №"+number;
@@ -20,9 +22,16 @@ public class Cashier {
         return total;
     }
 
-    public synchronized void setTotal(double total) {
+    public  void setTotal(double total) {
         this.total = this.total+total;
-        totalStoreCash=totalStoreCash+total;
+        try {
+            semaphore.acquire();
+            totalStoreCash=totalStoreCash+total;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        semaphore.release();
+
     }
 
     public static double getTotalStoreCash() {
