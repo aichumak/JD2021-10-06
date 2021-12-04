@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Manager {
 
     private final int PLAN;
-    public AtomicInteger countInCustomer=new AtomicInteger(0);
+    private AtomicInteger countInCustomer=new AtomicInteger(0);
     private AtomicInteger countOutCustomer=new AtomicInteger(0);
 
     public Manager(int PLAN) {

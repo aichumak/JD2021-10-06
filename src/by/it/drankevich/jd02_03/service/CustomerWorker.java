@@ -21,17 +21,22 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
         enteredStore();
         try {
             semaphoreShoppingCart.acquire();
+            takeCart();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        takeCart();
+
+
+
         try {
             semaphore.acquire();
+            chooseGood();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        chooseGood();
+
         semaphore.release();
+
         if(shoppingCart.cart.size()!=0) {
             goToQueue();
         }

@@ -6,6 +6,8 @@ import by.it.drankevich.jd02_03.entity.Store;
 import by.it.drankevich.jd02_03.helper.RandomGenerator;
 import by.it.drankevich.jd02_03.helper.Timeout;
 
+import java.util.concurrent.Semaphore;
+
 public class CashierWorker implements Runnable {
 
     private final Cashier cashier;
@@ -13,6 +15,7 @@ public class CashierWorker implements Runnable {
     public static volatile Integer countQueue = 0;
     public static final Integer monitorSizeQueue = 0;
     public  int sizeQueue=0;
+    private static final Semaphore semaphorePrint=new Semaphore(1);
 
     public CashierWorker(Cashier cashier, Store store) {
         this.cashier = cashier;
@@ -57,7 +60,43 @@ public class CashierWorker implements Runnable {
                 }while (store.getQueue().getCustomerDeque().size()>0);
             }
         }
-        System.out.println(cashier + "closed");
+     //   System.out.println(cashier + "closed");
+        try {
+            semaphorePrint.acquire();
+
+        switch (cashier.getName()){
+            case "Cashier №1":
+                System.out.printf("|%-27s|%29s|%29s|%29s|%29s|%10d people|%10s|\n",cashier,"","","","",store.getQueue().getCustomerDeque().size(),Cashier.getTotalStoreCash());
+                System.out.println("____________________________________________________________________________________________________________________________________________________________________________________");
+                semaphorePrint.release();
+                break;
+            case "Cashier №2":
+                System.out.printf("|%29s|%-29s|%29s|%29s|%29s|%10d people|%10s|\n","",cashier,"","","",store.getQueue().getCustomerDeque().size(),Cashier.getTotalStoreCash());
+                System.out.println("___________________________________________________________________________________________________________________________________________________________________________________");
+                semaphorePrint.release();
+                break;
+            case "Cashier №3":
+                System.out.printf("|%29s|%29s|%-27s|%29s|%29s|%10d people|%10s|\n","","",cashier,"","",store.getQueue().getCustomerDeque().size(),Cashier.getTotalStoreCash());
+                System.out.println("___________________________________________________________________________________________________________________________________________________________________________________");
+                semaphorePrint.release();
+                break;
+            case "Cashier №4":
+                System.out.printf("|%29s|%29s|%29s|%-29s|%29s|%10d people|%10s|\n","","","",cashier,"",store.getQueue().getCustomerDeque().size(),Cashier.getTotalStoreCash());
+                System.out.println("___________________________________________________________________________________________________________________________________________________________________________________");
+                semaphorePrint.release();
+                break;
+            case "Cashier №5":
+                System.out.printf("|%29s|%29s|%29s|%29s|%-27s|%10d people|%10s|\n","","","","",cashier,store.getQueue().getCustomerDeque().size(),Cashier.getTotalStoreCash());
+                System.out.println("___________________________________________________________________________________________________________________________________________________________________________________");
+                semaphorePrint.release();
+                break;
+
+        }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 }
