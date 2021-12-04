@@ -40,12 +40,13 @@ public class StoreWorker extends Thread {
 
 
         while (store.getManager().isOpenedStore()) {
-            second++;
+
             if (second > 60) {
                 second = second - 60;
             }
 
             int count = numberOfPeople(second, store.getManager().customersInStore());
+            second++;
 
 
             for (int i = 0; store.getManager().isOpenedStore() && i < count; i++) {
@@ -64,11 +65,7 @@ public class StoreWorker extends Thread {
                     }
 
                 }
-             //   try {
-               //     semaphoreShoppingCart.acquire();
-              //  } catch (InterruptedException e) {
-               //     e.printStackTrace();
-              //  }
+
                 ShoppingCart shoppingCart = new ShoppingCart();
                 CustomerWorker customerWorker = new CustomerWorker(customer, store, shoppingCart,semaphore,semaphoreShoppingCart);
                 customerWorker.start();
