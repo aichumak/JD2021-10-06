@@ -4,8 +4,8 @@ public class Student extends Customer {
 
 
 
-    public Student(int number) {
-        super(number,"(student)");
+    public Student(int number,ShoppingCart shoppingCart) {
+        super(number,"(student)",shoppingCart);
 
 
     }

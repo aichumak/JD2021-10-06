@@ -18,4 +18,13 @@ public class ShoppingCart {
         cart.remove(good);
 
     }
+    public String print(){
+        StringBuilder stringBuilder=new StringBuilder();
+        for (Good good : cart) {
+            stringBuilder.append(good.toString()).append("\n");
+
+        }
+        return stringBuilder.toString();
+    }
+
 }

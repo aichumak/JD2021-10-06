@@ -6,19 +6,24 @@ public class Customer {
 
     private double total;
     boolean flagWaiting;
+    public final ShoppingCart shoppingCart;
 
 
     public Customer() {
         name = "unknown";
+        shoppingCart = null;
     }
 
-    public Customer(int number) {
+    public Customer(int number,ShoppingCart shoppingCart) {
         name = "Customer №" + number;
+        this.shoppingCart=shoppingCart;
 
     }
 
-    public Customer(int number, String buyerName) {
+    public Customer(int number, String buyerName,ShoppingCart shoppingCart) {
+        this.shoppingCart=shoppingCart;
         name = "Customer №" + number + " " + buyerName;
+
 
     }
 

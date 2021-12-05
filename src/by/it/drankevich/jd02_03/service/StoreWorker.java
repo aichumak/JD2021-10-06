@@ -52,21 +52,22 @@ public class StoreWorker extends Thread {
             for (int i = 0; store.getManager().isOpenedStore() && i < count; i++) {
 
                 Customer customer;
+                ShoppingCart shoppingCart = new ShoppingCart();
 
                 int randomCustomer = RandomGenerator.get(1, 4);
                 if (randomCustomer == 4) {
-                    customer = new Pensioner(++customerCounter);
+                    customer = new Pensioner(++customerCounter,shoppingCart);
                 } else {
                     if (randomCustomer == 2 || randomCustomer == 3) {
-                        customer = new Student(++customerCounter);
+                        customer = new Student(++customerCounter,shoppingCart);
 
                     } else {
-                        customer = new Customer(++customerCounter);
+                        customer = new Customer(++customerCounter,shoppingCart);
                     }
 
                 }
 
-                ShoppingCart shoppingCart = new ShoppingCart();
+
                 CustomerWorker customerWorker = new CustomerWorker(customer, store, shoppingCart,semaphore,semaphoreShoppingCart);
                 customerWorker.start();
                 Timeout.sleep(1000);
