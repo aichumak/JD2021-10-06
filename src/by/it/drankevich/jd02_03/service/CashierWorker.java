@@ -12,10 +12,11 @@ public class CashierWorker implements Runnable {
 
     private final Cashier cashier;
     private final Store store;
-    public static volatile Integer countQueue = 0;
+    public static int countQueue = 0;
     public static final Integer monitorSizeQueue = 0;
-    public  int sizeQueue=0;
+    public   int sizeQueue=0;
     private static final Semaphore semaphorePrint=new Semaphore(1);
+    private static final Semaphore semaphore=new Semaphore(1);
 
     public CashierWorker(Cashier cashier, Store store) {
         this.cashier = cashier;
@@ -25,17 +26,20 @@ public class CashierWorker implements Runnable {
     @Override
     public void run() {
         while (!store.getManager().isClosedStore()) {
-
-
-            synchronized (monitorSizeQueue) {
-
-                sizeQueue = store.getQueue().getCustomerDeque().size() - countQueue;
-                if(sizeQueue>0){ countQueue = countQueue + 5;
-
-             }
+            try {
+                semaphore.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
+            sizeQueue = store.getQueue().getCustomerDeque().size() - countQueue;
+                if(sizeQueue>0){ countQueue = countQueue + 5;
+
+
+            }
+            semaphore.release();
             if(sizeQueue>0) {
+
                 System.out.println(cashier + "opened");
 
                 do {
@@ -46,15 +50,22 @@ public class CashierWorker implements Runnable {
                             int timeout = RandomGenerator.get(2000, 5000);
                             Timeout.sleep(timeout);
                             cashier.setTotal(customer.getTotal());
-                            System.out.println(cashier + "finished servise " + customer + " TOTAL PRISE=" + customer.getTotal());
+                            System.out.println("|"+cashier + "|QUEUE= "+store.getQueue().getCustomerDeque().size()+"| "+"finished servise |"+ customer + " TOTAL PRISE=" + customer.getTotal()+"|");
 
                             customer.setFlagWaiting(false);
                             customer.getMonitor().notify();
                         }
                     } else {
                         System.out.println(cashier + "closed");
-                        synchronized (monitorSizeQueue){
-                        countQueue = countQueue - 5;}
+                        try {
+                            semaphore.acquire();
+                            countQueue = countQueue - 5;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        semaphore.release();
+
+
 
                     }
                 }while (store.getQueue().getCustomerDeque().size()>0);
