@@ -8,12 +8,12 @@ import by.it.drankevich.jd02_03.helper.Timeout;
 
 import java.util.concurrent.Semaphore;
 
+@SuppressWarnings("RedundantStringFormatCall")
 public class CashierWorker implements Runnable {
 
     private final Cashier cashier;
     private final Store store;
     public static int countQueue = 0;
-    public static final Integer monitorSizeQueue = 0;
     public int sizeQueue = 0;
     private static final Semaphore semaphorePrint = new Semaphore(1);
     private static final Semaphore semaphore = new Semaphore(1);
@@ -59,8 +59,51 @@ public class CashierWorker implements Runnable {
                             int timeout = RandomGenerator.get(2000, 5000);
                             Timeout.sleep(timeout);
                             cashier.setTotal(customer.getTotal());
-                            System.out.println("|" + cashier + "|QUEUE= " + store.getQueue().getCustomerDeque().size() + "| " + "finished servise |" + customer + " TOTAL PRISE=" + customer.getTotal() + "|");
+                            try {
+                                semaphorePrint.acquire();
 
+
+                                switch (cashier.getName()) {
+                                    case "Cashier №1":
+                                        String s= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String s1= String.format("|%-27s|%29s|%29s|%29s|%29s|%10d people|%10s|", cashier," ", "", "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String s2= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n",s,s1,s2);
+                                        semaphorePrint.release();
+                                        break;
+                                    case "Cashier №2":
+                                        String s3= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String s4= String.format("|%29s|%-29s|%29s|%29s|%29s|%10d people|%10s|", "", cashier, "", "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String s5= String.format("___________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n",s3,s4,s5);
+                                        semaphorePrint.release();
+                                        break;
+                                    case "Cashier №3":
+                                        String s6= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String s7= String.format("|%29s|%29s|%-27s|%29s|%29s|%10d people|%10s|", "", "", cashier, "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String s8= String.format("___________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n",s6,s7,s8);
+                                        semaphorePrint.release();
+                                        break;
+                                    case "Cashier №4":
+                                        String s9= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String s10= String.format("|%29s|%29s|%29s|%-29s|%29s|%10d people|%10s|", "", "", "", cashier, "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String s11= String.format("___________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n",s9,s10,s11);
+                                        semaphorePrint.release();
+                                        break;
+                                    case "Cashier №5":
+                                        String s12= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String s13= String.format("|%29s|%29s|%29s|%29s|%-27s|%10d people|%10s|", "", "", "", "", cashier, store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String s14= String.format("___________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n",s12,s13,s14);
+                                        semaphorePrint.release();
+                                        break;
+
+                                }
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             customer.setFlagWaiting(false);
                             customer.getMonitor().notify();
                         }
@@ -79,41 +122,8 @@ public class CashierWorker implements Runnable {
                 } while (store.getQueue().getCustomerDeque().size() > 0);
             }
         }
-        //   System.out.println(cashier + "closed");
-        try {
-            semaphorePrint.acquire();
+          System.out.println(cashier + "closed");
 
-            switch (cashier.getName()) {
-                case "Cashier №1":
-                    System.out.printf("|%-27s|%29s|%29s|%29s|%29s|%10d people|%10s|\n", cashier, "", "", "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                    System.out.println("____________________________________________________________________________________________________________________________________________________________________________________");
-                    semaphorePrint.release();
-                    break;
-                case "Cashier №2":
-                    System.out.printf("|%29s|%-29s|%29s|%29s|%29s|%10d people|%10s|\n", "", cashier, "", "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                    System.out.println("___________________________________________________________________________________________________________________________________________________________________________________");
-                    semaphorePrint.release();
-                    break;
-                case "Cashier №3":
-                    System.out.printf("|%29s|%29s|%-27s|%29s|%29s|%10d people|%10s|\n", "", "", cashier, "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                    System.out.println("___________________________________________________________________________________________________________________________________________________________________________________");
-                    semaphorePrint.release();
-                    break;
-                case "Cashier №4":
-                    System.out.printf("|%29s|%29s|%29s|%-29s|%29s|%10d people|%10s|\n", "", "", "", cashier, "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                    System.out.println("___________________________________________________________________________________________________________________________________________________________________________________");
-                    semaphorePrint.release();
-                    break;
-                case "Cashier №5":
-                    System.out.printf("|%29s|%29s|%29s|%29s|%-27s|%10d people|%10s|\n", "", "", "", "", cashier, store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                    System.out.println("___________________________________________________________________________________________________________________________________________________________________________________");
-                    semaphorePrint.release();
-                    break;
-
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
 
     }
