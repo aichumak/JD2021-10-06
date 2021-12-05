@@ -8,7 +8,7 @@ import by.it.drankevich.jd02_03.helper.Timeout;
 
 import java.util.concurrent.Semaphore;
 
-@SuppressWarnings("RedundantStringFormatCall")
+@SuppressWarnings({"RedundantStringFormatCall", "ConstantConditions"})
 public class CashierWorker implements Runnable {
 
     private final Cashier cashier;
@@ -17,7 +17,6 @@ public class CashierWorker implements Runnable {
     public int sizeQueue = 0;
     private static final Semaphore semaphorePrint = new Semaphore(1);
     private static final Semaphore semaphore = new Semaphore(1);
-    int count = 0;
 
     public CashierWorker(Cashier cashier, Store store) {
         this.cashier = cashier;
@@ -42,17 +41,13 @@ public class CashierWorker implements Runnable {
 
             }
             semaphore.release();
-            count++;
-            if (count == 50) {
-                Timeout.sleep(1000);
-                count=0;
-            }
+
 
             if (sizeQueue > 0) {
 
                 System.out.println(cashier + "opened");
 
-                do {
+                while (store.getQueue().getCustomerDeque().size() != 0) {
                     Customer customer = store.getQueue().extract();
                     if (customer != null) {
                         synchronized (customer.getMonitor()) {
@@ -66,54 +61,54 @@ public class CashierWorker implements Runnable {
 
                                 switch (cashier.getName()) {
                                     case "Cashier №1":
-                                        String as= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
-                                        String as1= String.format("|%-27s|%29s|%29s|%29s|%29s|%10d people|%10s|", cashier,"", "", "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                                        String as2= String.format("%27s%29s%29s%29s%29s%10s%10s",customer,"", "", "", "","","");
-                                        String as3= String.format("%27s%29s%29s%29s%29s%10s%10s",customer.shoppingCart.print(),"", "", "", "","","");
-                                        String as4= String.format("TOTAL %-27.2f%29s%29s%29s%29s%10s%10s",customer.getTotal(),"", "", "", "","","");
-                                        String as5= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
-                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n",as,as1,as2,as3,as4,as5);
+                                        String as = String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String as1 = String.format("|%-27s|%29s|%29s|%29s|%29s|%10d people|%10s|", cashier, "", "", "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String as2 = String.format("%27s%29s%29s%29s%29s%10s%10s", customer, "", "", "", "", "", "");
+                                        String as3 = String.format("%27s%29s%29s%29s%29s%10s%10s", customer.shoppingCart.print(), "", "", "", "", "", "");
+                                        String as4 = String.format("TOTAL %-27.2f%29s%29s%29s%29s%10s%10s", customer.getTotal(), "", "", "", "", "", "");
+                                        String as5 = String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n", as, as1, as2, as3, as4, as5);
                                         semaphorePrint.release();
                                         semaphorePrint.release();
                                         break;
                                     case "Cashier №2":
-                                        String bs= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
-                                        String bs1= String.format("|%29s|%-29s|%29s|%29s|%29s|%10d people|%10s|", "", cashier, "", "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                                        String bs2= String.format("%29s%29s%29s%29s%29s%10s%10s", "", customer, "", "", "", "", "");
-                                        String bs3= String.format("%29s%29s%29s%29s%29s%10s%10s", "", customer.shoppingCart.print(), "", "", "", "", "");
-                                        String bs4= String.format("%29sTOTAL %-29.2f%29s%29s%29s%10s%10s", "", customer.getTotal(), "", "", "", "", "");
-                                        String bs5= String.format("___________________________________________________________________________________________________________________________________________________________________________________");
-                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n",bs,bs1,bs2,bs3,bs4,bs5);
+                                        String bs = String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String bs1 = String.format("|%29s|%-29s|%29s|%29s|%29s|%10d people|%10s|", "", cashier, "", "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String bs2 = String.format("%29s%29s%29s%29s%29s%10s%10s", "", customer, "", "", "", "", "");
+                                        String bs3 = String.format("%29s%29s%29s%29s%29s%10s%10s", "", customer.shoppingCart.print(), "", "", "", "", "");
+                                        String bs4 = String.format("%29sTOTAL %-29.2f%29s%29s%29s%10s%10s", "", customer.getTotal(), "", "", "", "", "");
+                                        String bs5 = String.format("___________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n", bs, bs1, bs2, bs3, bs4, bs5);
                                         semaphorePrint.release();
                                         break;
                                     case "Cashier №3":
-                                        String cs= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
-                                        String cs1= String.format("|%29s|%29s|%-27s|%29s|%29s|%10d people|%10s|", "", "", cashier, "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                                        String cs2= String.format("%29s%29s%27s%29s%29s%10s%10s", "", "", customer, "", "", "","");
-                                        String cs3= String.format("%29s%29s%27s%29s%29s%10s%10s", "", "", customer.shoppingCart.print(), "", "", "", "","");
-                                        String cs4= String.format("%29s%29sTOTAL %-27.2f%29s%29s%10s%10s", "", "", customer.getTotal(), "", "", "", "","");
-                                        String cs5= String.format("___________________________________________________________________________________________________________________________________________________________________________________");
-                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n",cs,cs1,cs2,cs3,cs4,cs5);
+                                        String cs = String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String cs1 = String.format("|%29s|%29s|%-27s|%29s|%29s|%10d people|%10s|", "", "", cashier, "", "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String cs2 = String.format("%29s%29s%27s%29s%29s%10s%10s", "", "", customer, "", "", "", "");
+                                        String cs3 = String.format("%29s%29s%27s%29s%29s%10s%10s", "", "", customer.shoppingCart.print(), "", "", "", "", "");
+                                        String cs4 = String.format("%29s%29sTOTAL %-27.2f%29s%29s%10s%10s", "", "", customer.getTotal(), "", "", "", "", "");
+                                        String cs5 = String.format("___________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n", cs, cs1, cs2, cs3, cs4, cs5);
                                         semaphorePrint.release();
                                         break;
                                     case "Cashier №4":
-                                        String ds= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
-                                        String ds1= String.format("|%29s|%29s|%29s|%-29s|%29s|%10d people|%10s|", "", "", "", cashier, "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                                        String ds2= String.format("%29s%29s%29s%29s%29s%10s%10s", "", "", "", customer, "", "", "");
-                                        String ds3= String.format("%29s%29s%29s%29s%29s%10s", "", "", "", customer.shoppingCart.print(), "", "", "");
-                                        String ds4= String.format("%29s%29s%29sTOTAL %-29.2f%29s%10s%10s", "", "", "", customer.getTotal(), "", "", "");
-                                        String ds5= String.format("___________________________________________________________________________________________________________________________________________________________________________________");
-                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n",ds,ds1,ds2,ds3,ds4,ds5);
+                                        String ds = String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String ds1 = String.format("|%29s|%29s|%29s|%-29s|%29s|%10d people|%10s|", "", "", "", cashier, "", store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String ds2 = String.format("%29s%29s%29s%29s%29s%10s%10s", "", "", "", customer, "", "", "");
+                                        String ds3 = String.format("%29s%29s%29s%29s%29s%10s", "", "", "", customer.shoppingCart.print(), "", "", "");
+                                        String ds4 = String.format("%29s%29s%29sTOTAL %-29.2f%29s%10s%10s", "", "", "", customer.getTotal(), "", "", "");
+                                        String ds5 = String.format("___________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n", ds, ds1, ds2, ds3, ds4, ds5);
                                         semaphorePrint.release();
                                         break;
                                     case "Cashier №5":
-                                        String es= String.format("____________________________________________________________________________________________________________________________________________________________________________________");
-                                        String es1= String.format("|%29s|%29s|%29s|%29s|%-27s|%10d people|%10s|", "", "", "", "", cashier, store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
-                                        String es2= String.format("%29s%29s%29s%29s%27s%10s%10s", "", "", "", "", customer, "", "");
-                                        String es3= String.format("%29s%29s%29s%29s%27s%10s%10s", "", "", "", "", customer.shoppingCart.print(), "", "");
-                                        String es4= String.format("%29s%29s%29s%29sTOTAL %-27.2f%10s%10s", "", "", "", "", customer.getTotal(), "", "");
-                                        String es5= String.format("___________________________________________________________________________________________________________________________________________________________________________________");
-                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n",es,es1,es2,es3,es4,es5);
+                                        String es = String.format("____________________________________________________________________________________________________________________________________________________________________________________");
+                                        String es1 = String.format("|%29s|%29s|%29s|%29s|%-27s|%10d people|%10s|", "", "", "", "", cashier, store.getQueue().getCustomerDeque().size(), Cashier.getTotalStoreCash());
+                                        String es2 = String.format("%29s%29s%29s%29s%27s%10s%10s", "", "", "", "", customer, "", "");
+                                        String es3 = String.format("%29s%29s%29s%29s%27s%10s%10s", "", "", "", "", customer.shoppingCart.print(), "", "");
+                                        String es4 = String.format("%29s%29s%29s%29sTOTAL %-27.2f%10s%10s", "", "", "", "", customer.getTotal(), "", "");
+                                        String es5 = String.format("___________________________________________________________________________________________________________________________________________________________________________________");
+                                        System.out.printf("%s\n%s\n%s\n%s\n%s\n%s\n", es, es1, es2, es3, es4, es5);
                                         semaphorePrint.release();
                                         break;
 
@@ -136,11 +131,10 @@ public class CashierWorker implements Runnable {
 
 
                     }
-                } while (store.getQueue().getCustomerDeque().size() > 0);
+                }
             }
         }
-          System.out.println(cashier + "closed");
-
+        System.out.println(cashier + "closed");
 
 
     }
