@@ -34,7 +34,7 @@ public class Cashier {
 
     }
 
-    public static double getTotalStoreCash() {
+    public static synchronized double getTotalStoreCash() {
         return totalStoreCash;
     }
 
