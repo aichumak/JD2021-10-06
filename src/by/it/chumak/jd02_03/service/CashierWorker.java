@@ -22,13 +22,13 @@ public class CashierWorker implements Runnable {
     @Override
     public void run() {
         while (!STORE.getManager().isClosedStore()) {
-            //int queueSize = STORE.getQueue().getSize();
-            //if (queueSize > (5 * (CASHIER.getNumber() - 1))) {
+            int queueSize = STORE.getQueue().getSize();
+            if (queueSize > (5 * (CASHIER.getNumber() - 1))) {
 
-            //if (CASHIER.isClosed()) {
-            //    CASHIER.openCashier();
-            //    System.out.println(CASHIER + " opened");
-            //}
+            if (CASHIER.isClosed()) {
+                CASHIER.openCashier();
+                System.out.println(CASHIER + " opened");
+            }
 
             Customer customer = STORE.getQueue().extract();
             if (customer != null) {
@@ -53,12 +53,12 @@ public class CashierWorker implements Runnable {
                     }
                 }
             }
-            // } else {
-            //if (!CASHIER.isClosed()) {
-            //    CASHIER.closeCashier();
-            //    System.out.println(CASHIER + " is temporary closed");
-            //}
-            //}
+             } else {
+            if (!CASHIER.isClosed()) {
+                CASHIER.closeCashier();
+                System.out.println(CASHIER + " is temporary closed");
+            }
+            }
         }
         System.out.println(CASHIER + " closed");
     }

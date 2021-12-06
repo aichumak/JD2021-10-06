@@ -23,4 +23,8 @@ public class Queue {
         return customerDeque.pollFirst();
     }
 
+    public int getSize() {
+        return this.customerDeque.size();
+    }
+
 }

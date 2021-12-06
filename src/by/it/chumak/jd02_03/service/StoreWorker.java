@@ -26,7 +26,9 @@ public class StoreWorker extends Thread {
         ExecutorService executorService = Executors.newFixedThreadPool(STORE.getManager().getCashiersMaxCount());
         for (int numberCashier = 1; numberCashier <= STORE.getManager().getCashiersMaxCount(); numberCashier++) {
             Cashier cashier = new Cashier(numberCashier);
-            executorService.execute(new CashierWorker(STORE, cashier));
+            CashierWorker cashierWorker = new CashierWorker(STORE, cashier);
+            executorService.execute(cashierWorker);
+            //executorService.execute(new CashierWorker(STORE, cashier));
         }
         executorService.shutdown();
 
@@ -39,8 +41,8 @@ public class StoreWorker extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+            System.out.println("Store closed");
 
-        System.out.println("Store closed");
     }
 
     private void createAndStartCustomers(Store store) {
