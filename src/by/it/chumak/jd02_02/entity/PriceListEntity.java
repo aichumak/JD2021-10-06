@@ -6,20 +6,19 @@ import java.util.HashMap;
 
 public class PriceListEntity {
 
-    private final HashMap<String, Integer> priceList;
+    private final HashMap<String, Integer> PRICE_LIST;
 
     public PriceListEntity() {
         String[] arrayItems = new Goods().getGoods();
-        priceList = new HashMap<>();
+        this.PRICE_LIST = new HashMap<>();
 
         for (String item : arrayItems) {
-            priceList.put(item, RandomGenerator.get(1, 100));
+            this.PRICE_LIST.put(item, RandomGenerator.get(1, 50));
         }
     }
 
     public HashMap<String, Integer> getPriceList() {
-        return priceList;
+        return this.PRICE_LIST;
     }
-
 
 }
