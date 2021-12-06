@@ -41,7 +41,7 @@ public class StoreWorker extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-            System.out.println("Store closed");
+        System.out.println("Store closed");
 
     }
 

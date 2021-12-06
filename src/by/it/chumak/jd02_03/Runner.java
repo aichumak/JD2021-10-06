@@ -10,7 +10,7 @@ public class Runner {
         for (int i = 0; i < 5; i++) {
             Manager manager = new Manager(100, 5);
             Queue queue = new Queue(30);
-            Store store = new Store(manager, queue, 20);
+            Store store = new Store(manager, queue, 50, 20);
             StoreWorker storeWorker = new StoreWorker(store);
             storeWorker.start();
         }

@@ -7,13 +7,16 @@ import by.it.chumak.jd02_03.entity.ShoppingCard;
 import by.it.chumak.jd02_03.helper.RandomGenerator;
 import by.it.chumak.jd02_03.helper.Timeout;
 
-public class ShoppingCartWorker implements ShoppingCardAction {
+public class ShoppingCartWorker implements ShoppingCartAction {
 
     public ShoppingCartWorker() {
     }
 
     @Override
     public void takeCart(Customer customer) {
+//        new Thread(() -> {
+//            try {
+//            store.getCART_QUEUE().put(1);
         if (customer.getCustomerType() == CustomerType.Pensioner) {
             Timeout.oversleep(150, 450);
         } else {
@@ -21,6 +24,10 @@ public class ShoppingCartWorker implements ShoppingCardAction {
         }
         customer.setShoppingCard(new ShoppingCard());
         System.out.println(customer + " took the shopping cart");
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
     }
 
     @Override

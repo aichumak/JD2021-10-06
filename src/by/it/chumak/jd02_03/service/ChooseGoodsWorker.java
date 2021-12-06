@@ -26,7 +26,7 @@ public class ChooseGoodsWorker implements ChooseGoodsActions, Runnable {
         try {
             SEMAPHORE.acquire();
             chooseGoodsAndPutItToCart();
-        } catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             SEMAPHORE.release();

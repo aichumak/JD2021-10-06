@@ -1,7 +1,9 @@
 package by.it.chumak.jd02_03.service;
 
 import by.it.chumak.jd02_03.entity.Customer;
+import by.it.chumak.jd02_03.entity.CustomerType;
 import by.it.chumak.jd02_03.entity.Store;
+import by.it.chumak.jd02_03.helper.Timeout;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,11 +23,18 @@ public class CustomerWorker extends Thread implements CustomerAction {
     @Override
     public void run() {
         enteredStore();
-        getShoppingCart();
-        chooseGoods();
-        goToQueueToCheckoutStore();
-        goOut();
-        STORE.getManager().finishedCustomer();
+        new Thread(() -> {
+            try {
+                STORE.getCART_QUEUE().put(1);
+                getShoppingCart();
+                chooseGoods();
+                goToQueueToCheckoutStore();
+                goOut();
+                STORE.getManager().finishedCustomer();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     @Override
@@ -35,7 +44,19 @@ public class CustomerWorker extends Thread implements CustomerAction {
 
     @Override
     public void goOut() {
-        System.out.println(CUSTOMER + " leaves shop");
+        new Thread(() -> {
+            try {
+                STORE.getCART_QUEUE().take();
+                if (CUSTOMER.getCustomerType() == CustomerType.Pensioner) {
+                    Timeout.oversleep(150, 450);
+                } else {
+                    Timeout.oversleep(100, 300);
+                }
+                System.out.println(CUSTOMER + " leaves shop");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     @Override
