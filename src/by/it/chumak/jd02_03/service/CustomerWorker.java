@@ -5,6 +5,7 @@ import by.it.chumak.jd02_03.entity.Store;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class CustomerWorker extends Thread implements CustomerAction {
 
@@ -61,6 +62,15 @@ public class CustomerWorker extends Thread implements CustomerAction {
     private void chooseGoods() {
         ExecutorService executors = Executors.newFixedThreadPool(1);
         executors.execute(new ChooseGoodsWorker(STORE, CUSTOMER));
+        executors.shutdown();
+
+        try {
+            //noinspection ResultOfMethodCallIgnored
+            executors.awaitTermination(1000, TimeUnit.DAYS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void goToQueueToCheckoutStore() {

@@ -28,7 +28,6 @@ public class StoreWorker extends Thread {
             Cashier cashier = new Cashier(numberCashier);
             CashierWorker cashierWorker = new CashierWorker(STORE, cashier);
             executorService.execute(cashierWorker);
-            //executorService.execute(new CashierWorker(STORE, cashier));
         }
         executorService.shutdown();
 
@@ -37,6 +36,7 @@ public class StoreWorker extends Thread {
         }
 
         try {
+            //noinspection ResultOfMethodCallIgnored
             executorService.awaitTermination(1000, TimeUnit.DAYS);
         } catch (InterruptedException e) {
             e.printStackTrace();

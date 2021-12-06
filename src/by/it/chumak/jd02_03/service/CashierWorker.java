@@ -53,7 +53,7 @@ public class CashierWorker implements Runnable {
                     }
                 }
             }
-             } else {
+            } else {
             if (!CASHIER.isClosed()) {
                 CASHIER.closeCashier();
                 System.out.println(CASHIER + " is temporary closed");
