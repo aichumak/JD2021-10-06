@@ -1,30 +1,27 @@
-package by.it.vrublevskii.jd02_01.entity;
+package by.it.vrublevskii.jd02_01.old.entity;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
 
 public class PriceListRepo {
 
     private static HashMap<String, Double> priceList = new HashMap<>();
-    private Object[] goodsNames;
-    private Object[] goodsPrices;
 
     public PriceListRepo() {
         priceList = fillPriceList();
-        goodsNames = priceList.keySet().toArray();
-        goodsPrices = priceList.values().toArray();
     }
 
     public HashMap<String, Double> getPriceList() {
         return priceList;
     }
 
+    @SuppressWarnings("RedundantExplicitVariableType")
     public String getGoodName(int index){
-        return String.valueOf(goodsNames[index]);
+        Object[] goodsNameArray = priceList.keySet().toArray();
+        return String.valueOf(goodsNameArray[index]);
     }
 
     public double getGoodPrice(int index){
+        Object[] goodsPrices = priceList.values().toArray();
         return (double) goodsPrices[index];
     }
 

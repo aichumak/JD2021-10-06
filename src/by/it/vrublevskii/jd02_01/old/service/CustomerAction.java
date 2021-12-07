@@ -1,6 +1,6 @@
-package by.it.vrublevskii.jd02_01.service;
+package by.it.vrublevskii.jd02_01.old.service;
 
-import by.it.vrublevskii.jd02_01.entity.Good;
+import by.it.vrublevskii.jd02_01.old.entity.Good;
 
 public interface CustomerAction {
     void enteredStore();     //вошел в магазин (мгновенно)

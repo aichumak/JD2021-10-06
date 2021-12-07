@@ -1,10 +1,10 @@
-package by.it.vrublevskii.jd02_01;
+package by.it.vrublevskii.jd02_01.old;
 
-import by.it.vrublevskii.jd02_01.entity.Customer;
-import by.it.vrublevskii.jd02_01.entity.PriceListRepo;
-import by.it.vrublevskii.jd02_01.helper.RandomGenerator;
-import by.it.vrublevskii.jd02_01.helper.Timeout;
-import by.it.vrublevskii.jd02_01.service.CustomerWorker;
+import by.it.vrublevskii.jd02_01.old.entity.Customer;
+import by.it.vrublevskii.jd02_01.old.entity.PriceListRepo;
+import by.it.vrublevskii.jd02_01.old.helper.RandomGenerator;
+import by.it.vrublevskii.jd02_01.old.helper.Timeout;
+import by.it.vrublevskii.jd02_01.old.service.CustomerWorker;
 
 import java.util.ArrayList;
 
