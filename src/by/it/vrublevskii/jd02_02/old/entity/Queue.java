@@ -1,13 +1,15 @@
-package by.it.vrublevskii.jd02_02.entity;
+package by.it.vrublevskii.jd02_02.old.entity;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Queue {
 
-    public static final Object queueMonitor = new Object();
+    public final Object queueMonitor = new Object();
 
     private final Deque<Customer> customerDeque = new ArrayDeque<>();
+
+
 
     public void add(Customer customer){
         synchronized (queueMonitor){
@@ -20,9 +22,4 @@ public class Queue {
             return customerDeque.pollFirst();
         }
     }
-
-
-
-
-
 }

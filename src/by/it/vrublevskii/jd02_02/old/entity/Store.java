@@ -1,6 +1,6 @@
-package by.it.vrublevskii.jd02_02.entity;
+package by.it.vrublevskii.jd02_02.old.entity;
 
-public class Store {
+public class Store extends Thread {
 
     private final Manager manager;
     private final Queue queue;

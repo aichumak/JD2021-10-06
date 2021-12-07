@@ -1,4 +1,4 @@
-package by.it.vrublevskii.jd02_02.entity;
+package by.it.vrublevskii.jd02_02.old.entity;
 
 public class Cashier {
 
@@ -7,24 +7,23 @@ public class Cashier {
     private double total;
 
     public Cashier(int number) {
-        this.name = "Cashier № " + number;
+        this.name = "cashier №" + number;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public double getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
     @Override
     public String toString() {
-        return name + " total=" + total;
+        return "\t" + name + ", total=" + total + " ";
     }
 }

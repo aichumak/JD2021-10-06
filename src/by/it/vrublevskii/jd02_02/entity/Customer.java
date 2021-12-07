@@ -1,45 +1,41 @@
 package by.it.vrublevskii.jd02_02.entity;
 
 public class Customer {
-
     private final String name;
-    private double total;
-    private boolean flagWait;
-    private final String type;
+    private final int customerNumber;
+    private final String customerType;
+    boolean flagWait;
 
-    public Customer() {
-        this.name = "unknown";
-        this.type = "average";
+    public Customer(int customerNumber) {
+        this.name = "anonim";
+        this.customerNumber = customerNumber;
+        this.customerType = "average";
     }
 
-    public Customer(int number) {
-        name = "Customer # " + number;
-        this.type = "average";
+    public Customer(String name, int customerNumber) {
+        this.name = name;
+        this.customerNumber = customerNumber;
+        this.customerType = "average";
     }
 
-    public Customer(String type, int number) {
-        this.type = type;
-        name = "Customer (" + type + ") # " + number;
+    public Customer(int customerNumber, String customerType) {
+        this.name = "anonim";
+        this.customerNumber = customerNumber;
+        this.customerType = customerType;
+    }
+
+    public Customer(String name, int customerNumber, String customerType) {
+        this.name = name;
+        this.customerNumber = customerNumber;
+        this.customerType = customerType;
     }
 
     public String getName() {
         return name;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
     public String getType() {
-        return type;
-    }
-
-    public Object getMonitor(){
-        return this;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
+        return customerType;
     }
 
     public boolean isFlagWait() {
@@ -50,8 +46,16 @@ public class Customer {
         this.flagWait = flagWait;
     }
 
+    public Object getMonitor(){
+        return this;
+    }
+
     @Override
     public String toString() {
-        return name;
+        if (this.customerType.equals("average")) {
+            return String.format("Customer %-11s №%- 4d: %-6s", " ", customerNumber, name);
+        } else {
+            return String.format("Customer (%-9s) №%- 4d: %-6s", customerType, customerNumber, name);
+        }
     }
 }

@@ -2,27 +2,32 @@ package by.it.vrublevskii.jd02_02.entity;
 
 public class Manager {
 
-    private final int PLAN;
-    private volatile int countInCustomer = 0;
-    private volatile int countOutCustomer = 0;
+    private final int plan;
+    private volatile int countCustomerIn = 0;
+    private volatile int countCustomerOut = 0;
 
     public Manager(int plan) {
-        this.PLAN = plan;
+        this.plan = plan;
+    }
+
+    public int getPlan() {
+        return plan;
     }
 
     public synchronized void addCustomer() {
-        countInCustomer++;
+        countCustomerIn++;
     }
 
-    public synchronized void finishCustomer() {
-        countOutCustomer++;
+    public synchronized void terminateCustomer() {
+        countCustomerOut++;
     }
 
     public boolean isStoreOpen() {
-        return countInCustomer != PLAN;
+        return countCustomerIn != plan;
     }
 
     public boolean isStoreClosed() {
-        return countOutCustomer == PLAN;
+        return countCustomerOut == plan;
     }
+
 }

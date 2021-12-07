@@ -1,20 +1,22 @@
-package by.it.vrublevskii.jd02_02.service;
+package by.it.vrublevskii.jd02_02.servise;
 
-import by.it.vrublevskii.jd02_02.entity.Store;
 import by.it.vrublevskii.jd02_02.entity.Customer;
 import by.it.vrublevskii.jd02_02.entity.Good;
 import by.it.vrublevskii.jd02_02.entity.PriceListRepo;
+import by.it.vrublevskii.jd02_02.entity.Store;
+import by.it.vrublevskii.jd02_02.helper.GoodGenerator;
 import by.it.vrublevskii.jd02_02.helper.RandomGenerator;
 import by.it.vrublevskii.jd02_02.helper.Timeout;
 
-public class CustomerWorker extends Thread implements CustomerAction, ShoppingCardAction {
-
-    private final Store store;
+public class CustomerThread extends Thread implements CustomerAction, ShoppingCardAction {
     private final Customer customer;
     private final PriceListRepo priceListRepo;
+    private final Store store;
+
+
     private int goodsInCard = 0;
 
-    public CustomerWorker(Store store, Customer customer, PriceListRepo priceListRepo) {
+    public CustomerThread(Store store, Customer customer, PriceListRepo priceListRepo) {
         this.store = store;
         this.customer = customer;
         this.priceListRepo = priceListRepo;
@@ -25,21 +27,19 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     public void run() {
         enteredStore();
         takeCart();
-        int customerNeedsGoods;
-        if (customer.getType().equals("Student")){
-            customerNeedsGoods = RandomGenerator.get(0, 2);
-        }else{
-            customerNeedsGoods = RandomGenerator.get(2, 5);
+        int customerNeedsGoodsNumber;
+        if (customer.getType().equals("Student")) {
+            customerNeedsGoodsNumber = RandomGenerator.get(0, 2);
+        } else {
+            customerNeedsGoodsNumber = RandomGenerator.get(2, 5);
         }
-        if (customerNeedsGoods != 0){
-            for (int j = 0; j < customerNeedsGoods; j++) {
+            for (int j = 0; j < customerNeedsGoodsNumber; j++) {
                 Good good = chooseGood();
                 putToCart(good);
             }
-        }
         goToQueue();
         goOut();
-        store.getManager().finishCustomer();
+        store.getManager().terminateCustomer();
     }
 
     @Override
@@ -50,10 +50,10 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     @Override
     public void takeCart() {
         double coefficient = 1;
-        if (customer.getType().equals("Pensioner")){
+        if (customer.getType().equals("Pensioner")) {
             coefficient = 1.5;
         }
-        int timeout = (int)(RandomGenerator.get(100, 300) * coefficient);
+        int timeout = (int) (RandomGenerator.get(100, 300) * coefficient);
         Timeout.sleep(timeout);
         System.out.println(customer + " takes a cart");
     }
@@ -61,14 +61,13 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     @Override
     public Good chooseGood() {
         double coefficient = 1;
-        if (customer.getType().equals("Pensioner")){
+        if (customer.getType().equals("Pensioner")) {
             coefficient = 1.5;
         }
         System.out.println(customer + " is choosing goods");
-        int timeout = (int)(RandomGenerator.get(500, 2000) * coefficient);
+        int timeout = (int) (RandomGenerator.get(500, 2000) * coefficient);
         Timeout.sleep(timeout);
-        int index = RandomGenerator.get(0, 10);
-        Good good = new Good(priceListRepo.getGoodName(index), priceListRepo.getGoodPrice(index));
+        Good good = GoodGenerator.get(priceListRepo);
         System.out.println(customer + " chose " + good);
         return good;
     }
@@ -77,13 +76,12 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     public int putToCart(Good good) {
         goodsInCard++;
         double coefficient = 1;
-        if (customer.getType().equals("Pensioner")){
+        if (customer.getType().equals("Pensioner")) {
             coefficient = 1.5;
         }
-        int timeout = (int)(RandomGenerator.get(100, 300) * coefficient);
+        int timeout = (int) (RandomGenerator.get(100, 300) * coefficient);
         Timeout.sleep(timeout);
         System.out.println(customer + " puts " + good + " in the cart");
-        System.out.println("Goods in the cart total: " + goodsInCard);
         return goodsInCard;
     }
 
@@ -101,13 +99,13 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
                 e.printStackTrace();
             }
         }
-        System.out.println(customer + " goes to queue");
+        System.out.println(customer + " lives the queue");
+
     }
 
     @Override
     public void goOut() {
-        System.out.println(customer + " left the store");
+        System.out.printf("%s leaves the store. %20s Goods bought: %d%n", customer, "", goodsInCard);
     }
-
 
 }

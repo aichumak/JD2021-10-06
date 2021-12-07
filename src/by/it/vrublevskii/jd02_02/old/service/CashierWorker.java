@@ -1,10 +1,10 @@
-package by.it.vrublevskii.jd02_02.service;
+package by.it.vrublevskii.jd02_02.old.service;
 
-import by.it.vrublevskii.jd02_02.entity.Cashier;
-import by.it.vrublevskii.jd02_02.entity.Customer;
-import by.it.vrublevskii.jd02_02.entity.Store;
-import by.it.vrublevskii.jd02_02.helper.RandomGenerator;
-import by.it.vrublevskii.jd02_02.helper.Timeout;
+import by.it.vrublevskii.jd02_02.old.entity.Cashier;
+import by.it.vrublevskii.jd02_02.old.entity.Customer;
+import by.it.vrublevskii.jd02_02.old.entity.Store;
+import by.it.vrublevskii.jd02_02.old.helper.RandomGenerator;
+import by.it.vrublevskii.jd02_02.old.helper.Timeout;
 
 public class CashierWorker implements Runnable {
 

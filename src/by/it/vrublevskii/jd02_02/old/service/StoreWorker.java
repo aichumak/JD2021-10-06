@@ -1,8 +1,8 @@
-package by.it.vrublevskii.jd02_02.service;
+package by.it.vrublevskii.jd02_02.old.service;
 
-import by.it.vrublevskii.jd02_02.entity.*;
-import by.it.vrublevskii.jd02_02.helper.RandomGenerator;
-import by.it.vrublevskii.jd02_02.helper.Timeout;
+import by.it.vrublevskii.jd02_02.old.entity.*;
+import by.it.vrublevskii.jd02_02.old.helper.RandomGenerator;
+import by.it.vrublevskii.jd02_02.old.helper.Timeout;
 
 import java.util.ArrayList;
 
@@ -21,9 +21,6 @@ public class StoreWorker extends Thread {
         System.out.println("Store is open");
         int customerCounter = 0;
         ArrayList<Thread> threads = new ArrayList<>();
-//        Manager manager = new Manager(100);
-//        Queue queue = new Queue();
-//        Store store = new Store(manager, queue);
         PriceListRepo priceListRepo = new PriceListRepo();
         for (int numberCashier = 1; numberCashier <= 2; numberCashier++) {
             Cashier cashier = new Cashier(numberCashier);
