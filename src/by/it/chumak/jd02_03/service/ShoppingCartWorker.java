@@ -1,6 +1,9 @@
 package by.it.chumak.jd02_03.service;
 
-import by.it.chumak.jd02_03.entity.*;
+import by.it.chumak.jd02_03.entity.Customer;
+import by.it.chumak.jd02_03.entity.CustomerType;
+import by.it.chumak.jd02_03.entity.Good;
+import by.it.chumak.jd02_03.entity.ShoppingCard;
 import by.it.chumak.jd02_03.helper.RandomGenerator;
 import by.it.chumak.jd02_03.helper.Timeout;
 

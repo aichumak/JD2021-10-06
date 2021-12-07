@@ -14,7 +14,7 @@ public class Store {
     private final BlockingQueue<Integer> CART_QUEUE;
     private final PriceListRepo STORE_PRICE_LIST;
     private final Semaphore SEMAPHORE;
-    private AtomicLong totalProfit;
+    private final AtomicLong totalProfit;
 
     public Store(Manager manager, Queue queue, int storeCartsLimit, int maxCustomersInStoreHall) {
         this.MANAGER = manager;

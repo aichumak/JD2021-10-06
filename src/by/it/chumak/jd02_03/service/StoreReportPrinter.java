@@ -10,7 +10,8 @@ import java.util.Map;
 
 public class StoreReportPrinter {
 
-    public StoreReportPrinter(){};
+    public StoreReportPrinter() {
+    }
 
 
     public void printHeadTable() {
@@ -23,12 +24,6 @@ public class StoreReportPrinter {
 
     public void printStatus(String statusText) {
         System.out.printf("║%-146s║%n", statusText);
-    }
-
-    public void printCashierStatus(Store store, int number, String statusText) {
-        StringBuffer stringBuffer = new StringBuffer();
-        processText(stringBuffer, store, number, statusText, true);
-        System.out.println(stringBuffer);
     }
 
     public void printCashierStatus(Store store, int number, List<String> cashierStatusList) {
@@ -104,5 +99,9 @@ public class StoreReportPrinter {
             stringBuffer.append(String.format("%-20s│", ""));
             stringBuffer.append(String.format("%-20s║%n", ""));
         }
+    }
+
+    public void printTableBasement() {
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
     }
 }

@@ -28,21 +28,14 @@ public class CashierWorker implements Runnable {
             if (queueSize > (5 * (CASHIER.getNumber() - 1))) {
                 if (CASHIER.isClosed()) {
                     CASHIER.openCashier();
-                    cashierStatusList.clear();
-                    cashierStatusList.add(CASHIER.getName());
-                    cashierStatusList.add("is open");
-                    cashierStatusList.add("Total:" + CASHIER.getTotal() + "$");
+                    getCashierStatusList(cashierStatusList, "is open");
                     storeReportPrinter.printCashierStatus(STORE, CASHIER.getNumber(), cashierStatusList);
                 }
 
                 Customer customer = STORE.getQueue().extract();
                 if (customer != null) {
                     synchronized (customer.getMonitor()) {
-                        cashierStatusList.clear();
-                        cashierStatusList.add(CASHIER.getName());
-                        cashierStatusList.add("Total:" + CASHIER.getTotal() + "$");
-                        cashierStatusList.add("started to service:");
-                        cashierStatusList.add(customer.getName());
+                        getCashierStatusList(cashierStatusList, customer, "started to service:");
                         storeReportPrinter.printCashierStatus(STORE, CASHIER.getNumber(), cashierStatusList);
 
                         int timeout = RandomGenerator.get(2000, 5000);
@@ -54,11 +47,7 @@ public class CashierWorker implements Runnable {
                         customer.setFlagWaiting(false);
                         customer.getMonitor().notify();
 
-                        cashierStatusList.clear();
-                        cashierStatusList.add(CASHIER.getName());
-                        cashierStatusList.add("finished to service:");
-                        cashierStatusList.add(customer.getName());
-                        cashierStatusList.add("Total:" + CASHIER.getTotal() + "$");
+                        getCashierStatusList(cashierStatusList, customer, "finished to service:");
                         storeReportPrinter.printCashierStatus(STORE, CASHIER.getNumber(), cashierStatusList);
                     }
                 } else {
@@ -75,19 +64,32 @@ public class CashierWorker implements Runnable {
             } else {
                 if (!CASHIER.isClosed()) {
                     CASHIER.closeCashier();
-                    cashierStatusList.clear();
-                    cashierStatusList.add(CASHIER.getName());
-                    cashierStatusList.add("is temporary closed");
-                    cashierStatusList.add("Total:" + CASHIER.getTotal() + "$");
+                    getCashierStatusList(cashierStatusList, "is temporary closed");
                     storeReportPrinter.printCashierStatus(STORE, CASHIER.getNumber(), cashierStatusList);
                 }
             }
         }
-        cashierStatusList.clear();
-        cashierStatusList.add(CASHIER.getName());
-        cashierStatusList.add("is closed");
-        cashierStatusList.add("Total:" + CASHIER.getTotal() + "$");
+        getCashierStatusList(cashierStatusList, "is closed");
         storeReportPrinter.printCashierStatus(STORE, CASHIER.getNumber(), cashierStatusList);
+    }
+
+    private void getCashierStatusList(List<String> cashierStatusList, Customer customer, String statusText) {
+        cashierStatusList.clear();
+        cashierStatusList.add("--------------------");
+        cashierStatusList.add(CASHIER.getName());
+        cashierStatusList.add("Total:" + CASHIER.getTotal() + "$");
+        cashierStatusList.add(statusText);
+        cashierStatusList.add(customer.getName());
+        cashierStatusList.add("====================");
+    }
+
+    private void getCashierStatusList(List<String> cashierStatusList, String statusText) {
+        cashierStatusList.clear();
+        cashierStatusList.add("--------------------");
+        cashierStatusList.add(CASHIER.getName());
+        cashierStatusList.add("Total:" + CASHIER.getTotal() + "$");
+        cashierStatusList.add(statusText);
+        cashierStatusList.add("====================");
     }
 
 }
