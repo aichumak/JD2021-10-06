@@ -1,30 +1,20 @@
 package by.it.konon.jd02_01.entity;
 
-import by.it.konon.jd02_01.PriceListRepo;
-
-import java.util.HashMap;
-
-public class Good extends PriceListRepo {
+public class Good {
 
     private final String name;
     private final double price;
 
-
-
-    @Override
-    public HashMap<String, Double> getHashMap() {
-        return super.getHashMap();
-    }
-
-
+    @SuppressWarnings("unused")
     public Good() {
-        this("noname", 0);
+        this("no name", 0);
     }
 
-    public Good(String name, double price) {
-        this.name = name;
-        this.price = price;
+    public Good(String goodsName, double goodsPrice) {
+        this.name = goodsName;
+        this.price = goodsPrice;
     }
+
 
     public String getName() {
         return name;
@@ -41,4 +31,5 @@ public class Good extends PriceListRepo {
                 ", price=" + price +
                 '}';
     }
+
 }

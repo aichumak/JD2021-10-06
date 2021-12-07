@@ -3,9 +3,9 @@ package by.it.konon.jd02_01.service;
 import by.it.konon.jd02_01.entity.Good;
 
 public interface CustomerAction {
-    void enteredStore(); //вошел в магазин (мгновенно)
+    void enteredStore();
 
-    Good chooseGood(); //выбрал товар (от 0,5 до 2 секунд)
+    Good chooseGood();
 
-    void goOut(); //отправился на выход(мгновенно)
+    void goOut();
 }
