@@ -1,4 +1,4 @@
-package by.it.ithoitan.jd02_02.service;
+package by.it.ithoitan.jd02_01.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +9,7 @@ public class PriceListRepo extends Thread {
     public PriceListRepo(Map<String, Double> priceList) {
         this.priceList = priceList;
     }
+
 
 
 }

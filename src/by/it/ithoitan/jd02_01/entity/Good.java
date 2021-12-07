@@ -1,4 +1,4 @@
-package by.it.ithoitan.jd02_02.entity;
+package by.it.ithoitan.jd02_01.entity;
 
 public class Good {
     private final String name;

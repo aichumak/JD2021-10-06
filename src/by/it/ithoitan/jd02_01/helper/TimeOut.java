@@ -1,4 +1,4 @@
-package by.it.ithoitan.jd02_02.helper;
+package by.it.ithoitan.jd02_01.helper;
 
 public class TimeOut {
 

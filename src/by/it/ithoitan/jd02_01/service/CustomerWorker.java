@@ -1,9 +1,9 @@
-package by.it.ithoitan.jd02_02.service;
+package by.it.ithoitan.jd02_01.service;
 
-import by.it.ithoitan.jd02_02.entity.Customer;
-import by.it.ithoitan.jd02_02.entity.Good;
-import by.it.ithoitan.jd02_02.helper.RandomGenerator;
-import by.it.ithoitan.jd02_02.helper.TimeOut;
+import by.it.ithoitan.jd02_01.entity.Customer;
+import by.it.ithoitan.jd02_01.entity.Good;
+import by.it.ithoitan.jd02_01.helper.RandomGenerator;
+import by.it.ithoitan.jd02_01.helper.TimeOut;
 
 public class CustomerWorker extends Thread implements CustomerAction {
     private final Customer customer;

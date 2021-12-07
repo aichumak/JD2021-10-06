@@ -1,9 +1,9 @@
-package by.it.ithoitan.jd02_02;
+package by.it.ithoitan.jd02_01;
 
-import by.it.ithoitan.jd02_02.entity.Customer;
-import by.it.ithoitan.jd02_02.helper.RandomGenerator;
-import by.it.ithoitan.jd02_02.helper.TimeOut;
-import by.it.ithoitan.jd02_02.service.CustomerWorker;
+import by.it.ithoitan.jd02_01.entity.Customer;
+import by.it.ithoitan.jd02_01.helper.RandomGenerator;
+import by.it.ithoitan.jd02_01.helper.TimeOut;
+import by.it.ithoitan.jd02_01.service.CustomerWorker;
 
 import java.util.ArrayList;
 
