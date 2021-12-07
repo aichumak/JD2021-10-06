@@ -35,6 +35,7 @@ public class ChooseGoodsWorker implements ChooseGoodsActions, Runnable {
 
     @Override
     public void chooseGoodsAndPutItToCart() {
+        StoreReportPrinter storeReportPrinter = new StoreReportPrinter();
         ShoppingCartWorker shoppingCartWorker = new ShoppingCartWorker();
         int goodsCounter;
 
@@ -46,14 +47,16 @@ public class ChooseGoodsWorker implements ChooseGoodsActions, Runnable {
 
         for (int i = 0; i < goodsCounter; i++) {
             Good good = chooseGood();
-            System.out.printf("%s choose %s that costs $%.2f%n", CUSTOMER, good.getName(), STORE.getStorePriceList().getGoodsPrice(good.getName()));
+            String statusText = String.format("%s choose %s that costs $%.2f", CUSTOMER, good.getName(), STORE.getStorePriceList().getGoodsPrice(good.getName()));
+            storeReportPrinter.printStatus(statusText);
             shoppingCartWorker.putToCart(CUSTOMER, good);
             CUSTOMER.setTotal(CUSTOMER.getTotal() + (CUSTOMER.getShoppingCard().getGoodCount(good) * STORE.getStorePriceList().getGoodsPrice(good.getName())));
         }
     }
 
     public Good chooseGood() {
-        System.out.println(CUSTOMER + " started to choose good");
+        StoreReportPrinter storeReportPrinter = new StoreReportPrinter();
+        storeReportPrinter.printStatus(CUSTOMER + " started to choose good");
 
         if (CUSTOMER.getCustomerType() == CustomerType.Pensioner) {
             Timeout.oversleep(750, 3000);
@@ -62,7 +65,7 @@ public class ChooseGoodsWorker implements ChooseGoodsActions, Runnable {
         }
 
         String nameSelectedGood = STORE.getStorePriceList().chooseGoodFromPriceList();
-        System.out.println(CUSTOMER + " finished to choose good");
+        storeReportPrinter.printStatus(CUSTOMER + " finished to choose good");
         return new Good(nameSelectedGood);
     }
 

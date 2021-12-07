@@ -21,6 +21,7 @@ public class CashierWorker implements Runnable {
 
     @Override
     public void run() {
+        StoreReportPrinter storeReportPrinter = new StoreReportPrinter();
         while (!STORE.getManager().isClosedStore()) {
             int queueSize = STORE.getQueue().getSize();
             if (queueSize > (5 * (CASHIER.getNumber() - 1))) {
@@ -37,7 +38,7 @@ public class CashierWorker implements Runnable {
                         int timeout = RandomGenerator.get(2000, 5000);
                         Timeout.sleep(timeout);
                         CASHIER.setTotal(customer.getTotal());
-                        printReceipt(customer);
+                        storeReportPrinter.printCashierReceipt(STORE, CASHIER.getNumber(), customer);
                         customer.setFlagWaiting(false);
                         customer.getMonitor().notify();
                         System.out.println(CASHIER + " finished to service " + customer);
@@ -63,37 +64,5 @@ public class CashierWorker implements Runnable {
         System.out.println(CASHIER + " closed");
     }
 
-    private void printReceipt(Customer customer) {
-        StringBuffer stringBuffer = new StringBuffer();
-
-        stringBuffer.append(customer.getName());
-        System.out.println();
-        stringBuffer.append(" RECEIPT\n");
-        stringBuffer.append("-------------------------------\n");
-        stringBuffer.append("-------------------------------\n");
-
-        for (Map.Entry<Good, Integer> entry : customer.getShoppingCard().getCart().entrySet()) {
-            double goodsPrice = STORE.getStorePriceList().getGoodsPrice(entry.getKey().getName());
-            double goodsCount = customer.getShoppingCard().getGoodCount(entry.getKey());
-
-            stringBuffer.append("*** Good: ");
-            stringBuffer.append(entry.getKey().getName());
-            stringBuffer.append(", goods price: ");
-            stringBuffer.append(goodsPrice);
-            stringBuffer.append("$   ");
-            stringBuffer.append(goodsCount);
-            stringBuffer.append(" * ");
-            stringBuffer.append(goodsPrice);
-            stringBuffer.append("$ = ");
-            stringBuffer.append(goodsCount * goodsPrice);
-            stringBuffer.append("$\n");
-        }
-
-        stringBuffer.append("-------------------------------\n");
-        stringBuffer.append("RECEIPT TOTAL: ");
-        stringBuffer.append(customer.getTotal());
-        stringBuffer.append("$\n");
-        System.out.println(stringBuffer);
-    }
 
 }

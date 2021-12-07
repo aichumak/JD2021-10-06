@@ -30,7 +30,6 @@ public class CustomerWorker extends Thread implements CustomerAction {
                 chooseGoods();
                 goToQueueToCheckoutStore();
                 goOut();
-                STORE.getManager().finishedCustomer();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -39,20 +38,24 @@ public class CustomerWorker extends Thread implements CustomerAction {
 
     @Override
     public void enteredStore() {
-        System.out.println(CUSTOMER + " entered to Shop");
+        StoreReportPrinter storeReportPrinter = new StoreReportPrinter();
+        storeReportPrinter.printStatus(CUSTOMER + " entered to Shop");
     }
 
     @Override
     public void goOut() {
         new Thread(() -> {
             try {
+                StoreReportPrinter storeReportPrinter = new StoreReportPrinter();
+
                 STORE.getCART_QUEUE().take();
                 if (CUSTOMER.getCustomerType() == CustomerType.Pensioner) {
                     Timeout.oversleep(150, 450);
                 } else {
                     Timeout.oversleep(100, 300);
                 }
-                System.out.println(CUSTOMER + " leaves shop");
+                storeReportPrinter.printStatus(CUSTOMER + " leaves shop");
+                STORE.getManager().finishedCustomer();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -61,7 +64,8 @@ public class CustomerWorker extends Thread implements CustomerAction {
 
     @Override
     public void goToQueue() {
-        System.out.println(CUSTOMER + " go to the Queue");
+        StoreReportPrinter storeReportPrinter = new StoreReportPrinter();
+        storeReportPrinter.printStatus(CUSTOMER + " go to the Queue");
         synchronized (CUSTOMER.getMonitor()) {
             STORE.getQueue().add(CUSTOMER);
             CUSTOMER.setFlagWaiting(true);

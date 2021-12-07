@@ -21,7 +21,9 @@ public class StoreWorker extends Thread {
 
     @Override
     public void run() {
-        System.out.println("Store opened");
+        StoreReportPrinter cashiersReportPrinter = new StoreReportPrinter();
+        cashiersReportPrinter.printHeadTable();
+        cashiersReportPrinter.printStatus("Store opened");
 
         ExecutorService executorService = Executors.newFixedThreadPool(STORE.getManager().getCashiersMaxCount());
         for (int numberCashier = 1; numberCashier <= STORE.getManager().getCashiersMaxCount(); numberCashier++) {
@@ -41,8 +43,7 @@ public class StoreWorker extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Store closed");
-
+        cashiersReportPrinter.printStatus("Store closed");
     }
 
     private void createAndStartCustomers(Store store) {

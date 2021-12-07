@@ -14,7 +14,6 @@ public class Store {
     private final PriceListRepo STORE_PRICE_LIST;
     private final Semaphore SEMAPHORE;
 
-
     public Store(Manager manager, Queue queue, int storeCartsLimit, int maxCustomersInStoreHall) {
         this.MANAGER = manager;
         this.QUEUE = queue;
