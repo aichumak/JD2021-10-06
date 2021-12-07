@@ -4,22 +4,22 @@ import java.util.HashMap;
 
 public class ShoppingCard {
 
-    private final HashMap<Good, Integer> cart;
+    private final HashMap<Good, Integer> CART;
 
     public ShoppingCard() {
-        this.cart = new HashMap<>();
+        this.CART = new HashMap<>();
     }
 
     public void addGoodToCart(Good good, int count) {
-        this.cart.put(good, count);
+        this.CART.put(good, count);
     }
 
     public int getGoodCount(Good good) {
-        return this.cart.get(good);
+        return this.CART.get(good);
     }
 
-    public String getGoodsList() {
-        return this.cart.toString();
+    public HashMap<Good, Integer> getCart() {
+        return this.CART;
     }
 
 }

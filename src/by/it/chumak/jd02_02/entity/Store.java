@@ -1,84 +1,29 @@
 package by.it.chumak.jd02_02.entity;
 
-import by.it.chumak.jd02_02.helper.PriceListRepo;
-import by.it.chumak.jd02_02.helper.RandomGenerator;
-import by.it.chumak.jd02_02.helper.Timeout;
-import by.it.chumak.jd02_02.service.CustomerWorker;
+import by.it.chumak.jd02_02.service.PriceListRepo;
 
-import java.util.ArrayList;
+public class Store {
 
-public class Store extends Thread {
-    int customerNumber = 0;
+    private final Manager MANAGER;
+    private final Queue QUEUE;
+    private final PriceListRepo STORE_PRICE_LIST;
 
 
-    @Override
-    public void run() {
-        PriceListRepo priceListRepo = new PriceListRepo();
-        CustomersCountRepo customersCount = new CustomersCountRepo(0);
-
-        System.out.println("Store opened");
-
-        ArrayList<CustomerWorker> customerWorkers = new ArrayList<>();
-
-        for (int minute = 1; minute < 3; minute++) {
-            for (int second = 1; second <= 60; second++) {
-                createAndStartCustomers(second, customersCount, priceListRepo, customerWorkers);
-            }
-        }
-
-        for (CustomerWorker customerWorker : customerWorkers) {
-            try {
-                customerWorker.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.printf("Store closed, count of customers in the store: %d", customersCount.getCustomersCount());
+    public Store(Manager manager, Queue queue) {
+        this.MANAGER = manager;
+        this.QUEUE = queue;
+        this.STORE_PRICE_LIST = new PriceListRepo();
     }
 
-    private void createAndStartCustomers(int second, CustomersCountRepo customersCount, PriceListRepo priceListRepo, ArrayList<CustomerWorker> customerWorkers) {
-        int customerTypeCounter = 0;
-        int randomCustomersCount = getRandomNumber(second, customersCount);
-
-        for (int i = 0; i < randomCustomersCount; i++) {
-            CustomerType customerType;
-            customerTypeCounter++;
-            customerNumber++;
-
-            if (customerTypeCounter == 2) {
-                customerType = CustomerType.Student;
-            } else if (customerTypeCounter == 4) {
-                customerType = CustomerType.Pensioner;
-                customerTypeCounter = 0;
-            } else {
-                customerType = CustomerType.Customer;
-            }
-
-            createCustomer(customersCount, priceListRepo, customerWorkers, customerType);
-            System.out.printf("=========== second: %d, count of customers in the store: %d%n", second, customersCount.getCustomersCount());
-        }
+    public Manager getManager() {
+        return this.MANAGER;
     }
 
-    private int getRandomNumber(int second, CustomersCountRepo customersCount) {
-        if (second <= 30) {
-            return RandomGenerator.get(second + 10 - 1 - customersCount.getCustomersCount());
-        } else {
-            return RandomGenerator.get(40 + 30 - second - 1 - customersCount.getCustomersCount());
-        }
+    public Queue getQueue() {
+        return this.QUEUE;
     }
 
-    private void createCustomer(CustomersCountRepo customersCount, PriceListRepo priceListRepo, ArrayList<CustomerWorker> customerWorkers, CustomerType customerType) {
-        Customer customer = new Customer(customerNumber, customerType);
-        CustomerWorker customerWorker = new CustomerWorker(customer, customersCount, priceListRepo, store);
-        customerWorkers.add(customerWorker);
-        customersCount.addCustomer();
-        customerWorker.start();
-
-        if (customerType == CustomerType.Pensioner) {
-            Timeout.sleep(1500);
-        } else {
-            Timeout.sleep(1000);
-        }
+    public PriceListRepo getStorePriceList() {
+        return this.STORE_PRICE_LIST;
     }
-
 }

@@ -1,14 +1,20 @@
-package by.it.chumak.jd02_02.helper;
+package by.it.chumak.jd02_02.service;
 
 import by.it.chumak.jd02_02.entity.Goods;
 import by.it.chumak.jd02_02.entity.PriceListEntity;
+import by.it.chumak.jd02_02.helper.RandomGenerator;
 
 public class PriceListRepo {
 
-    private final PriceListEntity priceListEntity;
+    private final PriceListEntity PRICE_LIST_ENTITY;
 
     public PriceListRepo() {
-        this.priceListEntity = new PriceListEntity();
+        this.PRICE_LIST_ENTITY = new PriceListEntity();
+    }
+
+
+    public double getGoodsPrice(String nameSelectedGood) {
+        return PRICE_LIST_ENTITY.getPriceList().get(nameSelectedGood);
     }
 
     public String chooseGoodFromPriceList() {
@@ -16,8 +22,4 @@ public class PriceListRepo {
         return arrayNamesGoods[RandomGenerator.get(0, arrayNamesGoods.length - 1)];
     }
 
-
-    public double getGoodsPrice(String nameSelectedGood) {
-        return priceListEntity.getPriceList().get(nameSelectedGood);
-    }
 }
