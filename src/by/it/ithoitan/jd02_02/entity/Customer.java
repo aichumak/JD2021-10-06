@@ -1,8 +1,9 @@
-package by.it.ithoitan.jd02_01.entity;
+package by.it.ithoitan.jd02_02.entity;
 
 public class Customer  {
     private final String name;
     private double total;
+    private boolean flagWaining;
     public Customer(int number){
         name = "Customer № " + number;
     }
@@ -21,6 +22,18 @@ public class Customer  {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isFlagWaining() {
+        return flagWaining;
+    }
+
+    public void setFlagWaining(boolean flagWaining) {
+        this.flagWaining = flagWaining;
+    }
+
+    public Object getMonitor() {
+        return this;
     }
 
     @Override

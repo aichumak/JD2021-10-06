@@ -11,7 +11,8 @@ public class CustomerWorker extends Thread implements CustomerAction {
     @Override
     public void run() {
         enteredStore();
-        chooseGood();
+        Good good = chooseGood();
+        System.out.println(customer + " choose " + good);
         goOut();
     }
 
@@ -31,7 +32,6 @@ public class CustomerWorker extends Thread implements CustomerAction {
         int timeout = RandomGenerator.get(500,2000);
         TimeOut.sleep(timeout);
         Good good = new Good();
-        System.out.println(customer + " choosed " + good);
         System.out.println(customer + " finished to choose good");
         return good;
     }
