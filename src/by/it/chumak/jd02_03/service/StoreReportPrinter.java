@@ -15,7 +15,8 @@ public class StoreReportPrinter {
 
 
     public void printHeadTable() {
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuffer stringBuffer;
+        stringBuffer = new StringBuffer();
         stringBuffer.append("╔════════════════════╤════════════════════╤════════════════════╤════════════════════╤════════════════════╤════════════════════╤════════════════════╗\n");
         stringBuffer.append("║   Cashier 1        │   Cashier 2        │   Cashier 3        │   Cashier 4        │   Cashier 5        │  Customers queue   │ Total store profit ║\n");
         stringBuffer.append("╟────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────╢");
