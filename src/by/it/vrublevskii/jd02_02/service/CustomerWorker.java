@@ -1,39 +1,45 @@
-package by.it.vrublevskii.jd02_01.service;
+package by.it.vrublevskii.jd02_02.service;
 
-import by.it.vrublevskii.jd02_01.entity.Customer;
-import by.it.vrublevskii.jd02_01.entity.Good;
-import by.it.vrublevskii.jd02_01.entity.PriceListRepo;
-import by.it.vrublevskii.jd02_01.helper.RandomGenerator;
-import by.it.vrublevskii.jd02_01.helper.Timeout;
+import by.it.vrublevskii.jd02_02.entity.Store;
+import by.it.vrublevskii.jd02_02.entity.Customer;
+import by.it.vrublevskii.jd02_02.entity.Good;
+import by.it.vrublevskii.jd02_02.entity.PriceListRepo;
+import by.it.vrublevskii.jd02_02.helper.RandomGenerator;
+import by.it.vrublevskii.jd02_02.helper.Timeout;
 
 public class CustomerWorker extends Thread implements CustomerAction, ShoppingCardAction {
 
+    private final Store store;
     private final Customer customer;
     private final PriceListRepo priceListRepo;
     private int goodsInCard = 0;
+
+    public CustomerWorker(Store store, Customer customer, PriceListRepo priceListRepo) {
+        this.store = store;
+        this.customer = customer;
+        this.priceListRepo = priceListRepo;
+        store.getManager().addCustomer();
+    }
 
     @Override
     public void run() {
         enteredStore();
         takeCart();
-        int customerNeedsGoodsNumber;
+        int customerNeedsGoods;
         if (customer.getType().equals("Student")){
-            customerNeedsGoodsNumber = RandomGenerator.get(0, 2);
+            customerNeedsGoods = RandomGenerator.get(0, 2);
         }else{
-            customerNeedsGoodsNumber = RandomGenerator.get(2, 5);
+            customerNeedsGoods = RandomGenerator.get(2, 5);
         }
-        if (customerNeedsGoodsNumber != 0){
-            for (int j = 0; j < customerNeedsGoodsNumber; j++) {
+        if (customerNeedsGoods != 0){
+            for (int j = 0; j < customerNeedsGoods; j++) {
                 Good good = chooseGood();
                 putToCart(good);
             }
         }
+        goToQueue();
         goOut();
-    }
-
-    public CustomerWorker(Customer customer, PriceListRepo priceListRepo) {
-        this.customer = customer;
-        this.priceListRepo = priceListRepo;
+        store.getManager().finishCustomer();
     }
 
     @Override
@@ -82,7 +88,26 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     }
 
     @Override
+    public void goToQueue() {
+        System.out.println(customer + " goes to queue");
+        synchronized (customer.getMonitor()){
+            store.getQueue().add(customer);
+            customer.setFlagWait(true);
+            try {
+                while(customer.isFlagWait()){
+                    customer.getMonitor().wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(customer + " goes to queue");
+    }
+
+    @Override
     public void goOut() {
         System.out.println(customer + " left the store");
     }
+
+
 }
