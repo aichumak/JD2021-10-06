@@ -4,7 +4,7 @@ public class Cashier {
 
     private final String NAME;
     private final int NUMBER;
-    private double total;
+    private long total;
     private boolean cashierOpen;
 
     public Cashier(int number) {
@@ -18,7 +18,7 @@ public class Cashier {
         return this.NAME;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(long total) {
         this.total = this.total + total;
     }
 

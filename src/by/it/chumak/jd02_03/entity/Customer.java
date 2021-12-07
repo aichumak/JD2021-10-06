@@ -4,7 +4,7 @@ public class Customer {
 
     private final String NAME;
     private final CustomerType CUSTOMER_TYPE;
-    private double total;
+    private long total;
     private boolean flagWaiting;
     private ShoppingCard shoppingCard;
 
@@ -26,11 +26,11 @@ public class Customer {
         return this.NAME;
     }
 
-    public double getTotal() {
+    public long getTotal() {
         return this.total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 

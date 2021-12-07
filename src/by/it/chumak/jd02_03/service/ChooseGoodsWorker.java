@@ -50,7 +50,7 @@ public class ChooseGoodsWorker implements ChooseGoodsActions, Runnable {
             String statusText = String.format("%s choose %s that costs $%.2f", CUSTOMER, good.getName(), STORE.getStorePriceList().getGoodsPrice(good.getName()));
             storeReportPrinter.printStatus(statusText);
             shoppingCartWorker.putToCart(CUSTOMER, good);
-            CUSTOMER.setTotal(CUSTOMER.getTotal() + (CUSTOMER.getShoppingCard().getGoodCount(good) * STORE.getStorePriceList().getGoodsPrice(good.getName())));
+            CUSTOMER.setTotal((long) (CUSTOMER.getTotal() + (CUSTOMER.getShoppingCard().getGoodCount(good) * STORE.getStorePriceList().getGoodsPrice(good.getName()))));
         }
     }
 
