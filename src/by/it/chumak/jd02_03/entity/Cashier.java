@@ -38,9 +38,13 @@ public class Cashier {
         return !this.cashierOpen;
     }
 
+    public long getTotal() {
+        return total;
+    }
+
     @Override
     public String toString() {
-        return "\t" + this.NAME + " TOTAL=" + this.total + " ";
+        return this.NAME + " TOTAL=" + this.total + " ";
     }
 
 
