@@ -1,29 +1,48 @@
 package by.it.chumak.bank.service;
 
-public class ClientWorker implements Client{
+import by.it.chumak.bank.entity.Bank;
+import by.it.chumak.bank.entity.Client;
 
-    @Override
-    public double withdraw() {
-        return 0;
+public class ClientWorker implements Runnable {
+
+    private final Client client;
+    private final Bank bank;
+
+    public ClientWorker(int clientNumber, Bank bank) {
+        this.client = new Client(clientNumber);
+        this.bank = bank;
     }
 
     @Override
-    public void topUp() {
-
+    public void run() {
+        enterBank();
+        goToQueue();
+        exitBank();
     }
 
-    @Override
-    public void transfer() {
+    private void goToQueue() {
+        System.out.println(client.getClientName() + " go to queue");
 
+        synchronized (client.getMonitor()) {
+            bank.getClientDeque().add(client);
+            client.setWaitingInQueue(true);
+            try {
+                while (client.isWaitingInQueue()) {
+                    client.getMonitor().wait();
+                }
+            } catch (InterruptedException e) {
+                e.getStackTrace();
+            }
+        }
     }
 
-    @Override
-    public void pay() {
-
+    private void enterBank() {
+        bank.addClientsIn();
+        System.out.println(client.getClientName() + " enter to bank");
     }
 
-    @Override
-    public double exchange() {
-        return 0;
+    private void exitBank() {
+        bank.addClientsOut();
+        System.out.println(client.getClientName() + " left bank");
     }
 }
