@@ -8,7 +8,7 @@ public abstract class Customer {
     public Customer(int customerNumber) {
         this.name = "anonim";
         this.customerNumber = customerNumber;
-        this.customerType = "average";
+        this.customerType = "some customer";
     }
 
 
