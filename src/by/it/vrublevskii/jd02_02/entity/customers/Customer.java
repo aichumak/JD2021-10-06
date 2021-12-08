@@ -3,12 +3,10 @@ package by.it.vrublevskii.jd02_02.entity.customers;
 public abstract class Customer {
     private final String name;
     private final int customerNumber;
-    private final String customerType;
 
-    public Customer(int customerNumber) {
-        this.name = "anonim";
+    public Customer(String name, int customerNumber) {
+        this.name = name;
         this.customerNumber = customerNumber;
-        this.customerType = "some customer";
     }
 
 
@@ -20,7 +18,4 @@ public abstract class Customer {
         return customerNumber;
     }
 
-    public String getCustomerType() {
-        return customerType;
-    }
 }

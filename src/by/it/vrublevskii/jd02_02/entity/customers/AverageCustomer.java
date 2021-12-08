@@ -1,12 +1,12 @@
 package by.it.vrublevskii.jd02_02.entity.customers;
 
-public class Pensioner extends Customer{
+public class AverageCustomer extends Customer {
 
-    public Pensioner(int customerNumber) {
+    public AverageCustomer(int customerNumber) {
         super("anonim", customerNumber);
     }
 
-    public Pensioner(String name, int customerNumber) {
+    public AverageCustomer(String name, int customerNumber) {
         super(name, customerNumber);
     }
 
@@ -19,5 +19,4 @@ public class Pensioner extends Customer{
     public int getCustomerNumber() {
         return super.getCustomerNumber();
     }
-
 }
