@@ -1,4 +1,6 @@
-package by.it.laevskiy.calc;
+package by.it.laevskiy.calc.repository;
+
+import by.it.laevskiy.calc.exception.CalcException;
 
 public interface Repository<K, V> {
 

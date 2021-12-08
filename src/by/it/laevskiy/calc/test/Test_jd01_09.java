@@ -1,4 +1,4 @@
-package by.it.laevskiy.calc;
+package by.it.laevskiy.calc.test;
 
 
 import by.it.HomeWork;

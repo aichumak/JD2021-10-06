@@ -1,6 +1,8 @@
-package by.it.laevskiy.calc;
+package by.it.laevskiy.calc.model;
 
-class Scalar extends Var {
+import by.it.laevskiy.calc.exception.CalcException;
+
+public class Scalar extends Var {
 
     private final double value;
 

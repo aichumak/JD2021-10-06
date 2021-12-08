@@ -1,4 +1,7 @@
-package by.it.laevskiy.calc;
+package by.it.laevskiy.calc.service;
+
+import by.it.laevskiy.calc.exception.CalcException;
+import by.it.laevskiy.calc.model.Var;
 
 import java.util.Objects;
 

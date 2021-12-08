@@ -1,6 +1,8 @@
-package by.it.laevskiy.calc;
+package by.it.laevskiy.calc.model;
 
-abstract class Var implements Operation {
+import by.it.laevskiy.calc.exception.CalcException;
+
+public abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {

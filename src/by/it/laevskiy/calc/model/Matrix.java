@@ -1,6 +1,6 @@
-package by.it.laevskiy.calc;
+package by.it.laevskiy.calc.model;
 
-class Matrix extends Var {
+public class Matrix extends Var {
 
     public Matrix(String stringValues) {
         super();

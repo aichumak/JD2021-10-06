@@ -1,11 +1,13 @@
-package by.it.laevskiy.calc;
+package by.it.laevskiy.calc.model;
 
+
+import by.it.laevskiy.calc.exception.CalcException;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Vector extends Var {
+public class Vector extends Var {
     private final double[] values;
 
     public double[] getValues() {
@@ -20,7 +22,7 @@ class Vector extends Var {
         this.values = vector.values;
     }
 
-    Vector(String strVector) {
+    public Vector(String strVector) {
         StringBuilder inText = new StringBuilder(strVector);
         Pattern pattern = Pattern.compile("[^,{}]+");
         Matcher matcher = pattern.matcher(inText);

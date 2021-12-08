@@ -1,4 +1,4 @@
-package by.it.laevskiy.calc;
+package by.it.laevskiy.calc.exception;
 
 public class CalcException extends Exception {
     public CalcException() {
