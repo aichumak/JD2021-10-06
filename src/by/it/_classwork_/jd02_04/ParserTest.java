@@ -12,7 +12,6 @@ import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
 
-
     private Parser parser;
 
     @Before
