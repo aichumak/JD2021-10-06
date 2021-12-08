@@ -1,4 +1,4 @@
-package by.it.vrublevskii.jd02_01.entity;
+package by.it.vrublevskii.jd02_02.old.entity;
 
 public class Good {
 
@@ -6,8 +6,7 @@ public class Good {
     private final double price;
 
     public Good() {
-        this.name = "something";
-        this.price = 12d;
+        this("noName", 12);
     }
 
     public Good(String name, double price) {
@@ -25,6 +24,6 @@ public class Good {
 
     @Override
     public String toString() {
-        return name + ", price=" + price;
+        return "Good " + name + '\'' + ", price=" + price;
     }
 }

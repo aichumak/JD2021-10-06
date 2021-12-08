@@ -1,9 +1,10 @@
-package by.it.vrublevskii.jd02_01.entity;
+package by.it.vrublevskii.jd02_02.entity;
 
 public class Customer {
     private final String name;
     private final int customerNumber;
     private final String customerType;
+    boolean flagWait;
 
     public Customer(int customerNumber) {
         this.name = "anonim";
@@ -35,6 +36,18 @@ public class Customer {
 
     public String getType() {
         return customerType;
+    }
+
+    public boolean isFlagWait() {
+        return flagWait;
+    }
+
+    public void setFlagWait(boolean flagWait) {
+        this.flagWait = flagWait;
+    }
+
+    public Object getMonitor(){
+        return this;
     }
 
     @Override

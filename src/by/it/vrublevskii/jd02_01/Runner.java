@@ -1,8 +1,10 @@
 package by.it.vrublevskii.jd02_01;
 
+
+import by.it.vrublevskii.jd02_01.servise.StoreThread;
+
 public class Runner {
     public static void main(String[] args) {
-        Store store = new Store();
-        store.start();
+        new StoreThread().start();
     }
 }

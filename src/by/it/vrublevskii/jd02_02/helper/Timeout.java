@@ -1,4 +1,4 @@
-package by.it.vrublevskii.jd02_01.helper;
+package by.it.vrublevskii.jd02_02.helper;
 
 public class Timeout {
 
