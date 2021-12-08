@@ -1,27 +1,29 @@
 package by.it.chumak.bank.entity;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class Queue {
-    public final Object QUEUE_MONITOR = new Object();
-    private final Deque<Client> CUSTOMER_DEQUEUE = new ArrayDeque<>();
+
+    private final BlockingDeque<Client> clientDeque;
+
+    public Queue(int capacity) {
+        clientDeque = new LinkedBlockingDeque<>(capacity);
+    }
 
     public void add(Client client) {
-        synchronized (this.QUEUE_MONITOR) {
-            this.CUSTOMER_DEQUEUE.addLast(client);
+        try {
+            clientDeque.putLast(client);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
     public Client extract() {
-        synchronized (this.QUEUE_MONITOR) {
-            return this.CUSTOMER_DEQUEUE.pollFirst();
-        }
+        return clientDeque.pollFirst();
     }
 
     public int getSize() {
-        synchronized (this.QUEUE_MONITOR) {
-            return this.CUSTOMER_DEQUEUE.size();
-        }
+        return this.clientDeque.size();
     }
 }
