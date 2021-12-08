@@ -6,7 +6,7 @@ public class FileNames {
     private FileNames(){
 
     }
-     static String getFullPath(String fileName, Class<?> currentClass) {
+     public static String getFullPath(String fileName, Class<?> currentClass) {
         String srcProject = System.getProperty("user.dir")
                 + File.separator + "src" + File.separator;
         String name = currentClass.getName();

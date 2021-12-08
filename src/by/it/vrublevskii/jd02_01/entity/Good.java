@@ -6,7 +6,8 @@ public class Good {
     private final double price;
 
     public Good() {
-        this("noName", 12);
+        this.name = "something";
+        this.price = 12d;
     }
 
     public Good(String name, double price) {
@@ -24,9 +25,6 @@ public class Good {
 
     @Override
     public String toString() {
-        return "Good{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+        return name + ", price=" + price;
     }
 }
