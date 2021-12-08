@@ -1,11 +1,12 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.model;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Matrix extends Var {
+public class Matrix extends Var {
 
     private final double[][] values;
 

@@ -1,4 +1,4 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.test;
 
 
 import by.it.HomeWork;

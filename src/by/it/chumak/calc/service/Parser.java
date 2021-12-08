@@ -1,4 +1,9 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.service;
+
+import by.it.chumak.calc.constant.Patterns;
+import by.it.chumak.calc.exception.CalcException;
+import by.it.chumak.calc.model.Var;
+import by.it.chumak.calc.repository.VarRepository;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

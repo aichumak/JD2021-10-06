@@ -1,10 +1,10 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.model;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Vector extends Var {
+public class Vector extends Var {
 
     private final double[] values;
 

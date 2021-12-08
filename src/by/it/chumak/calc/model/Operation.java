@@ -1,6 +1,8 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.model;
 
-interface Operation {
+import by.it.chumak.calc.exception.CalcException;
+
+public interface Operation {
     Var add(Var varLeftPartExpression, Var varRightPartExpression) throws CalcException;
 
     Var sub(Var varLeftPartExpression, Var varRightPartExpression) throws CalcException;

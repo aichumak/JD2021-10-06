@@ -1,4 +1,9 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.service;
+
+import by.it.chumak.calc.model.Matrix;
+import by.it.chumak.calc.model.Scalar;
+import by.it.chumak.calc.model.Var;
+import by.it.chumak.calc.model.Vector;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

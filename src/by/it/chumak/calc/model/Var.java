@@ -1,6 +1,6 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.model;
 
-abstract class Var {
+public abstract class Var {
     @Override
     public String toString() {
         return " unknown variable (abstract stub)";
