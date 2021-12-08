@@ -4,11 +4,6 @@ package by.it.laevskiy.jd01_15;
 import java.io.*;
 import java.util.Random;
 
-/**
- * generateArray - метод для генерации массива с заданным диапазоном чисел
- * printToFile - метод для вывода информации в файл
- *
- */
 public class TaskA {
     public static final String PRINT_FORMAT = "%3d ";
     public static final String LINE_SEPARATOR = "line.separator";
