@@ -1,24 +1,30 @@
-package by.it.laevskiy.jd02_01.service;
+package by.it.laevskiy.jd02_02.service;
 
-import by.it.laevskiy.jd02_01.entity.Customer;
-import by.it.laevskiy.jd02_01.entity.Good;
-import by.it.laevskiy.jd02_01.helper.RandomGenerator;
-import by.it.laevskiy.jd02_01.helper.Timeout;
+import by.it.laevskiy.jd02_02.entity.Customer;
+import by.it.laevskiy.jd02_02.entity.Good;
+import by.it.laevskiy.jd02_02.entity.Store;
+import by.it.laevskiy.jd02_02.helper.RandomGenerator;
+import by.it.laevskiy.jd02_02.helper.Timeout;
 
 public class CustomerWorker extends Thread implements CustomerAction, ShoppingCardAction {
     private final Customer customer;
+    private final Store store;
 
     @Override
     public void run() {
         enteredStore();
         chooseGood();
         takeCart();
+        goToQueue();
         goOut();
+        store.getManager().finishedCustomer();
     }
 
 
-    public CustomerWorker(Customer customer) {
+    public CustomerWorker(Store store, Customer customer) {
         this.customer = customer;
+        this.store = store;
+        store.getManager().addCustomer();
     }
 
     @Override
@@ -35,6 +41,23 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
         System.out.println(customer + " choose " + good);
         System.out.println(customer + " finished to choose good");
         return good;
+    }
+
+    @Override
+    public void goToQueue() {
+        System.out.println(customer + " go to the Queue");
+        synchronized (customer.getMonitor()){
+            store.getQueue().add(customer);
+            customer.setFlagWaiting(true);
+            try {
+                while (customer.isFlagWaiting()) {
+                    customer.getMonitor().wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(customer + " finished to choose good");
     }
 
     @Override
