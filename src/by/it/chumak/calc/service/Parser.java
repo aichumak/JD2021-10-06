@@ -49,7 +49,7 @@ public class Parser {
             operands.add(index, var.toString());
         }
 
-        return varCreator.create(operands.get(0));
+        return varCreator.create(operands.get(0).replaceAll(" ", ""));
     }
 
     private Var oneOperation(String stingLeftVar, String operation, String stingRightVar) throws CalcException {
@@ -61,7 +61,6 @@ public class Parser {
         }
 
         Var left = varCreator.create(stingLeftVar);
-
         return calcProcessor.calc(operation, left, right);
     }
 
