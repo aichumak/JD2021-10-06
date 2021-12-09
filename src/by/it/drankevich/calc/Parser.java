@@ -28,6 +28,9 @@ public class Parser {
         expression = expression
                 .replace(" ", "")
                 .trim();
+       while (expression.contains("(")) {
+           expression= bracket(expression);
+        }
 
         List<String> operands = new ArrayList<>(List.of(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
@@ -45,6 +48,8 @@ public class Parser {
         }
         return varcreator.create(operands.get(0));
     }
+
+
 
 
     private Var oneOperation(String stingLeftVar, String operation, String stingRightVar) throws CalcExeption {
@@ -82,5 +87,21 @@ public class Parser {
             }
         }
         return index;
+    }
+
+
+
+    private String bracket(String expression) throws CalcExeption {
+        Pattern pattern = Pattern.compile("(\\(([}{,0-9a-zA-Z-+*/.]+)\\))");
+        Matcher matcher = pattern.matcher(expression);
+        if(matcher.find()){
+            String expressionPart=matcher.group();
+           String expressionPart1=expressionPart.replace("(","").replace(")","");
+            String newExpressionPart=evaluate(expressionPart1).toString();
+            expression=expression.replace(expressionPart,newExpressionPart);
+
+        }
+        return expression;
+
     }
 }

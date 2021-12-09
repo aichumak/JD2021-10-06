@@ -1,10 +1,9 @@
 package by.it.drankevich.jd02_04;
 
 import by.it.drankevich.calc.*;
-import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
 
@@ -12,45 +11,67 @@ public class ParserTest {
 
 
     @Test
-    public void ScalarOperation() throws CalcExeption {
-        VarRepository varRepository = new VarRepository();
-        Varcreator varcreator = new Varcreator(varRepository);
-        parser =new Parser(varRepository,varcreator);
-        String expression="A=2+5.3";
-        double expected=7.3;
-        Var scalar = parser.evaluate(expression);
-        double actual=Double.parseDouble(scalar.toString());
-        assertEquals(expected,actual,1e-3);
-
-    }
-
-
-
-    @Test
     public void ScalarOperation1() throws CalcExeption {
         VarRepository varRepository = new VarRepository();
         Varcreator varcreator = new Varcreator(varRepository);
-        Var right = varcreator.create("7.3");
-        varRepository.save("A", right);
-        parser =new Parser(varRepository,varcreator);
-        String expression="B=A*3.5";
-        double expected=25.55;
+        parser = new Parser(varRepository, varcreator);
+        String expression = "A=2+5.3";
+        double expected = 7.3;
         Var scalar = parser.evaluate(expression);
-        double actual=Double.parseDouble(scalar.toString());
-        assertEquals(expected,actual,1e-3);
+        double actual = Double.parseDouble(scalar.toString());
+        assertEquals(expected, actual, 1e-3);
 
     }
-
 
     @Test
     public void ScalarOperation2() throws CalcExeption {
         VarRepository varRepository = new VarRepository();
         Varcreator varcreator = new Varcreator(varRepository);
-        Var right = varcreator.create("25.55");
-        varRepository.save("B", right);
+        varRepository.save("A", varcreator.create("7.3"));
+        parser = new Parser(varRepository, varcreator);
+        String expression = "B=A*3.5";
+        double expected = 25.55;
+        Var scalar = parser.evaluate(expression);
+        double actual = Double.parseDouble(scalar.toString());
+        assertEquals(expected, actual, 1e-3);
+    }
+
+
+    @Test
+    public void ScalarOperation3() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("B", varcreator.create("25.55"));
+        parser = new Parser(varRepository, varcreator);
+        String expression = "B1=B+0.11*-5";
+        double expected = 25;
+        Var scalar = parser.evaluate(expression);
+        double actual = Double.parseDouble(scalar.toString());
+        assertEquals(expected, actual, 1e-3);
+    }
+
+    @Test
+    public void ScalarOperation4() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("A", varcreator.create("7.3"));
+        parser = new Parser(varRepository, varcreator);
+        String expression = "B2=A/2-1";
+        double expected = 2.65;
+        Var scalar = parser.evaluate(expression);
+        double actual = Double.parseDouble(scalar.toString());
+        assertEquals(expected, actual, 1e-3);
+
+    }
+    @Test
+    public void VectorOperation1() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("A", varcreator.create("7.3"));
+        varRepository.save("B", varcreator.create("25.55"));
         parser =new Parser(varRepository,varcreator);
-        String expression="B1=B+0.11*-5";
-        double expected=25;
+        String expression="C=B+(A*2)";
+        double expected=40.15;
         Var scalar = parser.evaluate(expression);
         double actual=Double.parseDouble(scalar.toString());
         assertEquals(expected,actual,1e-3);
@@ -58,18 +79,34 @@ public class ParserTest {
 
 
     }
+
     @Test
-    public void ScalarOperation3() throws CalcExeption {
+    public void VectorOperation2() throws CalcExeption {
         VarRepository varRepository = new VarRepository();
         Varcreator varcreator = new Varcreator(varRepository);
-        Var right = varcreator.create("7.3");
-        varRepository.save("A", right);
+        varRepository.save("C", varcreator.create("40.15"));
         parser =new Parser(varRepository,varcreator);
-        String expression="B2=A/2-1";
-        double expected=2.65;
+        String expression="D=((C-0.15)-20)/(7-5)";
+        double expected=10;
         Var scalar = parser.evaluate(expression);
         double actual=Double.parseDouble(scalar.toString());
         assertEquals(expected,actual,1e-3);
+
+
+
+    }
+
+    @Test
+    public void VectorOperation3() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("10"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={2,3}*(D/2)";
+        String expected="{10, 15}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        assertEquals(expected,actual);
 
 
 
