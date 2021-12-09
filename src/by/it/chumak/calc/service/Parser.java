@@ -18,7 +18,8 @@ public class Parser {
             "+", 1,
             "-", 1,
             "*", 2,
-            "/", 2
+            "/", 2,
+            "(", 3
     );
 
     private VarRepository varRepository;
@@ -32,6 +33,8 @@ public class Parser {
         this.varCreator = new VarCreator(varRepository);
 
         expression = expression.replace(" ", "").trim();
+        //processOperands(expression);
+
         List<String> operands = new ArrayList<>(List.of(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
 
@@ -50,6 +53,11 @@ public class Parser {
         }
 
         return varCreator.create(operands.get(0).replaceAll(" ", ""));
+    }
+
+    private void processOperands(String expression) throws CalcException {
+
+
     }
 
     private Var oneOperation(String stingLeftVar, String operation, String stingRightVar) throws CalcException {
