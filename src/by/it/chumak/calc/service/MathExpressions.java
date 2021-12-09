@@ -7,6 +7,7 @@ import by.it.chumak.calc.model.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@SuppressWarnings("unused")
 public class MathExpressions implements Operation {
 
     @Override

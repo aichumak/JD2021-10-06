@@ -16,7 +16,6 @@ public class VarCreator {
     }
 
     public Var create(String stringVarValue) {
-
         try {
             if (stringVarValue.matches(Patterns.SCALAR)) {
                 return new Scalar(stringVarValue);

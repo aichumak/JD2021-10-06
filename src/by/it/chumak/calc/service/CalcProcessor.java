@@ -21,8 +21,10 @@ public class CalcProcessor {
         };
     }
 
+    @SuppressWarnings("deprecation")
     private Var performCalculations(String operation, Var varLeftPartExpression, Var varRightPartExpression) throws CalcException {
         String fullClassName = varLeftPartExpression.getClass().getPackageName() + "." + "MathExpressions";
+        fullClassName = fullClassName.replace("model", "service");
         try {
             Class<?> desiredClass = Class.forName(fullClassName);
             Object instanceClass = desiredClass.newInstance();
@@ -33,6 +35,6 @@ public class CalcProcessor {
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException exception) {
             throw new CalcException(exception);
         }
-
     }
+
 }
