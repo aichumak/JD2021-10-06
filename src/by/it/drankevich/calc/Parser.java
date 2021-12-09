@@ -1,10 +1,21 @@
 package by.it.drankevich.calc;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+    private Map<String,Integer> map=Map.of(
+            "=",0,
+            "+",1,
+            "-",1,
+            "*",2,
+            "/",2
+    );
     private final VarRepository varRepository;
     private final Varcreator varcreator;
 
@@ -13,49 +24,63 @@ public class Parser {
     }
 
     public Var evaluate(String expression) throws CalcExeption {
-        expression=expression.trim().replace(" ", "");
-        String[]parts=expression.split(Patterns.OPERATION,2);
-        String stringleftVar=parts[0];
-        if(parts.length==1){
-            return varcreator.create(stringleftVar);
-        }
 
-        String stringrightVar=parts[1];
-        Var right= varcreator.create(stringrightVar);
-        if(expression.contains("=")){
-            varRepository.save(stringleftVar, right);
+        expression = expression
+                .replace(" ", "")
+                .trim();
+
+        List<String> operands = new ArrayList<>(List.of(expression.split(Patterns.OPERATION)));
+        List<String> operations = new ArrayList<>();
+        Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
+        while (matcher.find()) {
+            operations.add(matcher.group());
+        }
+        while (operations.size() > 0) {
+            int index = getIndex(operations);
+            String operation = operations.remove(index);
+            String left = operands.remove(index);
+            String right = operands.remove(index);
+            Var var = oneOperation(left, operation, right);
+            operands.add(index,var.toString());
+        }
+        return varcreator.create(operands.get(0));
+    }
+
+
+    private Var oneOperation(String stingLeftVar, String operation, String stingRightVar) throws CalcExeption {
+
+        Var right = varcreator.create(stingRightVar);
+        if (operation.equals("=")) {
+            varRepository.save(stingLeftVar, right);
             return right;
         }
 
-        Var left= varcreator.create(stringleftVar);
-        if(left!=null&&right!=null){
-            Pattern pattern=Pattern.compile(Patterns.OPERATION);
-           Matcher matcher=pattern.matcher(expression);
-           if(matcher.find()){
-               String operation= matcher.group();
-               switch (operation){
-                   case "+":
-                       return left.add(right);
-
-                   case "-":
-                       return left.sub(right);
-
-
-                   case "*":
-                       return left.mul(right);
-
-                   case "/":
-                       return left.div(right);
-               }
-
-           }
-            System.err.println("Something stupid");
-            return null;
+        Var left = varcreator.create(stingLeftVar);
+        switch (operation) {
+            case "+":
+                return left.add(right);
+            case "-":
+                return left.sub(right);
+            case "*":
+                return left.mul(right);
+            case "/":
+                return left.div(right);
         }
+        throw new CalcExeption("Something stupid");
+    }
 
 
-
-        return null;
-
+    private int getIndex(List<String> operation) {
+        int index=-1;
+        int pr=-1;
+        for (int i = 0; i < operation.size(); i++) {
+            String currentOperation = operation.get(i);
+            Integer currentPriority = map.get(currentOperation);
+            if (pr<currentPriority){
+                index=i;
+                pr=currentPriority;
+            }
+        }
+        return index;
     }
 }

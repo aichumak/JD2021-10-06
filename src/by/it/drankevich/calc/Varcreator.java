@@ -8,7 +8,7 @@ public class Varcreator {
     }
 
 
-    Var create(String stringVarValue) throws CalcExeption {
+    public Var create(String stringVarValue) throws CalcExeption {
 
         if (stringVarValue.matches(Patterns.SCALAR)) {
             return new Scalar(stringVarValue);
