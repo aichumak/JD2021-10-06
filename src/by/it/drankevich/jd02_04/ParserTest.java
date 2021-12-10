@@ -120,8 +120,8 @@ public class ParserTest {
         Parser parser = new Parser(varRepository, varcreator);
         String expression = "E={{2,3},{2,3}}+D";
         String expected = "{{12,13},{12,13}}";
-        Var vector = parser.evaluate(expression);
-        String actual = vector.toString();
+        Var matrix = parser.evaluate(expression);
+        String actual = matrix.toString();
         actual = actual.replaceAll("\\.[0-9]+", "");
         assertEquals(expected, actual);
 
@@ -136,8 +136,8 @@ public class ParserTest {
         Parser parser = new Parser(varRepository, varcreator);
         String expression = "E={{20,30},{20,30}}-D";
         String expected = "{{10,20},{10,20}}";
-        Var vector = parser.evaluate(expression);
-        String actual = vector.toString();
+        Var matrix = parser.evaluate(expression);
+        String actual = matrix.toString();
         actual = actual.replaceAll("\\.[0-9]+", "");
         assertEquals(expected, actual);
 
@@ -152,8 +152,8 @@ public class ParserTest {
         Parser parser = new Parser(varRepository, varcreator);
         String expression = "E={{20,30},{20,30}}*D";
         String expected = "{{200,300},{200,300}}";
-        Var vector = parser.evaluate(expression);
-        String actual = vector.toString();
+        Var matrix = parser.evaluate(expression);
+        String actual = matrix.toString();
         actual = actual.replaceAll("\\.[0-9]+", "");
         assertEquals(expected, actual);
 
@@ -168,8 +168,8 @@ public class ParserTest {
         Parser parser = new Parser(varRepository, varcreator);
         String expression = "E={{20,30},{20,30}}/D";
         String expected = "{{2,3},{2,3}}";
-        Var vector = parser.evaluate(expression);
-        String actual = vector.toString();
+        Var matrix = parser.evaluate(expression);
+        String actual = matrix.toString();
         actual = actual.replaceAll("\\.[0-9]+", "");
         assertEquals(expected, actual);
 
@@ -198,8 +198,8 @@ public class ParserTest {
         Parser parser = new Parser(varRepository, varcreator);
         String expression = "E={{2,3},{2,3}}+D";
         String expected = "{{4,6},{3,5}}";
-        Var vector = parser.evaluate(expression);
-        String actual = vector.toString();
+        Var matrix = parser.evaluate(expression);
+        String actual = matrix.toString();
         actual = actual.replaceAll("\\.[0-9]+", "");
         assertEquals(expected, actual);
 
@@ -213,8 +213,8 @@ public class ParserTest {
         Parser parser = new Parser(varRepository, varcreator);
         String expression = "E={{2,3},{2,3}}-D";
         String expected = "{{0,0},{1,1}}";
-        Var vector = parser.evaluate(expression);
-        String actual = vector.toString();
+        Var matrix = parser.evaluate(expression);
+        String actual = matrix.toString();
         actual = actual.replaceAll("\\.[0-9]+", "");
         assertEquals(expected, actual);
 
@@ -228,8 +228,8 @@ public class ParserTest {
         Parser parser = new Parser(varRepository, varcreator);
         String expression = "E={{2,3},{2,3}}*D";
         String expected = "{{7,12},{7,12}}";
-        Var vector = parser.evaluate(expression);
-        String actual = vector.toString();
+        Var matrix = parser.evaluate(expression);
+        String actual = matrix.toString();
         actual = actual.replaceAll("\\.[0-9]+", "");
         assertEquals(expected, actual);
 
@@ -245,8 +245,8 @@ public class ParserTest {
         Parser parser = new Parser(varRepository, varcreator);
         String expression = "E={{2,3},{2,3}}*(D-A)*C";
         String expected = "{24,24}";
-        Var vector = parser.evaluate(expression);
-        String actual = vector.toString();
+        Var result = parser.evaluate(expression);
+        String actual = result.toString();
         actual = actual.replaceAll("\\.[0-9]+", "");
         assertEquals(expected, actual);
 
