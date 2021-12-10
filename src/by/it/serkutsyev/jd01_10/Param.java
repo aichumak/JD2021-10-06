@@ -9,6 +9,6 @@ import java.lang.reflect.Method;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Param {
-    int a ();
-    int b ();
+    int a();
+    int b();
 }
