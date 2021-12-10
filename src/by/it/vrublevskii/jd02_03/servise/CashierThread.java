@@ -1,12 +1,14 @@
-package by.it.vrublevskii.jd02_02.servise;
+package by.it.vrublevskii.jd02_03.servise;
 
 
-import by.it.vrublevskii.jd02_02.entity.*;
-import by.it.vrublevskii.jd02_02.helper.RandomGenerator;
-import by.it.vrublevskii.jd02_02.helper.Timeout;
+
+import by.it.vrublevskii.jd02_03.entity.*;
+import by.it.vrublevskii.jd02_03.helper.RandomGenerator;
+import by.it.vrublevskii.jd02_03.helper.Timeout;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
 
 public class CashierThread implements Runnable {
 
@@ -28,7 +30,6 @@ public class CashierThread implements Runnable {
                     System.out.println("\t" + cashier + " started to service: " + customer);
                     int timeout = RandomGenerator.get(2000, 5000);
                     Timeout.sleep(timeout);
-                    double total = this.countTotal(customer);
                     String check = this.makeCheck(customer);
                     printCheck(check);
                     System.out.println("\t"
@@ -42,20 +43,31 @@ public class CashierThread implements Runnable {
                     customer.getMonitor().notify();
                 }
             } else {
-                Thread.onSpinWait();
+                Object monitor = CashierThread.class;
+                //noinspection SynchronizationOnLocalVariableOrMethodParameter
+                synchronized (monitor){
+                    try {
+                        monitor.wait(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         }
         System.out.println("\t" + cashier + " finished");
     }
 
     public String makeCheck(Customer customer) {
-        Iterator<Good> goodsInCartIterator = getGoodsInCartIterator(customer);
+        ShoppingCart shoppingCart = customer.getShoppingCart();
+        ArrayList<Good> goodsInCart = shoppingCart.getGoodsInCart();
+        Iterator<Good> iterator = goodsInCart.iterator();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n");
-        while (goodsInCartIterator.hasNext()) {
+        while (iterator.hasNext()) {
             stringBuilder.append("\t");
-            stringBuilder.append(goodsInCartIterator.next());
-            if (goodsInCartIterator.hasNext()) {
+            stringBuilder.append(iterator.next());
+            if (iterator.hasNext()) {
                 stringBuilder.append("\n");
             }
         }
@@ -66,18 +78,4 @@ public class CashierThread implements Runnable {
         System.out.println(check);
     }
 
-    public double countTotal(Customer customer) {
-        Iterator<Good> goodsInCartIterator = getGoodsInCartIterator(customer);
-        while (goodsInCartIterator.hasNext()) {
-            cashier.setTotal(cashier.getTotal() + goodsInCartIterator.next().getPrice());
-        }
-        return cashier.getTotal();
-    }
-
-    private Iterator<Good> getGoodsInCartIterator(Customer customer) {
-        ShoppingCart shoppingCart = customer.getShoppingCart();
-        ArrayList<Good> goodsInCart = shoppingCart.getGoodsInCart();
-        Iterator<Good> iterator = goodsInCart.iterator();
-        return iterator;
-    }
 }
