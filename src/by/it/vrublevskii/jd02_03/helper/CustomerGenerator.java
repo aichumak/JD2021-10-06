@@ -1,8 +1,7 @@
-package by.it.vrublevskii.jd02_02.helper;
+package by.it.vrublevskii.jd02_03.helper;
 
-
-import by.it.vrublevskii.jd02_02.entity.Customer;
-import by.it.vrublevskii.jd02_02.entity.ShoppingCart;
+import by.it.vrublevskii.jd02_03.entity.Customer;
+import by.it.vrublevskii.jd02_03.entity.ShoppingCart;
 
 public class CustomerGenerator {
 
@@ -22,17 +21,4 @@ public class CustomerGenerator {
         }
         return customer;
     }
-
-//    public static Customer get(int customerCounter) {
-//        int customerType = RandomGenerator.get(3);
-//        Customer customer;
-//        if (customerType == 0) {
-//            customer = new Pensioner(customerCounter);
-//        } else if (customerType == 1) {
-//            customer = new AverageCustomer(customerCounter);
-//        } else {
-//            customer = new Student(customerCounter);
-//        }
-//        return customer;
-//    }
 }

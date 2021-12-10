@@ -1,9 +1,13 @@
-package by.it.vrublevskii.jd02_02.servise;
+package by.it.vrublevskii.jd02_03.servise;
 
-import by.it.vrublevskii.jd02_02.entity.*;
-import by.it.vrublevskii.jd02_02.helper.GoodGenerator;
-import by.it.vrublevskii.jd02_02.helper.RandomGenerator;
-import by.it.vrublevskii.jd02_02.helper.Timeout;
+
+import by.it.vrublevskii.jd02_03.entity.Customer;
+import by.it.vrublevskii.jd02_03.entity.Good;
+import by.it.vrublevskii.jd02_03.entity.PriceListRepo;
+import by.it.vrublevskii.jd02_03.entity.Store;
+import by.it.vrublevskii.jd02_03.helper.GoodGenerator;
+import by.it.vrublevskii.jd02_03.helper.RandomGenerator;
+import by.it.vrublevskii.jd02_03.helper.Timeout;
 
 public class CustomerThread extends Thread implements CustomerAction, ShoppingCardAction {
     private final Customer customer;
@@ -89,6 +93,9 @@ public class CustomerThread extends Thread implements CustomerAction, ShoppingCa
         synchronized (customer.getMonitor()){
             store.getQueue().add(customer);
             customer.setFlagWait(true);
+            synchronized (CashierThread.class){
+                CashierThread.class.notifyAll();
+            }
             try {
                 while(customer.isFlagWait()){
                     customer.getMonitor().wait();
@@ -105,5 +112,4 @@ public class CustomerThread extends Thread implements CustomerAction, ShoppingCa
     public void goOut() {
         System.out.printf("%s leaves the store. %20s Goods bought: %d%n", customer, "", goodsInCard);
     }
-
 }

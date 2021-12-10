@@ -1,4 +1,5 @@
-package by.it.vrublevskii.jd02_02.entity;
+package by.it.vrublevskii.jd02_03.entity;
+
 
 public class Customer {
     private final String name;
@@ -14,24 +15,12 @@ public class Customer {
         this.shoppingCart = shoppingCart;
     }
 
-//    public Customer(String name, int customerNumber) {
-//        this.name = name;
-//        this.customerNumber = customerNumber;
-//        this.customerType = "average";
-//    }
-
     public Customer(int customerNumber, String customerType, ShoppingCart shoppingCart) {
         this.name = "anonim";
         this.customerNumber = customerNumber;
         this.customerType = customerType;
         this.shoppingCart = shoppingCart;
     }
-
-//    public Customer(String name, int customerNumber, String customerType) {
-//        this.name = name;
-//        this.customerNumber = customerNumber;
-//        this.customerType = customerType;
-//    }
 
     public Customer(String name, int customerNumber, String customerType, ShoppingCart shoppingCart) {
         this.name = name;
