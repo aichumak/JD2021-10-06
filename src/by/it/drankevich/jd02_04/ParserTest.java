@@ -103,9 +103,10 @@ public class ParserTest {
         varRepository.save("D", varcreator.create("10"));
         parser =new Parser(varRepository,varcreator);
         String expression="E={2,3}*(D/2)";
-        String expected="{10, 15}";
+        String expected="{10,15}";
         Var vector = parser.evaluate(expression);
         String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
         assertEquals(expected,actual);
 
 
