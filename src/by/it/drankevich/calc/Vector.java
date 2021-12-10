@@ -155,7 +155,7 @@ class Vector extends Var {
         String delimetr = "";
         for (double elem : value) {
             sb.append(delimetr).append(elem);
-            delimetr = ", ";
+            delimetr = ",";
         }
         sb.append("}");
 

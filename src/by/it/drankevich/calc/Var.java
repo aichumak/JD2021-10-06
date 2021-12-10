@@ -1,6 +1,6 @@
 package by.it.drankevich.calc;
 
-abstract class Var implements Operation {
+public abstract class Var implements Operation {
     @Override
     public Var add(Var other) throws CalcExeption {
         throw new CalcExeption("Operation %s + %s unsupported%n", this, other);
