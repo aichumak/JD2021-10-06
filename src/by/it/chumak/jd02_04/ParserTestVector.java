@@ -4,7 +4,6 @@ import by.it.chumak.calc.exception.CalcException;
 import by.it.chumak.calc.model.Var;
 import by.it.chumak.calc.repository.VarRepository;
 import by.it.chumak.calc.service.Parser;
-import by.it.chumak.calc.service.VarCreator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +12,6 @@ import static org.junit.Assert.assertEquals;
 public class ParserTestVector {
 
     private Parser parser;
-    private VarCreator varCreator;
 
     @Before
     public void setUp() {

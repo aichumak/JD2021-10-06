@@ -18,8 +18,7 @@ public class Parser {
             "+", 1,
             "-", 1,
             "*", 2,
-            "/", 2,
-            "(", 3
+            "/", 2
     );
 
     private VarRepository varRepository;
@@ -31,10 +30,37 @@ public class Parser {
     public Var evaluate(String expression, VarRepository varRepository) throws CalcException {
         this.varRepository = varRepository;
         this.varCreator = new VarCreator(varRepository);
+        StringBuilder stringBuilder = new StringBuilder(expression);
 
-        expression = expression.replace(" ", "").trim();
-        //processOperands(expression);
+        Matcher matcher1 = Pattern.compile(Patterns.MATH_EXPRESSION_IN_PARENTHESES).matcher(stringBuilder.toString());
+        while (matcher1.find()){
+            stringBuilder.replace(matcher1.start()-1, matcher1.end()+1, processOperands(matcher1.group()));
+            matcher1.reset(stringBuilder.toString());
+        }
 
+
+
+//        List<String> operands = new ArrayList<>(List.of(stringBuilder.toString().split(Patterns.OPERATION)));
+//        List<String> operations = new ArrayList<>();
+//
+//        Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(stringBuilder.toString());
+//        while (matcher.find()) {
+//            operations.add(matcher.group());
+//        }
+//
+//        while (operations.size() > 0) {
+//            int index = getIndex(operations);
+//            String operation = operations.remove(index);
+//            String left = operands.remove(index).replaceAll(" ", "");
+//            String right = operands.remove(index).replaceAll(" ", "");
+//            Var var = oneOperation(left, operation, right);
+//            operands.add(index, var.toString());
+//        }
+
+        return varCreator.create(processOperands(stringBuilder.toString()).replaceAll(" ", ""));
+    }
+
+    private String processOperands(String expression) throws CalcException {
         List<String> operands = new ArrayList<>(List.of(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
 
@@ -52,12 +78,7 @@ public class Parser {
             operands.add(index, var.toString());
         }
 
-        return varCreator.create(operands.get(0).replaceAll(" ", ""));
-    }
-
-    private void processOperands(String expression) throws CalcException {
-
-
+        return operands.get(0);
     }
 
     private Var oneOperation(String stingLeftVar, String operation, String stingRightVar) throws CalcException {
