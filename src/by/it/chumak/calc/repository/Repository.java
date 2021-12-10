@@ -1,4 +1,6 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.repository;
+
+import by.it.chumak.calc.exception.CalcException;
 
 public interface Repository<K, V> {
 

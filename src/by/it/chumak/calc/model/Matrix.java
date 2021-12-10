@@ -1,11 +1,12 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.model;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Matrix extends Var {
+public class Matrix extends Var {
 
     private final double[][] values;
 
@@ -28,7 +29,7 @@ class Matrix extends Var {
         int maxCountSubstrings = 0;
         strMatrix = strMatrix.replaceAll(" ", "");
         StringBuilder str = new StringBuilder(strMatrix);
-        Pattern pattern = Pattern.compile("[0-9,]+[^{|^}]");
+        Pattern pattern = Pattern.compile("((-?([0-9]+)(\\.[0-9]+)*),?)+");
         Matcher matcher = pattern.matcher(str);
 
         while (matcher.find()) {

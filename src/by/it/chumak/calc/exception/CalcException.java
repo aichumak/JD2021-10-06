@@ -1,4 +1,4 @@
-package by.it.chumak.calc;
+package by.it.chumak.calc.exception;
 
 public class CalcException extends Exception{
     public CalcException() {
