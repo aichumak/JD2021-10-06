@@ -72,7 +72,7 @@ public class ParserTest {
         expression = "B=25.55";
         scalar = parser.evaluate(expression, varRepository);
         expression = "A=7.3";
-        scalar = parser.evaluate(expression,varRepository);
+        scalar = parser.evaluate(expression, varRepository);
 
         expression = "C=B+(A*2)";
         String expected = "40.15";
@@ -87,7 +87,7 @@ public class ParserTest {
         scalar = parser.evaluate(expression, varRepository);
 
         expression = "D=((C-0.15)-20)/(7-5)";
-        String expected = "10";
+        String expected = "10.0";
         scalar = parser.evaluate(expression, varRepository);
         String actual = scalar.toString();
         assertEquals(expected, actual);
@@ -112,6 +112,42 @@ public class ParserTest {
 
         expression = "E={2,3}*(D/2)";
         String expected = "12.0";
+        vector = parser.evaluate(expression, varRepository);
+        String actual = vector.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void vectorOperationB5() throws CalcException {
+        expression = "D={6,4}";
+        vector = parser.evaluate(expression, varRepository);
+
+        expression = "E={2,3}*D";
+        String expected = "24.0";
+        vector = parser.evaluate(expression, varRepository);
+        String actual = vector.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void vectorOperationB6() throws CalcException {
+        expression = "D={6,4}";
+        vector = parser.evaluate(expression, varRepository);
+
+        expression = "E={10,10}-D";
+        String expected = "{4.0, 6.0}";
+        vector = parser.evaluate(expression, varRepository);
+        String actual = vector.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void vectorOperationB7() throws CalcException {
+        expression = "D={6,4}";
+        vector = parser.evaluate(expression, varRepository);
+
+        expression = "E={10,10}+D";
+        String expected = "{16.0, 14.0}";
         vector = parser.evaluate(expression, varRepository);
         String actual = vector.toString();
         assertEquals(expected, actual);

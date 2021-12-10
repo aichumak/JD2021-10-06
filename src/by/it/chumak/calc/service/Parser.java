@@ -31,17 +31,18 @@ public class Parser {
         this.varRepository = varRepository;
         this.varCreator = new VarCreator(varRepository);
         StringBuilder stringBuilder = new StringBuilder(expression);
-        Matcher matcher1 = Pattern.compile(Patterns.MATH_EXPRESSION_IN_PARENTHESES).matcher(stringBuilder.toString());
+        Matcher matcher = Pattern.compile(Patterns.MATH_EXPRESSION_IN_PARENTHESES).matcher(stringBuilder.toString());
 
-        while (matcher1.find()){
-            stringBuilder.replace(matcher1.start()-1, matcher1.end()+1, processOperands(matcher1.group()));
-            matcher1.reset(stringBuilder.toString());
+        while (matcher.find()) {
+            stringBuilder.replace(matcher.start(), matcher.end(), processOperands(matcher.group()));
+            matcher.reset(stringBuilder.toString());
         }
 
         return varCreator.create(processOperands(stringBuilder.toString()).replaceAll(" ", ""));
     }
 
     private String processOperands(String expression) throws CalcException {
+        expression = expression.replaceAll("\\(", "").replaceAll("\\)", "");
         List<String> operands = new ArrayList<>(List.of(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
 
