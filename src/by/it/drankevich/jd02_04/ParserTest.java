@@ -114,5 +114,145 @@ public class ParserTest {
     }
 
 
+    @Test
+    public void MatrixScalarOperationAdd() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("10"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={{2,3},{2,3}}+D";
+        String expected="{{12,13},{12,13}}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
+        assertEquals(expected,actual);
+
+
+
+    }
+    @Test
+    public void MatrixScalarOperationSub() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("10"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={{20,30},{20,30}}-D";
+        String expected="{{10,20},{10,20}}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
+        assertEquals(expected,actual);
+
+
+
+    }
+    @Test
+    public void MatrixScalarOperationMul() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("10"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={{20,30},{20,30}}*D";
+        String expected="{{200,300},{200,300}}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
+        assertEquals(expected,actual);
+
+
+
+    }
+
+    @Test
+    public void MatrixScalarOperationDiv() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("10"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={{20,30},{20,30}}/D";
+        String expected="{{2,3},{2,3}}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
+        assertEquals(expected,actual);
+
+    }
+
+    @Test
+    public void MatrixVectorOperationMul() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("{2,3}"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={{2,3},{2,3}}*D";
+        String expected="{13,13}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
+        assertEquals(expected,actual);
+
+    }
+
+    @Test
+    public void MatrixMatrixOperationAdd() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("{{2,3},{1,2}}"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={{2,3},{2,3}}+D";
+        String expected="{{4,6},{3,5}}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
+        assertEquals(expected,actual);
+
+    }
+    @Test
+    public void MatrixMatrixOperationSub() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("{{2,3},{1,2}}"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={{2,3},{2,3}}-D";
+        String expected="{{0,0},{1,1}}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
+        assertEquals(expected,actual);
+
+    }
+
+    @Test
+    public void MatrixMatrixOperationMul() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("{{2,3},{1,2}}"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={{2,3},{2,3}}*D";
+        String expected="{{7,12},{7,12}}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
+        assertEquals(expected,actual);
+
+    }
+
+    @Test
+    public void MatrixVectorScalarBracketOperation() throws CalcExeption {
+        VarRepository varRepository = new VarRepository();
+        Varcreator varcreator = new Varcreator(varRepository);
+        varRepository.save("D", varcreator.create("{{2,3},{2,2}}"));
+        varRepository.save("A", varcreator.create("1"));
+        varRepository.save("C", varcreator.create("{2,2}"));
+        parser =new Parser(varRepository,varcreator);
+        String expression="E={{2,3},{2,3}}*(D-A)*C";
+        String expected="{24,24}";
+        Var vector = parser.evaluate(expression);
+        String actual=vector.toString();
+        actual=actual.replaceAll("\\.[0-9]+","");
+        assertEquals(expected,actual);
+
+    }
+
 
 }

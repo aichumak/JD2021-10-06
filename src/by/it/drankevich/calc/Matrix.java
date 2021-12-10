@@ -194,7 +194,7 @@ class Matrix extends Var {
 
         for (int i = 0; i < value.length; i++) {
             if (i > 0) {
-                sb.append(", ");
+                sb.append(",");
             }
             sb.append("{");
 
@@ -202,7 +202,7 @@ class Matrix extends Var {
             for (int j = 0; j < value[0].length; j++) {
 
                 sb.append(delimetr).append(value[i][j]);
-                delimetr = ", ";
+                delimetr = ",";
             }
             sb.append("}");
         }
