@@ -31,31 +31,12 @@ public class Parser {
         this.varRepository = varRepository;
         this.varCreator = new VarCreator(varRepository);
         StringBuilder stringBuilder = new StringBuilder(expression);
-
         Matcher matcher1 = Pattern.compile(Patterns.MATH_EXPRESSION_IN_PARENTHESES).matcher(stringBuilder.toString());
+
         while (matcher1.find()){
             stringBuilder.replace(matcher1.start()-1, matcher1.end()+1, processOperands(matcher1.group()));
             matcher1.reset(stringBuilder.toString());
         }
-
-
-
-//        List<String> operands = new ArrayList<>(List.of(stringBuilder.toString().split(Patterns.OPERATION)));
-//        List<String> operations = new ArrayList<>();
-//
-//        Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(stringBuilder.toString());
-//        while (matcher.find()) {
-//            operations.add(matcher.group());
-//        }
-//
-//        while (operations.size() > 0) {
-//            int index = getIndex(operations);
-//            String operation = operations.remove(index);
-//            String left = operands.remove(index).replaceAll(" ", "");
-//            String right = operands.remove(index).replaceAll(" ", "");
-//            Var var = oneOperation(left, operation, right);
-//            operands.add(index, var.toString());
-//        }
 
         return varCreator.create(processOperands(stringBuilder.toString()).replaceAll(" ", ""));
     }
