@@ -2,33 +2,10 @@ package by.it.brutski.jd01_11;
 
 import java.util.*;
 
-public class ListA<T> implements List<T> {
+public class ListB<T> implements List<T> {
     private T[] elements = (T[]) new Object[10];
     private int size = 0;
 
-    @Override
-    public boolean add(T e) {
-        if (size == elements.length) {
-            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
-        }
-        elements[size++] = e;
-        return true;
-    }
-
-    @Override
-    public T remove(int index) {
-        T returnElement = elements[index];
-        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
-        elements[--size] = null; //GC
-        return returnElement;
-    }
-
-    @Override
-    public T get(int index) {
-        return elements[index];
-    }
-
-    @Override
     public String toString() {
         StringJoiner st_joiner = new StringJoiner(", ", "[", "]");
         for (int i = 0; i < size; i++) {
@@ -37,64 +14,83 @@ public class ListA<T> implements List<T> {
         return st_joiner.toString();
     }
 
-    @Override
+    public boolean add(T e) {
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
+        }
+        elements[size++] = e;
+        return true;
+    }
+
+    public T remove(int index) {
+        T returnElement = elements[index];
+        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
+        elements[--size] = null; //GC
+        return returnElement;
+    }
+
+    public T get(int index) {
+        return elements[index];
+    }
+
+    public T set(int index, T e){
+        T e_Element = elements[index];
+        elements[index] = e;
+        return e_Element;
+    }
+
+    public void add(int index, T e){
+        if (size == elements.length)
+            elements = Arrays.copyOf(elements, size * 3 / 2 +1);
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = e;
+        size++;
+    }
+
+    public boolean addAll(Collection<? extends T> c){
+        if(size == elements.length)
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + c.size());
+        System.arraycopy(c.toArray(), 0, elements, size, c.size());
+        size = size + c.size();
+        return true;
+    }
+
     public int size() {
         return size;
     }
 
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
-    @Override
     public boolean contains(Object o) {
         return false;
     }
 
-    @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
-            private int position=0;
-
-            @Override
-            public boolean hasNext() {
-                return position<size;
-            }
-
-            @Override
-            public T next() {
-                return elements[position++];
-            }
-        };
+        return null;
     }
 
-    @Override
     public Object[] toArray() {
         return new Object[0];
     }
 
-    @Override
     public <T> T[] toArray(T[] a) {
         return null;
     }
 
-    @Override
     public boolean remove(Object o) {
         return false;
     }
 
-    @Override
     public boolean containsAll(Collection<?> c) {
         return false;
     }
 
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
+    public boolean addAll(List<? extends T> c) {
         return false;
     }
 
-    @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         return false;
     }
@@ -114,15 +110,6 @@ public class ListA<T> implements List<T> {
 
     }
 
-    @Override
-    public T set(int index, T element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, T element) {
-
-    }
 
     @Override
     public int indexOf(Object o) {
@@ -148,4 +135,5 @@ public class ListA<T> implements List<T> {
     public List<T> subList(int fromIndex, int toIndex) {
         return null;
     }
+
 }
