@@ -1,7 +1,5 @@
 package by.it.drankevich.calc;
 
-import by.it._classwork_.calc.CalcException;
-
 public class Varcreator {
     private final VarRepository varRepository;
 
@@ -10,7 +8,7 @@ public class Varcreator {
     }
 
 
-    Var create(String stringVarValue) throws CalcExeption {
+    public Var create(String stringVarValue) throws CalcExeption {
 
         if (stringVarValue.matches(Patterns.SCALAR)) {
             return new Scalar(stringVarValue);

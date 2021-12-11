@@ -1,39 +1,43 @@
 package by.it.astapchik.jd01_06;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class TaskB2 {
 
     public static void main(String[] args) {
         StringBuilder poem = new StringBuilder(Poem.text);
-        String sentences = poem.toString();
-        String text = sentences.replaceAll("\\.{3}", "");
-//        String modify = text.replaceAll("[,:]", "");
-//        String a = modify.replaceAll("[\\-]", "");
-        String[] per = text.replaceAll("\n", " ").split("[.!?]+");
+        String strings = poem.toString();
+        String sentences = strings.replace("...", " ");
+        Pattern pattern = Pattern.compile("([^.$|^!])+");
+        Matcher matcher = pattern.matcher(sentences);
+        String[] text = new String[0];
+        int index = 0;
 
-
-        int lengthSentences = per.length-1;
-
-
-
-        implementSorting(per, lengthSentences);
-        printResult(per, lengthSentences);
-    }
-
-    static void implementSorting(String[] s, int lengthSentences) {
-        for (int i = 1; i < lengthSentences; i++) {
-            String temp = s[i].trim();
-            int j = i - 1;
-            while (j >= 0 && temp.length() < s[j].length()) {
-                s[j + 1] = s[j];
-                j--;
-            }
-            s[j + 1] = temp;
+        while (matcher.find()){
+            String rows = matcher.group().replaceAll
+                    (
+                    "[,-:.\\n]", " "
+            )
+                    .replaceAll("[\\s]{2,}", " "
+            ).trim();
+            text = Arrays.copyOf(text, text.length + 1);
+            text[index] = rows;
+            index++;
         }
+        implementSorting(text);
+        printResult(text);
     }
 
-    static void printResult(String[] str, int lengthSentences) {
-        for (int i = 0; i < lengthSentences; i++) {
-            System.out.println(str[i]);
+    static void implementSorting(String[] text) {
+        Arrays.sort(text, Comparator.comparingInt(String::length));
+    }
+
+    static void printResult(String[] text) {
+        for (String s : text) {
+            System.out.println(s);
         }
     }
 }

@@ -1,5 +1,11 @@
 package by.it.chumak.calc;
 
+import by.it.chumak.calc.exception.CalcException;
+import by.it.chumak.calc.model.Var;
+import by.it.chumak.calc.repository.VarRepository;
+import by.it.chumak.calc.service.Parser;
+import by.it.chumak.calc.service.Printer;
+
 import java.util.Scanner;
 
 public class ConsoleRunner {
