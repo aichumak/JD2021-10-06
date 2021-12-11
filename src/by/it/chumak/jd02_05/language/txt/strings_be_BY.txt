@@ -1,0 +1,6 @@
+#strings
+messages.welcome=Прывітанне!
+messages.question=Як справы?
+messages.sentence=Маё імя:
+user.firstname=Аляксандр
+user.lastname=Чумак
