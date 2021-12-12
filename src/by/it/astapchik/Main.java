@@ -12,10 +12,11 @@ public class Main {
 //        return result;
 //        Arrays.
 //    }
-    public static void main(String[] args){
-        int[] array = {67, 21, 98, 8672, 252, 11};
-        for (int i = 0; i < array.length; i++) {
-            System.out.println("Index " + i + ": " +array[i]);
-        }
-    }
+//    public static void main(String[] args){
+//        int[] array = {67, 21, 98, 8672, 252, 11};
+//        for (int i = 0; i < array.length; i++) {
+//            System.out.println("Index " + i + ": " +array[i]);
+//        }
+//    }
+
 }
