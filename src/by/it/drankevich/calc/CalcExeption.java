@@ -2,7 +2,7 @@ package by.it.drankevich.calc;
 
 public class CalcExeption extends Exception{
     public CalcExeption() {
-        this("no message");
+        this(ResourceManager.get("massage.NoMassage"));
     }
 
     public CalcExeption(String message) {
@@ -14,7 +14,7 @@ public class CalcExeption extends Exception{
     }
 
     public CalcExeption(Throwable cause) {
-        super("no message",cause);
+        super(ResourceManager.get("massage.NoMassage"),cause);
     }
 
     public CalcExeption(String format, Object...objects){
