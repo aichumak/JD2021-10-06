@@ -11,7 +11,7 @@ public class Runner {
 
 
         LocalDateTime localDateTime = LocalDateTime.now();
-        DateTimeFormatter dateTimeFormatter = null;
+        DateTimeFormatter dateTimeFormatter;
 
         Scanner sc = new Scanner(System.in);
 
