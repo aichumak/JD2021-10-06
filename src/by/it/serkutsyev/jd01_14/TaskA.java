@@ -2,6 +2,7 @@ package by.it.serkutsyev.jd01_14;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 public class TaskA {
@@ -68,7 +69,7 @@ public class TaskA {
                 printWriter.printf(FORMAT_ONE_INT, integers.get(i));
                 sum2 = sum2 + integers.get(i);
             }
-            printWriter.printf(FORMAT_AVG, sum2 / integers.size());
+            printWriter.printf(Locale.ENGLISH,FORMAT_AVG, sum2 / integers.size());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

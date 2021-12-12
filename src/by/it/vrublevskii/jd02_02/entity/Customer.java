@@ -5,29 +5,39 @@ public class Customer {
     private final int customerNumber;
     private final String customerType;
     boolean flagWait;
+    private final ShoppingCart shoppingCart;
 
-    public Customer(int customerNumber) {
+    public Customer(int customerNumber, ShoppingCart shoppingCart) {
         this.name = "anonim";
         this.customerNumber = customerNumber;
         this.customerType = "average";
+        this.shoppingCart = shoppingCart;
     }
 
-    public Customer(String name, int customerNumber) {
-        this.name = name;
-        this.customerNumber = customerNumber;
-        this.customerType = "average";
-    }
+//    public Customer(String name, int customerNumber) {
+//        this.name = name;
+//        this.customerNumber = customerNumber;
+//        this.customerType = "average";
+//    }
 
-    public Customer(int customerNumber, String customerType) {
+    public Customer(int customerNumber, String customerType, ShoppingCart shoppingCart) {
         this.name = "anonim";
         this.customerNumber = customerNumber;
         this.customerType = customerType;
+        this.shoppingCart = shoppingCart;
     }
 
-    public Customer(String name, int customerNumber, String customerType) {
+//    public Customer(String name, int customerNumber, String customerType) {
+//        this.name = name;
+//        this.customerNumber = customerNumber;
+//        this.customerType = customerType;
+//    }
+
+    public Customer(String name, int customerNumber, String customerType, ShoppingCart shoppingCart) {
         this.name = name;
         this.customerNumber = customerNumber;
         this.customerType = customerType;
+        this.shoppingCart = shoppingCart;
     }
 
     public String getName() {
@@ -44,6 +54,10 @@ public class Customer {
 
     public void setFlagWait(boolean flagWait) {
         this.flagWait = flagWait;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
     }
 
     public Object getMonitor(){

@@ -1,9 +1,6 @@
 package by.it.vrublevskii.jd02_02.servise;
 
-import by.it.vrublevskii.jd02_02.entity.Customer;
-import by.it.vrublevskii.jd02_02.entity.Good;
-import by.it.vrublevskii.jd02_02.entity.PriceListRepo;
-import by.it.vrublevskii.jd02_02.entity.Store;
+import by.it.vrublevskii.jd02_02.entity.*;
 import by.it.vrublevskii.jd02_02.helper.GoodGenerator;
 import by.it.vrublevskii.jd02_02.helper.RandomGenerator;
 import by.it.vrublevskii.jd02_02.helper.Timeout;
@@ -68,6 +65,7 @@ public class CustomerThread extends Thread implements CustomerAction, ShoppingCa
         int timeout = (int) (RandomGenerator.get(500, 2000) * coefficient);
         Timeout.sleep(timeout);
         Good good = GoodGenerator.get(priceListRepo);
+        customer.getShoppingCart().add(good);
         System.out.println(customer + " chose " + good);
         return good;
     }
