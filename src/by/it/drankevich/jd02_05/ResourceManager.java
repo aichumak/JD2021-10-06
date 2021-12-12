@@ -22,5 +22,5 @@ public enum ResourceManager {
         return resourceBundle.getString(key);
     }
 
-    ;
+
 }
