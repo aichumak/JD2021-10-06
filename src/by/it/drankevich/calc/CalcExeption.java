@@ -6,11 +6,11 @@ public class CalcExeption extends Exception{
     }
 
     public CalcExeption(String message) {
-        super("ERROR: "+ message);
+        super(ResourceManager.get("massage.Error")+ message);
     }
 
     public CalcExeption(String message, Throwable cause) {
-        super("ERROR: "+ message, cause);
+        super(ResourceManager.get("massage.Error")+ message, cause);
     }
 
     public CalcExeption(Throwable cause) {

@@ -1,5 +1,6 @@
 package by.it.drankevich.calc;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -7,6 +8,35 @@ public class ConsoleRunner {
 
 
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+
+            System.out.println("Выберите язык : en,be,ru и нажмите Enter\n Для вывода языка по умолчанию Enter");
+
+            switch (sc.nextLine()) {
+                case "en":
+                    ResourceManager.setLocale(new Locale("en", "US"));
+
+                    break;
+
+                case "ru":
+                   ResourceManager.setLocale(new Locale("ru", "RU"));
+
+                    break;
+
+                case "be":
+                    ResourceManager.setLocale(new Locale("be", "BY"));
+
+                    break;
+
+                default:
+                    ResourceManager.setLocale(Locale.getDefault());
+
+                    break;
+
+            }
+
 
         Scanner scanner = new Scanner(System.in);
         VarRepository varRepository = new VarRepository();

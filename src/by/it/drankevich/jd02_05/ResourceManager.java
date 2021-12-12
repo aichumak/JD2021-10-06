@@ -8,17 +8,17 @@ public enum ResourceManager {
 
     public static final String basename = "by.it.drankevich.jd02_05.languages.strings";
 
-    private ResourceBundle resourceBundle;
+    private static ResourceBundle resourceBundle;
 
     ResourceManager() {
         setLocale(new Locale("en"));
     }
 
-    public void setLocale(Locale locale) {
+    public static void setLocale(Locale locale) {
         resourceBundle = ResourceBundle.getBundle(basename, locale);
     }
 
-    public String get(String key) {
+    public static String get(String key) {
         return resourceBundle.getString(key);
     }
 

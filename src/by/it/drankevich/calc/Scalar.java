@@ -54,7 +54,7 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
 
             if (((Scalar) other).value == 0) {
-                throw new CalcExeption("Division by zero %s / %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.ErrorDivZero"), this, other);
             }
             double div = this.value / ((Scalar) other).value;
             return new Scalar(div);
