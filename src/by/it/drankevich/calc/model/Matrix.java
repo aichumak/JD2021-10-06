@@ -35,12 +35,14 @@ public class Matrix extends Var {
 
         double[][] array1 = new double[arrayx][ arrayy];
         int k = 0;
+
         for (int i = 0; i < arrayx; i++) {
 
             for (int j = 0; j < arrayy; j++) {
                 array1[i][j] = Double.parseDouble(strMatrixarr[k]);
                 k++;
             }
+
 
         }
         this.value = array1;
@@ -66,7 +68,7 @@ public class Matrix extends Var {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value[0].length ||
                     res.length != ((Matrix) other).value.length) {
-                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect+"), this, other);
             } else {
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res[0].length; j++) {
@@ -99,7 +101,7 @@ public class Matrix extends Var {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value[0].length ||
                     res.length != ((Matrix) other).value.length) {
-                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect-"), this, other);
             } else {
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res[0].length; j++) {
@@ -131,7 +133,7 @@ public class Matrix extends Var {
         if ((other instanceof Matrix othermatrix)) {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value.length) {
-                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect*"), this, other);
             } else {
                 double[][] newres = new double[res.length][othermatrix.value[0].length];
 
@@ -152,7 +154,7 @@ public class Matrix extends Var {
         if ((other instanceof Vector othervector)) {
             double[][] res = copymatrix(value);
             if (res[0].length != othervector.getValues().length) {
-                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect*"), this, other);
             } else {
                 double[] newres = new double[res.length];
 

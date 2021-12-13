@@ -47,7 +47,7 @@ public class Vector extends Var {
         if ((other instanceof Vector)) {
             double[] res = Arrays.copyOf(value, value.length);
             if (value.length!=((Vector) other).value.length) {
-                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect+"), this, other);
             }
             else {
                 for (int i = 0; i < res.length; i++) {
@@ -78,7 +78,7 @@ public class Vector extends Var {
         if ((other instanceof Vector)) {
             double[] res = Arrays.copyOf(value, value.length);
             if (value.length != ((Vector) other).value.length) {
-                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect-"), this, other);
             } else {
                 for (int i = 0; i < ((Vector) other).value.length; i++) {
                     res[i] = res[i] - ((Vector) other).value[i];
@@ -106,7 +106,7 @@ public class Vector extends Var {
         if ((other instanceof Vector )) {
             double[] res = Arrays.copyOf(value, value.length);
             if (value.length!=((Vector) other).value.length) {
-                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect*"), this, other);
             }
             else {
                 for (int i = 0; i < res.length; i++) {

@@ -6,25 +6,25 @@ import by.it.drankevich.calc.exeption.CalcExeption;
 public abstract class Var implements Operation {
     @Override
     public Var add(Var other) throws CalcExeption {
-        throw new CalcExeption(ResourceManager.get("massage.Unsupported"), this, other);
+        throw new CalcExeption(ResourceManager.get("massage.Unsupported+"), this, other);
 
     }
 
     @Override
     public Var sub(Var other) throws CalcExeption {
-        throw new CalcExeption(ResourceManager.get("massage.Unsupported"), this, other);
+        throw new CalcExeption(ResourceManager.get("massage.Unsupported-"), this, other);
 
     }
 
     @Override
     public Var mul(Var other) throws CalcExeption {
-        throw new CalcExeption(ResourceManager.get("massage.Unsupported"), this, other);
+        throw new CalcExeption(ResourceManager.get("massage.Unsupported*"), this, other);
 
     }
 
     @Override
     public Var div(Var other) throws CalcExeption {
-        throw new CalcExeption(ResourceManager.get("massage.Unsupported"), this, other);
+        throw new CalcExeption(ResourceManager.get("massage.Unsupported/"), this, other);
 
     }
 
