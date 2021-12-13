@@ -1,6 +1,6 @@
 package by.it.brutski.jd01_09;
 
-interface Operation {
+public interface Operation {
     Var add(Var other);
 
     Var sub(Var other);

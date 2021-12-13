@@ -1,6 +1,6 @@
 package by.it.brutski.jd01_09;
 
-abstract class Var implements Operation {
+public abstract class Var implements Operation {
 
     public String toString() {
         return "unknown variable (abstract stub)";
