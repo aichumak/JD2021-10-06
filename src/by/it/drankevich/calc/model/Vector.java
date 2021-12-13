@@ -1,23 +1,26 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.model;
+
+import by.it.drankevich.calc.ResourceManager;
+import by.it.drankevich.calc.exeption.CalcExeption;
 
 import java.util.Arrays;
 
-class Vector extends Var {
+public class Vector extends Var {
     private final double[] value;
 
-    Vector(double[] value) {
+    public Vector(double[] value) {
         this.value = Arrays.copyOf(value,value.length);
     }
     public double[] getValues() {
         return Arrays.copyOf(value,value.length);
     }
 
-    Vector(Vector othervector) {
+    public Vector(Vector othervector) {
         this.value = othervector.value;
     }
 
 
-    Vector(String strVector) {
+    public Vector(String strVector) {
         String s = strVector.replace('{', ' ');
         String s1 = s.replace('}', ' ');
         String s3 = s1.trim();

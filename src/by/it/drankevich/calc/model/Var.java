@@ -1,4 +1,7 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.model;
+
+import by.it.drankevich.calc.ResourceManager;
+import by.it.drankevich.calc.exeption.CalcExeption;
 
 public abstract class Var implements Operation {
     @Override

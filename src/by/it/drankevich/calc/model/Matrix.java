@@ -1,19 +1,24 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.model;
 
-class Matrix extends Var {
+import by.it.drankevich.calc.ResourceManager;
+import by.it.drankevich.calc.model.Scalar;
+import by.it.drankevich.calc.model.Vector;
+import by.it.drankevich.calc.exeption.CalcExeption;
+
+public class Matrix extends Var {
 
     private final double[][] value;
 
-    Matrix(double[][] value) {
+    public Matrix(double[][] value) {
         this.value = value;
     }
 
 
-    Matrix(Matrix matrix) {
+    public Matrix(Matrix matrix) {
         this.value = matrix.value;
     }
 
-    Matrix(String strMatrix) {
+    public Matrix(String strMatrix) {
         String[]str=strMatrix.split("\\}\\,[ ]?\\{");
         int arrayx=str.length;
 

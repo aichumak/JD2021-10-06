@@ -1,17 +1,20 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.model;
 
-class Scalar extends Var {
+import by.it.drankevich.calc.ResourceManager;
+import by.it.drankevich.calc.exeption.CalcExeption;
+
+public class Scalar extends Var {
     private final double value;
 
-    Scalar(double value) {
+    public Scalar(double value) {
         this.value = value;
     }
 
-    Scalar(Scalar  scalar) {
+    public Scalar(Scalar  scalar) {
         this.value = scalar.value;
     }
 
-    Scalar(String strScalar) {
+    public Scalar(String strScalar) {
         this.value = Double.parseDouble(strScalar);
     }
 

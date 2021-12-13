@@ -1,4 +1,6 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.exeption;
+
+import by.it.drankevich.calc.ResourceManager;
 
 public class CalcExeption extends Exception{
     public CalcExeption() {

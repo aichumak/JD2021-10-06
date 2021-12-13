@@ -1,4 +1,7 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.servise;
+
+import by.it.drankevich.calc.exeption.CalcExeption;
+import by.it.drankevich.calc.model.Var;
 
 public class Printer {
     public  void print(Var result){

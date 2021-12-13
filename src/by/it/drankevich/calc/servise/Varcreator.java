@@ -1,4 +1,12 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.servise;
+
+import by.it.drankevich.calc.constant.Patterns;
+import by.it.drankevich.calc.exeption.CalcExeption;
+import by.it.drankevich.calc.model.Matrix;
+import by.it.drankevich.calc.model.Scalar;
+import by.it.drankevich.calc.model.Var;
+import by.it.drankevich.calc.model.Vector;
+import by.it.drankevich.calc.repository.VarRepository;
 
 public class Varcreator {
     private final VarRepository varRepository;

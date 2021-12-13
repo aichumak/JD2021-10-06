@@ -1,4 +1,4 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.constant;
 
 public interface Patterns {
     String OPERATION="(?<=[^-+*/={,])[-+*/=]";
