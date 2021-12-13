@@ -2,5 +2,5 @@
 messages.welcome=Привет!
 messages.question=Как дела?
 messages.sentence=Меня зовут 
-user.firstname=Адольф
-user.lastname=Торетто
+user.firstname=Виктор
+user.lastname=Врублевский

@@ -5,5 +5,6 @@ public interface Messages {
     String WELCOME="messages.welcome";
     String QUESTION="messages.question";
     String SENTENCE="messages.sentence";
+//    String CURRENT_DATE = "date";
 
 }
