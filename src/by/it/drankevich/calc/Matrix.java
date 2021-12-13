@@ -61,7 +61,7 @@ class Matrix extends Var {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value[0].length ||
                     res.length != ((Matrix) other).value.length) {
-                throw new CalcExeption("Incorrect operation %s + %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
             } else {
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res[0].length; j++) {
@@ -94,7 +94,7 @@ class Matrix extends Var {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value[0].length ||
                     res.length != ((Matrix) other).value.length) {
-                throw new CalcExeption("Incorrect operation %s - %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
             } else {
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res[0].length; j++) {
@@ -126,7 +126,7 @@ class Matrix extends Var {
         if ((other instanceof Matrix othermatrix)) {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value.length) {
-                throw new CalcExeption("Incorrect operation %s * %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
             } else {
                 double[][] newres = new double[res.length][othermatrix.value[0].length];
 
@@ -147,7 +147,7 @@ class Matrix extends Var {
         if ((other instanceof Vector othervector)) {
             double[][] res = copymatrix(value);
             if (res[0].length != othervector.getValues().length) {
-                throw new CalcExeption("Incorrect operation %s * %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect"), this, other);
             } else {
                 double[] newres = new double[res.length];
 
@@ -171,7 +171,7 @@ class Matrix extends Var {
     public Var div(Var other) throws CalcExeption {
         if ((other instanceof Scalar)) {
             if (((Scalar) other).getValue() == 0) {
-                throw new CalcExeption("Division by zero %s / %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.ErrorDivZero"), this, other);
             } else {
                 double[][] res = copymatrix(value);
                 for (int i = 0; i < res.length; i++) {

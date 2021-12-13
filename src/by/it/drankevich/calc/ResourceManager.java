@@ -4,8 +4,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 
-    public enum ResourceManager {
-        INSTANCE;
+    public class ResourceManager {
 
         public static final String basename = "by.it.drankevich.calc.languages.error";
 

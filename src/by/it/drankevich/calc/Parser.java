@@ -71,7 +71,7 @@ public class Parser {
             case "/":
                 return left.div(right);
         }
-        throw new CalcExeption("Something stupid");
+        throw new CalcExeption(ResourceManager.get("massage.Stupid"));
     }
 
 
