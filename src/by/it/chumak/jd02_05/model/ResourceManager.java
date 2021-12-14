@@ -14,7 +14,7 @@ public enum ResourceManager {
     private Locale locale;
 
     ResourceManager() {
-        setLocale(new Locale("en"));
+        setLocale(new Locale("en", "EN"));
     }
 
     public void setLocale(Locale locale) {
