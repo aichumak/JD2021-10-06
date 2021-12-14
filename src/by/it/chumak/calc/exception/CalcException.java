@@ -18,7 +18,7 @@ public class CalcException extends Exception {
     }
 
     public CalcException(ResourceManager resourceManager, Throwable cause) {
-        super(String.format("%s %s", resourceManager.get(Messages.ERROR), cause));
+        super(String.format("%s %s", resourceManager.get(Messages.ERROR), cause.getCause()));
     }
 
     public CalcException(ResourceManager resourceManager, String format, Object... objects) {
