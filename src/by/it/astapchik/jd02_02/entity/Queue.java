@@ -1,4 +1,4 @@
-package by.it.astapchik.jd_02_02.entity;
+package by.it.astapchik.jd02_02.entity;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

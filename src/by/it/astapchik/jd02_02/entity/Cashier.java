@@ -1,4 +1,4 @@
-package by.it.astapchik.jd_02_02.entity;
+package by.it.astapchik.jd02_02.entity;
 
 public class Cashier {
     private final String name;
@@ -14,7 +14,7 @@ public class Cashier {
     }
 
     public void setTotal(double total) {
-        this.total = total;
+        this.total = total + total;
     }
 
     public String getName() {

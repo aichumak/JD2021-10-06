@@ -1,9 +1,9 @@
-package by.it.astapchik.jd_02_02;
+package by.it.astapchik.jd02_02;
 
-import by.it.astapchik.jd_02_02.entity.Manager;
-import by.it.astapchik.jd_02_02.entity.Queue;
-import by.it.astapchik.jd_02_02.entity.Store;
-import by.it.astapchik.jd_02_02.service.StoreWorker;
+import by.it.astapchik.jd02_02.entity.Manager;
+import by.it.astapchik.jd02_02.entity.Queue;
+import by.it.astapchik.jd02_02.entity.Store;
+import by.it.astapchik.jd02_02.service.StoreWorker;
 
 public class Runner {
     public static void main(String[] args) {

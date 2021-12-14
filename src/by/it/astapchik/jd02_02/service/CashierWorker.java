@@ -1,10 +1,10 @@
-package by.it.astapchik.jd_02_02.service;
+package by.it.astapchik.jd02_02.service;
 
-import by.it.astapchik.jd_02_02.entity.Cashier;
-import by.it.astapchik.jd_02_02.entity.Customer;
-import by.it.astapchik.jd_02_02.entity.Store;
-import by.it.astapchik.jd_02_02.helper.GenerateRandomNumbers;
-import by.it.astapchik.jd_02_02.helper.Timeout;
+import by.it.astapchik.jd02_02.entity.Cashier;
+import by.it.astapchik.jd02_02.entity.Customer;
+import by.it.astapchik.jd02_02.entity.Store;
+import by.it.astapchik.jd02_02.helper.GenerateRandomNumbers;
+import by.it.astapchik.jd02_02.helper.Timeout;
 
 public class CashierWorker implements Runnable{
 
@@ -28,7 +28,8 @@ public class CashierWorker implements Runnable{
                     System.out.println(cashier+ " is working.");
                     int timeout = GenerateRandomNumbers.get(2000, 5000);
                     Timeout.sleep(timeout);
-                    System.out.println(cashier+ " is To Do Service.");
+                    cashier.setTotal(customer.getTotal());
+                    System.out.println(cashier+ " is serving. " + customer+"." + "Paycheck: " + customer.getTotal() + "$");
                     customer.setFlagWait(false);
                     customer.getMonitor().notify();
                 }

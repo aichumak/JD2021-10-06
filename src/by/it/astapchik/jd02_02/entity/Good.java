@@ -1,13 +1,12 @@
-package by.it.astapchik.jd_02_02.entity;
+package by.it.astapchik.jd02_02.entity;
 
 public class Good {
 
     private final String name;
-
     private final double price;
 
     public Good(){
-        this("Milk", 12);
+        this("No name", 0);
     }
 
     public Good(String name, double price) {
@@ -25,9 +24,6 @@ public class Good {
 
     @Override
     public String toString() {
-        return "Good{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+        return "Good: " + "Name -" + name +". " + "Price - " + price + " $";
     }
 }

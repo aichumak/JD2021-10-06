@@ -1,6 +1,6 @@
-package by.it.astapchik.jd_02_02.service;
+package by.it.astapchik.jd02_02.service;
 
-import by.it.astapchik.jd_02_02.entity.Good;
+import by.it.astapchik.jd02_02.entity.Good;
 
 public interface CustomerAction {
     void enteredStore(); //вошел в магазин (мгновенно)

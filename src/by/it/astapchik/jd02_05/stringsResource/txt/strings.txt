@@ -1,3 +1,4 @@
+#strings
 message.welcome=Welcome
 message.question=How are you?
 message.sentence=My name is 

@@ -1,5 +1,6 @@
 package by.it.astapchik.calculator;
 
+
 interface Operation {
     Var add(Var other);
     Var sub(Var other);

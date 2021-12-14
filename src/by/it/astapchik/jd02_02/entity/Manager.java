@@ -1,4 +1,4 @@
-package by.it.astapchik.jd_02_02.entity;
+package by.it.astapchik.jd02_02.entity;
 
 public class Manager {
     private final int Plan;

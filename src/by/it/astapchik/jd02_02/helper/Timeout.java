@@ -1,4 +1,4 @@
-package by.it.astapchik.jd_02_02.helper;
+package by.it.astapchik.jd02_02.helper;
 
 public class Timeout {
     private static final int boost = 100;

@@ -1,10 +1,10 @@
-package by.it.astapchik.jd_02_02.service;
+package by.it.astapchik.jd02_02.service;
 
-import by.it.astapchik.jd_02_02.entity.Cashier;
-import by.it.astapchik.jd_02_02.entity.Customer;
-import by.it.astapchik.jd_02_02.entity.Store;
-import by.it.astapchik.jd_02_02.helper.GenerateRandomNumbers;
-import by.it.astapchik.jd_02_02.helper.Timeout;
+import by.it.astapchik.jd02_02.entity.Cashier;
+import by.it.astapchik.jd02_02.entity.Customer;
+import by.it.astapchik.jd02_02.entity.Store;
+import by.it.astapchik.jd02_02.helper.GenerateRandomNumbers;
+import by.it.astapchik.jd02_02.helper.Timeout;
 
 import java.util.ArrayList;
 

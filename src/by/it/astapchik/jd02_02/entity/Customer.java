@@ -1,4 +1,4 @@
-package by.it.astapchik.jd_02_02.entity;
+package by.it.astapchik.jd02_02.entity;
 
 public class Customer {
 
@@ -32,7 +32,7 @@ public class Customer {
     }
 
     public void setTotal(double total) {
-        this.total = total;
+        this.total = total + total;
     }
 
     public Object getMonitor() {
