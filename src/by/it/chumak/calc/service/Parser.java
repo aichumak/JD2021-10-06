@@ -58,7 +58,7 @@ public class Parser {
             String left = operands.remove(index).replaceAll(" ", "");
             String right = operands.remove(index).replaceAll(" ", "");
             Var var = oneOperation(resourceManager, left, operation, right);
-            operands.add(index, var.toString(resourceManager));
+            operands.add(index, var.toString());
         }
 
         return operands.get(0);

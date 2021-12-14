@@ -29,9 +29,10 @@ public class CalcProcessor {
         try {
             Class<?> desiredClass = Class.forName(fullClassName);
             Object instanceClass = desiredClass.newInstance();
-            Class<?>[] arrayParameters = new Class[]{Var.class};
-            Method method = desiredClass.getDeclaredMethod(operation, arrayParameters[0], arrayParameters[0]);
-            Object abc = method.invoke(instanceClass, varLeftPartExpression, varRightPartExpression);
+            Class<?>[] arrayParametersFirst = new Class[]{ResourceManager.class};
+            Class<?>[] arrayParametersSecond = new Class[]{Var.class};
+            Method method = desiredClass.getDeclaredMethod(operation, arrayParametersFirst[0], arrayParametersSecond[0], arrayParametersSecond[0]);
+            Object abc = method.invoke(instanceClass, resourceManager, varLeftPartExpression, varRightPartExpression);
             return (Var) abc;
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException exception) {
             throw new CalcException(resourceManager, exception);

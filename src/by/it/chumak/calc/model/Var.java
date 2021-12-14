@@ -7,7 +7,4 @@ public abstract class Var {
         return " unknown variable (abstract stub)";
     }
 
-//    public String toString(ResourceManager resourceManager) {
-//        return resourceManager.get(Messages.UNKNOWN_VARIABLE);
-//    }
 }
