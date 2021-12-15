@@ -122,4 +122,64 @@ public class ParserTest {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void vectorOperationB4() throws CalcException {
+
+
+        expression = "D = {2,2}";
+        vector = parser.evaluate(expression);
+
+        expression = "E={2,3}*(D/2)";
+        String expected = "5";
+        vector = parser.evaluate(expression);
+        String actual = vector.toString();
+        assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+    public void vectorOperationB5() throws CalcException {
+
+
+        expression = "D = {2,2}";
+        vector = parser.evaluate(expression);
+
+        expression = "E={2,3}*D";
+        String expected = "10";
+        vector = parser.evaluate(expression);
+        String actual = vector.toString();
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void vectorOperationB6() throws CalcException {
+
+
+        expression = "D = {1,2}";
+        vector = parser.evaluate(expression);
+
+        expression = "E={2,3}-D";
+        String expected = "{1,1}";
+        vector = parser.evaluate(expression);
+        String actual = vector.toString();
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void vectorOperationB7() throws CalcException {
+
+        expression = "D = {1,2}";
+        vector = parser.evaluate(expression);
+
+        expression = "E={2,3}+D";
+        String expected = "{3,5}";
+        vector = parser.evaluate(expression);
+        String actual = vector.toString();
+        assertEquals(expected, actual);
+
+    }
 }

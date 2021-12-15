@@ -49,18 +49,6 @@ public class Vector extends Var {
         return super.add(other);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder out = new StringBuilder();
-        out.append("{");
-        String delimiter = "";
-        for (double value : values) {
-            out.append(delimiter).append(value);
-            delimiter = ", ";
-        }
-        out.append("}");
-        return out.toString();
-    }
 
     @Override
     public Var mul(Var other) throws CalcException {
@@ -129,5 +117,18 @@ public class Vector extends Var {
             return new Vector(result);
         }
         return super.div(other);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+        out.append("{");
+        String delimiter = "";
+        for (double value : values) {
+            out.append(delimiter).append(value);
+            delimiter = ", ";
+        }
+        out.append("}");
+        return out.toString();
     }
 }
