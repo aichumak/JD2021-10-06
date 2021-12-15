@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Bank {
     private final AtomicInteger moneyStorage = new AtomicInteger(0);
-    private int cashierMaxLimit = 0;
+    private final int cashierMaxLimit;
     private final Queue clientDeque;
     private final int countClientsPlan;
     private final List<Cashier> cashiersList;
@@ -21,11 +21,8 @@ public class Bank {
         this.cashiersList = new ArrayList<>();
     }
 
+    @SuppressWarnings("inverted")
     public boolean bankIsOpen() {
-        return clientsIn.get() != countClientsPlan;
-    }
-
-    public boolean bankIsClosed() {
         return clientsOut.get() != countClientsPlan;
     }
 
@@ -43,10 +40,6 @@ public class Bank {
 
     public void addClientsOut() {
         this.clientsOut.getAndIncrement();
-    }
-
-    public double getStorageMoney() {
-        return moneyStorage.get();
     }
 
     public int getStorageMoney(int amount) {

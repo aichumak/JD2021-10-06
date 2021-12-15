@@ -7,21 +7,18 @@ public class ClientsBankAccount {
         this.amount = amount;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
     public void addToAmount(int amount) {
         this.amount = this.amount + amount;
     }
 
-    public boolean withdrawFromAmount(int amount) {
+    public int withdrawFromAmount(int amount) {
         if(this.amount - amount >= 0) {
             this.amount = this.amount - amount;
-            return true;
+            return amount;
         } else {
-            return false;
+            int buffer = this.amount;
+            this.amount = 0;
+            return buffer;
         }
     }
-
 }
