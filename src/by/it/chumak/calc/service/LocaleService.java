@@ -5,10 +5,9 @@ import java.util.Locale;
 public class LocaleService {
     private final Locale locale;
 
-    public LocaleService(String languageLetterCode) {
-        this.locale = setLocale(languageLetterCode);
+    public LocaleService() {
+        this.locale = setLocale(Locale.getDefault().getLanguage());
     }
-
 
     public Locale getLocale() {
         return locale;
@@ -19,15 +18,11 @@ public class LocaleService {
     }
 
     private Locale setLocale(String languageLetterCode) {
-        if (languageLetterCode.equals("en")) {
-            return new Locale("en", "EN");
-        } else if (languageLetterCode.equals("ru")) {
-            return new Locale("ru", "RU");
-        } else if (languageLetterCode.equals("be")) {
-            return new Locale("be", "BE");
-        } else {
-            return new Locale("en", "EN");
-        }
+        return switch (languageLetterCode) {
+            case "ru" -> new Locale("ru", "RU");
+            case "be" -> new Locale("be", "BE");
+            default -> new Locale("en", "EN");
+        };
     }
 
 }

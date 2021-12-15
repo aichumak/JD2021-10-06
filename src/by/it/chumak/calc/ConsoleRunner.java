@@ -16,7 +16,7 @@ public class ConsoleRunner {
 
     public static void main(String[] args) throws CalcException {
         ResourceManager resourceManager = ResourceManager.INSTANCE;
-        LocaleService locale = new LocaleService(args.length>0 ? args[0] : "en");
+        LocaleService locale = new LocaleService();
         resourceManager.setLocale(locale.getLocale());
         Scanner scanner = new Scanner(System.in);
         Printer printer = new Printer();

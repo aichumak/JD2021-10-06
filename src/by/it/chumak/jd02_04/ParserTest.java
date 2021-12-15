@@ -24,7 +24,7 @@ public class ParserTest {
         parser = new Parser();
         varRepository = new VarRepository();
         resourceManager = ResourceManager.INSTANCE;
-        LocaleService locale = new LocaleService("en");
+        LocaleService locale = new LocaleService();
         resourceManager.setLocale(locale.getLocale());
     }
 
