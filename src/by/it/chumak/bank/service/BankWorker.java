@@ -37,7 +37,7 @@ public class BankWorker extends Thread {
 
     private void createClients(ExecutorService executorService) {
         for (int i = 0; i < bank.getCountClientsPlan(); i++) {
-            executorService.execute(new ClientWorker(i+1, bank));
+            executorService.execute(new ClientWorker(i + 1, bank));
         }
     }
 
