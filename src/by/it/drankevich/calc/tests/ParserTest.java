@@ -1,4 +1,4 @@
-package by.it.drankevich.jd02_04;
+package by.it.drankevich.calc.tests;
 
 import by.it.drankevich.calc.exeption.CalcExeption;
 import by.it.drankevich.calc.model.Var;

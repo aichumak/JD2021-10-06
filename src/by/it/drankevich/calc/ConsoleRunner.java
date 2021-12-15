@@ -1,5 +1,13 @@
 package by.it.drankevich.calc;
 
+import by.it.drankevich.calc.exeption.CalcExeption;
+import by.it.drankevich.calc.model.Var;
+import by.it.drankevich.calc.repository.VarRepository;
+import by.it.drankevich.calc.servise.Parser;
+import by.it.drankevich.calc.servise.Printer;
+import by.it.drankevich.calc.servise.Varcreator;
+
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -7,6 +15,35 @@ public class ConsoleRunner {
 
 
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+
+            System.out.println("Выберите язык : en,be,ru и нажмите Enter\n Для вывода языка по умолчанию Enter");
+
+            switch (sc.nextLine()) {
+                case "en":
+                    ResourceManager.setLocale(new Locale("en", "US"));
+
+                    break;
+
+                case "ru":
+                   ResourceManager.setLocale(new Locale("ru", "RU"));
+
+                    break;
+
+                case "be":
+                    ResourceManager.setLocale(new Locale("be", "BY"));
+
+                    break;
+
+                default:
+                    ResourceManager.setLocale(Locale.getDefault());
+
+                    break;
+
+            }
+
 
         Scanner scanner = new Scanner(System.in);
         VarRepository varRepository = new VarRepository();

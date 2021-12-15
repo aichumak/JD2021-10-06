@@ -1,5 +1,11 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.servise;
 
+
+import by.it.drankevich.calc.ResourceManager;
+import by.it.drankevich.calc.constant.Patterns;
+import by.it.drankevich.calc.exeption.CalcExeption;
+import by.it.drankevich.calc.model.Var;
+import by.it.drankevich.calc.repository.VarRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +77,7 @@ public class Parser {
             case "/":
                 return left.div(right);
         }
-        throw new CalcExeption("Something stupid");
+        throw new CalcExeption(ResourceManager.get("massage.Stupid"));
     }
 
 

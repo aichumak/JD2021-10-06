@@ -1,44 +1,55 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.model;
 
-class Matrix extends Var {
+import by.it.drankevich.calc.ResourceManager;
+import by.it.drankevich.calc.model.Scalar;
+import by.it.drankevich.calc.model.Vector;
+import by.it.drankevich.calc.exeption.CalcExeption;
+
+public class Matrix extends Var {
 
     private final double[][] value;
 
-    Matrix(double[][] value) {
+    public Matrix(double[][] value) {
         this.value = value;
     }
 
 
-    Matrix(Matrix matrix) {
+    public Matrix(Matrix matrix) {
         this.value = matrix.value;
     }
 
-    Matrix(String strMatrix) {
-        String[]str=strMatrix.split("\\}\\,[ ]?\\{");
-        int arrayx=str.length;
+    public Matrix(String strMatrix) throws CalcExeption {
+        try {
+            String[] str = strMatrix.split("\\}\\,[ ]?\\{");
+            int arrayx = str.length;
 
-        String str0 = str[0].replace('{', ' ');
-        String str1 = str0.replace('}', ' ');
-        String str2 = str1.trim();
-        String[] arraystr = str2.split("[,\\s]+");
-        int arrayy=arraystr.length;
+            String str0 = str[0].replace('{', ' ');
+            String str1 = str0.replace('}', ' ');
+            String str2 = str1.trim();
+            String[] arraystr = str2.split("[,\\s]+");
+            int arrayy = arraystr.length;
 
-        String strMatrix1 = strMatrix.replace('{', ' ');
-        String strMatrix2 = strMatrix1.replace('}', ' ');
-        String strMatrix3 = strMatrix2.trim();
-        String[] strMatrixarr = strMatrix3.split("[,\\s]+");
+            String strMatrix1 = strMatrix.replace('{', ' ');
+            String strMatrix2 = strMatrix1.replace('}', ' ');
+            String strMatrix3 = strMatrix2.trim();
+            String[] strMatrixarr = strMatrix3.split("[,\\s]+");
 
-        double[][] array1 = new double[arrayx][ arrayy];
-        int k = 0;
-        for (int i = 0; i < arrayx; i++) {
+            double[][] array1 = new double[arrayx][arrayy];
+            int k = 0;
 
-            for (int j = 0; j < arrayy; j++) {
-                array1[i][j] = Double.parseDouble(strMatrixarr[k]);
-                k++;
+            for (int i = 0; i < arrayx; i++) {
+
+                for (int j = 0; j < arrayy; j++) {
+                    array1[i][j] = Double.parseDouble(strMatrixarr[k]);
+                    k++;
+                }
+
+
             }
-
+            this.value = array1;
+        } catch (ArrayIndexOutOfBoundsException e){
+            throw new CalcExeption(ResourceManager.get("massage.Stupid"));
         }
-        this.value = array1;
 
 
     }
@@ -61,7 +72,7 @@ class Matrix extends Var {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value[0].length ||
                     res.length != ((Matrix) other).value.length) {
-                throw new CalcExeption("Incorrect operation %s + %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect+"), this, other);
             } else {
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res[0].length; j++) {
@@ -94,7 +105,7 @@ class Matrix extends Var {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value[0].length ||
                     res.length != ((Matrix) other).value.length) {
-                throw new CalcExeption("Incorrect operation %s - %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect-"), this, other);
             } else {
                 for (int i = 0; i < res.length; i++) {
                     for (int j = 0; j < res[0].length; j++) {
@@ -126,7 +137,7 @@ class Matrix extends Var {
         if ((other instanceof Matrix othermatrix)) {
             double[][] res = copymatrix(value);
             if (res[0].length != ((Matrix) other).value.length) {
-                throw new CalcExeption("Incorrect operation %s * %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect*"), this, other);
             } else {
                 double[][] newres = new double[res.length][othermatrix.value[0].length];
 
@@ -147,7 +158,7 @@ class Matrix extends Var {
         if ((other instanceof Vector othervector)) {
             double[][] res = copymatrix(value);
             if (res[0].length != othervector.getValues().length) {
-                throw new CalcExeption("Incorrect operation %s * %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.Incorrect*"), this, other);
             } else {
                 double[] newres = new double[res.length];
 
@@ -171,7 +182,7 @@ class Matrix extends Var {
     public Var div(Var other) throws CalcExeption {
         if ((other instanceof Scalar)) {
             if (((Scalar) other).getValue() == 0) {
-                throw new CalcExeption("Division by zero %s / %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.ErrorDivZero"), this, other);
             } else {
                 double[][] res = copymatrix(value);
                 for (int i = 0; i < res.length; i++) {

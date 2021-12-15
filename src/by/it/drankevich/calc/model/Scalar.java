@@ -1,17 +1,20 @@
-package by.it.drankevich.calc;
+package by.it.drankevich.calc.model;
 
-class Scalar extends Var {
+import by.it.drankevich.calc.ResourceManager;
+import by.it.drankevich.calc.exeption.CalcExeption;
+
+public class Scalar extends Var {
     private final double value;
 
-    Scalar(double value) {
+    public Scalar(double value) {
         this.value = value;
     }
 
-    Scalar(Scalar  scalar) {
+    public Scalar(Scalar  scalar) {
         this.value = scalar.value;
     }
 
-    Scalar(String strScalar) {
+    public Scalar(String strScalar) {
         this.value = Double.parseDouble(strScalar);
     }
 
@@ -54,7 +57,7 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
 
             if (((Scalar) other).value == 0) {
-                throw new CalcExeption("Division by zero %s / %s%n", this, other);
+                throw new CalcExeption(ResourceManager.get("massage.ErrorDivZero"), this, other);
             }
             double div = this.value / ((Scalar) other).value;
             return new Scalar(div);
