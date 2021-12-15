@@ -16,7 +16,7 @@ public class ManagerWorker implements Runnable {
     @Override
     public void run() {
 
-        while (!bank.bankIsClosed()){
+        while (bank.bankIsOpen()){
             List<Cashier> cashierList = bank.getCashiersList();
             for (Cashier cashier : cashierList) {
                 if(cashier.getCash()> bank.getCashierMaxLimit()){

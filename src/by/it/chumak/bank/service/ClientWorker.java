@@ -43,6 +43,6 @@ public class ClientWorker implements Runnable {
 
     private void exitBank() {
         bank.addClientsOut();
-        System.out.println(client.getClientName() + " left bank");
+        System.out.println(client.getClientName() + " exit bank");
     }
 }

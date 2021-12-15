@@ -2,6 +2,7 @@ package by.it.chumak.calc.service;
 
 import by.it.chumak.calc.constant.Patterns;
 import by.it.chumak.calc.exception.CalcException;
+import by.it.chumak.calc.model.ResourceManager;
 import by.it.chumak.calc.model.Var;
 import by.it.chumak.calc.repository.VarRepository;
 
@@ -27,21 +28,21 @@ public class Parser {
     public Parser() {
     }
 
-    public Var evaluate(String expression, VarRepository varRepository) throws CalcException {
+    public Var evaluate(ResourceManager resourceManager, String expression, VarRepository varRepository) throws CalcException {
         this.varRepository = varRepository;
         this.varCreator = new VarCreator(varRepository);
         StringBuilder stringBuilder = new StringBuilder(expression);
         Matcher matcher = Pattern.compile(Patterns.MATH_EXPRESSION_IN_PARENTHESES).matcher(stringBuilder.toString());
 
         while (matcher.find()) {
-            stringBuilder.replace(matcher.start(), matcher.end(), processOperands(matcher.group()));
+            stringBuilder.replace(matcher.start(), matcher.end(), processOperands(resourceManager, matcher.group()));
             matcher.reset(stringBuilder.toString());
         }
 
-        return varCreator.create(processOperands(stringBuilder.toString()).replaceAll(" ", ""));
+        return varCreator.create(processOperands(resourceManager, stringBuilder.toString()).replaceAll(" ", ""));
     }
 
-    private String processOperands(String expression) throws CalcException {
+    private String processOperands(ResourceManager resourceManager, String expression) throws CalcException {
         expression = expression.replaceAll("\\(", "").replaceAll("\\)", "");
         List<String> operands = new ArrayList<>(List.of(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
@@ -56,14 +57,14 @@ public class Parser {
             String operation = operations.remove(index);
             String left = operands.remove(index).replaceAll(" ", "");
             String right = operands.remove(index).replaceAll(" ", "");
-            Var var = oneOperation(left, operation, right);
+            Var var = oneOperation(resourceManager, left, operation, right);
             operands.add(index, var.toString());
         }
 
         return operands.get(0);
     }
 
-    private Var oneOperation(String stingLeftVar, String operation, String stingRightVar) throws CalcException {
+    private Var oneOperation(ResourceManager resourceManager, String stingLeftVar, String operation, String stingRightVar) throws CalcException {
         CalcProcessor calcProcessor = new CalcProcessor();
         Var right = varCreator.create(stingRightVar);
         if (operation.equals("=")) {
@@ -72,7 +73,7 @@ public class Parser {
         }
 
         Var left = varCreator.create(stingLeftVar);
-        return calcProcessor.calc(operation, left, right);
+        return calcProcessor.calc(operation, left, right, resourceManager);
     }
 
     private int getIndex(List<String> operation) {

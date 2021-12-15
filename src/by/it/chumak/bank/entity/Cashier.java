@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Cashier {
     private final String name;
     private final Bank bank;
-    private AtomicInteger cash = new AtomicInteger(300);
+    private final AtomicInteger cash = new AtomicInteger(300);
 
     public Cashier(Bank bank, int cashierNumber) {
         this.name = "Cashier #" + cashierNumber;
@@ -20,7 +20,7 @@ public class Cashier {
         return bank;
     }
 
-    public double getCash() {
+    public int getCash() {
         return cash.get();
     }
 

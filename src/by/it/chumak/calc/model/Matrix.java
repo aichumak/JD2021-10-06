@@ -41,15 +41,19 @@ public class Matrix extends Var {
             }
         }
 
-        resultArray = new double[countRows][maxCountSubstrings];
+        if (allStringArrays.get(0).length == allStringArrays.get(1).length) {
+            resultArray = new double[countRows][maxCountSubstrings];
 
-        for (int i = 0; i < resultArray.length; i++) {
-            String[] tempArray = allStringArrays.get(i);
-            for (int j = 0; j < tempArray.length; j++) {
-                resultArray[i][j] = Double.parseDouble(tempArray[j]);
+            for (int i = 0; i < resultArray.length; i++) {
+                String[] tempArray = allStringArrays.get(i);
+                for (int j = 0; j < tempArray.length; j++) {
+                    resultArray[i][j] = Double.parseDouble(tempArray[j]);
+                }
             }
+            this.values = resultArray;
+        } else {
+            this.values = null;
         }
-        this.values = resultArray;
     }
 
     public double[][] getValues() {
