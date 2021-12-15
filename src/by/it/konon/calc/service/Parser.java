@@ -36,6 +36,7 @@ public class Parser {
         expression = expression
                 .replace(" ", "")
                 .trim();
+        expression = expression.replaceAll("\\(","").replaceAll("\\)", "");
 
         List<String> operands = new ArrayList<>(List.of(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
@@ -46,8 +47,8 @@ public class Parser {
         while (operations.size() > 0) {
             int index = getIndex(operations);
             String operation = operations.remove(index);
-            String left = operands.remove(index);
-            String right = operands.remove(index);
+            String left = operands.remove(index).replaceAll(" ","");
+            String right = operands.remove(index).replaceAll(" ","");
             Var var = oneOperation(left, operation, right);
             operands.add(index,var.toString());
         }
