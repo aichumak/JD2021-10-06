@@ -101,10 +101,10 @@ public class ParserTest {
         scalar = parser.evaluate(expression);
 
         expression = "D=((C-0.15)-20)/(7-5)"; // 10
-        double expected = 10;
+        String expected = "10.0";
         scalar = parser.evaluate(expression);
-        double actual = Double.parseDouble(scalar.toString());
-        assertEquals(expected, actual, 1e-3);
+        String actual = scalar.toString();
+        assertEquals(expected, actual);
 
     }
 

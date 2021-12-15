@@ -11,7 +11,7 @@ public class VarRepositoryToFile implements Repository<String, Var> {
     //TODO in progress...
     private final Map<String, Var> map = new HashMap<>();
 
-    public void save(String name, Var value)  throws CalcException {
+    public void save(String name, Var value) {
         map.put(name, value);
         
     }

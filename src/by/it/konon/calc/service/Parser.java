@@ -23,7 +23,6 @@ public class Parser {
 
 
     private final VarRepository varRepository;
-
     private final VarCreator varCreator;
 
     public Parser(VarRepository varRepository, VarCreator varCreator) {
@@ -32,11 +31,12 @@ public class Parser {
     }
 
     public Var evaluate(String expression) throws CalcException {
-        //2+2 {1,3}*5
         expression = expression
                 .replace(" ", "")
                 .trim();
-        expression = expression.replaceAll("\\(","").replaceAll("\\)", "");
+        while (expression.contains("(")) {
+            expression= staple(expression);
+        }
 
         List<String> operands = new ArrayList<>(List.of(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
@@ -90,5 +90,19 @@ public class Parser {
             }
         }
         return index;
+    }
+
+    private String staple(String expression) throws CalcException{
+        Pattern pattern = Pattern.compile("(\\(([}{,0-9a-zA-Z-+*/.]+)\\))");
+        Matcher matcher = pattern.matcher(expression);
+        if(matcher.find()){
+            String expressionPart=matcher.group();
+            String expressionFirstPart =expressionPart.replace("(","").replace(")","");
+            String newExpressionPart=evaluate(expressionFirstPart).toString();
+            expression=expression.replace(expressionPart,newExpressionPart);
+
+        }
+        return expression;
+
     }
 }
