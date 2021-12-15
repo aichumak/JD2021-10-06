@@ -12,97 +12,106 @@ public class MathExpressions implements Operation {
     @Override
     public Var add(ResourceManager resourceManager, Var varLeftPartExpression, Var varRightPartExpression) throws CalcException {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
+        String leftPartExpression = varLeftPartExpression.toString();
+        String rightPartExpression = varRightPartExpression.toString();
+
 
         if (values != null) {
 
             if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
                 if (varLeftPartExpression instanceof Scalar) {
-                    return new Scalar((double) values.get(0) + (double) values.get(1));
+                    return new Scalar((double) values.get(0) + (double) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Vector) {
-                    return getVectorAddVector(resourceManager, (double[]) values.get(0), (double[]) values.get(1));
+                    return getVectorAddVector(resourceManager, (double[]) values.get(0), (double[]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Matrix) {
-                    return getMatrixAddMatrix(resourceManager, (double[][]) values.get(0), (double[][]) values.get(1));
+                    return getMatrixAddMatrix(resourceManager, (double[][]) values.get(0), (double[][]) values.get(1), leftPartExpression, rightPartExpression);
                 }
             } else {
                 if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
-                    return getVectorAddScalar((double) values.get(0), (double[]) values.get(1));
+                    return getVectorAddScalar((double) values.get(0), (double[]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
-                    return getVectorAddScalar((double) values.get(1), (double[]) values.get(0));
+                    return getVectorAddScalar((double) values.get(1), (double[]) values.get(0), rightPartExpression, leftPartExpression);
                 } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
-                    return getMatrixAddScalar((double) values.get(0), (double[][]) values.get(1));
+                    return getMatrixAddScalar((double) values.get(0), (double[][]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
-                    return getMatrixAddScalar((double) values.get(1), (double[][]) values.get(0));
+                    return getMatrixAddScalar((double) values.get(1), (double[][]) values.get(0), rightPartExpression, leftPartExpression);
                 }
             }
         }
-        return null;
+        throw new CalcException(resourceManager, String.format("%s, %s + %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), varLeftPartExpression, varRightPartExpression));
     }
 
     @Override
     public Var sub(ResourceManager resourceManager, Var varLeftPartExpression, Var varRightPartExpression) throws CalcException {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
+        String leftPartExpression = varLeftPartExpression.toString();
+        String rightPartExpression = varRightPartExpression.toString();
 
         if (values != null) {
 
             if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
                 if (varLeftPartExpression instanceof Scalar) {
-                    return new Scalar((double) values.get(0) - (double) values.get(1));
+                    return new Scalar((double) values.get(0) - (double) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Vector) {
-                    return getVectorSubVector(resourceManager, (double[]) values.get(0), (double[]) values.get(1));
+                    return getVectorSubVector(resourceManager, (double[]) values.get(0), (double[]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Matrix) {
-                    return getMatrixSubMatrix(resourceManager, (double[][]) values.get(0), (double[][]) values.get(1));
+                    return getMatrixSubMatrix(resourceManager, (double[][]) values.get(0), (double[][]) values.get(1), leftPartExpression, rightPartExpression);
                 }
             } else {
                 if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
-                    return getVectorSubScalar((double) values.get(0), (double[]) values.get(1));
+                    return getVectorSubScalar((double) values.get(0), (double[]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
-                    return getVectorSubScalar((double) values.get(1), (double[]) values.get(0));
+                    return getVectorSubScalar((double) values.get(1), (double[]) values.get(0), rightPartExpression, leftPartExpression);
                 } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
-                    return getMatrixSubScalar((double) values.get(0), (double[][]) values.get(1));
+                    return getMatrixSubScalar((double) values.get(0), (double[][]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
-                    return getMatrixSubScalar((double) values.get(1), (double[][]) values.get(0));
+                    return getMatrixSubScalar((double) values.get(1), (double[][]) values.get(0), rightPartExpression, leftPartExpression);
                 }
             }
         }
-        return null;
+        throw new CalcException(resourceManager, String.format("%s, %s - %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), varLeftPartExpression, varRightPartExpression));
     }
 
     @Override
     public Var mul(ResourceManager resourceManager, Var varLeftPartExpression, Var varRightPartExpression) throws CalcException {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
+        String leftPartExpression = varLeftPartExpression.toString();
+        String rightPartExpression = varRightPartExpression.toString();
 
         if (values != null) {
 
             if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
                 if (varLeftPartExpression instanceof Scalar) {
-                    return new Scalar((double) values.get(0) * (double) values.get(1));
+                    return new Scalar((double) values.get(0) * (double) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Vector) {
-                    return getVectorMulVector(resourceManager, (double[]) values.get(0), (double[]) values.get(1));
+                    return getVectorMulVector(resourceManager, (double[]) values.get(0), (double[]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Matrix) {
-                    return getMatrixMulMatrix(resourceManager, (double[][]) values.get(0), (double[][]) values.get(1));
+                    return getMatrixMulMatrix(resourceManager, (double[][]) values.get(0), (double[][]) values.get(1), leftPartExpression, rightPartExpression);
                 }
             } else {
                 if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
-                    return getVectorMulScalar((double) values.get(0), (double[]) values.get(1));
+                    return getVectorMulScalar((double) values.get(0), (double[]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
-                    return getVectorMulScalar((double) values.get(1), (double[]) values.get(0));
+                    return getVectorMulScalar((double) values.get(1), (double[]) values.get(0), rightPartExpression, leftPartExpression);
                 } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
-                    return getMatrixMulScalar((double) values.get(0), (double[][]) values.get(1));
+                    return getMatrixMulScalar((double) values.get(0), (double[][]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
-                    return getMatrixMulScalar((double) values.get(1), (double[][]) values.get(0));
+                    return getMatrixMulScalar((double) values.get(1), (double[][]) values.get(0), rightPartExpression, leftPartExpression);
                 } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Matrix) {
-                    return getVectorMulMatrix(resourceManager, (double[]) values.get(0), (double[][]) values.get(1));
+                    return getVectorMulMatrix(resourceManager, (double[]) values.get(0), (double[][]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Vector) {
-                    return getVectorMulMatrix(resourceManager, (double[]) values.get(1), (double[][]) values.get(0));
+                    return getVectorMulMatrix(resourceManager, (double[]) values.get(1), (double[][]) values.get(0), rightPartExpression, leftPartExpression);
                 }
             }
         }
-        return null;
+        throw new CalcException(resourceManager, String.format("%s, %s * %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), varLeftPartExpression, varRightPartExpression));
     }
 
     @Override
     public Var div(ResourceManager resourceManager, Var varLeftPartExpression, Var varRightPartExpression) throws CalcException {
         ArrayList<Object> values = Assistants.getValues(varLeftPartExpression, varRightPartExpression);
+        String leftPartExpression = varLeftPartExpression.toString();
+        String rightPartExpression = varRightPartExpression.toString();
 
         if (values != null) {
             if (varLeftPartExpression.getClass().getSimpleName().equals(varRightPartExpression.getClass().getSimpleName())) {
@@ -111,25 +120,25 @@ public class MathExpressions implements Operation {
                     if (Double.isInfinite(doubleValue) || Double.isNaN(doubleValue)) {
                         throw new CalcException(resourceManager, resourceManager.get(Messages.INCORRECT_OPERATION_BY_ZERO) + "\n");
                     } else {
-                        return new Scalar(doubleValue);
+                        return new Scalar(doubleValue, leftPartExpression, rightPartExpression);
                     }
                 }
             } else {
                 if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Vector) {
                     throw new CalcException(resourceManager, String.format("%s, %s / %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), varLeftPartExpression, varRightPartExpression));
                 } else if (varLeftPartExpression instanceof Vector && varRightPartExpression instanceof Scalar) {
-                    return getVectorDivScalar(resourceManager, (double) values.get(1), (double[]) values.get(0));
+                    return getVectorDivScalar(resourceManager, (double) values.get(1), (double[]) values.get(0), rightPartExpression, leftPartExpression);
                 } else if (varLeftPartExpression instanceof Scalar && varRightPartExpression instanceof Matrix) {
-                    return getMatrixDivScalar(resourceManager, (double) values.get(0), (double[][]) values.get(1));
+                    return getMatrixDivScalar(resourceManager, (double) values.get(0), (double[][]) values.get(1), leftPartExpression, rightPartExpression);
                 } else if (varLeftPartExpression instanceof Matrix && varRightPartExpression instanceof Scalar) {
-                    return getMatrixDivScalar(resourceManager, (double) values.get(1), (double[][]) values.get(0));
+                    return getMatrixDivScalar(resourceManager, (double) values.get(1), (double[][]) values.get(0), rightPartExpression, leftPartExpression);
                 }
             }
         }
-        return null;
+        throw new CalcException(resourceManager, String.format("%s, %s / %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), varLeftPartExpression, varRightPartExpression));
     }
 
-    private Var getMatrixSubScalar(double a, double[][] b) {
+    private Var getMatrixSubScalar(double a, double[][] b, String leftPartExpression, String rightPartExpression) {
         double[][] result = new double[b.length][b[0].length];
 
         for (int i = 0; i < result.length; i++) {
@@ -140,7 +149,7 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Var getVectorSubScalar(double a, double[] b) {
+    private Var getVectorSubScalar(double a, double[] b, String leftPartExpression, String rightPartExpression) {
         double[] result = new double[b.length];
 
         for (int i = 0; i < result.length; i++) {
@@ -149,11 +158,11 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getMatrixSubMatrix(ResourceManager resourceManager, double[][] a, double[][] b) throws CalcException {
+    private Var getMatrixSubMatrix(ResourceManager resourceManager, double[][] a, double[][] b, String leftPartExpression, String rightPartExpression) throws CalcException {
         double[][] result = new double[a.length][a[0].length];
 
         if (result.length != b[0].length) {
-            throw new CalcException(resourceManager, String.format("%s %s - %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), a, b));
+            throw new CalcException(resourceManager, String.format("%s %s - %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), leftPartExpression, rightPartExpression));
         }
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result.length; j++) {
@@ -163,11 +172,11 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Var getVectorSubVector(ResourceManager resourceManager, double[] a, double[] b) throws CalcException {
+    private Var getVectorSubVector(ResourceManager resourceManager, double[] a, double[] b, String leftPartExpression, String rightPartExpression) throws CalcException {
         double[] result = new double[a.length];
 
         if (result.length != b.length) {
-            throw new CalcException(resourceManager, String.format("%s %s - %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), a, b));
+            throw new CalcException(resourceManager, String.format("%s %s - %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), leftPartExpression, rightPartExpression));
         }
         for (int i = 0; i < result.length; i++) {
             result[i] = a[i] - b[i];
@@ -175,13 +184,13 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getVectorMulMatrix(ResourceManager resourceManager, double[] a, double[][] b) throws CalcException {
+    private Var getVectorMulMatrix(ResourceManager resourceManager, double[] a, double[][] b, String leftPartExpression, String rightPartExpression) throws CalcException {
         double[] result = new double[a.length];
         int verticalVectorSize = b[0].length;
         int horizontalVectorSize = a.length;
 
         if (verticalVectorSize != horizontalVectorSize) {
-            throw new CalcException(resourceManager, String.format("%s %s * %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), a, b));
+            throw new CalcException(resourceManager, String.format("%s %s * %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), leftPartExpression, rightPartExpression));
         }
         for (int i = 0; i < horizontalVectorSize; i++) {
             for (int j = 0; j < result.length; j++) {
@@ -192,7 +201,7 @@ public class MathExpressions implements Operation {
 
     }
 
-    private Var getMatrixMulScalar(double a, double[][] b) {
+    private Var getMatrixMulScalar(double a, double[][] b, String leftPartExpression, String rightPartExpression) {
         double[][] result = new double[b.length][b[0].length];
 
         for (int i = 0; i < result.length; i++) {
@@ -203,7 +212,7 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Var getVectorMulScalar(double a, double[] b) {
+    private Var getVectorMulScalar(double a, double[] b, String leftPartExpression, String rightPartExpression) {
         double[] result = new double[b.length];
 
         for (int i = 0; i < result.length; i++) {
@@ -212,13 +221,13 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getMatrixMulMatrix(ResourceManager resourceManager, double[][] a, double[][] b) throws CalcException {
+    private Var getMatrixMulMatrix(ResourceManager resourceManager, double[][] a, double[][] b, String leftPartExpression, String rightPartExpression) throws CalcException {
         double[][] result = new double[a.length][a[0].length];
         int verticalMatrixSize = a[0].length;
         int horizontalMatrixSize = b.length;
 
         if (verticalMatrixSize != horizontalMatrixSize) {
-            throw new CalcException(resourceManager, String.format("%s %s * %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), a, b));
+            throw new CalcException(resourceManager, String.format("%s %s * %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), leftPartExpression, rightPartExpression));
         }
 
         for (int i = 0; i < verticalMatrixSize; i++) {
@@ -231,11 +240,11 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Var getVectorMulVector(ResourceManager resourceManager, double[] a, double[] b) throws CalcException {
+    private Var getVectorMulVector(ResourceManager resourceManager, double[] a, double[] b, String leftPartExpression, String rightPartExpression) throws CalcException {
         double[] result = new double[1];
 
         if (a.length != b.length) {
-            throw new CalcException(resourceManager, String.format("%s %s * %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), a, b));
+            throw new CalcException(resourceManager, String.format("%s %s * %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), leftPartExpression, rightPartExpression));
         }
         for (int i = 0; i < a.length; i++) {
             result[0] = result[0] + (a[i] * b[i]);
@@ -243,7 +252,7 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getMatrixDivScalar(ResourceManager resourceManager, double a, double[][] b) throws CalcException {
+    private Var getMatrixDivScalar(ResourceManager resourceManager, double a, double[][] b, String leftPartExpression, String rightPartExpression) throws CalcException {
         if (Double.isNaN(a) || Double.isInfinite(a) || a == 0) {
             throw new CalcException(resourceManager, resourceManager.get(Messages.INCORRECT_OPERATION_BY_ZERO) + "\n");
         }
@@ -256,7 +265,7 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Var getVectorDivScalar(ResourceManager resourceManager, double a, double[] b) throws CalcException {
+    private Var getVectorDivScalar(ResourceManager resourceManager, double a, double[] b, String rightPartExpression, String leftPartExpression) throws CalcException {
         if (Double.isNaN(a) || Double.isInfinite(a) || a == 0) {
             throw new CalcException(resourceManager, resourceManager.get(Messages.INCORRECT_OPERATION_BY_ZERO) + "\n");
         }
@@ -267,11 +276,11 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Var getMatrixAddMatrix(ResourceManager resourceManager, double[][] a, double[][] b) throws CalcException {
+    private Var getMatrixAddMatrix(ResourceManager resourceManager, double[][] a, double[][] b, String leftPartExpression, String rightPartExpression) throws CalcException {
         double[][] result = new double[a.length][a[0].length];
 
         if (result.length != b.length) {
-            throw new CalcException(resourceManager, String.format("%s %s + %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), a, b));
+            throw new CalcException(resourceManager, String.format("%s %s + %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), leftPartExpression, rightPartExpression));
         }
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result[i].length; j++) {
@@ -281,7 +290,7 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Var getMatrixAddScalar(double a, double[][] b) {
+    private Var getMatrixAddScalar(double a, double[][] b, String leftPartExpression, String rightPartExpression) {
         double[][] result = new double[b.length][b[0].length];
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result[i].length; j++) {
@@ -291,11 +300,11 @@ public class MathExpressions implements Operation {
         return new Matrix(result);
     }
 
-    private Vector getVectorAddVector(ResourceManager resourceManager, double[] a, double[] b) throws CalcException {
+    private Vector getVectorAddVector(ResourceManager resourceManager, double[] a, double[] b, String leftPartExpression, String rightPartExpression) throws CalcException {
         double[] result = new double[a.length];
 
         if (result.length != b.length) {
-            throw new CalcException(resourceManager, String.format("%s %s + %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), a, b));
+            throw new CalcException(resourceManager, String.format("%s %s + %s%n", resourceManager.get(Messages.INCORRECT_OPERATION), leftPartExpression, rightPartExpression));
         }
         for (int i = 0; i < result.length; i++) {
             result[i] = a[i] + b[i];
@@ -303,7 +312,7 @@ public class MathExpressions implements Operation {
         return new Vector(result);
     }
 
-    private Vector getVectorAddScalar(double a, double[] b) {
+    private Vector getVectorAddScalar(double a, double[] b, String leftPartExpression, String rightPartExpression) {
         double[] result = new double[b.length];
         for (int i = 0; i < result.length; i++) {
             result[i] = b[i] + a;
