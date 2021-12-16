@@ -6,9 +6,7 @@ import by.it.chumak.calc.model.Messages;
 import by.it.chumak.calc.model.ResourceManager;
 import by.it.chumak.calc.model.Var;
 import by.it.chumak.calc.repository.VarRepository;
-import by.it.chumak.calc.service.LocaleService;
-import by.it.chumak.calc.service.Parser;
-import by.it.chumak.calc.service.Printer;
+import by.it.chumak.calc.service.*;
 
 import java.util.Scanner;
 
@@ -18,6 +16,8 @@ public class ConsoleRunner {
         ResourceManager resourceManager = ResourceManager.INSTANCE;
         LocaleService locale = new LocaleService();
         resourceManager.setLocale(locale.getLocale());
+        LoggerMethods logger = Logger.INSTANCE;
+        logger.info(resourceManager.get(Messages.CALC_OPEN), resourceManager.getZonedDateTime());
         Scanner scanner = new Scanner(System.in);
         Printer printer = new Printer();
         Parser parser = new Parser();
@@ -27,7 +27,7 @@ public class ConsoleRunner {
             String expression = scanner.nextLine();
             if (!expression.matches(Patterns.STOP_APP_COMMAND) && !expression.matches(Patterns.CHANGE_LANGUAGE_COMMAND)) {
                 try {
-                    Var result = parser.evaluate(resourceManager, expression, varRepository);
+                    Var result = parser.evaluate(resourceManager, logger, expression, varRepository);
                     printer.print(result);
                 } catch (CalcException e) {
                     printer.print(e);
@@ -39,5 +39,6 @@ public class ConsoleRunner {
             }
         }
         System.out.println(resourceManager.get(Messages.CALC_CLOSED));
+        logger.info(resourceManager.get(Messages.CALC_CLOSED), resourceManager.getZonedDateTime());
     }
 }

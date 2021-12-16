@@ -7,4 +7,5 @@ public interface Messages {
     String INCORRECT_OPERATION_BY_ZERO = "messages.incorrectOperationDivByZero";
     String INCORRECT_OPERATION = "messages.incorrectOperation";
     String CALC_CLOSED = "messages.calcClosed";
+    String CALC_OPEN = "messages.calcOpen";
 }
