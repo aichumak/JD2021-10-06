@@ -11,7 +11,7 @@ public enum ResourceManager {
     private ResourceBundle resourceBundle;
 
     ResourceManager() {
-        setLocale(new Locale("de"));
+        setLocale(new Locale("de", "DE"));
     }
 
     public void setLocale(Locale locale) {

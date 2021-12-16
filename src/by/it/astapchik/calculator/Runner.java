@@ -32,7 +32,7 @@ class Runner {
 //        System.out.println(v.add(s) + " = scalar + vector");
 //        System.out.println(v.sub(v)+ " = vector - vector"); //выведет в консоль {0.0, 0.0, 0.0}
 //        System.out.println(v.sub(s1)+ " = scalar - vector");
-        System.out.println(v.mul(s) + " = scalar * vector"); //выведет в консоль 14.0
+//        System.out.println(v.mul(s) + " = scalar * vector"); //выведет в консоль 14.0
 //        System.out.println(v.mul(v) + " = vector * vector");
 //        System.out.println(v.div(s)); //сообщит о невозможности операции
 
@@ -46,7 +46,7 @@ class Runner {
 //        System.out.println("scalar - matrix = " + m.sub(s));
 //        print(m.mul(m)); //{{30.0, 36.0, 42.0}, {66.0, 81.0, 96.0}, {102.0, 126.0, 150.0}}
 //        System.out.println("scalar * matrix = " + m.mul(s));
-//        System.out.println("matrix * matrix = " + m.mul(m));//{{30.0, 36.0, 42.0}, {66.0, 81.0, 96.0}, {102.0, 126.0, 150.0}}
+        System.out.println("matrix * matrix = " + m.mul(m));//{{30.0, 36.0, 42.0}, {66.0, 81.0, 96.0}, {102.0, 126.0, 150.0}}
 //        System.out.println("matrix * vector = " + m.mul(v)); //{14.0, 32.0, 50.0}
     }
 }

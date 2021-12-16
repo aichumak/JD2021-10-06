@@ -16,6 +16,7 @@ public class ParserTest {
     private String expression;
     private Var scalar;
     private Var vector;
+    private Var matrix;
 
     @Before
     public void setUp() throws Exception {
@@ -111,6 +112,14 @@ public class ParserTest {
         String expected = "{10.0,15.0}";
         vector = parser.evaluate(expression);
         String actual = vector.toString();
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void matrixOperation1() throws CalcException {
+        expression = "E={{1,2,3},{4,5,6},{7,8,9}}*{{1,2,3},{4,5,6},{7,8,9}}";
+        String expected = "{{30.0,36.0,42.0},{66.0,81.0,96.0},{102.0,126.0,150.0}}";
+        matrix = parser.evaluate(expression);
+        String actual = matrix.toString();
         assertEquals(expected, actual);
     }
 }
