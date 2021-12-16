@@ -4,7 +4,6 @@ import by.it.chumak.calc.constant.Patterns;
 import by.it.chumak.calc.exception.CalcException;
 import by.it.chumak.calc.model.ResourceManager;
 import by.it.chumak.calc.model.Var;
-import by.it.chumak.calc.repository.VarRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +21,13 @@ public class Parser {
             "/", 2
     );
 
-    private VarRepository varRepository;
-    private VarCreator varCreator;
+    private final VarCreator varCreator;
 
-    public Parser() {
+    public Parser(VarCreator varCreator) {
+        this.varCreator = varCreator;
     }
 
-    public Var evaluate(ResourceManager resourceManager, LoggerMethods logger, String expression, VarRepository varRepository) throws CalcException {
-        this.varRepository = varRepository;
-        this.varCreator = new VarCreator(varRepository);
+    public Var evaluate(ResourceManager resourceManager, LoggerMethods logger, String expression) throws CalcException {
         StringBuilder stringBuilder = new StringBuilder(expression);
         Matcher matcher = Pattern.compile(Patterns.MATH_EXPRESSION_IN_PARENTHESES).matcher(stringBuilder.toString());
 
@@ -39,7 +36,8 @@ public class Parser {
             matcher.reset(stringBuilder.toString());
         }
 
-        return varCreator.create(processOperands(resourceManager, logger, stringBuilder.toString()).replaceAll(" ", ""));
+        String result = processOperands(resourceManager, logger, stringBuilder.toString()).replaceAll(" ", "");
+        return varCreator.getVar(result).create(result);
     }
 
     private String processOperands(ResourceManager resourceManager, LoggerMethods logger, String expression) throws CalcException {
@@ -64,15 +62,15 @@ public class Parser {
         return operands.get(0);
     }
 
-    private Var oneOperation(ResourceManager resourceManager, LoggerMethods logger, String stingLeftVar, String operation, String stingRightVar) throws CalcException {
+    private Var oneOperation(ResourceManager resourceManager, LoggerMethods logger, String stringLeftVar, String operation, String stringRightVar) throws CalcException {
         CalcProcessor calcProcessor = new CalcProcessor();
-        Var right = varCreator.create(stingRightVar);
+        Var right = varCreator.getVar(stringRightVar).create(stringRightVar);
         if (operation.equals("=")) {
-            varRepository.save(stingLeftVar, right);
+            varCreator.getVarRepository().save(stringLeftVar, stringRightVar);
             return right;
         }
 
-        Var left = varCreator.create(stingLeftVar);
+        Var left = varCreator.getVar(stringLeftVar).create(stringLeftVar);
         return calcProcessor.calc(operation, left, right, resourceManager, logger);
     }
 

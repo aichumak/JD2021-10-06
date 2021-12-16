@@ -1,10 +1,7 @@
 package by.it.chumak.calc.service;
 
 import by.it.chumak.calc.constant.Patterns;
-import by.it.chumak.calc.model.Matrix;
-import by.it.chumak.calc.model.Scalar;
 import by.it.chumak.calc.model.Var;
-import by.it.chumak.calc.model.Vector;
 import by.it.chumak.calc.repository.VarRepository;
 
 public class VarCreator {
@@ -15,20 +12,24 @@ public class VarCreator {
         this.varRepository = varRepository;
     }
 
-    public Var create(String stringVarValue) {
+    public VarCreatorMethods getVar(String stringVarValue) {
         try {
             if (stringVarValue.matches(Patterns.SCALAR)) {
-                return new Scalar(stringVarValue);
+                return new ScalarCreator();
             } else if (stringVarValue.matches(Patterns.VECTOR)) {
-                return new Vector(stringVarValue);
+                return new VectorCreator();
             } else if (stringVarValue.matches(Patterns.MATRIX)) {
-                return new Matrix(stringVarValue);
+                return new MatrixCreator();
             } else {
-                return varRepository.find(stringVarValue);
+                return getVar(varRepository.find(stringVarValue));
             }
         } catch (Exception error) {
             System.out.println(error.getMessage());
         }
         return null;
+    }
+
+    public VarRepository getVarRepository() {
+        return varRepository;
     }
 }

@@ -20,14 +20,13 @@ public class ConsoleRunner {
         logger.info(resourceManager.get(Messages.CALC_OPEN), resourceManager.getZonedDateTime());
         Scanner scanner = new Scanner(System.in);
         Printer printer = new Printer();
-        Parser parser = new Parser();
-        VarRepository varRepository = new VarRepository();
+        Parser parser = new Parser(new VarCreator(new VarRepository()));
 
         for (; ; ) {
             String expression = scanner.nextLine();
             if (!expression.matches(Patterns.STOP_APP_COMMAND) && !expression.matches(Patterns.CHANGE_LANGUAGE_COMMAND)) {
                 try {
-                    Var result = parser.evaluate(resourceManager, logger, expression, varRepository);
+                    Var result = parser.evaluate(resourceManager, logger, expression);
                     printer.print(result);
                 } catch (CalcException e) {
                     printer.print(e);
