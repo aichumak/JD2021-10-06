@@ -8,7 +8,7 @@ import by.it.drankevich.calc.model.Var;
 import by.it.drankevich.calc.model.Vector;
 import by.it.drankevich.calc.repository.VarRepository;
 
-public class Varcreator {
+public class Varcreator implements VarCreatorAction{
     private final VarRepository varRepository;
 
     public Varcreator(VarRepository varRepository) {
