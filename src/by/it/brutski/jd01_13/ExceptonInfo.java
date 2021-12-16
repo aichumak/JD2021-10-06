@@ -1,16 +1,22 @@
 package by.it.brutski.jd01_13;
 
-import jdk.jfr.StackTrace;
-
 public class ExceptonInfo {
-    String getInfo(RuntimeException exc, Class<TaskA> currentClass){
+    private RuntimeException exception;
+    private Class<?> currentClass;
+
+    public ExceptonInfo(RuntimeException exception, Class<?> currentClass) {
+        this.exception = exception;
+        this.currentClass = currentClass;
+    }
+
+    String getInfo(){
         String currentClassName = currentClass.getName();
-        StackTraceElement[] stackTrace = exc.getStackTrace();
+        StackTraceElement[] stackTrace = exception.getStackTrace();
 
         for(StackTraceElement stackTraceElement : stackTrace){
             String className = stackTraceElement.getClassName();
             if(className.equals(currentClassName)){
-                Class<? extends RuntimeException> a_Class = exc.getClass();
+                Class<? extends RuntimeException> a_Class = exception.getClass();
                 String nameException = a_Class.getName();
                 int lineNumber = stackTraceElement.getLineNumber();
                 return String.format("" + " name: %s%n" + "class: %s%n" + " line: %d%n", nameException, currentClassName, lineNumber);

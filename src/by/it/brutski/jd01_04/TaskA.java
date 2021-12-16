@@ -1,6 +1,5 @@
 package by.it.brutski.jd01_04;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskA {
@@ -23,25 +22,43 @@ public class TaskA {
     }
 
     static void buildOneDimArray(String line) {
-        line = line.trim();
-        String[] strings = line.split(" ");
+        double[] array = InOut.getArray(line);
+        InOut.printArray(array, "V", 5);
+        double first = array[0];
+        double last = array[array.length - 1];
+        sort(array);
 
-        double[] array = new double[strings.length];
-        for (int i = 0; i < strings.length; i++) {
-            array[i] = Double.parseDouble(strings[i]);
-        }
-
-        for (double element : array) {
-            System.out.print(Arrays.toString(new double[]{element}));
-        }
-        System.out.println();
-
+        InOut.printArray(array, "V", 4);
         for (int i = 0; i < array.length; i++) {
-            System.out.printf("%s[%-1d] = %-3.2f ", "V", i, array[i]);
+            if (first == array[i]) {
+                System.out.printf("Index of first element=%d\n", i);
+                break;
+            }
         }
+        for (int i = 0; i < array.length; i++) {
+            if (last == array[i]) {
+                System.out.printf("Index of last element=%d\n", i);
+                break;
+            }
+        }
+    }
 
-        Arrays.sort(array);
-        System.out.println(Arrays.toString(array));
+    static void sort(double[] array) {
+        int j;
+        boolean flag = true;
+        double temp;
+
+        while (flag) {
+            flag = false;
+            for (j = 0; j < array.length - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    temp =array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    flag = true;
+                }
+            }
+        }
     }
 }
 

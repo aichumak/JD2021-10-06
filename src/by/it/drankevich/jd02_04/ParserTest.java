@@ -1,6 +1,10 @@
 package by.it.drankevich.jd02_04;
 
-import by.it.drankevich.calc.*;
+import by.it.drankevich.calc.exeption.CalcExeption;
+import by.it.drankevich.calc.model.Var;
+import by.it.drankevich.calc.repository.VarRepository;
+import by.it.drankevich.calc.servise.Parser;
+import by.it.drankevich.calc.servise.Varcreator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

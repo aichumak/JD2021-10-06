@@ -10,9 +10,9 @@ public class TaskA {
             else
                 Integer.parseInt("Привет");
         }catch (NumberFormatException | NullPointerException exc){
-            Class<TaskA> currentClass = TaskA.class;
-            ExceptonInfo exceptonInfo = new ExceptonInfo();
-            String info = exceptonInfo.getInfo(exc, currentClass);
+           // Class<TaskA> currentClass = TaskA.class;
+            ExceptonInfo exceptonInfo = new ExceptonInfo(exc, TaskA.class);
+            String info = exceptonInfo.getInfo();
             System.out.println(info);
         }
     }

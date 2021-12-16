@@ -6,6 +6,7 @@ import by.it.chumak.bank.helper.Timeout;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class BankWorker extends Thread {
     private final Bank bank;
@@ -16,35 +17,39 @@ public class BankWorker extends Thread {
 
     @Override
     public void run() {
-        System.out.printf("Bank opened");
-        createCashiers();
+        ExecutorService executorService = Executors.newFixedThreadPool(103);
+        System.out.println("Bank opened");
+        createCashiers(executorService);
         Timeout.sleep(1000);
-        createManager();
+        createManager(executorService);
         Timeout.sleep(1000);
-        createClients();
+        createClients(executorService);
+        executorService.shutdown();
+
+        try {
+            executorService.awaitTermination(1, TimeUnit.DAYS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Bank closed");
     }
 
-    private void createClients() {
-        ExecutorService executorService = Executors.newFixedThreadPool(100);
+    private void createClients(ExecutorService executorService) {
         for (int i = 0; i < bank.getCountClientsPlan(); i++) {
             executorService.execute(new ClientWorker(i+1, bank));
         }
-        executorService.shutdown();
     }
 
-    private void createManager() {
-        ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private void createManager(ExecutorService executorService) {
         executorService.execute(new ManagerWorker(bank));
-        executorService.shutdown();
     }
 
-    private void createCashiers() {
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
+    private void createCashiers(ExecutorService executorService) {
         for (int i = 0; i < bank.getCountClientsPlan() / 50; i++) {
             Cashier cashier = new Cashier(bank, i + 1);
             bank.addCashierToList(cashier);
             executorService.execute(new CashierWorker(bank, cashier));
         }
-        executorService.shutdown();
     }
 }

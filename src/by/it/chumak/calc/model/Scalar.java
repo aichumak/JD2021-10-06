@@ -4,7 +4,7 @@ public class Scalar extends Var {
 
     private final double value;
 
-    public Scalar(double value) {
+    public Scalar(double value, String leftPartExpression, String rightPartExpression) {
         this.value = value;
     }
 

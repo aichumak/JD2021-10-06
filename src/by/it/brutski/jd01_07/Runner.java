@@ -11,6 +11,10 @@ public class Runner {
 
         Var var3 = new Scalar("51.51");
         System.out.println(var3);
+
+        double[] array = {15, 56, -9, 7, 0.36};
+        Var var4 = new Vector(array);
+        System.out.println(var4);
     }
 
 }

@@ -13,7 +13,7 @@ public class ClientActions {
         int countActions = RandomGenerator.get(1, 5);
 
         for (int i = 0; i < countActions; i++) {
-            clientActionList.add(actionList.get(RandomGenerator.get(1, 5)));
+            clientActionList.add(actionList.get(RandomGenerator.get(0, 4)));
         }
 
         return clientActionList;

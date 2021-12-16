@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
     public Var evaluate(String expression) {
         expression = expression.replace(" ", "");
         expression = expression.trim();
