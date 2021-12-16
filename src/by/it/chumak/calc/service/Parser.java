@@ -37,7 +37,7 @@ public class Parser {
         }
 
         String result = processOperands(resourceManager, logger, stringBuilder.toString()).replaceAll(" ", "");
-        return varCreator.getVar(result).create(result);
+        return varCreator.getVar(result).create(result, varCreator.getVarRepository());
     }
 
     private String processOperands(ResourceManager resourceManager, LoggerMethods logger, String expression) throws CalcException {
@@ -64,13 +64,13 @@ public class Parser {
 
     private Var oneOperation(ResourceManager resourceManager, LoggerMethods logger, String stringLeftVar, String operation, String stringRightVar) throws CalcException {
         CalcProcessor calcProcessor = new CalcProcessor();
-        Var right = varCreator.getVar(stringRightVar).create(stringRightVar);
+        Var right = varCreator.getVar(stringRightVar).create(stringRightVar, varCreator.getVarRepository());
         if (operation.equals("=")) {
             varCreator.getVarRepository().save(stringLeftVar, stringRightVar);
             return right;
         }
 
-        Var left = varCreator.getVar(stringLeftVar).create(stringLeftVar);
+        Var left = varCreator.getVar(stringLeftVar).create(stringLeftVar, varCreator.getVarRepository());
         return calcProcessor.calc(operation, left, right, resourceManager, logger);
     }
 

@@ -8,6 +8,6 @@ public interface Repository<K, V> {
 
     void save(String name, String value);
 
-    String find(K name) throws CalcException;
+    String find(K name);
 
 }

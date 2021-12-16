@@ -1,7 +1,5 @@
 package by.it.chumak.calc.repository;
 
-import by.it.chumak.calc.model.Var;
-
 import java.util.HashMap;
 import java.util.Map;
 
