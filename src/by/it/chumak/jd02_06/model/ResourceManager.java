@@ -1,8 +1,5 @@
 package by.it.chumak.jd02_06.model;
 
-import by.it.chumak.jd02_05.model.ZoneIdEntity;
-import by.it.chumak.jd02_06.model.DateFormatPatterns;
-
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
