@@ -18,30 +18,30 @@ public class CalcException extends Exception {
     public CalcException(LoggerMethods logger, SetReportBuilder reportBuilder, List<ReportBuilder> builders, ResourceManager resourceManager, String message) {
         super(String.format("%s %s", resourceManager.get(Messages.ERROR), message));
         logger.error(String.format("%s %s", resourceManager.get(Messages.ERROR), message), resourceManager.getZonedDateTime());
-        buildReport(reportBuilder, builders, resourceManager.get(Messages.ERROR), message, "");
+        buildReport(resourceManager, reportBuilder, builders, resourceManager.get(Messages.ERROR), message, "");
     }
 
     public CalcException(LoggerMethods logger, SetReportBuilder reportBuilder, List<ReportBuilder> builders, ResourceManager resourceManager, String message, Throwable cause) {
         super(String.format("%s %s %s", resourceManager.get(Messages.ERROR), message, cause));
         logger.error(String.format("%s %s %s", resourceManager.get(Messages.ERROR), message, cause), resourceManager.getZonedDateTime());
-        buildReport(reportBuilder, builders, resourceManager.get(Messages.ERROR), message, cause.toString());
+        buildReport(resourceManager, reportBuilder, builders, resourceManager.get(Messages.ERROR), message, cause.toString());
     }
 
     public CalcException(LoggerMethods logger, SetReportBuilder reportBuilder, List<ReportBuilder> builders, ResourceManager resourceManager, Throwable cause) {
         super(String.format("%s %s", resourceManager.get(Messages.ERROR), cause.getCause()));
         logger.error(String.format("%s %s", resourceManager.get(Messages.ERROR), cause.getCause()), resourceManager.getZonedDateTime());
-        buildReport(reportBuilder, builders, resourceManager.get(Messages.ERROR), "", cause.getCause().toString());
+        buildReport(resourceManager, reportBuilder, builders, resourceManager.get(Messages.ERROR), "", cause.getCause().toString());
     }
 
     public CalcException(LoggerMethods logger, SetReportBuilder reportBuilder, List<ReportBuilder> builders, ResourceManager resourceManager, String format, Object... objects) {
         this(logger, reportBuilder, builders, resourceManager, String.format(format, objects));
     }
 
-    private void buildReport(SetReportBuilder reportBuilder, List<ReportBuilder> builders, String messageTYPE, String message, String cause) {
+    private void buildReport(ResourceManager resourceManager, SetReportBuilder reportBuilder, List<ReportBuilder> builders, String messageTYPE, String message, String cause) {
         List<String> parametersList = getParametersList(messageTYPE, message, cause);
         for (ReportBuilder builder : builders) {
-            reportBuilder.SetReportBuilder(builder);
-            reportBuilder.recordErrorInfoMessages(parametersList);
+            reportBuilder.SetSpecificReportBuilder(builder);
+            reportBuilder.recordErrorInfoMessages(resourceManager, parametersList);
         }
     }
 

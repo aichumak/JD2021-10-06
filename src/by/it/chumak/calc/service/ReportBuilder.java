@@ -1,6 +1,7 @@
 package by.it.chumak.calc.service;
 
 import by.it.chumak.calc.model.Report;
+import by.it.chumak.calc.model.ResourceManager;
 
 import java.util.List;
 
@@ -11,15 +12,14 @@ public abstract class ReportBuilder {
         this.report = new Report();
     }
 
-    Report getReport() {
-        return report;
-    }
+    public abstract void appendReportTitle(ResourceManager resourceManager);
 
-    public abstract void appendReportTitle();
-    public abstract void appendPackageLaunchTime();
-    public abstract void appendPackageCompletionTime();
-    public abstract void appendEnteredOperationsAndResults(String enteredOperationsAndResults);
-    public abstract void appendErrorInfoMessages(List<?> errorInfoMessages);
+    public abstract void appendPackageLaunchTime(ResourceManager resourceManager);
 
+    public abstract void appendPackageCompletionTime(ResourceManager resourceManager);
+
+    public abstract void appendEnteredOperationsAndResults(ResourceManager resourceManager, String enteredOperationsAndResults);
+
+    public abstract void appendErrorInfoMessages(ResourceManager resourceManager, List<?> errorInfoMessages);
 
 }

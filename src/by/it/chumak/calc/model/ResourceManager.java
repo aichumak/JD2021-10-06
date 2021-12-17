@@ -16,7 +16,6 @@ public enum ResourceManager {
     private ResourceBundle resourceBundle;
     private Locale locale;
     private ZoneIdEntity zoneIdEntity;
-    private DateTimeFormatter dateTimeFormatter;
 
     ResourceManager() {
         setLocale(new Locale("en", "EN"));
@@ -26,7 +25,6 @@ public enum ResourceManager {
         resourceBundle = ResourceBundle.getBundle(basename, locale);
         this.locale = locale;
         zoneIdEntity = new ZoneIdEntity();
-        dateTimeFormatter = DateTimeFormatter.ofPattern(DateFormatPatterns.TIME_DATE, locale);
     }
 
     public String get(String key) {
@@ -38,6 +36,12 @@ public enum ResourceManager {
     }
 
     public String getZonedDateTime() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DateFormatPatterns.TIME_DATE, locale);
+        return dateTimeFormatter.format(ZonedDateTime.ofInstant(Instant.now(), ZoneId.of(zoneIdEntity.getZoneId(locale.getCountry()))));
+    }
+
+    public String getZonedDate() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DateFormatPatterns.DATE, locale);
         return dateTimeFormatter.format(ZonedDateTime.ofInstant(Instant.now(), ZoneId.of(zoneIdEntity.getZoneId(locale.getCountry()))));
     }
 }

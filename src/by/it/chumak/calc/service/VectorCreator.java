@@ -1,10 +1,8 @@
 package by.it.chumak.calc.service;
 
 import by.it.chumak.calc.constant.Patterns;
-import by.it.chumak.calc.model.Matrix;
 import by.it.chumak.calc.model.Var;
 import by.it.chumak.calc.model.Vector;
-import by.it.chumak.calc.repository.Repository;
 import by.it.chumak.calc.repository.VarRepository;
 
 public class VectorCreator implements VarCreatorMethods {

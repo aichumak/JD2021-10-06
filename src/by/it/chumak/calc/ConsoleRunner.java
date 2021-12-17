@@ -27,8 +27,8 @@ public class ConsoleRunner {
         builders.add(new ShortReport());
 
         for (ReportBuilder builder : builders) {
-            reportBuilder.SetReportBuilder(builder);
-            reportBuilder.recordInitReportPart();
+            reportBuilder.SetSpecificReportBuilder(builder);
+            reportBuilder.recordInitReportPart(resourceManager);
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -42,15 +42,11 @@ public class ConsoleRunner {
                     Var result = parser.evaluate(resourceManager, logger, reportBuilder, builders, expression);
                     printer.print(result);
                     for (ReportBuilder builder : builders) {
-                        reportBuilder.SetReportBuilder(builder);
-                        reportBuilder.recordEnteredOperationsAndResults(expression + " = " + result.toString());
+                        reportBuilder.SetSpecificReportBuilder(builder);
+                        reportBuilder.recordEnteredOperationsAndResults(resourceManager, expression + " = " + result.toString());
                     }
                 } catch (CalcException e) {
                     printer.print(e);
-//                    for (ReportBuilder builder : builders) {
-//                        reportBuilder.SetReportBuilder(builder);
-//                        reportBuilder.recordErrorInfoMessages(e.toString());
-//                    }
                 }
             } else if (expression.matches(Patterns.STOP_APP_COMMAND)) {
                 break;
@@ -62,8 +58,8 @@ public class ConsoleRunner {
         logger.info(resourceManager.get(Messages.CALC_CLOSED), resourceManager.getZonedDateTime());
 
         for (ReportBuilder builder : builders) {
-            reportBuilder.SetReportBuilder(builder);
-            reportBuilder.recordFinalReportPart();
+            reportBuilder.SetSpecificReportBuilder(builder);
+            reportBuilder.recordFinalReportPart(resourceManager);
         }
     }
 }

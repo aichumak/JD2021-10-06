@@ -1,32 +1,31 @@
 package by.it.chumak.calc.service;
 
+import by.it.chumak.calc.model.ResourceManager;
+
 import java.util.List;
 
 public class SetReportBuilder {
     private ReportBuilder reportBuilder;
 
-    public void SetReportBuilder(ReportBuilder reportBuilder) {
+    public void SetSpecificReportBuilder(ReportBuilder reportBuilder) {
         this.reportBuilder = reportBuilder;
     }
 
-    public ReportBuilder getReportBuilder() {
-        return reportBuilder;
+    public void recordInitReportPart(ResourceManager resourceManager) {
+        reportBuilder.createNewReportBuilder();
+        reportBuilder.appendPackageLaunchTime(resourceManager);
+        reportBuilder.appendReportTitle(resourceManager);
     }
 
-    public void recordInitReportPart(){
-        reportBuilder.appendPackageLaunchTime();
-        reportBuilder.appendReportTitle();
+    public void recordFinalReportPart(ResourceManager resourceManager) {
+        reportBuilder.appendPackageCompletionTime(resourceManager);
     }
 
-    public void recordFinalReportPart(){
-        reportBuilder.appendPackageCompletionTime();
+    public void recordEnteredOperationsAndResults(ResourceManager resourceManager, String enteredOperationsAndResults) {
+        reportBuilder.appendEnteredOperationsAndResults(resourceManager, enteredOperationsAndResults);
     }
 
-    public void recordEnteredOperationsAndResults(String enteredOperationsAndResults){
-        reportBuilder.appendEnteredOperationsAndResults(enteredOperationsAndResults);
-    }
-
-    public void recordErrorInfoMessages(List<?> errorInfoMessages){
-        reportBuilder.appendErrorInfoMessages(errorInfoMessages);
+    public void recordErrorInfoMessages(ResourceManager resourceManager, List<?> errorInfoMessages) {
+        reportBuilder.appendErrorInfoMessages(resourceManager, errorInfoMessages);
     }
 }
