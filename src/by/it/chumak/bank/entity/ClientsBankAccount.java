@@ -12,7 +12,7 @@ public class ClientsBankAccount {
     }
 
     public int withdrawFromAmount(int amount) {
-        if(this.amount - amount >= 0) {
+        if (this.amount - amount >= 0) {
             this.amount = this.amount - amount;
             return amount;
         } else {

@@ -1,6 +1,6 @@
 package by.it._classwork_.jd02_02.entity;
 
-public class Good {
+public class Good extends by.it.astapchik.jd02_02.entity.Good {
 
     private final String name;
     private final double price;

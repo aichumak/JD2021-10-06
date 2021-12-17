@@ -1,13 +1,14 @@
 package by.it.astapchik.calculator;
 
 
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Vector extends Var {
+public class Vector extends Var {
 
-    private final double[] value;
+    public final double[] value;
 
     public Vector(double[] value){
         this.value = Arrays.copyOf(value, value.length);

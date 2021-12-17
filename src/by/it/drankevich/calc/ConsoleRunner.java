@@ -1,6 +1,7 @@
 package by.it.drankevich.calc;
 
 import by.it.drankevich.calc.exeption.CalcExeption;
+import by.it.drankevich.calc.logs.*;
 import by.it.drankevich.calc.model.Var;
 import by.it.drankevich.calc.repository.VarRepository;
 import by.it.drankevich.calc.servise.Parser;
@@ -14,7 +15,11 @@ public class ConsoleRunner {
     public static final String STOP_APP_COMMAND = "end";
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CalcExeption {
+        Log logger= Logger.getLogger();
+        LogCreator logBuilderShort=new LogBuilderShort();
+        LogCreator logBuilderFull=new LogBuilderFull();
+
 
         Scanner sc = new Scanner(System.in);
 
@@ -43,6 +48,7 @@ public class ConsoleRunner {
                     break;
 
             }
+            logger.info(ResourceManager.get("massage.Report"),logBuilderShort,logBuilderFull);
 
 
         Scanner scanner = new Scanner(System.in);
@@ -56,14 +62,18 @@ public class ConsoleRunner {
                try {
                    Var result = parser.evaluate(expression);
                    printer.print(result);
+                   logger.info(expression, logBuilderShort,logBuilderFull);
+                   logger.info(result.toString(), logBuilderShort,logBuilderFull);
                } catch (CalcExeption e) {
                    printer.print(e);
+                   logger.error(e.getMessage(),logBuilderShort,logBuilderFull );
                }
 
            }
            else break;
         }
-        System.out.println("Calculator closed");
+        System.out.println(ResourceManager.get("massage.CalcClosed"));
+        logger.info(ResourceManager.get("massage.CalcClosed"), logBuilderShort,logBuilderFull);
 
 
     }

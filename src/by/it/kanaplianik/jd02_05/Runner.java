@@ -3,7 +3,8 @@ package by.it.kanaplianik.jd02_05;
 import java.util.Locale;
 
 public class Runner {
-    public static void main(String[] args) {
+   public static void main(String[] args) {
+
         ManagerOfResources lang = ManagerOfResources.INSTANCE;
         if (args.length == 2) {
             Locale locale = new Locale(args[0], args[1]);

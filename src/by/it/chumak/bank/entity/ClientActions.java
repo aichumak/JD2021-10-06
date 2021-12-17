@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ClientActions {
 
-    public static List<Enum> getActions(){
+    public static List<Enum> getActions() {
         List<Enum> actionList = getActionList();
         List<Enum> clientActionList = new ArrayList<>();
         int countActions = RandomGenerator.get(1, 5);

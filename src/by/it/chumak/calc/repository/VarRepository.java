@@ -1,24 +1,22 @@
 package by.it.chumak.calc.repository;
 
-import by.it.chumak.calc.model.Var;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class VarRepository implements Repository<String, Var> {
+public class VarRepository implements Repository<String, String> {
 
-    private final Map<String, Var> map = new HashMap<>();
+    private final Map<String, String> map = new HashMap<>();
 
     public VarRepository() {
     }
 
     @Override
-    public void save(String name, Var value) {
+    public void save(String name, String value) {
         map.put(name, value);
     }
 
     @Override
-    public Var find(String name) {
+    public String find(String name) {
         return map.get(name);
     }
 }

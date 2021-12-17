@@ -1,0 +1,5 @@
+messages.welcome=Прывітанне!
+messages.question=Як твае справы?
+messages.sentence=Маё імя:
+user.name=Уладзімір
+user.surname=Серкуцьеў

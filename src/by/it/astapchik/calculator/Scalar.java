@@ -1,6 +1,6 @@
 package by.it.astapchik.calculator;
 
-class Scalar extends Var {
+public class Scalar extends Var {
 
     private final double value;
 
