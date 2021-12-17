@@ -37,7 +37,7 @@ public class Logger implements Log {
     }
 
 
-    private synchronized void log(String type, String message) {
+    private synchronized void log(Name type, String message,DateTimeFormatter dateTimeFormatter) {
         try (
                 PrintWriter writer = new PrintWriter(
                         new FileWriter(path, true));
@@ -51,13 +51,15 @@ public class Logger implements Log {
 
     @Override
     public void error(String message) {
-        log("ERROR",message);
+        log(Name.error,message,dateTimeFormatter);
 
     }
 
+
+
     @Override
     public void info(String message) {
-        log("INFO",message);
+        log(Name.info,message,dateTimeFormatter);
 
     }
 }
