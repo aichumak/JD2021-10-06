@@ -25,7 +25,7 @@ public class Runner {
                     Locale.forLanguageTag(args[0]));
 
         } else {
-            System.out.println("Choose language format:");
+            System.out.println("Choose language format:\n(en\\be\\ru)");
         }
 
 
