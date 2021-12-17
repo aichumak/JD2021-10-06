@@ -1,6 +1,8 @@
 package by.it.astapchik.calculator;
 
-abstract class Var implements Operation {
+
+
+public abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) {

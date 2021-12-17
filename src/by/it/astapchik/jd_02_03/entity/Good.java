@@ -1,12 +1,13 @@
-package by.it._classwork_.jd02_02.entity;
+package by.it.astapchik.jd_02_03.entity;
 
-public class Good extends by.it.astapchik.jd02_02.entity.Good {
+public class Good {
 
     private final String name;
+
     private final double price;
 
-    public Good() {
-        this("noname", 0);
+    public Good(){
+        this("Milk", 12);
     }
 
     public Good(String name, double price) {

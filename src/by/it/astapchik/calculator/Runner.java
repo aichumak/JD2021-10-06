@@ -9,9 +9,9 @@ class Runner {
     }
 
     public static void main(String[] args) {
-        Var s = new Scalar(4.0);
+        Var s = new Scalar(5.0);
         Var s1 = new Scalar(1.0);
-        Var v = new Vector(new double[]{1, 2, 3});
+        Var v = new Vector(new double[]{2,3});
 
 //        Var m = new Matrix("{{1,2,3},{4,5,6},{7,8,9}}");
         Var m = new Matrix(new double[][]{
@@ -47,6 +47,6 @@ class Runner {
 //        print(m.mul(m)); //{{30.0, 36.0, 42.0}, {66.0, 81.0, 96.0}, {102.0, 126.0, 150.0}}
 //        System.out.println("scalar * matrix = " + m.mul(s));
         System.out.println("matrix * matrix = " + m.mul(m));//{{30.0, 36.0, 42.0}, {66.0, 81.0, 96.0}, {102.0, 126.0, 150.0}}
-        System.out.println("matrix * vector = " + m.mul(v)); //{14.0, 32.0, 50.0}
+//        System.out.println("matrix * vector = " + m.mul(v)); //{14.0, 32.0, 50.0}
     }
 }

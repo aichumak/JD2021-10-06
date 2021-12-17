@@ -1,6 +1,6 @@
-package by.it.astapchik.calculator;
+package by.it.astapchik.calc.model;
 
-
+import by.it.astapchik.calc.exception.CalcException;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -8,15 +8,15 @@ import java.util.regex.Pattern;
 
 public class Vector extends Var {
 
-    public final double[] value;
+    private final double[] value;
 
     public Vector(double[] value){
         this.value = Arrays.copyOf(value, value.length);
     }
-
     public Vector(Vector vector){
         this.value = Arrays.copyOf(vector.value, vector.value.length);
     }
+    public double[] getValue() { return Arrays.copyOf(value, value.length); }
 
     public Vector(String strVector){
         StringBuilder string = new StringBuilder(strVector);
@@ -33,10 +33,10 @@ public class Vector extends Var {
         this.value = newArray;
     }
 
-    public double[] getValue() { return Arrays.copyOf(value, value.length); }
+
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar otherScalar){
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
@@ -59,11 +59,11 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other)throws CalcException {
         if (other instanceof Scalar otherScalar){
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
-                result[i] = result[i] * otherScalar.getValue();
+                result[i] = otherScalar.getValue() * result[i];
             }
             return new Vector(result);
         }
@@ -85,7 +85,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException{
 
         if (other instanceof Scalar otherScalar){
             double[] result = Arrays.copyOf(value, value.length);
@@ -110,7 +110,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException{
         if (other instanceof Scalar otherScalar){
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
@@ -129,7 +129,7 @@ public class Vector extends Var {
         String comma = "";
         for (double v : value) {
             string.append(comma).append(v);
-            comma = ", ";
+            comma = ",";
         }
         string.append("}");
 
