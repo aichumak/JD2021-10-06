@@ -6,7 +6,6 @@ import by.it.chumak.calc.model.Var;
 import by.it.chumak.calc.repository.VarRepository;
 
 public class ScalarCreator implements VarCreatorMethods {
-
     @Override
     public Var create(String stringVarValue, VarRepository varRepository) {
         if (stringVarValue.matches(Patterns.SCALAR)) {
