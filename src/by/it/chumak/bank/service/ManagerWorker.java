@@ -16,10 +16,10 @@ public class ManagerWorker implements Runnable {
     @Override
     public void run() {
 
-        while (bank.bankIsOpen()){
+        while (bank.bankIsOpen()) {
             List<Cashier> cashierList = bank.getCashiersList();
             for (Cashier cashier : cashierList) {
-                if(cashier.getCash()> bank.getCashierMaxLimit()){
+                if (cashier.getCash() > bank.getCashierMaxLimit()) {
                     bank.addStorageMoney(cashier.getFromCash(300));
                 }
             }

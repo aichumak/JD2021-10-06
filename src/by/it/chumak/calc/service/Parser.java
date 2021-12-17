@@ -4,7 +4,6 @@ import by.it.chumak.calc.constant.Patterns;
 import by.it.chumak.calc.exception.CalcException;
 import by.it.chumak.calc.model.ResourceManager;
 import by.it.chumak.calc.model.Var;
-import by.it.chumak.calc.repository.VarRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,27 +21,26 @@ public class Parser {
             "/", 2
     );
 
-    private VarRepository varRepository;
-    private VarCreator varCreator;
+    private final VarCreator varCreator;
 
-    public Parser() {
+    public Parser(VarCreator varCreator) {
+        this.varCreator = varCreator;
     }
 
-    public Var evaluate(ResourceManager resourceManager, String expression, VarRepository varRepository) throws CalcException {
-        this.varRepository = varRepository;
-        this.varCreator = new VarCreator(varRepository);
+    public Var evaluate(ResourceManager resourceManager, LoggerMethods logger, SetReportBuilder reportBuilder, List<ReportBuilder> builders, String expression) throws CalcException {
         StringBuilder stringBuilder = new StringBuilder(expression);
         Matcher matcher = Pattern.compile(Patterns.MATH_EXPRESSION_IN_PARENTHESES).matcher(stringBuilder.toString());
 
         while (matcher.find()) {
-            stringBuilder.replace(matcher.start(), matcher.end(), processOperands(resourceManager, matcher.group()));
+            stringBuilder.replace(matcher.start(), matcher.end(), processOperands(resourceManager, logger, reportBuilder, builders, matcher.group()));
             matcher.reset(stringBuilder.toString());
         }
 
-        return varCreator.create(processOperands(resourceManager, stringBuilder.toString()).replaceAll(" ", ""));
+        String result = processOperands(resourceManager, logger, reportBuilder, builders, stringBuilder.toString()).replaceAll(" ", "");
+        return varCreator.getVar(result).create(result, varCreator.getVarRepository());
     }
 
-    private String processOperands(ResourceManager resourceManager, String expression) throws CalcException {
+    private String processOperands(ResourceManager resourceManager, LoggerMethods logger, SetReportBuilder reportBuilder, List<ReportBuilder> builders, String expression) throws CalcException {
         expression = expression.replaceAll("\\(", "").replaceAll("\\)", "");
         List<String> operands = new ArrayList<>(List.of(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
@@ -57,23 +55,23 @@ public class Parser {
             String operation = operations.remove(index);
             String left = operands.remove(index).replaceAll(" ", "");
             String right = operands.remove(index).replaceAll(" ", "");
-            Var var = oneOperation(resourceManager, left, operation, right);
+            Var var = oneOperation(resourceManager, logger, reportBuilder, builders, left, operation, right);
             operands.add(index, var.toString());
         }
 
         return operands.get(0);
     }
 
-    private Var oneOperation(ResourceManager resourceManager, String stingLeftVar, String operation, String stingRightVar) throws CalcException {
+    private Var oneOperation(ResourceManager resourceManager, LoggerMethods logger, SetReportBuilder reportBuilder, List<ReportBuilder> builders, String stringLeftVar, String operation, String stringRightVar) throws CalcException {
         CalcProcessor calcProcessor = new CalcProcessor();
-        Var right = varCreator.create(stingRightVar);
+        Var right = varCreator.getVar(stringRightVar).create(stringRightVar, varCreator.getVarRepository());
         if (operation.equals("=")) {
-            varRepository.save(stingLeftVar, right);
+            varCreator.getVarRepository().save(stringLeftVar, stringRightVar);
             return right;
         }
 
-        Var left = varCreator.create(stingLeftVar);
-        return calcProcessor.calc(operation, left, right, resourceManager);
+        Var left = varCreator.getVar(stringLeftVar).create(stringLeftVar, varCreator.getVarRepository());
+        return calcProcessor.calc(operation, left, right, resourceManager, logger, reportBuilder, builders);
     }
 
     private int getIndex(List<String> operation) {
