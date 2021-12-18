@@ -7,7 +7,7 @@ public class Player {
     private final boolean isActive;
 
     public Player(int number, int age, boolean isActive) {
-        this.name = "Player" + number;
+        this.name = "Player " + number;
         this.age = age;
         this.isActive = isActive;
     }
