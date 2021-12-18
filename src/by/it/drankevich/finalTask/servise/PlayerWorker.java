@@ -8,6 +8,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PlayerWorker extends Thread implements PlayAction{
 
@@ -72,8 +73,13 @@ public class PlayerWorker extends Thread implements PlayAction{
         }}
 
 
-        List<String> collect = arrayList1.stream().map(String::toUpperCase).limit(5).collect(Collectors.toList());
-       System.out.println(collect);
+            Object[] objects = arrayList1.stream().map(String::toUpperCase).limit(5).toArray();
+            for (Object object : objects) {
+                System.out.println(object.toString());
+
+
+            }
+
 
 
     }
