@@ -1,30 +1,31 @@
 package by.it.ithoitan.jd01_06;
 
 
-
 public class TaskB2 {
     public static void main(String[] args) {
         String text = Poem.text;
-        String withoutSumbol = text.replaceAll("[\n]", " ");
-        String nextText = withoutSumbol.replaceAll("[!.?]", "\n");
+        String s1 = text.replaceAll("[\\n]", " ");
+        String s2 = s1.replace("...", "");
+        String s3 = s2.replaceAll("[!.?]", "\n");
+        String s = s3.replaceAll("[\\p{Punct}]", "");
+        String[] a = s.split("\n");
+        String[] a2 = new String[a.length];
+        for (int i = 0; i < a.length; i++) {
+            a2[i] = a[i].trim();
+        }
 
-        String withoutSumbol2 = nextText.replaceAll("[!.,;:-]", " ");
-        String withoutSumbol3 = withoutSumbol2.replaceAll("[\\p{Blank}]+", " ");
-
-
-        String[] a = withoutSumbol3.split("\n");
-        for (int j = 0; j < a.length - 1; j++) {
-            for (int i = j + 1; i < a.length; i++) {
-                if (a[i].length() < a[j].length()) {
-                    String temp = a[j];
-                    a[j] = a[i];
-                    a[i] = temp;
+        for (int j = 0; j < a2.length - 1; j++) {
+            for (int i = j + 1; i < a2.length; i++) {
+                if (a2[i].length() < a2[j].length()) {
+                    String temp = a2[j];
+                    a2[j] = a2[i];
+                    a2[i] = temp;
                 }
-
+//
             }
         }
-        for (String s : a) {
-            System.out.println(s);
+        for (String n : a2) {
+            System.out.println(n);
 
         }
 
