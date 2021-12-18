@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class PlayerGeneratorTask implements Runnable{
     private final Collection collection;
     ArrayList<PlayerWorker> playerWorkers = new ArrayList<>();
-    String path = Filenames.getFullPath(PlayerWorker.class, "log.txt");
+
 
 
     public PlayerGeneratorTask(Collection collection) {
@@ -41,7 +41,7 @@ public class PlayerGeneratorTask implements Runnable{
                 e.printStackTrace();
             }
         }
-        PrintResult.print(path);
+
 
 
 
