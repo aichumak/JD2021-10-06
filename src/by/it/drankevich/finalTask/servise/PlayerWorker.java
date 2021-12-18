@@ -24,7 +24,7 @@ public class PlayerWorker extends Thread implements PlayAction{
     @Override
     public void run() {
         write();
-        getText(path);
+
 
     }
 
@@ -45,44 +45,10 @@ public class PlayerWorker extends Thread implements PlayAction{
     }
 
 
-    private static void getText(String filename) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
-
-            String s;
-            while ((s = bufferedReader.readLine()) != null) {
-
-
-                stringBuilder.append(s).append("\n");
-                arrayList.add(s);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ArrayList<String> arrayList1 = new ArrayList<>();
-
-        for (String s : arrayList) {
-            if(s.contains("true")){
-            if(s.contains("25")||s.contains("26")||s.contains("27")||s.contains("28")||s.contains("29")||s.contains("30")){
-
-            arrayList1.add(s);
-        }}}
-
-
-            Object[] objects = arrayList1.stream().limit(5).map(String::toUpperCase).toArray();
-            for (Object object : objects) {
-                System.out.println(object.toString());
-
-
-            }
 
 
 
 
 
 }
-}
+
