@@ -5,9 +5,9 @@ import by.it.drankevich.finalTask.entity.Player;
 import by.it.drankevich.finalTask.helper.Filenames;
 
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PlayerWorker extends Thread implements PlayAction{
 
@@ -44,7 +44,7 @@ public class PlayerWorker extends Thread implements PlayAction{
     }
 
 
-    private static String getText(String filename) {
+    private static void getText(String filename) {
         ArrayList<String> arrayList = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
@@ -62,11 +62,21 @@ public class PlayerWorker extends Thread implements PlayAction{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ArrayList<String> arrayList1 = new ArrayList<>();
+
+        for (String s : arrayList) {
+            if(s.contains("true")){
+            if(s.contains("25")||s.contains("26")||s.contains("27")||s.contains("28")||s.contains("29")||s.contains("30")){
+
+            arrayList1.add(s);
+        }}
 
 
-        String s = arrayList.stream().filter((s1)->s1.contains("25")).map(String::toUpperCase).limit(1).findFirst().orElse("1");
-        System.out.println(s);
-        return stringBuilder.toString();
+        List<String> collect = arrayList1.stream().filter((s1) -> s1.contains("25")).map(String::toUpperCase).limit(5).collect(Collectors.toList());
+       System.out.println(collect);
+
 
     }
+
+}
 }

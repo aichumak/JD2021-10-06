@@ -21,7 +21,7 @@ public class PlayerGeneratorTask implements Runnable{
 
     @Override
     public void run() {
-        for (int i = 0; i <=10 ; i++) {
+        for (int i = 110; i <=120 ; i++) {
             Player player=new Player(i,(int)( Math.random() * 21) + 20, RandomMaker.random());
 
             PlayerWorker playerWorker=new PlayerWorker(collection,player);
