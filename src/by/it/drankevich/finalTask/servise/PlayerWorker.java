@@ -64,7 +64,7 @@ public class PlayerWorker extends Thread implements PlayAction{
         }
 
 
-        String s = arrayList.stream().limit(5).findFirst().get();
+        String s = arrayList.stream().filter((s1)->s1.contains("25")).map(String::toUpperCase).limit(1).findFirst().orElse("1");
         System.out.println(s);
         return stringBuilder.toString();
 
