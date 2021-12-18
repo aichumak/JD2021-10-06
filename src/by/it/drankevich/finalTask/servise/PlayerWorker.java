@@ -70,10 +70,10 @@ public class PlayerWorker extends Thread implements PlayAction{
             if(s.contains("25")||s.contains("26")||s.contains("27")||s.contains("28")||s.contains("29")||s.contains("30")){
 
             arrayList1.add(s);
-        }}
+        }}}
 
 
-            Object[] objects = arrayList1.stream().map(String::toUpperCase).limit(5).toArray();
+            Object[] objects = arrayList1.stream().limit(5).map(String::toUpperCase).toArray();
             for (Object object : objects) {
                 System.out.println(object.toString());
 
@@ -82,7 +82,7 @@ public class PlayerWorker extends Thread implements PlayAction{
 
 
 
-    }
+
 
 }
 }
