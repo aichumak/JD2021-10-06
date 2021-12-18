@@ -4,7 +4,7 @@ import by.it.drankevich.finalTask.entity.Collection;
 import by.it.drankevich.finalTask.helper.Filenames;
 import by.it.drankevich.finalTask.servise.PlayerGeneratorTask;
 import by.it.drankevich.finalTask.servise.PlayerWorker;
-import by.it.drankevich.finalTask.servise.PrintResult;
+import by.it.drankevich.finalTask.servise.PlayerReaderTask;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,7 +26,7 @@ public class Runner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        PrintResult.print(path);
+        PlayerReaderTask.readerTask(path);
 
     }
 }
