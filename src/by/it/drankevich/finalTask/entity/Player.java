@@ -14,6 +14,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return name+" "+isActive+" " +age;
+        return name + " " + isActive + " " + age;
     }
 }

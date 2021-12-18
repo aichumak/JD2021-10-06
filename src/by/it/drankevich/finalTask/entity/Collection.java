@@ -6,7 +6,8 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class Collection {
     private final BlockingDeque<Player> playerDeque;
 
-    public Collection() {playerDeque=new LinkedBlockingDeque<>();
+    public Collection() {
+        playerDeque = new LinkedBlockingDeque<>();
     }
 
 
