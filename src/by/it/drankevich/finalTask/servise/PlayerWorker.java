@@ -23,7 +23,7 @@ public class PlayerWorker extends Thread implements PlayAction{
     @Override
     public void run() {
         write();
-        read(path);
+        getText(path);
 
     }
 
@@ -42,23 +42,31 @@ public class PlayerWorker extends Thread implements PlayAction{
 
         return path;
     }
-    private static ArrayList<String> read(String filename) {
+
+
+    private static String getText(String filename) {
         ArrayList<String> arrayList = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
 
-        try (DataInputStream dataInputStream = new DataInputStream(
-                new BufferedInputStream(
-                        new FileInputStream(filename)))) {
-            while (dataInputStream.available() > 0) {
+            String s;
+            while ((s = bufferedReader.readLine()) != null) {
 
-                arrayList.add(dataInputStream.readLine());
+
+                stringBuilder.append(s).append("\n");
+                arrayList.add(s);
             }
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        String s = arrayList.stream().limit(5).findAny().get();
-        System.out.println(s);
 
-        return arrayList;
+
+        String s = arrayList.stream().limit(5).findFirst().get();
+        System.out.println(s);
+        return stringBuilder.toString();
+
     }
 }
