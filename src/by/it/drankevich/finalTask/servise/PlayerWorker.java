@@ -72,7 +72,7 @@ public class PlayerWorker extends Thread implements PlayAction{
         }}
 
 
-        List<String> collect = arrayList1.stream().filter((s1) -> s1.contains("25")).map(String::toUpperCase).limit(5).collect(Collectors.toList());
+        List<String> collect = arrayList1.stream().map(String::toUpperCase).limit(5).collect(Collectors.toList());
        System.out.println(collect);
 
 
