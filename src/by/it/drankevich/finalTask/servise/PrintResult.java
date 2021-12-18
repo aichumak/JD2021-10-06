@@ -9,14 +9,12 @@ import java.util.ArrayList;
 public class PrintResult {
     public static void print(String filename) {
         ArrayList<String> arrayList = new ArrayList<>();
-        StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
 
             String s;
             while ((s = bufferedReader.readLine()) != null) {
 
 
-                stringBuilder.append(s).append("\n");
                 arrayList.add(s);
             }
 
@@ -37,7 +35,7 @@ public class PrintResult {
         }
 
 
-        Object[] objects = arrayList1.stream().limit(5).map(String::toUpperCase).toArray();
+        Object[] objects = arrayList1.stream().limit(5).map(String::toUpperCase).sorted().toArray();
         for (Object object : objects) {
             System.out.println(object.toString());
 
