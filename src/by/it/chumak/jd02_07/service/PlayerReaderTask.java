@@ -18,7 +18,6 @@ public class PlayerReaderTask implements Runnable {
         this.linesList = linesList;
     }
 
-
     @Override
     public void run() {
         List<String> bufferLinesList = new ArrayList<>();

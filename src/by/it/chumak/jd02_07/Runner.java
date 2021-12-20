@@ -13,7 +13,6 @@ public class Runner {
         String path = pathMethods.getFilePath(Runner.class, "");
 
         ExecutorService executorService = Executors.newFixedThreadPool(4);
-        //PlayerGeneratorTask playerGeneratorTask = new PlayerGeneratorTask(path, "Players" + i + ".txt");
         //PlayerReaderTask playerReaderTask = new PlayerReaderTask(path, new ArrayList<>());
 
         for (int i = 0; i < 20; i++) {
