@@ -1,6 +1,0 @@
-#strings
-message.welcome=Прывiтанне
-message.question=Як справы?
-message.sentence=Мяне завуць 
-user.firstname=Алексей
-user.lastname=Астапчик

@@ -1,2 +1,0 @@
-TIME: 14.25.58 17.12.2021 г.  TYPE: ERROR message: bad event
-TIME: 14.25.58 17.12.2021 г.  TYPE: INFO message: test

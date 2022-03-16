@@ -1,5 +1,0 @@
-messages.welcome=Привет!
-messages.question=Как твои дела?
-messages.sentence=Мое имя:
-user.name=Владимир
-user.surname=Серкутьев
